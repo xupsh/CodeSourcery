@@ -1,0 +1,72 @@
+     Mentor Embedded Soucery Probe (MESP) Release Notes
+     Fall 2012 Oct 22, 2012  
+========================================================================
+(c) Copyright 2012 Mentor Graphics Corp.  All rights reserved.
+
+
+CONTENTS
+=======================================
+
+  Introduction
+  Product Version Numbers
+  Changes
+
+
+INTRODUCTION
+=======================================
+
+This release notes file documents last minute product changes,
+product version numbers, and usage of the sample program files.
+
+Below is the sturcture of these installation tree.
+
+<install>\<host>\bin            Executables, dll's, command files, etc
+<install>\<host>\mdi\           mdi interface details
+<install>\<host>\inf            Windows "inf" files for Sourcery Personal support
+<install>\<host>\mep_firmware   Firmware for Mentor Embeddded Sourcery Personal
+                                and Pro Probes
+<install>\<host>\tsp            Target initializtion files and templates
+
+<host> is either linux or win32 depending upon your host environment.
+
+Note that the inf directory is for Windows hosts only.
+
+
+PRODUCT VERSION NUMBERS
+=======================================
+
+    Debugger Libraries and Executables Versions:
+
+      MON                          V7.0.19
+      MESP MDILib (MDI 1.5 API)    V2.0.20
+      MESP UpdateLib               V1.13
+
+    Sourcery Probe Firmware:       V2.3.8 Build 1
+    (all models)
+
+
+CHANGES
+=======================================
+
+See the MESP Fall 2012 Code Freeze Details section below for the specific 
+set of issues covered.
+
+-PowerPC e500v2 and e500mc core support.
+
+-PowerPC target support (mpc8572, p2020rdb, p1022ds, p4080ds).
+
+-ARM Cortex-R4/R4F support.
+
+-Improved Cortex cache management
+
+-Added VFP register access support for Cortex-A9
+
+-Added support for ST MicroElectronics Spear1310 board
+
+-Added support for TI Panda (OMAP 4460) board 
+
+For additional information see:
+http://confluence.alm.mentorg.com:8090/display/MEP/MESP+2012+Fall+Release
+
+
+

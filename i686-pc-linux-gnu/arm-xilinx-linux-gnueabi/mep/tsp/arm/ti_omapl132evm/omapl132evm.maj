@@ -1,0 +1,610 @@
++q  // Enter quiet mode
+//___________________________________________________________________
+//
+//               Copyright (c) 2011 Mentor Graphics Corporation
+//                           All rights reserved
+//
+//   THIS WORK CONTAINS TRADE SECRETS AND PROPRIETARY INFORMATION WHICH IS
+//    THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS LICENSORS AND IS
+//                        SUBJECT TO LICENSE TERMS.
+//
+//___________________________________________________________________
+//
+// Mentor Embedded Sourcery Probe target initialization file for the
+// TI OMAP-L132 EVM reference platform.  It supports this platform as-is,
+// and can be adapted to a new target based on this reference board,
+// as detailed below.  For a brand new custom board not related to
+// this reference board, it may be better to start from the template
+// rather than trying to adapt this file.
+//
+// Target Description:
+//
+//     Board:   TI OMAP-L132 EVM Reference Platform
+//     Device:  TI OMAP-L132
+//     CPU ID:  ARM926EJS
+//     Endian:  Little
+//     Cores:   1
+//
+// Porting Guide:
+//
+// The user should make the following adaptations to port this file
+// to a new target board based on the associated reference platform:
+//
+//        0. Review the MEP Probe Initialization section at
+//           "TO DO #0" below to make sure the settings are
+//           right for your board.
+//        1. Update the memory configuration table for changes
+//           in the new board's  *Physical*  memory map.  See
+//           'TO DO #1' below.
+//        2. If your target board requires any special MEP
+//           settings, they should be added to the end of the
+//           ONE_TIME_SETUP section.  See 'TO DO #2' below.
+//        3. Decide whether the target should be automatically
+//           reset and/or initialized upon start-up by choosing
+//           the desired command at 'TO DO #3' below.  This
+//           really depends on your use case.
+//        4. If the board has no boot code (or bad boot code),
+//           and you want to download into RAM, then you may
+//           have to adapt the memory controller initialization
+//           script at 'TO DO #4' below to account for changes
+//           relative to the reference platform.
+//
+// NOTE:  Additional information on MON commands and the configuration
+//        options used here is available in the online help system.
+//___________________________________________________________________
+dv "Reading $$# ...\n"
+
+
+// Initialization script preparation
+// =================================
+
+// The RTI, RTNI, and TI command aliases call script functions in this file.
+// These command aliases should never be changed.
+
+ea RTI   $$#.DO_RTI  // RTI  call DO_RTI script function  (Reset Target and Initialize)
+ea RTNI  $$#.DO_RTNI // RTNI call DO_RTNI script function (Reset Target with No Initialization)
+ea TI    $$#.DO_TI   // TI   call DO_TI script function   (Target Initialize without resetting)
+
+
+// MEP Probe Initialization
+// ==========================
+
+// TO DO #0 -- Review the following MEP configuration options to make
+//             sure they are right for your target board hardware and
+//             processor device design.
+
+// The  Trgt_Resets_JTAG  option informs the MEP probe whether the target
+// board will forward a system reset (nSRST) to the JTAG interface (nTRST),
+// or reset the system only without resetting the JTAG interface.  When in
+// doubt, a YES setting is safer.  When the two reset circuits are known
+// to be independent, which is strongly recommended, then a NO setting is
+// recommended.
+
+eo Trgt_Resets_JTAG  = yes
+
+// The  Ice_JTAG_Use_RTCLK  and  Ice_JTAG_Clock_Freq  options are related
+// and must be considered together.  An  Ice_JTAG_Use_RTCLK  setting of
+// ON  selects adaptive clocking mode, where the JTAG clock is dynamically
+// controlled by the target processor.  When  Ice_JTAG_Use_RTCLK  is set
+// OFF  then normal (unthrottled) clocking is selected.
+//
+// When adaptive clocking is disabled, the  Ice_JTAG_Clock_Freq  option
+// specifies the the JTAG clock (TCK) frequency in Megahertz, from
+// 0.002 to 100 (depending on probe hardware capability).  A lower setting
+// is safer, a higher setting yields higher performance.  Note that the
+// requested frequency will be adjusted down to the closest frequency
+// supported by the probe hardware (displaying this option will show the
+// actual TCK frequency).
+//
+//     IJUR  Clock mode
+//     ====  ========================
+//     OFF   Free running TCK at specified frequency (RTCK is ignored)
+//     ON    Adaptive clocking with frequency controlled by RTCK
+//           (Ice_JTAG_Clock_Freq is ignored)
+//
+// Note that enabling  Ice_JTAG_Use_RTCLK  on target boards that do not
+// drive the RTCK signal will lock up the JTAG interface.
+
+eo Ice_JTAG_Use_RTCLK  = on
+eo Ice_JTAG_Clock_Freq = 20
+if (@$Ice_JTAG_Use_RTCLK) {doq Ice_JTAG_Use_RTCLK} {doq Ice_JTAG_Clock_Freq}
+
+// The following command can be used to define the details of the JTAG
+// daisy chain.  It is only required for targets on which the MEP
+// auto-detection algorithm cannot correctly determine the JTAG connection
+// details.  On most boards this command can be omitted.
+//
+//    ew MEP_JTAG_DIMENSION = TAP_CNT, IR1_CNT [ , IR2_CNT ]  ...
+
+ew MEP_JTAG_DIMENSION = 2,4,6
+
+// The following commands can be used to define special JTAG initialization
+// operations required by certain processors.  The first one, if defined,
+// is scanned in right after the JTAG reset cycle completes, but before the
+// standard JTAG initialization performed by the MEP.  The second, if
+// defined, is scanned in right after the standard JTAG initialization
+// performed by the MEP.  On most boards these can both be omitted.
+//
+//    ew MEP_JTAG_INIT0 = <scan-op> [ , <scan-op> ]  ...
+//    ew MEP_JTAG_INIT1 = <scan-op> [ , <scan-op> ]  ...
+
+//                  INP IR#6,  TDI = 7, INP DR#8, TDI = 89, INP IR#6,  TDI = 2, IN DR#32, A_002108, IN IR#6,  TDI = 3F, IN IR#32, TDI=F's
+ew MEP_JTAG_INIT0 = 89000006, 00000007, 09000008, 00000089, 89000006, 00000002, 09000020, a2002108, 81000006, 0000003f, 81000020, ffffffff
+
+// The  Ice_Power_Sense  option enables the target power monitor.  When
+// target power is detected, the debug interface is enabled.
+
+eo Ice_Power_Sense = VREF
+
+// The  Ice_JTAG_TAP_Select  option controls which TAP on a multi-TAP
+// daisy chain is associated with this debug connection.  This option
+// can be omitted on targets which have one TAP.  Note that TAPs are
+// numbered from 1-N, with TAP 1 being the one whose TDO is connected
+// to the MEP probe.
+//
+//    eo Ice_JTAG_TAP_Select = <num>
+
+eo Ice_JTAG_TAP_Select = 1
+
+// Physical Memory Configuration
+// =============================
+
+mc *:P, inv     // start with all *physical* memory (*:P) marked as invalid
+
+// TO DO #1 -- Change the address range(s) below to match the  *physical*
+//             address ranges of your ROM/flash and RAM areas.  Add more
+//             MC commands as necessary for each memory mapped area.
+//
+// WARNING:  DO NOT confuse virtual (MVA) addresses with physical space.
+//           Make sure to use physical addresses in the MC table.
+//
+// EXAMPLE:
+//
+//     mc  ________:P  ________:P,  PWE, JAM, RW    // DRAM
+//     mc  ________:P  ________:P,  PWD, JAM, RO    // Flash or ROM
+//     mc  ________:P  ________:P,  PWD, JAM, RW    // Peripheral registers
+//
+// Note that if your boot code remaps physical memory, then the MC table
+// should reflect the mapping that is in effect for the code you are trying
+// to debug.  When debugging boot code in flash, MC should match the mapping
+// in effect when booting.  When debugging code in RAM, MC should match the
+// mapping in effect when running code from RAM.
+//
+// Address Range          PWE  Access
+// ---------------------- ---- -------
+mc 01BC0000:P 01F11FFF:P, PWD, JAM, RW
+mc 40000000:P 5FFFFFFF:P, PWE, JAM, RW // EMIFA SDRAM data CS0
+mc 60000000:P 68007FFF:P, PWD, JAM, RW // EMIFA async data CS2..CS5
+mc 80000000:P 8001FFFF:P, PWE, JAM, RW // on chip RAM
+mc B0000000:P B0007FFF:P, PWD, JAM, RW // DDR2 control regs
+mc C0000000:P DFFFFFFF:P, PWE, JAM, RW // DDR2 data 
+mc FFFD0000:P FFFDFFFF:P, PWE, JAM, RO // ARM Local ROM
+mc FFFEE000:P FFFEFFFF:P, PWD, JAM, RW // ARM Interrupt control
+mc FFFF0000:P FFFF1FFF:P, PWE, JAM, RW // ARM Local RAM
+
+//        ____User Supplied Setup Commands Go Here____
+
+// TO DO #2 -- If your target board requires any special MEP settings
+//             (e.g. special JTAG initialization), add the commands to
+//             make those settings here.
+
+
+// End of initial one-time only setup script.  If this is a non-intrusive
+// attach connection, or if a normal debug connection fails to connect
+// properly, then exit at this point.  Otherwise continue on with optional
+// additional initialization.
+
+if (@.4$INIT_TYPE != 0) {dv "Non-intrusive attach connection\n"; goto EXIT}
+if (@$trgt_cpu_state != $tcs.halt) {dv "Debug connection failed, "; doq TCS; goto EXIT}
+
+// TO DO #3 -- Comment out all but one of the next three commands to
+//             control IF and HOW the target is initialized when the
+//             debugger is launched.  If no reset or target initialization
+//             is needed then all these can be left commented out.
+
+//   TI
+RTI
+//   RTNI
+
+:EXIT
+dv "Finished reading $$#.\n"
+return
+
+//___________________________________________________________________
+::DO_RTNI  // Reset Target with No Initialization.
+
+    // Normally an  rt  command is sufficient, but it may be necessary
+    // to slow down the JTAG clock first, depending on the affect of
+    // reset on the processor.
+
+    dv "Executing RTNI script function\n"
+    rt
+    return
+
+//___________________________________________________________________
+::DO_RTI   // Reset Target and Initialize.
+
+    // Note that it may be necessary to slow down the JTAG clock first, 
+    // depending on the affect of reset on the processor.
+
+    dv "Executing RTI script function\n"
+    rt
+    TI	// call script DO_TI function
+    return
+
+//___________________________________________________________________
+::DO_TI  // Target Initialize.
+
+    if (@$trgt_cpu_state != $tcs.halt) { dv "Target Initialization commands skipped due to CPU state\n"; doq TCS; return }
+    dv "Initializing target...\n"
+
+    //  Memory Controller Setup
+    //
+    // TO DO #4 -- If your board has a different memory configuration than
+    //             the reference board, then you may need to adapt the
+    //             memory controller initialization script accordingly.
+    //             These settings should match the settings used by your
+    //             boot code during its hardware initialization phase.
+
+
+    // ******** BEGIN Set_Core_200MHz() ********
+
+    // ******** BEGIN device_PLL0(0,15,1,0,1,11,5) ********
+
+    // /* Clear PLL lock bit */
+    // CFGCHIP0 &= ~(0x00000010);
+    ew 0x01C1417C = (@.40x01C1417C & ~0x00000010)
+
+    // /* Set PLLENSRC '0',bit 5, PLL Enable(PLLEN) selection is controlled through MMR */
+    // PLL0_PLLCTL &= ~(0x00000020);
+    ew 0x01C11100 = (@.40x01C11100 & ~0x00000020)
+
+    // /* PLLCTL.EXTCLKSRC bit 9 should be left at 0 for OMAP-L138 */
+    // PLL0_PLLCTL &= ~(0x00000200);
+    ew 0x01C11100 = (@.40x01C11100 & ~0x00000200)
+
+    // /* Set PLLEN=0 to put in bypass mode*/
+    // PLL0_PLLCTL &= ~(0x00000001);
+    ew 0x01C11100 = (@.40x01C11100 & ~0x00000001)
+
+    // /*wait for 4 cycles to allow PLLEN mux switches properly to bypass clock*/
+    // for(i=0; i<PLLEN_MUX_SWITCH; i++) {;}
+    w 10
+
+    // /* Select the Clock Mode bit 8 as External Clock or On Chip Oscilator*/
+    // PLL0_PLLCTL &= 0xFFFFFEFF;
+    ew 0x01C11100 = (@.40x01C11100 & 0xFFFFFEFF)
+
+    // /*Clear PLLRST bit to reset the PLL */
+    // PLL0_PLLCTL &= ~(0x00000008);
+    ew 0x01C11100 = (@.40x01C11100 & ~0x00000008)
+
+    // /* Disable the PLL output*/
+    // PLL0_PLLCTL |= (0x00000010);
+    ew 0x01C11100 = (@.40x01C11100 | 0x00000010)
+
+    // /* PLL initialization sequence
+    // Power up the PLL by setting PWRDN bit set to 0 */
+    // PLL0_PLLCTL &= ~(0x00000002);
+    ew 0x01C11100 = (@.40x01C11100 & ~0x00000002)
+
+    // /* Enable the PLL output*/
+    // PLL0_PLLCTL &= ~(0x00000010);
+    ew 0x01C11100 = (@.40x01C11100 & ~0x00000010)
+
+    // /*PLL stabilisation time- take out this step , not required here when PLL in bypassmode*/
+    // for(i=0; i<PLL_STABILIZATION_TIME; i++) {;}
+    w 200
+
+    // /*Program the required multiplier value in PLLM*/
+    // PLL0_PLLM    = PLLM; /* Make PLLMULTIPLEIR as bootpacket*/
+    ew 0x01C11110 = 0n15
+
+    // /*If desired to scale all the SYSCLK frequencies of a given PLLC, program the POSTDIV ratio*/
+    // PLL0_POSTDIV = 0x8000 | POSTDIV; /* Make POSTDIV as bootpacket*/
+    ew 0x01C11128 = 0x8001
+
+    // /*Check for the GOSTAT bit in PLLSTAT to clear to 0 to indicate that no GO operation is currently in progress*/
+    // while(PLL0_PLLSTAT & 0x1==1){}
+    :label200
+    if ((@.40x01C1113C & 0x1) == 0n1) { goto label200 }
+
+    // /*Program the RATIO field in PLLDIVx with the desired divide factors.
+    // In addition, make sure in this step you leave the PLLDIVx.DxEN bits set so clocks are still enabled (default).*/
+    // PLL0_PLLDIV1 = 0x8000 | PLLDIV1;   /* Make PLLDIV1 as bootpacket, do it for other PLLDIVx to if required*/
+    ew 0x01C11118 = 0x8000
+
+    // PLL0_PLLDIV2 = 0x8000 | PLLDIV2;
+    ew 0x01C1111C = 0x8001
+
+    // PLL0_PLLDIV4 = 0x8000 | (((PLLDIV1+1)*4)-1);
+    ew 0x01C11160 = 0x8003
+
+    // PLL0_PLLDIV6 = 0x8000 | PLLDIV1;
+    ew 0x01C11168 = 0x8000
+
+    // PLL0_PLLDIV3 = 0x8000 | PLLDIV3;   /* Make PLLDIV3 as bootpacket, do it for other PLLDIVx to if required*/
+    ew 0x01C11120 = 0x8011
+
+    // PLL0_PLLDIV7 = 0x8000 | PLLDIV7;   /* Make PLLDIV7 as bootpacket, do it for other PLLDIVx to if required*/
+    ew 0x01C1116C = 0x8005
+
+    // /*Set the GOSET bit in PLLCMD to 1 to initiate a new divider transition.*/
+    // PLL0_PLLCMD |= 0x1;
+    ew 0x01C11138 = (@.40x01C11138 | 0x1)
+
+    // /*Wait for the GOSTAT bit in PLLSTAT to clear to 0 (completion of phase alignment).*/
+    // while(PLL0_PLLSTAT & 0x1==1) { }
+    :label201
+    if ((@.40x01C1113C & 0x1) == 0n1) { goto label201 }
+
+    // /*Wait for PLL to reset properly. See PLL spec for PLL reset time - This step is not required here -step11*/
+    // for(i=0; i<PLL_RESET_TIME_CNT; i++) {;}   /*128 MXI Cycles*/
+    w 50
+
+    // /*Set the PLLRST bit in PLLCTL to 1 to bring the PLL out of reset*/
+    // PLL0_PLLCTL |= 0x8;
+    ew 0x01C11100 = (@.40x01C11100 | 0x8)
+
+    // /*Wait for PLL to lock. See PLL spec for PLL lock time*/
+    // for(i=0; i<PLL_LOCK_TIME_CNT; i++) {;} /*Make PLL_LOCK_TIME_CNT as boot Packet*/
+    w 200
+
+    // /*Set the PLLEN bit in PLLCTL to 1 to remove the PLL from bypass mode*/
+    // PLL0_PLLCTL |=  0x1;
+    ew 0x01C11100 = (@.40x01C11100 | 0x1)
+
+    // /* SET PLL lock bit*/
+    // CFGCHIP0 |= (0x1 << 4) & 0x00000010;
+    ew 0x01C1417C = (@.40x01C1417C | 0x00000010)
+
+    // ******** END device_PLL0(0,15,1,0,1,11,5) ********
+
+    // ******** END Set_Core_200MHz() ********
+
+    // ******** BEGIN Set_mDDR_132MHz() ********
+
+    // ******** BEGIN device_PLL1(21,1,0,1,2) ********
+
+    // /* Clear PLL lock bit */
+    // CFGCHIP3 &= ~(0x00000020);
+    ew 0x01C14188 = (@.40x01C14188 & ~0x00000020)
+
+    // /* Set PLLENSRC '0',bit 5, PLL Enable(PLLEN) selection is controlled through MMR */
+    // PLL1_PLLCTL &= ~(0x00000020);
+    ew 0x01E1A100 = (@.40x01E1A100 & ~0x00000020)
+
+    // /* PLLCTL.EXTCLKSRC bit 9 should be left at 0 for OMAP-L138 */
+    // PLL1_PLLCTL &= ~(0x00000200);
+    ew 0x01E1A100 = (@.40x01E1A100 & ~0x00000200)
+
+    // /* Set PLLEN=0 to put in bypass mode*/
+    // PLL1_PLLCTL &= ~(0x00000001);
+    ew 0x01E1A100 = (@.40x01E1A100 & ~0x00000001)
+
+    // /*wait for 4 cycles to allow PLLEN mux switches properly to bypass clock*/
+    // for(i=0; i<PLLEN_MUX_SWITCH; i++) {;}
+    w 10
+
+    // /* Select the Clock Mode bit 8 as External Clock or On Chip Oscilator*/
+    // /* PLL1_PLLCTL &= 0xFFFFFEFF;
+    ew 0x01E1A100 = (@.40x01E1A100 & 0xFFFFFEFF)
+
+    // /*Clear PLLRST bit to reset the PLL */
+    // PLL1_PLLCTL &= ~(0x00000008);
+    ew 0x01E1A100 = (@.40x01E1A100 & ~0x00000008)
+
+    // /* Disable the PLL output*/
+    // PLL1_PLLCTL |= (0x00000010);
+    ew 0x01E1A100 = (@.40x01E1A100 | 0x00000010)
+
+    // /* PLL initialization sequence
+    // Power up the PLL by setting PWRDN bit set to 0 */
+    // PLL1_PLLCTL &= ~(0x00000002);
+    ew 0x01E1A100 = (@.40x01E1A100 & ~0x00000002)
+
+    // /* Enable the PLL output*/
+    // PLL1_PLLCTL &= ~(0x00000010);
+    ew 0x01E1A100 = (@.40x01E1A100 & ~0x00000010)
+
+    // /*PLL stabilisation time- take out this step , not required here when PLL in bypassmode*/
+    // for(i=0; i<PLL_STABILIZATION_TIME; i++) {;}
+    w 200
+
+    // /*Program the required multiplier value in PLLM*/
+    // PLL1_PLLM    = PLLM; /* Make PLLMULTIPLEIR as bootpacket*/
+    ew 0x01E1A110 = 0n21
+
+    // /*If desired to scale all the SYSCLK frequencies of a given PLLC, program the POSTDIV ratio*/
+    // PLL1_POSTDIV = 0x8000 | POSTDIV; /* Make POSTDIV as bootpacket*/
+    ew 0x01E1A128 = 0x8001 
+
+    // /*Check for the GOSTAT bit in PLLSTAT to clear to 0 to indicate that no GO operation is currently in progress*/
+    // while(PLL1_PLLSTAT & 0x1==1){}
+    :label100
+    if ((@.40x01E1A13C & 0x1) == 0n1) { goto label100 }
+
+    // // /*Program the RATIO field in PLLDIVx with the desired divide factors. 
+    // // In addition, make sure in this step you leave the PLLDIVx.DxEN bits set so clocks are still enabled (default).*/
+    // PLL1_PLLDIV1 = 0x8000 | PLLDIV1;   /* Make PLLDIV1 as bootpacket, do it for other PLLDIVx to if required*/
+    ew 0x01E1A118 = 0x8000
+
+    // PLL1_PLLDIV2 = 0x8000 | PLLDIV2;   /* Make PLLDIV2 as bootpacket, do it for other PLLDIVx to if required*/
+    ew 0x01E1A11C = 0x8001
+
+    // PLL1_PLLDIV3 = 0x8000 | PLLDIV3;   /* Make PLLDIV3 as bootpacket, do it for other PLLDIVx to if required*/
+    ew 0x01E1A120 = 0x8002
+
+    // /*Set the GOSET bit in PLLCMD to 1 to initiate a new divider transition.*/
+    // PLL1_PLLCMD |= 0x1;
+    ew 0x01E1A138 = (@.40x01E1A138 | 0x1)
+
+    // /*Wait for the GOSTAT bit in PLLSTAT to clear to 0 (completion of phase alignment).*/
+    // while(PLL1_PLLSTAT & 0x1==1) { }
+    :label101
+    if ((@.40x01E1A13C & 0x1) == 0n1) { goto label101 }
+
+    // /*Wait for PLL to reset properly. See PLL spec for PLL reset time - */
+    // for(i=0; i<PLL_RESET_TIME_CNT; i++) {;}   /*128 MXI Cycles*/
+    w 50
+
+    // /*Set the PLLRST bit in PLLCTL to 1 to bring the PLL out of reset*/
+    // PLL1_PLLCTL |= 0x8;
+    ew 0x01E1A100 = (@.40x01E1A100 | 0x8)
+
+    // /*Wait for PLL to lock. See PLL spec for PLL lock time*/
+    // for(i=0; i<PLL_LOCK_TIME_CNT; i++) {;} /*Make PLL_LOCK_TIME_CNT as boot Packet*/
+    w 200
+
+    // /*Set the PLLEN bit in PLLCTL to 1 to remove the PLL from bypass mode*/
+    // PLL1_PLLCTL |=  0x1;
+    ew 0x01E1A100 = (@.40x01E1A100 | 0x1)
+
+    // /* SET PLL lock bit*/
+    // CFGCHIP3 |= (0x1 << 5) & 0x00000020;
+    ew 0x01C14188 = (@.40x01C14188 | 0x00000020)
+
+    // ******** END device_PLL1(21,1,0,1,2) ********
+
+    // ******** BEGIN DEVICE_mDDRConfig(132) ********
+
+    // /*Enable the Clock to EMIF3A SDRAM*/
+    // if( (*(unsigned int*)(PSC1_MDSTAT+4 * LPSC_num) & 0x1F) != 0x3 )
+    if((@.40x01E27818 & 0x1F) == 0x3) { goto label1 }
+
+    // *(unsigned int*) (PSC1_MDCTL+4*LPSC_num) = (*(unsigned int*) (PSC1_MDCTL+4*LPSC_num) & 0xFFFFFFE0) | 0x0003;
+    ew 0x01E27A18 = ((@.40x01E27A18 & 0xFFFFFFE0) | 0x0003)
+
+    // PSC1_PTCMD = 0x1<<PD;
+    ew 0x01E27120 = 0x1
+
+    // /*Wait for power state transition to finish*/
+    // while( (PSC1_PTSTAT & (0x1<<PD) ) !=0) ;
+    :label2
+    if ((@.40x01E27128 & 0x1) != 0n0) { goto label2 }
+
+    // while( (*(unsigned int*)(PSC1_MDSTAT+4 * LPSC_num) & 0x1F) !=0x3);
+    :label3
+    if ((@.40x01E27818 & 0x1F) != 0x03) { goto label3 }
+
+    :label1
+
+    // /*If VTP claiberation enabled , then skip the VTP calibration*/
+    // if((VTPIO_CTL & 0x00000040))
+    if ((@.40x01E2C000 & 0x00000040) == 0x0) { goto label4 }
+
+    // Begin VTP Calibration
+    // VTPIO_CTL |= (0x00004000);     // Set IOPWRDN bit to enable input buffer powerdown enable mode
+    ew 0x01E2C000 = (@.40x01E2C000 | 0x00004000)
+
+    // VTPIO_CTL &= ~(0x00000040);    // Clear POWERDN bit (enable VTP)
+    ew 0x01E2C000 = (@.40x01E2C000 & ~0x00000040)
+
+    // Pulse (low) CLRZ to initiate VTP IO Calibration
+    // VTPIO_CTL |= (0x00002000);     // Set CLRZ bit
+    ew 0x01E2C000 = (@.40x01E2C000 | 0x00002000)
+
+    // VTPIO_CTL &= ~(0x00002000);    // Clear CLRZ bit (CLRZ should be low for at least 2ns)
+    ew 0x01E2C000 = (@.40x01E2C000 & ~0x00002000)
+
+    // VTPIO_CTL |= 0x00002000;       // Set CLRZ bit
+    ew 0x01E2C000 = (@.40x01E2C000 | 0x00002000)
+
+    // Polling READY bit to see when VTP calibration is done
+    // while(!((VTPIO_CTL & 0x00008000)>>15)) {}
+    :label5
+    if (((@.40x01E2C000 & 0x00008000)>>0n15) != 0x1) { goto label5 }
+
+    // VTPIO_CTL |= 0x00000080;       // Set LOCK bit for static mode
+    ew 0x01E2C000 = (@.40x01E2C000 | 0x00000080)
+
+    // VTPIO_CTL |= 0x00000100;       // Set PWRSAVE bit to save power
+    ew 0x01E2C000 = (@.40x01E2C000 | 0x00000100)
+
+    // VTPIO_CTL |= 0x00000040;       // Set POWERDN bit to power down VTP module
+    ew 0x01E2C000 = (@.40x01E2C000 | 0x00000040)
+
+    // End VTP Calibration
+
+    :label4
+
+    // EMIF3A_SDCR |= 0x00800000; // Set BOOTUNLOCK
+    ew 0xB0000008 = (@.40xB0000008 | 0x00800000)
+
+    // Config DDR timings
+    // DDRCTL = 
+    ew 0xB00000E4 = 0x000000C4
+
+    // EMIF3A_SDCR =
+    ew 0xB0000008 = ((@.40xB0000008 & 0xF0000000) | 0x0A03C622)
+
+    // EMIF3A_SDTIMR1 =
+    ew 0xB0000010 = 0x1A922A0C
+
+    // EMIF3A_SDTIMR2 =
+    ew 0xB0000014 = 0xC010C700
+
+    // EMIF3A_SDCR    &= ~0x00008000; // Clear TIMUNLOCK
+    ew 0xB0000008 = (@.40xB0000008 & ~0x00008000)
+
+    // EMIF3A_SDCR2   = 0x00000000; // IBANK_POS set to 0 so this register does not apply
+    ew 0xB000001C = 0x00000000
+
+    // EMIF3A_SDRCR =
+    ew 0xB000000C = 0xC0000408
+
+    // /*SyncReset the Clock to EMIF3A SDRAM*/
+    // if( (*(unsigned int*)(PSC1_MDSTAT+4 * LPSC_num) & 0x1F) != 0x1 )
+    if((@.40x01E27818 & 0x1F) == 0x1) { goto label6 }
+
+    // *(unsigned int*) (PSC1_MDCTL+4*LPSC_num) = (*(unsigned int*) (PSC1_MDCTL+4*LPSC_num) & 0xFFFFFFE0) | 0x0001;
+    ew 0x01E27A18 = ((@.40x01E27A18 & 0xFFFFFFE0) | 0x0001)
+
+    // PSC1_PTCMD = 0x1<<PD;
+    ew 0x01E27120 = 0x1
+
+    // /*Wait for power state transition to finish*/
+    // while( (PSC1_PTSTAT & (0x1<<PD) ) !=0) ;
+    :label7
+    if ((@.40x01E27128 & 0x1) != 0n0) { goto label7 }
+
+    // while( (*(unsigned int*)(PSC1_MDSTAT+4 * LPSC_num) & 0x1F) !=0x1);
+    :label8
+    if ((@.40x01E27818 & 0x1F) != 0x01) { goto label8 }
+
+    :label6
+
+    // /*Enable the Clock to EMIF3A SDRAM*/
+    // if( (*(unsigned int*)(PSC1_MDSTAT+4 * LPSC_num) & 0x1F) != 0x3 )
+    if((@.40x01E27818 & 0x1F) == 0x3) { goto label9 }
+
+    // *(unsigned int*) (PSC1_MDCTL+4*LPSC_num) = (*(unsigned int*) (PSC1_MDCTL+4*LPSC_num) & 0xFFFFFFE0) | 0x0003;
+    ew 0x01E27A18 = ((@.40x01E27A18 & 0xFFFFFFE0) | 0x0003)
+
+    // PSC1_PTCMD = 0x1<<PD;
+    ew 0x01E27120 = 0x1
+
+    // /*Wait for power state transition to finish*/
+    // while( (PSC1_PTSTAT & (0x1<<PD) ) !=0) ;
+    :label10
+    if ((@.40x01E27128 & 0x1) != 0n0) { goto label10 }
+
+    // while( (*(unsigned int*)(PSC1_MDSTAT+4 * LPSC_num) & 0x1F) !=0x3);
+    :label11
+    if ((@.40x01E27818 & 0x1F) != 0x03) { goto label11 }
+
+    :label9
+
+    // EMIF3A_SDRCR &= ~0xC0000000;  // disable self-refresh
+    ew 0xB000000C = (@.40xB000000C & ~0xC0000000)
+
+    // ******** END DEVICE_mDDRConfig(132) ********
+
+    // ******** END Set_mDDR_132MHz() ********
+
+    dv "Initializing target done.\n"
+    return
+
+//___________________________________________________________________
+
+// <eof>

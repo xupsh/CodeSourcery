@@ -1,0 +1,488 @@
++q  // Enter quiet mode
+//___________________________________________________________________
+//
+//               Copyright (c) 2011 Mentor Graphics Corporation
+//                           All rights reserved
+//
+//   THIS WORK CONTAINS TRADE SECRETS AND PROPRIETARY INFORMATION WHICH IS
+//    THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS LICENSORS AND IS
+//                        SUBJECT TO LICENSE TERMS.
+//
+//___________________________________________________________________
+//
+// Mentor Embedded Sourcery Probe target initialization file for the
+// Freescale i.MX21-ADS reference platform.  It supports this platform as-is,
+// and can be adapted to a new target based on this reference board,
+// as detailed below.  For a brand new custom board not related to
+// this reference board, it may be better to start from the template
+// rather than trying to adapt this file.
+//
+// Target Description:
+//
+//     Board:   Freescale i.MX21-ADS reference platform
+//     Device:  Freescale i.MX21
+//     CPU ID:  ARM926EJS
+//     Endian:  Little
+//     Cores:   1
+//
+// Porting Guide:
+//
+// The user should make the following adaptations to port this file
+// to a new target board based on the associated reference platform:
+//
+//        0. Review the MEP Probe Initialization section at
+//           "TO DO #0" below to make sure the settings are
+//           right for your board.
+//        1. Update the memory configuration table for changes
+//           in the new board's  *Physical*  memory map.  See
+//           'TO DO #1' below.
+//        2. If your target board requires any special MEP
+//           settings, they should be added to the end of the
+//           ONE_TIME_SETUP section.  See 'TO DO #2' below.
+//        3. Decide whether the target should be automatically
+//           reset and/or initialized upon start-up by choosing
+//           the desired command at 'TO DO #3' below.  This
+//           really depends on your use case.
+//        4. If the board has no boot code (or bad boot code),
+//           and you want to download into RAM, then you may
+//           have to adapt the memory controller initialization
+//           script at 'TO DO #4' below to account for changes
+//           relative to the reference platform.
+//
+// NOTE:  Additional information on MON commands and the configuration
+//        options used here is available in the online help system.
+//___________________________________________________________________
+dv "Reading $$# ...\n"
+
+
+// Initialization script preparation
+// =================================
+
+// The RTI, RTNI, and TI command aliases call script functions in this file.
+// These command aliases should never be changed.
+
+ea RTI   $$#.DO_RTI  // RTI  call DO_RTI script function  (Reset Target and Initialize)
+ea RTNI  $$#.DO_RTNI // RTNI call DO_RTNI script function (Reset Target with No Initialization)
+ea TI    $$#.DO_TI   // TI   call DO_TI script function   (Target Initialize without resetting)
+
+
+// MEP Probe Initialization
+// ==========================
+
+// TO DO #0 -- Review the following MEP configuration options to make
+//             sure they are right for your target board hardware and
+//             processor device design.
+
+// The  Trgt_Resets_JTAG  option informs the MEP probe whether the target
+// board will forward a system reset (nSRST) to the JTAG interface (nTRST),
+// or reset the system only without resetting the JTAG interface.  When in
+// doubt, a YES setting is safer.  When the two reset circuits are known
+// to be independent, which is strongly recommended, then a NO setting is
+// recommended.
+
+eo Trgt_Resets_JTAG  = no
+
+// The  Ice_JTAG_Use_RTCLK  and  Ice_JTAG_Clock_Freq  options are related
+// and must be considered together.  An  Ice_JTAG_Use_RTCLK  setting of
+// ON  selects adaptive clocking mode, where the JTAG clock is dynamically
+// controlled by the target processor.  When  Ice_JTAG_Use_RTCLK  is set
+// OFF  then normal (unthrottled) clocking is selected.
+//
+// When adaptive clocking is disabled, the  Ice_JTAG_Clock_Freq  option
+// specifies the the JTAG clock (TCK) frequency in Megahertz, from
+// 0.002 to 100 (depending on probe hardware capability).  A lower setting
+// is safer, a higher setting yields higher performance.  Note that the
+// requested frequency will be adjusted down to the closest frequency
+// supported by the probe hardware (displaying this option will show the
+// actual TCK frequency).
+//
+//     IJUR  Clock mode
+//     ====  ========================
+//     OFF   Free running TCK at specified frequency (RTCK is ignored)
+//     ON    Adaptive clocking with frequency controlled by RTCK
+//           (Ice_JTAG_Clock_Freq is ignored)
+//
+// Note that enabling  Ice_JTAG_Use_RTCLK  on target boards that do not
+// drive the RTCK signal will lock up the JTAG interface.
+
+eo Ice_JTAG_Use_RTCLK  = off
+eo Ice_JTAG_Clock_Freq = 0.1   // start at 100kHz and increase later
+if (@$Ice_JTAG_Use_RTCLK) {doq Ice_JTAG_Use_RTCLK} {doq Ice_JTAG_Clock_Freq}  
+
+// The following command can be used to define the details of the JTAG
+// daisy chain.  It is only required for targets on which the MEP
+// auto-detection algorithm cannot correctly determine the JTAG connection
+// details.  On most boards this command can be omitted.
+//
+//    ew MEP_JTAG_DIMENSION = TAP_CNT, IR1_CNT [ , IR2_CNT ]  ...
+
+// The following commands can be used to define special JTAG initialization
+// operations required by certain processors.  The first one, if defined,
+// is scanned in right after the JTAG reset cycle completes, but before the
+// standard JTAG initialization performed by the MEP.  The second, if
+// defined, is scanned in right after the standard JTAG initialization
+// performed by the MEP.  On most boards these can both be omitted.
+//
+//    ew MEP_JTAG_INIT0 = <scan-op> [ , <scan-op> ]  ...
+//    ew MEP_JTAG_INIT1 = <scan-op> [ , <scan-op> ]  ...
+
+// The  Ice_Power_Sense  option enables the target power monitor.  When
+// target power is detected, the debug interface is enabled.
+
+eo Ice_Power_Sense = VREF
+
+// The  Ice_JTAG_TAP_Select  option controls which TAP on a multi-TAP
+// daisy chain is associated with this debug connection.  This option
+// can be omitted on targets which have one TAP.  Note that TAPs are
+// numbered from 1-N, with TAP 1 being the one whose TDO is connected
+// to the MEP probe.
+//
+//    eo Ice_JTAG_TAP_Select = <num>
+
+// Physical Memory Configuration
+// =============================
+
+mc *:P, inv     // start with all *physical* memory (*:P) marked as invalid
+
+// TO DO #1 -- Change the address range(s) below to match the  *physical*
+//             address ranges of your ROM/flash and RAM areas.  Add more
+//             MC commands as necessary for each memory mapped area.
+//
+// WARNING:  DO NOT confuse virtual (MVA) addresses with physical space.
+//           Make sure to use physical addresses in the MC table.
+//
+// EXAMPLE:
+//
+//     mc  ________:P  ________:P,  PWE, JAM, RW    // DRAM
+//     mc  ________:P  ________:P,  PWD, JAM, RO    // Flash or ROM
+//     mc  ________:P  ________:P,  PWD, JAM, RW    // Peripheral registers
+//
+// Note that if your boot code remaps physical memory, then the MC table
+// should reflect the mapping that is in effect for the code you are trying
+// to debug.  When debugging boot code in flash, MC should match the mapping
+// in effect when booting.  When debugging code in RAM, MC should match the
+// mapping in effect when running code from RAM.
+//
+// Address Range          PWE  Access
+// ---------------------- ---- -------
+mc 00000000:P FFFFFFFF:P, PWE, JAM, RW  // temporary place holder
+
+
+//        ____User Supplied Setup Commands Go Here____
+
+// TO DO #2 -- If your target board requires any special MEP settings
+//             (e.g. special JTAG initialization), add the commands to
+//             make those settings here.
+
+
+// End of initial one-time only setup script.  If this is a non-intrusive
+// attach connection, or if a normal debug connection fails to connect
+// properly, then exit at this point.  Otherwise continue on with optional
+// additional initialization.
+
+if (@.4$INIT_TYPE != 0) {dv "Non-intrusive attach connection\n"; goto EXIT}
+if (@$trgt_cpu_state != $tcs.halt) {dv "Debug connection failed, "; doq TCS; goto EXIT}
+
+// TO DO #3 -- Comment out all but one of the next three commands to
+//             control IF and HOW the target is initialized when the
+//             debugger is launched.  If no reset or target initialization
+//             is needed then all these can be left commented out.
+
+TI
+//   RTI
+//   RTNI
+
+:EXIT
+dv "Finished reading $$#.\n"
+return
+
+//___________________________________________________________________
+::DO_RTNI  // Reset Target with No Initialization.
+
+    // Normally an  rt  command is sufficient, but it may be necessary
+    // to slow down the JTAG clock first, depending on the affect of
+    // reset on the processor.
+
+    dv "Executing RTNI script function\n"
+    eo Ice_JTAG_Clock_Freq = 0.1   // revert to 100kHz before resetting
+    if (@$Ice_JTAG_Use_RTCLK) {doq Ice_JTAG_Use_RTCLK} {doq Ice_JTAG_Clock_Freq}
+    rt
+    return
+
+//___________________________________________________________________
+::DO_RTI   // Reset Target and Initialize.
+
+    // Note that it may be necessary to slow down the JTAG clock first, 
+    // depending on the affect of reset on the processor.
+
+    dv "Executing RTI script function\n"
+    eo Ice_JTAG_Clock_Freq = 0.1   // revert to 100kHz before resetting
+    if (@$Ice_JTAG_Use_RTCLK) {doq Ice_JTAG_Use_RTCLK} {doq Ice_JTAG_Clock_Freq}
+    rt
+    TI	// call script DO_TI function
+    return
+
+//___________________________________________________________________
+::DO_TI  // Target Initialize.
+
+    if (@$trgt_cpu_state != $tcs.halt) { dv "Target Initialization commands skipped due to CPU state\n"; doq TCS; return }
+    dv "Initializing target...\n"
+
+    //  Memory Controller Setup
+    //
+    // TO DO #4 -- If your board has a different memory configuration than
+    //             the reference board, then you may need to adapt the
+    //             memory controller initialization script accordingly.
+    //             These settings should match the settings used by your
+    //             boot code during its hardware initialization phase.
+
+    ew c15_1 = 0x78
+    //
+    // ############################################################################
+    // # i.MX21 EVB v0.0 or v1.0 Initialization (For Tape Out 2 ONLY)
+    // ############################################################################
+
+    // ############################################################################
+    // ###
+    // ### AHB-Lite IP Interface
+    // ###
+    // ############################################################################
+    ew 0x10000000:P = 0x00040304
+    ew 0x10020000:P = 0x00000000
+    ew 0x10000004:P = 0xFFFBFCFB
+    ew 0x10020004:P = 0xFFFFFFFF
+    //
+    // ### PCCR0 (Disable LCDC by clear PERCLK3_EN bit)
+    ew 0x10027020:P = 0x31084003
+    //
+    // ############################################################################
+    // ###
+    // ### EIM
+    // ###
+    // ############################################################################
+    //
+    // # CS0 Initialization (Async Mode)
+    // # 32-bit, ?? wait states
+    ew 0xDF001000:P = 0x00003E00
+    ew 0xDF001004:P = 0x20000E01
+    //
+    // # Setting for Memory Map IO Port
+    // # CS1 Initialization (Async Mode)
+    // # 16-bit, D0..15, ?? wait states
+    ew 0xDF001008:P = 0x00002000
+    ew 0xDF00100C:P = 0x11118501
+    //
+    // # Config MUX for pin PF18->CS1
+    // # Clear PTF_GIUSE
+    ew 0x10015520:P = 0x00000000
+    // # Clear PTF_GPR
+    ew 0x10015538:P = 0x00000000
+    //
+    // # CS3 Initialization (Async Mode) SRAM on EVB Base Board
+    // # 32-bit, ?? wait states
+    ew 0xDF001018:P = 0x00000E00
+    ew 0xDF00101C:P = 0x11110601
+    //
+    // # FMCR Register
+    // # Select CS3/CSD0 Pin as CS3 only.
+    ew 0x10027814:P = 0xFFFFFFC9
+    //
+    // ############################################################################
+    // ###
+    // ### SDRAMC
+    // ###
+    // ############################################################################
+    //
+    // ########################################################
+    // # CSD0 Initialization (SDRAM)
+    // # 16Mx16x2 IAM=0 CSD0 CL3
+    // ########################################################
+    //
+    // *** Set Precharge Command
+    ew 0xDF000000:P = 0x92120300
+    //
+    // *** Issue Precharge all Command
+    dw 0xC0200000:P
+    //
+    // *** Set AutoRefresh Command
+    ew 0xDF000000:P = 0xA2120300
+    //
+    // *** Issue AutoRefresh Command
+    dw 0xC0000000:P
+    dw 0xC0000000:P
+    dw 0xC0000000:P
+    dw 0xC0000000:P
+    dw 0xC0000000:P
+    dw 0xC0000000:P
+    dw 0xC0000000:P
+    dw 0xC0000000:P
+    //
+    // *** Set Mode Register
+    ew 0xDF000000:P = 0xB2120300
+    //
+    // *** Issue Mode Register Command
+    // Burst Length = 8
+    dw 0xC0119800:P
+    //
+    // *** Set to Normal Mode
+    // # From the spec of the SDRAM K4S56163LC-RG75000,
+    // # 1. tRCD = 19ns minimum  -> RCD = 3 clk (SDCLK=133MHz) -> SRCD = 11b
+    // # 2. tRP  = 19ns minimum  -> RP  = 3 clk (SDCLK=133MHz) -> SRP  = 0b
+    // # 3. tRC  = 65ns minimum  -> RC  = 9 clk (SDCLK=133MHz) -> SRC  = 1001b
+    // # 4. refresh rate = 8192rows/64ms -> SREFR = 11b
+    ew 0xDF000000:P = 0x8212F339
+    //
+    // ### End of Memory Configuration ##########################################
+    //
+    // ############################################################################
+    // ###
+    // ### CrossBar (MAX)
+    // ###
+    // ############################################################################
+    // ### Master Priority Register for Slave Port 3 (EMI)
+    // ### LCD - highest priority
+    // ### ARM - Lowest prority
+    ew 0x1003F300:P = 0x00123056
+    //
+    // ############################################################################
+    // ###
+    // ### LCD
+    // ###
+    // ############################################################################
+    //
+    // ###################
+    // # Driving
+    // ###################
+    // # DSCR1: Driving Strength Control Register
+    ew 0x10027820:P = 0x00000000
+    //
+    // ##########################################################################
+    // # Sharp LCD (Part#: LQ035Q7DB02) Initialization for i.MX21EVB v0.0 Rev 1
+    // ##########################################################################
+    //
+    // ### PCDR1 Peripheral Clock Divider Register - Set PERDIV3
+    ew 0x1002701C:P = 0x03070F0F
+    //                ^
+    //                |
+    //                +- PERDIV3
+    //
+    // ###########################################
+    //   LCD OFF by bit 9 Memory Map IO Register
+    // ###########################################
+    eh 0xCC800000:P = 0x0000
+    //
+    // ### PCCR0 (Set HCLK_LCDC_EN)
+    ew 0x10027020:P = 0x35084003
+    //
+    // ###########################################
+    // ## Init LCDC
+    // ###########################################
+    //
+    // ###############
+    // ## IO Port
+    // ###############
+    //
+    // ## Clear Port A for LCD signals
+    // Port A PTA_GIUS
+    ew 0x10015020:P = 0x00000000
+    // Port A PTA_GPR
+    ew 0x10015038:P = 0x00000000
+    //
+    // #######################
+    // ## LCDC Configuartion
+    // #######################
+    //
+    // ### Screen Starting Address Register
+    // # Point to SDRAM
+    ew 0x10021000:P = 0xC2000000
+    //
+    // ### Size Register
+    ew 0x10021004:P = 0x00F00140
+    //
+    // ### Virtual Page Width
+    ew 0x10021008:P = 0x00000078
+    //
+    // ### Cursor
+    ew 0x1002100C:P = 0x40010001
+    ew 0x10021010:P = 0x1F1F0000
+    ew 0x10021014:P = 0x0000F800
+    //
+    // ### Cursor OFF
+    // ### ew = 0x1002100C:P 0x00000000 32
+    //
+    // ### Panel Configuration Register
+    //
+    // ## 18-bpp
+    // ew = 0x10021018:P 0xFD148BC7 32
+    // ## 16-bpp
+    ew 0x10021018:P = 0xFB148BC7
+    //
+    // ### Sharp Configuration Register
+    ew 0x10021028:P = 0x00120300
+    //
+    // hsyn width = 12  hsyn_wait 1 = 15 hsyn_wait2 = 15
+    ew 0x1002101C:P = 0x04000F06
+    //
+    // vsyn width = 1  vsyn_wait 1 = 0 vsyn_wait2 = 4
+    ew 0x10021020:P = 0x04000907
+    //
+    // LPCCR Register (Set CLS_HI_WIDTH) without backlight
+    // ew = 0x1002102C:P 0x00A90200, 32
+    // LPCCR Register (Set CLS_HI_WIDTH) with backlight
+    ew 0x1002102C:P = 0x00A903FF
+    //
+    // Refresh Mode Control Register
+    ew 0x10021034:P = 0x00000000
+    //
+    // ### LDCR Register (LCDC DMA)
+    ew 0x10021030:P = 0x00020008
+    //
+    // ### Enable LCDC
+    // ### HCLK_LCDC_EN = 1 and LCDC_PIXCLK_EN = 1
+    // ### PCCR0
+    ew 0x10027020:P = 0x350C4003
+    //
+    // ###########################################
+    // # LCD ON by bit 9 Memory Map IO Register
+    // ###########################################
+    eh 0xCC800000:P = 0x200
+    //
+    // ############################################################################
+    // ###
+    // ### PLL and Clock Setting
+    // ###
+    // ############################################################################
+    //
+    // #####################################
+    // # CLKO Select
+    // #####################################
+    // ## CCSR (Set CLKO_SEL = CLK32)
+    ew 0x10027028:P = 0x00000300
+    // ## CCSR (Set CLKO_SEL = FCLK)
+    // ew 0x10027028:P = 0x00000307
+    // ## CCSR (Set CLKO_SEL = HCLK)
+    // ew 0x10027028:P = 0x00000308
+    //
+    // ###### MPCTL0: (For 32.768KHz Input Frequency)
+    // #      MPLL = 266MHz
+    // ew 0x10027004:P = 0x007B1C73
+    //
+    // #### Select the Frequency
+    // ### CSCR: FCLK=MPLL/1; HCLK=FCLK/2; #####(If MPLL==266MHz, FCLK=266MHz and HCLK=133MHz)
+    // ##  ew 0x10027000:P = 0x17000607
+    // ### CSCR: FCLK=MPLL/1; HCLK=FCLK/3; #####(If MPLL==266MHz, FCLK=266MHz and HCLK=88MHz)
+    // ##  ew 0x10027000:P = 0x17000A07
+    // ### CSCR: FCLK=MPLL/1; HCLK=FCLK/4; #####(If MPLL==266MHz, FCLK=266MHz and HCLK=66MHz)
+    // ##  ew 0x10027000:P = 0x17000E07
+    // ### CSCR: FCLK=MPLL/1; HCLK=FCLK/8; #####(If MPLL==266MHz, FCLK=266MHz and HCLK=33MHz)
+    // ##  ew 0x10027000:P = 0x17001E07
+
+    eo Ice_JTAG_Clock_Freq = 8
+    if (@$Ice_JTAG_Use_RTCLK) {doq Ice_JTAG_Use_RTCLK} {doq Ice_JTAG_Clock_Freq}
+
+    dv "Initializing target done.\n"
+    return
+
+//___________________________________________________________________
+
+// <eof>

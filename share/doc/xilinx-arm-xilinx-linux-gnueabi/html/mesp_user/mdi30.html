@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:25:46 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>Command Interpreter</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("Meta Debug Interface (MDI)","mdi01","Optional MDI Services","mdi19","Command Interpreter","mdi30","129");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp8784"></a><h1 class="pHeading3 FontLevel1" id="MGC8784">
+
+
+Command Interpreter
+</h1>
+
+<a name="wp8785"></a><p class="pBody">
+
+The MDILib for Sourcery Probe implements the MON command language interpreter in order to provide full access to all the capabilities of the Sourcery Probe, not just the subset that is supported by the MDI API and the debugger.
+</p>
+
+<a name="wp8786"></a><p class="pBody">
+
+As described in <a href="mdi18.html"  onclick='oT("CRF","mdi18.html");return false;'>Required Services</a>, the debugger is required by the MDI specification to provide a way for you to enter commands and data to, and see the output from, the MDILib&#39;s command interpreter. When using Sourcery CodeBench, an MDI window is created and monitor commands (which can be abbreviated as mdi) can be used to execute MDI commands.
+</p>
+
+<a name="wp12008"></a><p class="pBody">
+
+The MDILib command interpreter supports nearly all of the MON command language, as documented in <a name="EW73"></a><a href="moncommand01.html#CRefID21126" onclick='oT("CRF","moncommand01.html#CRefID21126");'><span class=" cLinkOverride">MON Command Language</span></a>. All data display and enter commands, including trace data display, reset commands, and configuration commands are available. The command file and alias commands that allow the command language to be extended are also available.
+</p>
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp11942"></a><p class="pnoteNote">
+
+        	If the <span class=" cCourier cP10">MDILib</span> can not find the .<span class=" cCourier cP10">/mep/bin </span>installation directory, then the MON Help command will not work and some register definitions may be missing. Specifying the <span class=" cCourier cP10">PATH</span> value in the Global section of the <span class=" cCourier cP10">mdi.cfg</span> file is recommended for this reason. For Windows and cygwin environments, the directory will be found if the <span class=" cCourier cP10">mdi.dll </span>file is being loaded from there. Otherwise, the .<span class=" cCourier cP10">/mep/bin</span> directory must be added to your <span class=" cCourier cP10">PATH</span>. 
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "Command Interpreter";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "Command.Interpreter"
+   ThisTopic = "CommandInterpreter";
+   CurrentFile = "mdi30.html";
+   CurrentFileID = "129";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    
+<br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    
+<br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

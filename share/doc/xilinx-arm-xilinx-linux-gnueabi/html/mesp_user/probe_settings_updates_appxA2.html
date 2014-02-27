@@ -1,0 +1,245 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:26:20 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>Updating the Sourcery Probe Firmware Using CodeBench</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("Probe Settings and Updates","probe_settings_updates_appxA1","Updating the Sourcery Probe Firmware Using CodeBench","probe_settings_updates_appxA2","naV","naV","135");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp5856"></a><h1 class="pHeading2 FontLevel1" id="MGC5856">
+
+<a name="CRefID60549"></a>
+Updating the Sourcery Probe Firmware Using CodeBench
+</h1>
+<a name="wp5859"></a><p class="pBody">
+
+This section describes the steps required to update the firmware that is running on Sourcery Probe Professional and Sourcery Probe Personal.
+</p>
+
+<a name="wp5872"></a><p class="pzHeading">
+
+Procedure
+</p>
+
+<a name="wp5876"></a>
+<ol start="1"><li class="LL1Seq">Start Sourcery CodeBench per the instructions in the Sourcery CodeBench Getting Started manual. Close the Welcome screen if it appears.</li></ol>
+<a name="wp5882"></a>
+<ol start="2"><li class="LL1Seq">Select <span class=" cBold">Run &gt; Sourcery Probe &gt; Settings and Firmware Update</span>. <br />The <a href="probe_settings_updates_appxA6.html"  onclick='oT("CRF","probe_settings_updates_appxA6.html");return false;'>Settings and Firmware Update Dialog Box</a> appears.</li></ol>
+<a name="wp5889"></a>
+<ol start="3"><li class="LL1Seq">Enter the IP address or hostname in the <span class=" cBold">Probe IP/Hostname</span> field for the probe, and click <span class=" cBold">Retrieve Settings</span>. If you do not know the IP address or hostname of your probe, click <span class=" cBold">Discover</span> to view a list of all Sourcery Probe devices currently available on the local subnet and select your probe. See <a href="probe_settings_updates_appxA7.html"  onclick='oT("CRF","probe_settings_updates_appxA7.html");return false;'>Sourcery Probe Discovery Dialog Box</a>.</li></ol>
+<a name="wp5899"></a>
+<ol start="4"><li class="LL1Seq">Select the Firmware tab from the Settings and Firmware Update dialog box. See <a href="probe_settings_updates_appxA6.html#wp6205"  onclick='oT("CRF","probe_settings_updates_appxA6.html#wp6205");return false;'>Firmware Tab (See Figure&#160;A&#8209;4)</a>.</li></ol>
+<a name="wp5923"></a>
+<ol start="5"><li class="LL1Seq">Select a valid Update file.
+
+<div id="TableDivQz"></div>
+<div align="center">
+
+
+<a name="wp5908"></a><p class="pTableTitle" id="MGC5908">
+
+Table A&#8209;1. <a name="CRefID99874"></a>
+Valid Update Files for Sourcery Probes
+</p>
+
+
+<table border="1" cellpadding="5" cellspacing="0" id="wp5908table5903">
+  <tr bgcolor="#CCCCCC"  align="center" valign="middle">
+    <th>
+
+<a name="wp5912"></a><p class="pTableHeading" id="MGC5908">
+Probe Name
+</p>
+</th>
+
+    <th>
+
+<a name="wp5914"></a><p class="pTableHeading">
+
+Valid Update File 
+</p>
+
+</th>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row2Column1'  style='width:3.11459in'>
+
+
+<a name="wp5916"></a><p class="pTableCell">
+Sourcery Probe Professional -- OR --<br />Mentor Embedded GIGA-JTAG Probe</p></td>
+
+    <td id='Row2Column2'  style='width:2.76042in'>
+
+
+<a name="wp5918"></a><p class="pTableCell">
+mesp-professional_vXYZbN.mud </p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row3Column1' >
+
+
+<a name="wp5920"></a><p class="pTableCell">
+Sourcery Probe Personal -- OR --<br />Mentor Embedded USB-JTAG Probe</p></td>
+
+    <td id='Row3Column2' >
+
+
+<a name="wp5922"></a><p class="pTableCell">
+mesp-personal_vXYZbN.mud </p></td>
+
+
+</tr>
+
+
+</table>
+
+</div>
+<div id='EndTable'> </div>
+
+<br clear='left' class='Blank4Table' />
+
+</li></ol>
+<a name="wp5927"></a>
+<ol start="6"><li class="LL1Seq">Click <span class=" cBold">Program Update</span>. This updates the firmware on the Sourcery Probe.</li></ol>
+<table class="notes">
+  <tr class="NotesUpperRuleRed">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesRed">Caution</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp7219"></a><p class="pnoteSWCaution">
+
+        	Do not unplug or otherwise disturb the probe during the update process. Wait for the process to complete before moving on.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleRed">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp5928"></a>
+<ol start="7"><li class="LL1Seq">Click <span class=" cBold">Close</span> to close the dialog box.</li></ol>
+<a name="wp5929"></a><p class="pHTaskSubhead">
+
+Related Topics
+</p>
+
+<a name="wp5933"></a><p class="pBody">
+
+<a href="probe_settings_updates_appxA3.html"  onclick='oT("CRF","probe_settings_updates_appxA3.html");return false;'>Updating the Sourcery Probe Firmware from the Command Line</a>
+</p>
+
+<a name="wp5937"></a><p class="pBody">
+
+<a href="probe_settings_updates_appxA4.html"  onclick='oT("CRF","probe_settings_updates_appxA4.html");return false;'>Sourcery Probe Personal Settings (ARM and MIPS Only)</a>
+</p>
+
+<a name="wp5941"></a><p class="pBody">
+
+<a href="probe_settings_updates_appxA5.html"  onclick='oT("CRF","probe_settings_updates_appxA5.html");return false;'>Sourcery Probe Professional Settings</a>
+</p>
+
+<a name="wp5945"></a><p class="pBody">
+
+<a href="probe_settings_updates_appxA6.html"  onclick='oT("CRF","probe_settings_updates_appxA6.html");return false;'>Settings and Firmware Update Dialog Box</a>
+</p>
+
+<a name="wp5949"></a><p class="pBody">
+
+<a href="probe_settings_updates_appxA7.html"  onclick='oT("CRF","probe_settings_updates_appxA7.html");return false;'>Sourcery Probe Discovery Dialog Box</a>
+</p>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "Updating the Sourcery Probe Firmware Using CodeBench";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "Updating.the.Sourcery.Probe.Firmware.Using.CodeBench"
+   ThisTopic = "CommandInterpreter";
+   CurrentFile = "probe_settings_updates_appxA2.html";
+   CurrentFileID = "135";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    <br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    <br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

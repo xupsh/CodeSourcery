@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<?NLS TYPE="org.eclipse.help.toc"?>
+<toc label="Mentor Embedded Sourcery Probe Personal Hardware Manual">
+    <topic label=" Introduction" href="doc/mesp_personal/introduction1.html" >
+     <topic label="Related Documentation" href="doc/mesp_personal/introduction2.html"/>
+     <topic label="About Sourcery Probe Personal" href="doc/mesp_personal/introduction3.html" >
+      <topic label="Product Highlights" href="doc/mesp_personal/introduction4.html"/>
+      <topic label="The Debugging Environment" href="doc/mesp_personal/introduction4.html#wp9584" >
+       <topic label="Sourcery Probe Personal Benefits" href="doc/mesp_personal/introduction4.html#wp8436"/>
+       <topic label="Target Connections" href="doc/mesp_personal/introduction4.html#wp8470"/>
+      </topic>
+     </topic>
+     <topic label="Environmental Information" href="doc/mesp_personal/introduction5.html" >
+      <topic label="Product Disposal" href="doc/mesp_personal/introduction6.html"/>
+     </topic>
+     <topic label="Operating Requirements" href="doc/mesp_personal/introduction7.html" >
+      <topic label="Operating Conditions" href="doc/mesp_personal/introduction7.html#wp9482"/>
+      <topic label="Standard Electrostatic Precautions" href="doc/mesp_personal/introduction8.html"/>
+      <topic label="Electrical Requirements" href="doc/mesp_personal/introduction8.html#wp8679"/>
+      <topic label="Target Requirements" href="doc/mesp_personal/introduction8.html#wp8684"/>
+     </topic>
+     <topic label="Cycling Power to the System" href="doc/mesp_personal/introduction9.html"/>
+    </topic>
+    <topic label=" Connecting to the Target and Host Computer" href="doc/mesp_personal/connecting01.html" >
+     <topic label="Connecting to a Windows 7 PC" href="doc/mesp_personal/connecting02.html" >
+      <topic label="Configuring the Windows 7 Network Adapter to Use a Static IP Address" href="doc/mesp_personal/connecting02.html#wp17573" >
+       <topic label="Results" href="doc/mesp_personal/connecting02.html#wp17730"/>
+      </topic>
+     </topic>
+     <topic label="Connecting to a Windows XP/SP3 PC" href="doc/mesp_personal/connecting03.html" >
+      <topic label="Installing the USB Driver Software" href="doc/mesp_personal/connecting03.html#wp20171"/>
+      <topic label="Configuring the Windows XP Network Adapter to Use a Static IP Address" href="doc/mesp_personal/connecting03.html#wp14883"/>
+     </topic>
+     <topic label="Connecting to a Linux PC" href="doc/mesp_personal/connecting04.html" >
+      <topic label="Known Issues" href="doc/mesp_personal/connecting04.html#wp10339"/>
+      <topic label="Procedure" href="doc/mesp_personal/connecting04.html#wp10364"/>
+     </topic>
+     <topic label="Changing the IP Address of the Probe (Optional)" href="doc/mesp_personal/connecting05.html" >
+      <topic label="Procedure" href="doc/mesp_personal/connecting05.html#wp15296"/>
+     </topic>
+     <topic label="Sourcery Probe Console" href="doc/mesp_personal/connecting06.html" >
+      <topic label="Configuring the USB Serial Interface" href="doc/mesp_personal/connecting07.html"/>
+      <topic label="Sourcery Probe Personal Console Menu" href="doc/mesp_personal/connecting08.html"/>
+      <topic label="Connecting to the Sourcery Probe Console from Sourcery CodeBench" href="doc/mesp_personal/connecting09.html"/>
+     </topic>
+     <topic label="Debug Port Connector Information" href="doc/mesp_personal/connecting10.html"/>
+     <topic label="Connecting the Probe to the Target" href="doc/mesp_personal/connecting11.html"/>
+     <topic label="Probe Configuration Settings" href="doc/mesp_personal/connecting11.html#wp15924"/>
+    </topic>
+    <topic label=" Hardware Specifications" href="doc/mesp_personal/hardware_specs1.html" >
+     <topic label="Connectors and LEDs" href="doc/mesp_personal/hardware_specs2.html" >
+      <topic label="Run/Pause Indicator"  >
+       <topic label="Run/Pause Indicator" href="doc/mesp_personal/hardware_specs2.html#wp8246"/>
+       <topic label="Transmit/Receive Indicator" href="doc/mesp_personal/hardware_specs2.html#wp8262"/>
+      </topic>
+      <topic label="USB Connector" href="doc/mesp_personal/hardware_specs3.html"/>
+      <topic label="Debug Port Connector" href="doc/mesp_personal/hardware_specs4.html"/>
+     </topic>
+     <topic label="Electrical Characteristics" href="doc/mesp_personal/hardware_specs5.html"/>
+     <topic label="Physical Considerations" href="doc/mesp_personal/hardware_specs6.html"/>
+    </topic>
+    <topic label=" Hardware Warranty and Servicing" href="doc/mesp_personal/warranty1.html" >
+     <topic label="Sourcery Probe Personal Hardware Warranty" href="doc/mesp_personal/warranty2.html"/>
+     <topic label="Cleaning the Probe" href="doc/mesp_personal/warranty3.html"/>
+    </topic>
+    <topic label=" USB Network Details" href="doc/mesp_personal/appxa_networkadmin1.html" >
+     <topic label="Sourcery Probe Personal Network Ports" href="doc/mesp_personal/appxa_networkadmin2.html"/>
+    </topic>
+    <topic label="Embedded Software and Hardware License Agreement" href="doc/mesp_personal/eshla1.html"/>
+</toc>

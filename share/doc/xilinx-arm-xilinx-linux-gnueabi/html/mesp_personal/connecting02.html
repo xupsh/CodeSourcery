@@ -1,0 +1,200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:21:47 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe Personal Hardware Manual" />
+    <title>Connecting to a Windows 7 PC</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("Connecting to the Target and Host Computer","connecting01","Connecting to a Windows 7 PC","connecting02","Configuring the Windows 7 Network Adapter to Use a Static IP Address","connecting02","12");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp19884"></a><h1 class="pHeading2 FontLevel1" id="MGC19884">
+
+<a name="CRefID55630"></a>Connecting to a Windows 7 PC
+</h1>
+<a name="wp19885"></a><p class="pzShortDesc">
+
+To connect a Sourcery Probe Personal to your Windows 7 computer and configure it, perform the following steps.
+</p>
+
+<a name="wp19888"></a><p class="pHTaskSubhead">
+
+Procedure
+</p>
+
+<a name="wp19946"></a>
+<ol start="1"><li class="LL1Seq">Connect one end of your USB 2.0 cable to a USB port on your host computer. Connect the other end of the cable to your probe.</li></ol>
+<a name="wp19947"></a><p class="pL1Body">
+The first time you connect the USB cable to your host computer, you might get a New Hardware Detected dialog box. If you have already installed the debugger software, then Windows should be able to automatically install the right USB driver. This will happen again the first time you connect a Sourcery Probe Personal to each different USB port on your computer.</p>
+<a name="wp19948"></a>
+<ol start="2"><li class="LL1Seq">Click the <span class=" cBold">New Hardware Detected</span> dialog box. The Driver Software Installation dialog box appears.</li></ol>
+<a name="wp19949"></a><p class="pL1Body">
+It is important to note the warning in this dialog box stating that the process of installing the device drivers can require some time to complete.</p>
+<a name="wp19950"></a>
+<ol start="3"><li class="LL1Seq">When the installation is complete, click <span class=" cBold">Close</span>.</li></ol>
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp19962"></a><p class="pnoteNote">
+
+        	New probes are configured for Local Link mode, which means the probe will assign itself an address in the range 169.254.xxx.yyy. You may want to check what value the probe picked using the <a href="connecting06.html"  onclick='oT("CRF","connecting06.html");return false;'>Sourcery Probe Console</a>, so you can ping it, but it is not usually necessary because CodeBench can automatically detect the presence of Sourcery Probes. <br /><br />If the probe has been configured to use a static IP address, then you must configure the PC network adapter to use a unique address within the range set in the probe. See <a href="connecting02.html#wp17573"  onclick='oT("CRF","connecting02.html#wp17573");return false;'>Configuring the Windows 7 Network Adapter to Use a Static IP Address</a> for details. <br /><br />If the probe&#39;s IP address is unknown, you can find it using the <a href="connecting08.html"  onclick='oT("CRF","connecting08.html");return false;'>Sourcery Probe Personal Console Menu</a>.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp17573"></a><h2 class="pHeading3NoSplit FontLevel2" id="MGC17573">
+
+<a name="CRefID91363"></a>
+Configuring the Windows 7 Network Adapter to Use a Static IP Address
+</h2>
+<a name="wp17574"></a><p class="pBody">
+
+To configure the PC network adapter to use an unique static IP address, perform the following steps. Note that this is not normally necessary as the default configuration has the probe and PC assigning compatible addresses on their own. However, there are times when a static IP solution is desirable.
+</p>
+
+<a name="wp17837"></a><p class="pHTaskSubhead">
+
+Procedure
+</p>
+
+<a name="wp17584"></a>
+<ol start="1"><li class="LL1Seq">From the Start menu, click <span class=" cBold">Computer.</span></li></ol>
+<a name="wp17593"></a>
+<ol start="2"><li class="LL1Seq">Right-click <span class=" cBold">Network</span> on the bottom of the left pane and choose <span class=" cBold">Properties</span>.</li></ol>
+<a name="wp17595"></a>
+<ol start="3"><li class="LL1Seq">Select <span class=" cBold">Change adapter settings</span> from the left pane to see all the network adapters available on your computer.</li></ol>
+<a name="wp17597"></a>
+<ol start="4"><li class="LL1Seq">Right-click the <span class=" cBold">Local Area Connection</span> associated with Mentor Embedded USB JTAG and choose <span class=" cBold">Properties</span>.</li></ol>
+<a name="wp17765"></a>
+<ol start="5"><li class="LL1Seq">Select <span class=" cBold">Internet Protocol Version 4 (TCP/IPv4)</span> and click <span class=" cBold">Properties</span>. The Internet Protocol Version 4 (TCP/IPv4) Properties dialog box appears.</li></ol>
+<a name="wp17769"></a>
+<ol start="6"><li class="LL1Seq">Select <span class=" cBold">Use the following IP address</span>.</li></ol>
+<a name="wp17795"></a>
+<ol start="7"><li class="LL1Seq">Enter the IP address. See the note above for information on choosing one.</li></ol>
+<a name="wp17812"></a><p class="pL1Body">
+The Subnet mask should always be 255.255.0.0 when using IP addresses in the local link range. If you set the probe and PC to IP addresses in a different range, then the subnet mask would typically be 255.255.255.0 (on both probe and PC) and the Gateway field should remain blank.</p>
+<a name="wp17782"></a><p class="pFigureTitle" id="MGC17782">
+
+Figure 2&#8209;1. 
+IP Properties Dialog<a name='Graphic18078'></a><img src="images/internetprotocol_properties.jpg"  style='width:4.32291in;'  class="Aligncenter" id='wp18078' border='0' hspace='0' vspace='0'/>
+
+
+</p>
+
+
+<a name="wp17817"></a>
+<ol start="8"><li class="LL1Seq">Click <span class=" cBold">OK</span> to accept these changes.</li></ol>
+<a name="wp17818"></a>
+<ol start="9"><li class="LL1Seq">Click <span class=" cBold">Close</span> to close the Properties dialog box for the connection.</li></ol>
+<a name="wp17730"></a><h4 class="pHeading5 FontLevel4" id="MGC17730">
+
+
+Results
+</h4>
+<a name="wp10022"></a><p class="pBody">
+
+Windows 7 auto-configures after the drivers are installed and the connection is made.
+</p>
+
+<a name="wp15178"></a><p class="pHTaskSubhead">
+
+Related Topics
+</p>
+
+<a name="wp15182"></a><p class="pBody">
+
+<a href="connecting05.html"  onclick='oT("CRF","connecting05.html");return false;'>Changing the IP Address of the Probe (Optional)</a>
+</p>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_personal";
+   DocTitle = "Mentor Embedded Sourcery Probe Personal Hardware Manual";
+   PageTitle = "Connecting to a Windows 7 PC";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "Connecting.to.a.Windows.7.PC"
+   ThisTopic = "StandardElectrostaticPrecautions";
+   CurrentFile = "connecting02.html";
+   CurrentFileID = "12";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe Personal Hardware Manual&nbsp;2.3.4
+    <br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    <br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

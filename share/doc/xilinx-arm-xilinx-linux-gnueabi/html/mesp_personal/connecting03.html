@@ -1,0 +1,342 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:21:47 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe Personal Hardware Manual" />
+    <title>Connecting to a Windows XP/SP3 PC</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("Connecting to the Target and Host Computer","connecting01","Connecting to a Windows XP/SP3 PC","connecting03","Configuring the Windows XP Network Adapter to Use a Static IP Address","connecting03","13");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="EW5"></a>
+<a name="wp20045"></a><h1 class="pHeading2 WarninG FontLevel1" id="MGC20045">
+
+<a name="CRefID66968"></a>Connecting to a Windows XP/SP3 PC
+</h1>
+<a name="wp20046"></a><p class="pzShortDesc">
+
+There are two steps to set up the ARM and MIPS models on Windows XP.
+</p>
+
+<a name="wp20049"></a><p class="pHTaskSubhead">
+
+Procedure
+</p>
+
+<a name="wp20103"></a>
+<ol start="1"><li class="LL1Seq">Install the USB drivers. See <a href="connecting03.html#wp20171"  onclick='oT("CRF","connecting03.html#wp20171");return false;'>Installing the USB Driver Software</a>.</li></ol>
+<a name="wp20106"></a>
+<ol start="2"><li class="LL1Seq">Set the Windows network adapter to use a static IP address. See <a href="connecting03.html#wp14883"  onclick='oT("CRF","connecting03.html#wp14883");return false;'>Configuring the Windows XP Network Adapter to Use a Static IP Address</a>.</li></ol>
+<a name="wp20135"></a><p class="pBody">
+
+Sourcery Probe Personal for PowerPC installs a custom USB driver which does not use TCP/IP communication. This section does not apply to those models.
+</p>
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp20143"></a><p class="pnoteNote">
+
+        	XP Service Pack 3 is required when using Sourcery Probe Personal with Windows XP.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp20171"></a><h2 class="pHeading3NoSplit FontLevel2" id="MGC20171">
+
+
+
+<a name="CRefID91542"></a>Installing the USB Driver Software
+</h2>
+<a name="wp20172"></a><p class="pzShortDesc">
+
+This section provides the steps required to install the drivers for your probe.
+</p>
+
+<a name="wp20175"></a><p class="pHTaskSubhead">
+
+Procedure
+</p>
+
+<a name="wp20236"></a>
+<ol start="1"><li class="LL1Seq">Connect the USB cable to your probe and to your PC. After a few seconds, the Found New Hardware Wizard appears. Install the USB drivers.</li></ol>
+<a name="wp20240"></a>
+<ul><li class="LL2BulHollow">If a warning similar to the following appears, click <span class=" cBold">Continue Anyway</span>.<br /><br /><a name='Graphic20238'></a><img src="images/newhwwiz_winverificationmsg.gif"  style='width:3.59999in;'  class="Aligncenter" id='wp20238' border='0' hspace='0' vspace='0'/>
+
+
+</li></ul>
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp20248"></a><p class="pnoteNote">
+
+        	The hardware name (Mentor Embedded USB JTAG Probe) shown in the warning message is the correct driver name for the Sourcery Probe Personal.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp20251"></a>
+<ol start="2"><li class="LL1Seq">Set the XP network adaptor to use a static IP address. See <a href="connecting03.html#wp14883"  onclick='oT("CRF","connecting03.html#wp14883");return false;'>Configuring the Windows XP Network Adapter to Use a Static IP Address</a>.</li></ol>
+<a name="wp14883"></a><h2 class="pHeading3NoSplit FontLevel2" id="MGC14883">
+
+<a name="CRefID12421"></a>
+Configuring the Windows XP Network Adapter to Use a Static IP Address
+</h2>
+<a name="wp14934"></a><p class="pBody">
+
+The Sourcery Probe Personal models for ARM and MIPS use remote RNDIS for TCP/IP communication to Windows over USB. If you are using Windows XP, the probe and PC automatically negotiate their IP addresses, so no manual setup is required. However, because this negotiation can take an extended time to complete, XP might report the network has limited or no connectivity. To avoid this, you can set the Windows Network Adapter to use static IP addresses. In general you can leave the probe configured for Local Link (automatic) mode, but we recommend that you set the PC to a compatible static IP address.
+</p>
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp14960"></a><p class="pnoteNote">
+
+        	There will be a 30 second delay for network connection if you are using Windows XP instead of Windows 7. You can avoid this delay by setting a static IP address on the XP network adapter properties. Additionally, Windows XP shows an exclamation mark (!) on the network icon in the tray area indicating limited or no connectivity. You can ignore this indication.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp14961"></a><p class="pHTaskSubhead">
+
+Prerequisites
+</p>
+
+<a name="wp14967"></a><p class="pBody">
+
+Before setting the XP network adapter static IP address, you must pick a suitable address. The address must be unique, but within the same range as the probe&#39;s address. New probes are configured for Local Link mode, which means the probe will assign itself an address in the range 169.254.xxx.yyy. You may want to check what value the probe picked using the <a href="connecting06.html"  onclick='oT("CRF","connecting06.html");return false;'>Sourcery Probe Console</a>, but in practice you can probably just pick any number from 1-254 for each of xxx and yyy. If the PC reports that the address you chose is already in use, then just try another value for xxx or yyy.
+</p>
+
+<a name="wp14890"></a><p class="pBody">
+
+However, if the probe was reconfigured to use a static IP address, then you must pick an address within the range set in the probe. If the probe&#39;s IP address is unknown, you can find it by using the <a href="connecting08.html"  onclick='oT("CRF","connecting08.html");return false;'>Sourcery Probe Personal Console Menu</a>.
+</p>
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack"><img src="../MGC/images/blank2x2.png" /></span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteTip"></td>
+    <td valign="top">
+            
+<a name="wp17446"></a><p class="pnoteInfo">
+
+        <span class=" cBold">	Tip</span>: If you do not know the probe&#39;s IP address, you can either use the Discovery dialog box in Sourcery CodeBench, or you can run the mep_update console application to find the probe and quit instead of proceeding with the update. <br /><br />The mep_update utility is in the ...\mep\bin directory within the Sourcery CodeBench installation.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp17447"></a><p class="pExampleTitle" id="MGC17447">
+
+Example 2&#8209;1. 
+mep_update Console Output</p>
+
+
+<a name="wp17448"></a><pre class="pCode" id="MGC17447">
+MEP Update Ver 0.1.0 Copyright 2010 Mentor Graphics Inc.
+</pre>
+
+<a name="wp17449"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp17450"></a><pre class="pCode">
+Scanning for visible Probes...
+</pre>
+
+<a name="wp17451"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp17452"></a><pre class="pCode">
+    Model:                   Serial #:      IP Addr:        UnitName:      
+</pre>
+
+<a name="wp17453"></a><pre class="pCode">
+ 0: MESP-Personal / ARM      07380004       169.254.156.36                 
+</pre>
+
+<a name="wp17454"></a><pre class="pCode">
+ 1: MESP-Pro / MIPS          FSL016F52      134.86.178.205  FSL016F52      
+</pre>
+
+<a name="wp17455"></a><pre class="pCode">
+                             Hostname: sj178dy205.my_network_name
+</pre>
+
+<a name="wp17456"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp17440"></a><p class="pBody">
+
+Select a Probe 0..6, q&gt; q
+</p>
+
+<a name="wp14971"></a><p class="pHTaskSubhead">
+
+Procedure
+</p>
+
+<a name="wp14891"></a>
+<ol start="1"><li class="LL1Seq">On your desktop, right-click <span class=" cBold">My Network Places</span> and click <span class=" cBold">Properties</span>.</li></ol>
+<a name="wp10202"></a>
+<ol start="2"><li class="LL1Seq">Right-click the network connection associated with Sourcery Probe Personal. Note that the Local Area Connection number will differ from one computer to another and from one USB port to another.</li></ol>
+<a name="wp10234"></a>
+<ol start="3"><li class="LL1Seq">Click <span class=" cBold">Properties</span> in the dropdown menu.</li></ol>
+<a name="wp10232"></a>
+<ol start="4"><li class="LL1Seq">In the connection&#8217;s properties dialog box, click<span class=" cBold"> Internet Protocol (TCP/IP)</span>. Then, click the <span class=" cBold">Properties</span> button.</li></ol>
+<a name="wp10240"></a>
+<ol start="5"><li class="LL1Seq">Choose <span class=" cBold">Use the following IP address</span>.</li></ol>
+<a name="wp10241"></a>
+<ol start="6"><li class="LL1Seq">Select the static IP address option for the network adapter and enter the address chosen above, as shown in <a href="connecting03.html#wp10259"  onclick='oT("CRF","connecting03.html#wp10259");return false;'>Figure&#160;2&#8209;2</a>.</li></ol>
+<a name="wp14987"></a><p class="pL1Body">
+The Subnet mask should always be 255.255.0.0 when using IP addresses in the local link range. If you set the probe and PC to IP addresses in a different range, then the subnet mask would typically be 255.255.255.0 (on both probe and PC) and the Gateway field should remain blank.</p>
+<a name="wp10259"></a><p class="pFigureTitle" id="MGC10259">
+
+Figure 2&#8209;2. <a name="CRefID31343"></a><a name='Graphic11526'></a><img src="images/networkconn_tcpipsettings.jpg"  style='width:4.21875in;'  class="Aligncenter" id='wp11526' border='0' hspace='0' vspace='0'/>
+
+
+
+IP Properties Dialog</p>
+
+
+<a name="wp10291"></a>
+<ol start="7"><li class="LL1Seq">Click <span class=" cBold">OK</span> to accept these changes.</li></ol>
+<a name="wp15001"></a>
+<ol start="8"><li class="LL1Seq">Click <span class=" cBold">OK</span> to close the Properties dialog box for the connection.</li></ol>
+<a name="wp10292"></a>
+<ol start="9"><li class="LL1Seq">Close <span class=" cBold">My Network Places</span>.</li></ol>
+<a name="wp10289"></a>
+<ol start="10"><li class="LL1Seq">If you know the IP address of the probe, you should be able to ping the probe over USB using its IP address (for example, 169.254.85.218). The first time you ping, it can require some time to establish the connection.</li></ol>
+<a name="wp15020"></a><pre class="pCodeIndent">
+ping 169.254.85.218
+</pre>
+
+<a name="wp17418"></a><p class="pHTaskSubhead">
+
+Related Topics
+</p>
+
+<a name="wp15197"></a><p class="pBody">
+
+<a href="connecting06.html"  onclick='oT("CRF","connecting06.html");return false;'>Sourcery Probe Console</a>
+</p>
+
+<a name="wp15773"></a><p class="pBody">
+
+<a href="connecting05.html"  onclick='oT("CRF","connecting05.html");return false;'>Changing the IP Address of the Probe (Optional)</a>
+</p>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_personal";
+   DocTitle = "Mentor Embedded Sourcery Probe Personal Hardware Manual";
+   PageTitle = "Connecting to a Windows XP/SP3 PC";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "Connecting.to.a.Windows.XPSP3.PC"
+   ThisTopic = "StandardElectrostaticPrecautions";
+   CurrentFile = "connecting03.html";
+   CurrentFileID = "13";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe Personal Hardware Manual&nbsp;2.3.4
+    <br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    <br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

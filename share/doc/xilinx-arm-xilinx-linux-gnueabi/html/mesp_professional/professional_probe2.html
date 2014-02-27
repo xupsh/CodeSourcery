@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:22:24 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe Professional Hardware Manual" />
+    <title>Sourcery Probe Console</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("Using Sourcery Probe Professional","professional_probe1","Sourcery Probe Console","professional_probe2","Accessing the Sourcery Probe Console Using Telnet","professional_probe2","21");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp6507"></a><h1 class="pHeading2 FontLevel1" id="MGC6507">
+
+<a name="CRefID94684"></a>Sourcery Probe Console
+</h1>
+<a name="wp6508"></a><p class="pBody">
+
+There are two ways you can access the Sourcery Probe console: USB and telnet. The following sections describe how to use both access methods.
+</p>
+
+<a name="wp6511"></a><h2 class="pHeading3NoSplit FontLevel2" id="MGC6511">
+
+
+Accessing the Sourcery Probe Console via USB
+</h2>
+<a name="wp6512"></a><p class="pBody">
+
+This section provides the steps required to establish serial communication with the probe, which is required for some configuration procedures.
+</p>
+
+<a name="wp6513"></a><p class="pHTaskSubhead">
+
+Procedure
+</p>
+
+<a name="wp6514"></a>
+<ol start="1"><li class="LL1Seq">Connect one end of the USB cable (P/N 600-76787) to a USB port on your host computer.</li></ol>
+<a name="wp6515"></a>
+<ol start="2"><li class="LL1Seq">Connect the other end of the USB cable to the USB connector of the probe, labeled <span class=" cItalic">CONFIG, </span>shown in <a href="professional_probe2.html#wp6526"  onclick='oT("CRF","professional_probe2.html#wp6526");return false;'>Figure&#160;4&#8209;1</a>.</li></ol>
+<a name="wp6526"></a><p class="pFigureTitle" id="MGC6526">
+
+Figure 4&#8209;1. <a name="CRefID64680"></a><a name='Graphic6521'></a><img src="images/giga_jtag_usb_connected.jpg"  style='width:6.35999in;'  class="Aligncenter" id='wp6521' border='0' hspace='0' vspace='0'/>
+
+
+Sourcery Probe Professional with USB Cable Attached</p>
+
+
+<a name="wp6527"></a>
+<ol start="3"><li class="LL1Seq">In Windows, you might need a driver before you can access the CONFIG port. The driver is installed automatically. If you find that drivers are not automatically installed:</li></ol>
+<a name="wp6528"></a>
+<ol start="1."><li class="LL2Seq">Click the Windows <span class=" cBold">Start </span>button and type <span class=" cBold">device</span> into the search box.</li></ol>
+<a name="wp6529"></a>
+<ol start="2."><li class="LL2Seq">Click <span class=" cBold">Device Manager</span> in the search results to launch it.</li></ol>
+<a name="wp6530"></a><p class="pL1Body">
+If the probe registered, but failed to find drivers, there will be two USB devices listed in the Device Manager screen with problems (<a name='Graphic6532'></a><img src="images/win_warning.jpg"  style='width:0.28665in;'  id='wp6532' border='0' hspace='0' vspace='0'/>
+
+
+). Right-click the USB device and select the option to install or update the drivers. Select the option to search Microsoft Update for a driver.</p>
+<a name="wp6534"></a>
+<ol start="4"><li class="LL1Seq">Identify the serial port device assigned to the probe.</li></ol>
+<a name="wp6535"></a>
+<ul><li class="LL2BulHollow">In Windows<span class="cTradmkBody">&reg;</span> XP, select 
+<br /><span class=" cBold">Start &gt; Settings &gt; Control Panel &gt;Administrative Tools &gt; Computer Management &gt; Device Manager &gt; Ports</span> and then select <span class=" cBold">USB serial port</span> from the ports list. </li></ul>
+<a name="wp6536"></a>
+<ul><li class="LL2BulHollow">On Windows 7, select <span class=" cBold">Start &gt; Control Panel &gt;Hardware and Sound &gt; Device Manager &gt; Ports (COM &amp; LPT)</span>.</li></ul>
+<a name="wp6537"></a>
+<ul><li class="LL2BulHollow">On Linux, the device file is located at: <span class=" cItalic">/dev/ttyUSB0</span>.</li></ul>
+<a name="wp6538"></a>
+<ol start="5"><li class="LL1Seq">Set up your terminal or terminal communication software (for example, Sourcery CodeBench Terminal View) as shown in <a href="professional_probe2.html#wp6548"  onclick='oT("CRF","professional_probe2.html#wp6548");return false;'>Figure&#160;4&#8209;2</a>.</li></ol>
+<a name="wp6548"></a><p class="pFigureTitle" id="MGC6548">
+
+Figure 4&#8209;2. <a name="CRefID88330"></a>
+Terminal View<a name='Graphic6546'></a><img src="images/new_terminal.gif"  style='width:2.79166in;'  class="Aligncenter" id='wp6546' border='0' hspace='0' vspace='0'/>
+
+
+</p>
+
+
+<a name="wp6549"></a>
+<ol start="6"><li class="LL1Seq">Turn on power to the probe. If the power is already on, push the reset button.</li></ol>
+<a name="wp6550"></a>
+<ol start="7"><li class="LL1Seq">When prompted, press <span class=" cBold">Enter</span>. A boot screen will appear. Follow the instructions in the boot screen,</li></ol>
+<a name="wp6551"></a>
+<ol start="8"><li class="LL1Seq">Once you are connected to the probe, the login banner is displayed and the <span class=" cCourier cP10">core&gt;</span> command-line prompt appears. Type <span class=" cBold">help</span> for a list of the core commands.</li></ol>
+<a name="wp6558"></a><h2 class="pHeading3NoSplit FontLevel2" id="MGC6558">
+
+<a name="CRefID21027"></a>
+Accessing the Sourcery Probe Console Using Telnet
+</h2>
+<a name="wp6562"></a><p class="pBody">
+
+You can use telnet to connect to the Sourcery Probe Professional Target configuration console remotely over Ethernet.
+</p>
+
+<a name="wp6563"></a><p class="pHTaskSubhead">
+
+Procedure
+</p>
+
+<a name="wp6565"></a>
+<ol start="1"><li class="LL1Seq">Start a telnet session and connect to the Configuration console for the probe. You can use the Terminal view in Sourcery CodeBench to do this. To open the Terminal view, from Sourcery CodeBench select <span class=" cBold">Window &gt; Show Views &gt; Other</span>. From the Show View dialog box, Select <span class=" cBold">Terminal &gt; Terminal </span>and click <span class=" cBold">OK</span>.</li></ol>
+<a name="wp6572"></a><pre class="pCodeIndent">
+telnet {hostname | ip_address} 
+</pre>
+
+<a name="wp6573"></a><pre class="pCodeIndent">
+
+</pre>
+
+<a name="wp6574"></a><p class="pL1Body">
+Use the host name or IP address of the probe. For static IP, the <span class=" cItalic">host</span> name must be the same one you entered into the hosts database file. The Configuration port number of the probe is <span class=" cItalic">23</span>.</p>
+<a name="wp6723"></a><p class="pL1Body">
+The login banner is displayed, followed by the <span class=" cCourier cP10">core&gt; </span>command-line prompt.</p>
+<a name="wp6575"></a><p class="pHTaskSubhead">
+
+Results
+</p>
+
+<a name="wp6576"></a><p class="pBody">
+
+You should now have access to the configuration console for your target system.
+</p>
+
+<a name="wp6577"></a><p class="pHTaskSubhead">
+
+Related Topics
+</p>
+
+<a name="wp6581"></a><p class="pBody">
+
+<a name="EW21"></a><a href="apxc_network_admin3.html#CRefID56761" onclick='oT("CRF","apxc_network_admin3.html#CRefID56761");'><span class=" cLinkOverride">Using netparam to Configure the Sourcery Probe Professional</span></a>
+</p>
+
+<a name="wp6505"></a><p class="pBody">
+
+<a name="EW22"></a><a href="apxc_network_admin2.html#CRefID88552" onclick='oT("CRF","apxc_network_admin2.html#CRefID88552");'><span class=" cLinkOverride">Sourcery Probe Professional Network Ports</span></a>
+</p>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_professional";
+   DocTitle = "Mentor Embedded Sourcery Probe Professional Hardware Manual";
+   PageTitle = "Sourcery Probe Console";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "Sourcery.Probe.Console"
+   ThisTopic = "ProductDisposal";
+   CurrentFile = "professional_probe2.html";
+   CurrentFileID = "21";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe Professional Hardware Manual&nbsp;2.3.4
+    
+<br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    
+<br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

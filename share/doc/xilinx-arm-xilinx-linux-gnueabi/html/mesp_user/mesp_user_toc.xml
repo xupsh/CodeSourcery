@@ -1,0 +1,229 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<?NLS TYPE="org.eclipse.help.toc"?>
+<toc label="Mentor Embedded Sourcery Probe User's Manual">
+    <topic label=" Mentor Embedded Sourcery Probe Introduction" href="doc/mesp_user/majic_setup1.html" >
+     <topic label="Sourcery Probe Software Support" href="doc/mesp_user/majic_setup2.html" >
+      <topic label="Sourcery Probe Default Installation Directories" href="doc/mesp_user/majic_setup2.html#wp17963"/>
+     </topic>
+     <topic label="Sourcery Probe Personal Models" href="doc/mesp_user/majic_setup3.html"/>
+     <topic label="Sourcery Probe Professional Models" href="doc/mesp_user/majic_setup4.html"/>
+    </topic>
+    <topic label=" Debugging an Application" href="doc/mesp_user/debug_with_cb1.html" >
+     <topic label="Debugging an Application with CodeBench" href="doc/mesp_user/debug_with_cb2.html" >
+      <topic label="Sourcery Probe Debugger Tab Options" href="doc/mesp_user/debug_with_cb2.html#wp15355"/>
+     </topic>
+    </topic>
+    <topic label=" Sourcery Probe Configuration" href="doc/mesp_user/majicconfig01.html" >
+     <topic label="Configuration Process" href="doc/mesp_user/majicconfig02.html" >
+      <topic label="Configuration Files" href="doc/mesp_user/majicconfig02.html#wp5381"/>
+      <topic label="File Search Order" href="doc/mesp_user/majicconfig03.html"/>
+     </topic>
+     <topic label="Sourcery Probe Target Initialization Scripts" href="doc/mesp_user/majicconfig04.html" >
+      <topic label="Creating a Custom Initialization Script Using a Template" href="doc/mesp_user/majicconfig05.html"/>
+      <topic label="Adapting a Reference Board Initialization Script to Your Board" href="doc/mesp_user/majicconfig06.html"/>
+      <topic label="Components of Initialization Files" href="doc/mesp_user/majicconfig07.html" >
+       <topic label="Initialization" href="doc/mesp_user/majicconfig07.html#wp26555"/>
+       <topic label="DO_RTNI Script" href="doc/mesp_user/majicconfig07.html#wp31164"/>
+       <topic label="DO_RTI Script" href="doc/mesp_user/majicconfig07.html#wp26614"/>
+       <topic label="DO_TI" href="doc/mesp_user/majicconfig07.html#wp26619"/>
+      </topic>
+      <topic label="Configuration Options" href="doc/mesp_user/majicconfig08.html" >
+       <topic label="Setting Configuration Options" href="doc/mesp_user/majicconfig08.html#wp26659"/>
+       <topic label="Memory Configuration (ARM and MIPS Only)" href="doc/mesp_user/majicconfig08.html#wp26695"/>
+       <topic label="MC Display (ARM and MIPS only)" href="doc/mesp_user/majicconfig08.html#wp26704"/>
+       <topic label="MC Attributes Table (ARM and MIPS Only)" href="doc/mesp_user/majicconfig08.html#wp26798"/>
+      </topic>
+      <topic label="Setting MC Attributes (ARM and MIPS Only)" href="doc/mesp_user/majicconfig09.html" >
+       <topic label="Sample MC Table" href="doc/mesp_user/majicconfig09.html#wp26832"/>
+      </topic>
+     </topic>
+     <topic label="Register Definition File" href="doc/mesp_user/majicconfig10.html" >
+      <topic label="Register Definition File Format" href="doc/mesp_user/majicconfig11.html" >
+       <topic label="Predefined Spaces for ARM" href="doc/mesp_user/majicconfig11.html#wp32071"/>
+       <topic label="Predefined Spaces for MIPS" href="doc/mesp_user/majicconfig11.html#wp32150"/>
+       <topic label="Predefined Spaces for PowerPC" href="doc/mesp_user/majicconfig11.html#wp34094"/>
+       <topic label="Sample Register Definition file" href="doc/mesp_user/majicconfig11.html#wp5714"/>
+      </topic>
+     </topic>
+     <topic label="Configuration Option Table" href="doc/mesp_user/majicconfig12.html"/>
+     <topic label="Special Probe Initialization (ARM and MIPS Only)" href="doc/mesp_user/majicconfig13.html" >
+      <topic label="MEP_JTAG_DIMENSION" href="doc/mesp_user/majicconfig13.html#wp17383"/>
+      <topic label="MEP_JTAG_INIT0 and MEP_JTAG_INIT1" href="doc/mesp_user/majicconfig13.html#wp17391"/>
+      <topic label="MEP_JTAG_SCAN and MEP_JTAG_SCAN_TAP" href="doc/mesp_user/majicconfig13.html#wp30288" >
+       <topic label="Scan-List Format" href="doc/mesp_user/majicconfig13.html#wp30306"/>
+      </topic>
+     </topic>
+     <topic label="Automatic Access Mode" href="doc/mesp_user/majicconfig14.html" >
+      <topic label="User Defined Access Lists" href="doc/mesp_user/majicconfig15.html"/>
+     </topic>
+    </topic>
+    <topic label=" MON Command Language" href="doc/mesp_user/moncommand01.html" >
+     <topic label="MON Command Basics" href="doc/mesp_user/moncommand02.html" >
+      <topic label="MON Help" href="doc/mesp_user/moncommand02.html#wp5375"/>
+      <topic label="Command Lists" href="doc/mesp_user/moncommand02.html#wp5387"/>
+     </topic>
+     <topic label="MON Command Quick Reference" href="doc/mesp_user/moncommand03.html"/>
+     <topic label="MON Command Details" href="doc/mesp_user/moncommand04.html" >
+      <topic label="+B, -B Enable or Disable Breakpoints" href="doc/mesp_user/moncommand05.html"/>
+      <topic label="BC Breakpoint Clear" href="doc/mesp_user/moncommand06.html"/>
+      <topic label="BL Breakpoint List" href="doc/mesp_user/moncommand07.html"/>
+      <topic label="BS Breakpoint Set" href="doc/mesp_user/moncommand08.html"/>
+      <topic label="BSH Breakpoint Set Hardware" href="doc/mesp_user/moncommand09.html"/>
+      <topic label="CF, CFI, CI Cache Flush" href="doc/mesp_user/moncommand10.html"/>
+      <topic label="DA Display Alias" href="doc/mesp_user/moncommand11.html"/>
+      <topic label="DB, DD, DH, DQ, DW, Display/Find Data" href="doc/mesp_user/moncommand12.html"/>
+      <topic label="dc Display Cache (MIPS Only)" href="doc/mesp_user/moncommand13.html"/>
+      <topic label="DI Display Information" href="doc/mesp_user/moncommand14.html"/>
+      <topic label="DM Display MMU Table / Translate Address (ARM)" href="doc/mesp_user/moncommand15.html"/>
+      <topic label="DM Display MMU Table / Translate Address (MIPS and PowerPC)" href="doc/mesp_user/moncommand16.html"/>
+      <topic label="DN Display Names" href="doc/mesp_user/moncommand17.html"/>
+      <topic label="DO, DOQ, DOV Display Options" href="doc/mesp_user/moncommand18.html"/>
+      <topic label="DS Display Scripts" href="doc/mesp_user/moncommand19.html"/>
+      <topic label="DV Display Values" href="doc/mesp_user/moncommand20.html"/>
+      <topic label="EA Enter Alias" href="doc/mesp_user/moncommand21.html"/>
+      <topic label="EB, ED, EH, EQ, EW Enter or Fill Data" href="doc/mesp_user/moncommand22.html"/>
+      <topic label="EN Enter Names" href="doc/mesp_user/moncommand23.html"/>
+      <topic label="EO Enter Option" href="doc/mesp_user/moncommand24.html"/>
+      <topic label="FR File Read" href="doc/mesp_user/moncommand25.html"/>
+      <topic label="FW File Write" href="doc/mesp_user/moncommand26.html"/>
+      <topic label="G, GI Go, Go Interactive" href="doc/mesp_user/moncommand27.html"/>
+      <topic label="GOTO" href="doc/mesp_user/moncommand28.html"/>
+      <topic label="+H, -H Enable/Disable Hardware Names (MIPS Only)" href="doc/mesp_user/moncommand29.html"/>
+      <topic label="H Help" href="doc/mesp_user/moncommand30.html"/>
+      <topic label="IF" href="doc/mesp_user/moncommand31.html"/>
+      <topic label="KA Kill Alias" href="doc/mesp_user/moncommand32.html"/>
+      <topic label="KN Kill Names" href="doc/mesp_user/moncommand33.html"/>
+      <topic label="L Load" href="doc/mesp_user/moncommand34.html"/>
+      <topic label="LN Load Names" href="doc/mesp_user/moncommand35.html"/>
+      <topic label="MB, MD, MH, MW Move, Move Reverse" href="doc/mesp_user/moncommand36.html"/>
+      <topic label="MC Memory Configuration" href="doc/mesp_user/moncommand37.html"/>
+      <topic label="MT Memory Test" href="doc/mesp_user/moncommand38.html"/>
+      <topic label="+Q, -Q Enable or Disable Quiet Mode" href="doc/mesp_user/moncommand39.html"/>
+      <topic label="R, RP, RT Reset" href="doc/mesp_user/moncommand40.html"/>
+      <topic label="RETURN" href="doc/mesp_user/moncommand41.html"/>
+      <topic label="SHIFT/UNSHIFT" href="doc/mesp_user/moncommand42.html"/>
+      <topic label="S Step" href="doc/mesp_user/moncommand43.html"/>
+      <topic label="SP Stop" href="doc/mesp_user/moncommand44.html"/>
+      <topic label="TC Target Connect (PowerPC Only)" href="doc/mesp_user/moncommand45.html"/>
+      <topic label="TS Target Status" href="doc/mesp_user/moncommand46.html"/>
+      <topic label="VL Verify Load" href="doc/mesp_user/moncommand47.html"/>
+      <topic label="W Wait" href="doc/mesp_user/moncommand48.html"/>
+      <topic label="! Execute Operating System Shell" href="doc/mesp_user/moncommand49.html"/>
+     </topic>
+     <topic label="MON Operands" href="doc/mesp_user/moncommand50.html" >
+      <topic label="Operand Details" href="doc/mesp_user/moncommand50.html#wp6454"/>
+      <topic label="addr Address" href="doc/mesp_user/moncommand51.html"/>
+      <topic label="cmd_list Command List" href="doc/mesp_user/moncommand52.html"/>
+      <topic label="expr Expression" href="doc/mesp_user/moncommand53.html"/>
+      <topic label="fmt Data Format" href="doc/mesp_user/moncommand54.html"/>
+      <topic label="ident Identifier" href="doc/mesp_user/moncommand55.html"/>
+      <topic label="number" href="doc/mesp_user/moncommand56.html"/>
+      <topic label="range Address Range" href="doc/mesp_user/moncommand57.html"/>
+      <topic label="reg_name Register Name" href="doc/mesp_user/moncommand58.html" >
+       <topic label="MIPS Register Names" href="doc/mesp_user/moncommand58.html#wp6943"/>
+       <topic label="ARM Cortex-M Register Names" href="doc/mesp_user/moncommand58.html#wp16421"/>
+       <topic label="ARM Register Names" href="doc/mesp_user/moncommand58.html#wp16488"/>
+       <topic label="PowerPC Register Names" href="doc/mesp_user/moncommand58.html#wp33369"/>
+      </topic>
+      <topic label="space Address Space Designator" href="doc/mesp_user/moncommand59.html" >
+       <topic label="Space Designators For All Processors" href="doc/mesp_user/moncommand59.html#wp7046"/>
+       <topic label="Space Designators for 32-bit MIPS Processors" href="doc/mesp_user/moncommand59.html#wp7094"/>
+       <topic label="Space Designators for 64-bit MIPS Processors" href="doc/mesp_user/moncommand59.html#wp17784"/>
+       <topic label="Space Designators for PowerPC Processors" href="doc/mesp_user/moncommand59.html#wp33779"/>
+      </topic>
+      <topic label="string String Literal" href="doc/mesp_user/moncommand60.html"/>
+     </topic>
+     <topic label="Assigning Names" href="doc/mesp_user/moncommand61.html"/>
+     <topic label="Command Aliases" href="doc/mesp_user/moncommand62.html"/>
+     <topic label="MON Local Variables and Option References" href="doc/mesp_user/moncommand63.html"/>
+     <topic label="Formatted Display" href="doc/mesp_user/moncommand64.html"/>
+     <topic label="Session Log" href="doc/mesp_user/moncommand65.html"/>
+     <topic label="Command Script Files" href="doc/mesp_user/moncommand66.html" >
+      <topic label="Command Parameters" href="doc/mesp_user/moncommand67.html"/>
+      <topic label="Shift/Unshift Commands" href="doc/mesp_user/moncommand68.html"/>
+      <topic label="GOTO Command" href="doc/mesp_user/moncommand69.html"/>
+      <topic label="IF Command" href="doc/mesp_user/moncommand70.html"/>
+      <topic label="+/-Q" href="doc/mesp_user/moncommand71.html"/>
+     </topic>
+    </topic>
+    <topic label=" MON Command Line Debugger" href="doc/mesp_user/moncommand_debug1.html" >
+     <topic label="MON Invocation Line" href="doc/mesp_user/moncommand_debug2.html" >
+      <topic label="Starting MON" href="doc/mesp_user/moncommand_debug3.html" >
+       <topic label="Examples:" href="doc/mesp_user/moncommand_debug3.html#wp5873"/>
+      </topic>
+      <topic label="Creating a MON Connection" href="doc/mesp_user/moncommand_debug4.html"/>
+     </topic>
+     <topic label="Command Line Editor" href="doc/mesp_user/moncommand_debug5.html"/>
+     <topic label="MON Help Command" href="doc/mesp_user/moncommand_debug6.html"/>
+    </topic>
+    <topic label=" Meta Debug Interface (MDI)" href="doc/mesp_user/mdi01.html" >
+     <topic label="What is MDI?" href="doc/mesp_user/mdi02.html" >
+      <topic label="MDI Versions" href="doc/mesp_user/mdi03.html"/>
+     </topic>
+     <topic label="Getting Started with MDI" href="doc/mesp_user/mdi04.html" >
+      <topic label="Configuring the MDI Environment" href="doc/mesp_user/mdi05.html"/>
+      <topic label="Introduction" href="doc/mesp_user/mdi06.html"/>
+      <topic label="MDI Files" href="doc/mesp_user/mdi07.html"/>
+      <topic label="The Debug Environment" href="doc/mesp_user/mdi08.html"/>
+      <topic label="Creating the MDI Configuration File" href="doc/mesp_user/mdi09.html"/>
+     </topic>
+     <topic label="Advanced Configuration" href="doc/mesp_user/mdi10.html" >
+      <topic label="MDI Configuration File (mdi.cfg)" href="doc/mesp_user/mdi11.html"/>
+      <topic label="The MDI Launch Process" href="doc/mesp_user/mdi12.html"/>
+      <topic label="MDI Configuration File Format" href="doc/mesp_user/mdi13.html"/>
+      <topic label="Organization" href="doc/mesp_user/mdi13.html#wp8656"/>
+      <topic label="Global" href="doc/mesp_user/mdi13.html#wp8658"/>
+      <topic label="Device" href="doc/mesp_user/mdi13.html#wp8669"/>
+      <topic label="Controller" href="doc/mesp_user/mdi13.html#wp8682"/>
+      <topic label="MDIDeviceList" href="doc/mesp_user/mdi13.html#wp8694"/>
+     </topic>
+     <topic label="Startup Command File" href="doc/mesp_user/mdi14.html"/>
+     <topic label="Troubleshooting" href="doc/mesp_user/mdi15.html" >
+      <topic label="MDI Interface Logging" href="doc/mesp_user/mdi16.html" >
+       <topic label="Setup Logging via the Configuration File" href="doc/mesp_user/mdi16.html#wp8717"/>
+       <topic label="Setup Logging via an Environment Variable" href="doc/mesp_user/mdi16.html#wp8730"/>
+      </topic>
+     </topic>
+     <topic label="Interoperability" href="doc/mesp_user/mdi17.html" >
+      <topic label="Required Services" href="doc/mesp_user/mdi18.html" >
+       <topic label="MDICacheFlush" href="doc/mesp_user/mdi18.html#wp8737"/>
+       <topic label="MDIRunState" href="doc/mesp_user/mdi18.html#wp8739"/>
+       <topic label="MDIRead" href="doc/mesp_user/mdi18.html#wp8742"/>
+       <topic label="MDIDoCommand" href="doc/mesp_user/mdi18.html#wp8745"/>
+       <topic label="MDICBInput, MDICBOutput" href="doc/mesp_user/mdi18.html#wp8748"/>
+      </topic>
+     </topic>
+     <topic label="Optional MDI Services" href="doc/mesp_user/mdi19.html" >
+      <topic label="MDIOpen" href="doc/mesp_user/mdi20.html"/>
+      <topic label="Target Groups" href="doc/mesp_user/mdi21.html"/>
+      <topic label="Target access while running" href="doc/mesp_user/mdi22.html"/>
+      <topic label="MDIFind" href="doc/mesp_user/mdi23.html"/>
+      <topic label="MDICacheQuery" href="doc/mesp_user/mdi24.html"/>
+      <topic label="MDIReset" href="doc/mesp_user/mdi25.html"/>
+      <topic label="MDISetBp" href="doc/mesp_user/mdi26.html"/>
+      <topic label="Trace services" href="doc/mesp_user/mdi27.html"/>
+      <topic label="MDICBPeriodic" href="doc/mesp_user/mdi28.html"/>
+      <topic label="MDICBLookup, MDICBEvaluate" href="doc/mesp_user/mdi29.html"/>
+      <topic label="Command Interpreter" href="doc/mesp_user/mdi30.html"/>
+     </topic>
+    </topic>
+    <topic label=" Using the Virtual Sourcery Probe" href="doc/mesp_user/virtualprobe1.html" >
+     <topic label="Sourcery Debug Environment" href="doc/mesp_user/virtualprobe2.html"/>
+     <topic label="MESP/Virtual Invocation Line" href="doc/mesp_user/virtualprobe3.html"/>
+     <topic label="Debugging on Veloce" href="doc/mesp_user/virtualprobe4.html"/>
+    </topic>
+    <topic label=" Probe Settings and Updates" href="doc/mesp_user/probe_settings_updates_appxA1.html" >
+     <topic label="Updating the Sourcery Probe Firmware Using CodeBench" href="doc/mesp_user/probe_settings_updates_appxA2.html"/>
+     <topic label="Updating the Sourcery Probe Firmware from the Command Line" href="doc/mesp_user/probe_settings_updates_appxA3.html"/>
+     <topic label="Sourcery Probe Personal Settings (ARM and MIPS Only)" href="doc/mesp_user/probe_settings_updates_appxA4.html" >
+      <topic label="Changing the Settings Using CodeBench" href="doc/mesp_user/probe_settings_updates_appxA4.html#wp7392"/>
+      <topic label="Configuring a Sourcery Probe Network Interface for Local Link Addressing" href="doc/mesp_user/probe_settings_updates_appxA4.html#wp9548"/>
+     </topic>
+     <topic label="Sourcery Probe Professional Settings" href="doc/mesp_user/probe_settings_updates_appxA5.html"/>
+     <topic label="Settings and Firmware Update Dialog Box" href="doc/mesp_user/probe_settings_updates_appxA6.html" >
+      <topic label="Sourcery Probe Discovery Dialog Box" href="doc/mesp_user/probe_settings_updates_appxA7.html"/>
+     </topic>
+     <topic label="Sourcery Probe Serial Port Console" href="doc/mesp_user/probe_settings_updates_appxA8.html"/>
+    </topic>
+    <topic label="Embedded Software and Hardware License Agreement" href="doc/mesp_user/eshla1.html"/>
+</toc>

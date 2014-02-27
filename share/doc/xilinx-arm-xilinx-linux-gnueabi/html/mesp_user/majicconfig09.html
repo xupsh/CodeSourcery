@@ -1,0 +1,271 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:22:23 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>Setting MC Attributes (ARM and MIPS Only)</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("Sourcery Probe Configuration ","majicconfig01","Sourcery Probe Target Initialization Scripts","majicconfig04","Setting MC Attributes (ARM and MIPS Only)","majicconfig09","16");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp26805"></a><h1 class="pHeading3 FontLevel1" id="MGC26805">
+
+<a name="CRefID24403"></a>
+Setting MC Attributes (ARM and MIPS Only)
+</h1>
+
+<a name="wp26806"></a><p class="pBody">
+
+The <span class=" cCourier cP10">MC</span> command can be used to set an individual attribute, or multiple attributes, for the specified memory region. When an <span class=" cCourier cP10">MC</span> command is entered, only those attributes specified in the command are changed. All other attributes remain unaffected.
+</p>
+
+<a name="wp26807"></a><p class="pBody">
+
+Before you set up the memory configuration table, you must be familiar with your system&#8217;s physical memory map. Specifically:
+</p>
+
+<a name="wp26808"></a>
+<ul><li class="LL1BulSolid">Where is your ROM, and how big is it?</li></ul>
+
+<a name="wp26809"></a>
+<ul><li class="LL1BulSolid">Where is your RAM, and how big is it?</li></ul>
+
+<a name="wp26810"></a>
+<ul><li class="LL1BulSolid">What peripherals do you have, where are they mapped, and are they byte accessible?</li></ul>
+
+<a name="wp26811"></a>
+<ul><li class="LL1BulSolid">What other memory-mapped resources are there, and how are they accessed?</li></ul>
+
+<a name="wp26812"></a><p class="pBody">
+
+When you have a concise representation of your memory system, you can enter it into the Mentor Embedded Sourcery Probe memory configuration table. Add the appropriate <span class=" cBold">MC</span> commands to your target initialization file, where noted in the template. The following are examples of additions to the file:
+</p>
+
+<a name="wp26816"></a><pre class="pCode">
+MC *:P,INV                           /* Flag all physical memory as invalid */
+</pre>
+
+<a name="wp26817"></a><pre class="pCode">
+MC 0:P FFFFFF:P,DMA                  /* Set first 16MB to DMA access */
+</pre>
+
+<a name="wp26818"></a><pre class="pCode">
+MC 10000000:P 1000FFFF:P,JAM         /* Select JAM mode for this range */
+</pre>
+
+<a name="wp26819"></a><pre class="pCode">
+MC *:P, PWE                           /* Enable partial word access for all 
+                                 physical memory */
+</pre>
+
+<a name="wp26820"></a><pre class="pCode">
+MC 10000000:P 1000FFFF:P,PWD         /* Disable partial word access for
+                                 selected range */
+</pre>
+
+<a name="wp26821"></a><pre class="pCode">
+MC 0:P FFFFF:P, RO, DW=8             /* First Meg is 8-bit read-only */
+
+</pre>
+
+<a name="wp26822"></a><p class="pzHeading">
+
+Additional Notes
+</p>
+
+<a name="wp26823"></a>
+<ul><li class="LL1BulSolid">Because the MC table describes your <span class=" cItalic">physical</span> memory environment, <span class=" cItalic">physical</span> addresses must be used when setting MC attributes. Physical addresses are specified by appending <span class=" cItalic">:P</span> to the address value.</li></ul>
+
+<a name="wp26827"></a>
+<ul><li class="LL1BulSolid">As MC commands are read or entered, the Mentor Embedded Sourcery Probe collates the input ranges into one map, spanning the entire address space, with no holes or overlaps.</li></ul>
+
+<a name="wp26832"></a><h2 class="pHeading4 FontLevel2" id="MGC26832">
+
+<a name="CRefID14578"></a>
+Sample MC Table
+</h2>
+<a name="wp26833"></a><p class="pBody">
+
+For this example, assume the memory model consists of the following regions:
+</p>
+
+<a name="wp26834"></a>
+<ul><li class="LL1BulSolid">512k of read-only flash memory at 0x1FC00000 in the physical memory space.</li></ul>
+
+<a name="wp26835"></a>
+<ul><li class="LL1BulSolid">1MB of RAM starting at address 0 in the physical memory space.</li></ul>
+
+<a name="wp26836"></a>
+<ul><li class="LL1BulSolid">256k of internal scratchpad RAM at 0x10000000 in the physical memory space.</li></ul>
+
+<a name="wp26838"></a>
+<ul><li class="LL1BulSolid"><a name="CRefID95583"></a>Peripherals are located at 0x18000000 in the physical memory space, and do not support byte writes.</li></ul>
+
+<a name="wp26839"></a><p class="pBody">
+
+Assume that your processor supports DMA to external memory, but not to internal scratchpad RAM. You want to prevent inadvertent accesses (by the Mentor Embedded Sourcery Probe) to invalid memory regions. The following memory configuration commands describe the system:
+</p>
+
+<a name="wp26843"></a><pre class="pCode">
+MC *:P, INV        /* Invalidate all memory first, then configure valid ranges*/
+</pre>
+
+<a name="wp26844"></a><pre class="pCode">
+MC 00000000:P 000FFFFF:P, DMA, PWE              /* DRAM */
+</pre>
+
+<a name="wp26845"></a><pre class="pCode">
+MC 10000000:P 1003FFFF:P, JAM, PWE              /* Scratchpad RAM*/
+</pre>
+
+<a name="wp26846"></a><pre class="pCode">
+MC 18000000:P 18FFFFFF:P, DMA, PWD              /* Peripherals */
+</pre>
+
+<a name="wp26847"></a><pre class="pCode">
+MC 1FC00000:P 1FC7FFFF:P, DMA, PWD, RO          /* Flash */
+
+</pre>
+
+<a name="wp26848"></a><p class="pBody">
+
+The first line defines all memory as invalid, thereby erasing any previous mappings. This prevents the Mentor Embedded Sourcery Probe from attempting to access any address (although it cannot prevent your program from doing so, while it is running).
+</p>
+
+<a name="wp26852"></a><p class="pBody">
+
+The second line sets a 1MB region, starting at 0, that can be accessed by DMA, and supports partial word accesses (PWE). This area is no longer restricted. If your CPU does not support DMA, then select JAM instead.
+</p>
+
+<a name="wp26853"></a><p class="pBody">
+
+The third line represents the internal scratchpad RAM, which must be accessed by jamming load and store instructions (JAM), because DMA is not supported in this area for this example. Partial word accesses are enabled (PWE) in this area.
+</p>
+
+<a name="wp26854"></a><p class="pBody">
+
+The peripheral area is shown on line 4; DMA access mode is enabled. However, partial word accesses are disabled (PWD), since these hypothetical peripherals do not support byte writes.
+</p>
+
+<a name="wp26855"></a><p class="pBody">
+
+The boot ROM is shown on line 5; DMA is enabled, and partial word accesses are disabled (PWD). This range is also marked as read-only (RO), because flash is not directly writable.
+</p>
+
+<a name="wp26856"></a><p class="pBody">
+
+The memory configuration commands would result in the memory configuration table as shown in <a href="majicconfig09.html#wp26866"  onclick='oT("CRF","majicconfig09.html#wp26866");return false;'>Figure&#160;3&#8209;2</a>.
+</p>
+
+<a name="wp26866"></a><p class="pFigureTitle" id="MGC26866">
+
+Figure 3&#8209;2. <a name="CRefID83688"></a>
+Memory Configuration Table<a name='Graphic26864'></a><img src="images/mem_config_table.gif"  style='width:4.9375in;'  class="Aligncenter" id='wp26864' border='0' hspace='0' vspace='0'/>
+
+
+</p>
+
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp26877"></a><p class="pnoteNote" id="MGC26866">
+
+        	The Mentor Embedded Sourcery Probe may coerce the settings of certain memory ranges to meet access method restrictions imposed by the target processor. For example, if internal memory-mapped registers are not accessible through DMA, the Mentor Embedded Sourcery Probe will keep such areas set to JAM mode.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "Setting MC Attributes (ARM and MIPS Only)";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "Setting.MC.Attributes.ARM.and.MIPS.Only"
+   ThisTopic = "SettingMCAttributesARMandMIPSOnly";
+   CurrentFile = "majicconfig09.html";
+   CurrentFileID = "16";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    <br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    <br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

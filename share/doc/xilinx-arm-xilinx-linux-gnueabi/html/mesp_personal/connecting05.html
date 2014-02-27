@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:21:47 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe Personal Hardware Manual" />
+    <title>Changing the IP Address of the Probe (Optional)</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("Connecting to the Target and Host Computer","connecting01","Changing the IP Address of the Probe (Optional)","connecting05","naV","naV","15");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp15117"></a><h1 class="pHeading2 FontLevel1" id="MGC15117">
+
+<a name="CRefID37297"></a>
+Changing the IP Address of the Probe (Optional)
+</h1>
+<a name="wp15118"></a><p class="pBody">
+
+This section provides the steps required if you need to set the IP address of the probe.
+</p>
+
+<a name="wp15126"></a><p class="pBody">
+
+Setting the probe to use a static IP address is not generally recommended. If you do need to, or want to, then it is a good idea to place a label on the probe showing its IP address.
+</p>
+
+<a name="wp17018"></a><p class="pHTaskSubhead">
+
+Prerequisites
+</p>
+
+<a name="wp17025"></a><p class="pBody">
+
+To configure the probe to use a static IP, use the probe&#39;s console to configure the probe&#39;s settings. The console is accessible via the Terminal view in Sourcery CodeBench, or a terminal program such as Hyperterm. See <a href="connecting06.html"  onclick='oT("CRF","connecting06.html");return false;'>Sourcery Probe Console</a> for the proper serial port settings.
+</p>
+
+<a name="wp15296"></a><h4 class="pHeading5 FontLevel4" id="MGC15296">
+
+
+Procedure
+</h4>
+<a name="wp16086"></a>
+<ol start="1"><li class="LL1Seq">Connect to the virtual serial port console using the Terminal view in Sourcery CodeBench. See <a href="connecting09.html"  onclick='oT("CRF","connecting09.html");return false;'>Connecting to the Sourcery Probe Console from Sourcery CodeBench</a> for the steps required to make this connection.</li></ol>
+<a name="wp16090"></a>
+<ol start="2"><li class="LL1Seq">When the terminal is connected to the virtual serial port, press <span class=" cBold">&lt;ESC&gt;</span> to enter the setup menu and choose <span class=" cBold">USB/Net settings</span> from the menu. See <a href="connecting06.html"  onclick='oT("CRF","connecting06.html");return false;'>Sourcery Probe Console</a> for details on the settings to use.</li></ol>
+<a name="wp16094"></a>
+<ol start="3"><li class="LL1Seq">Disable Local Link mode, and enter a static IP address and subnet mask for the probe.</li></ol>
+<a name="wp15149"></a>
+<ol start="4"><li class="LL1Seq">After you successfully update the probe:</li></ol>
+<a name="wp15303"></a>
+<ol start="1."><li class="LL2Seq">First, quit the terminal emulator program.</li></ol>
+<a name="wp15308"></a>
+<ol start="2."><li class="LL2Seq">Then, unplug the probe from your PC.</li></ol>
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack"><img src="../MGC/images/blank2x2.png" /></span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteTip"></td>
+    <td valign="top">
+            
+<a name="wp15794"></a><p class="pnoteInfo">
+
+        <span class=" cBold">	Tip</span>: After setting a static IP address for the probe, remember that the network adapter on the PC must be changed to a unique address within the same range.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp15154"></a><p class="pHTaskSubhead">
+
+Related Topics
+</p>
+
+<a name="wp15162"></a><p class="pBody">
+
+<a href="connecting06.html"  onclick='oT("CRF","connecting06.html");return false;'>Sourcery Probe Console</a>
+</p>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_personal";
+   DocTitle = "Mentor Embedded Sourcery Probe Personal Hardware Manual";
+   PageTitle = "Changing the IP Address of the Probe (Optional)";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "Changing.the.IP.Address.of.the.Probe.Optional"
+   ThisTopic = "StandardElectrostaticPrecautions";
+   CurrentFile = "connecting05.html";
+   CurrentFileID = "15";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe Personal Hardware Manual&nbsp;2.3.4
+    <br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    <br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

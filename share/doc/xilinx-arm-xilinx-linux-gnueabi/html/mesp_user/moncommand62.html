@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:23:56 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>Command Aliases</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("MON Command Language ","moncommand01","Command Aliases","moncommand62","naV","naV","84");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp7581"></a><h1 class="pHeading2 FontLevel1" id="MGC7581">
+
+<a name="CRefID42937"></a>
+Command Aliases
+</h1>
+<a name="wp7583"></a><p class="pBody">
+
+The <span class=" cBold">EA</span> (Enter Alias) <a name="CRefIDenter alias command"></a>command creates an alias (synonym) for a list of one or more commands. It is normally used to create a short abbreviation for a longer command or sequence of commands that are frequently needed.
+</p>
+
+<a name="wp7585"></a><p class="pBody">
+
+Combining <span class=" cBold">EA</span> with <span class=" cBold">MON scripts</span> allows you to create your own custom commands. A command file can accept parameters, generate output, and supports expression evaluation and flow control for creating loops - everything you need to create your own intelligent command (see <a href="moncommand66.html"  onclick='oT("CRF","moncommand66.html");return false;'><span class=" cBold">Command Script Files</span></a>). The <span class=" cBold">EA</span> command allows you to define a name to use for running your command.
+</p>
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp7597"></a><p class="pnoteNote">
+
+        	Most sample board initialization files, plus the custom init file template, use EA commands to create names for various scripts that are included in the board initialization file.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp7598"></a><p class="pBody">
+
+Aliases can be displayed with the Display Alias (<span class=" cBold">DA</span>) command, and removed with the Kill Alias (<span class=" cBold">KA</span>) command.
+</p>
+
+<a name="wp7600"></a><p class="pBody">
+
+The <span class=" cBold">DA</span> (Display Alias) command shows the name and replacement text for one or all currently defined aliases. If the command is entered without a parameter, all aliases are displayed.
+</p>
+
+<a name="wp7602"></a><p class="pBody">
+
+The <span class=" cBold">KA</span> (Kill Alias) command deletes the name and replacement text for one or all of the currently defined command aliases.
+</p>
+
+<a name="wp7605"></a><p class="pzHeading">
+
+Examples
+</p>
+
+<a name="wp7606"></a><pre class="pCode">
+<span class=" cBold">ea DIA DW @pc L 10,i            </span><span class=" cNoBold cNoItalic cBlack">// Disassemble instructions from current pc
+</span></pre>
+
+<a name="wp7607"></a><pre class="pCode">
+<span class=" cBold">ea rc fr c                     </span><span class=" cNoBold cNoItalic cBlack">// Read command file without echo
+</span></pre>
+
+<a name="wp7608"></a><pre class="pCode">
+<span class=" cBold">da DIA                        </span><span class=" cNoBold cNoItalic cBlack">// Display DIA alias
+</span></pre>
+
+<a name="wp7609"></a><pre class="pCode">
+<span class=" cBold">da *                        </span><span class=" cNoBold cNoItalic cBlack">// Display all aliases
+</span></pre>
+
+<a name="wp7610"></a><pre class="pCode">
+<span class=" cBold">ka rc                        </span><span class=" cNoBold cNoItalic cBlack">// Kill rc alias
+</span></pre>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "Command Aliases";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "Command.Aliases"
+   ThisTopic = "UserDefinedAccessLists";
+   CurrentFile = "moncommand62.html";
+   CurrentFileID = "84";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    <br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    <br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

@@ -1,0 +1,234 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:23:56 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>SHIFT/UNSHIFT </title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("MON Command Language ","moncommand01","MON Command Details","moncommand04","SHIFT/UNSHIFT ","moncommand42","64");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="EW39"></a>
+
+
+
+
+
+
+
+
+<a name="wp6361"></a><h1 class="pzCmdFunc WarninG FontLevel1" id="MGC6361">
+
+
+SHIFT/UNSHIFT <a name="CRefID38820"></a><a name="CRefID20397"></a>
+</h1>
+
+
+
+<a name="wp29208"></a><p class="pzMiscInfo">
+
+Availability: ALL
+</p>
+
+<a name="wp6362"></a><p class="pzHeading">
+
+Syntax
+</p>
+
+<a name="wp6363"></a><p class="pzUsage">
+
+SHIFT [<span class="cOptRpl">number</span>]
+</p>
+
+<a name="wp6364"></a><p class="pzUsage">
+
+UNSHIFT [<span class="cOptRpl">number</span>|*]
+</p>
+
+<a name="wp6365"></a><p class="pzHeading">
+
+Description
+</p>
+
+<a name="wp6366"></a><p class="pzShortDesc">
+
+The SHIFT and UNSHIFT commands change the correspondence between the arguments supplied on an &ldquo;<span class=" cBold">FR C</span> <span class=" cItalic">filename</span>&rdquo; command and the formal parameter tokens within the command file.
+</p>
+
+
+<a name="wp6369"></a><p class="pzShortDesc">
+
+Normally, the first argument is substituted for $$1, the second argument for $$2, and so forth. The SHIFT command increments the argument number that corresponds to each parameter number, effectively shifting the argument array so that a given range of parameter numbers refer to a higher range of arguments. The UNSHIFT command reverses this effect. Argument shifting is very useful when you want to perform the same series of actions repetitively on an unknown number of arguments (or groups of arguments).<span class="cDefault"> </span>
+</p>
+
+
+<a name="wp6370"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cItalic">number</span> - is the number of arguments to shift or unshift.</li></ul>
+
+<a name="wp6371"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cBold">*</span> - is valid only for UNSHIFT, and it restores the arguments so that <span class=" cBold">$$1 </span>again refers to the first argument.</li></ul>
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp6381"></a><p class="pnoteNote">
+
+        	The $$0 parameter is also affected by shifting: if there were originally 10 arguments, after a SHIFT 2 command $$0 will be replaced with 8. $$* is not affected by shifting - it is always replaced with the entire argument list.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp6383"></a><p class="pzHeading">
+
+Examples
+</p>
+
+<a name="wp6384"></a><p class="pBody">
+
+The following command file will display the contents of a series of ranges. It expects an argument list of the form:
+</p>
+
+<a name="wp6385"></a><pre class="pCode">
+   addr count [addr count] ...
+</pre>
+
+<a name="wp6386"></a><pre class="pCode">
+if ($$0 &lt; 2) { dv &quot;Expected address and count\n&quot;;
+                   goto done }
+</pre>
+
+<a name="wp6387"></a><pre class="pCode">
+:loop
+</pre>
+
+<a name="wp6388"></a><pre class="pCode">
+   dw $$1 L $$2
+</pre>
+
+<a name="wp6389"></a><pre class="pCode">
+   shift 2
+</pre>
+
+<a name="wp6390"></a><pre class="pCode">
+   if ($$0 &gt;= 2) { goto loop }
+</pre>
+
+<a name="wp6391"></a><pre class="pCode">
+:done
+</pre>
+
+<a name="wp6392"></a><pre class="pCode">
+
+</pre>
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp6401"></a><p class="pnoteNote">
+
+        	The first if command in the example, like all MON commands, must be entered on one line.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "SHIFT/UNSHIFT ";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "SHIFTUNSHIFT."
+   ThisTopic = "UserDefinedAccessLists";
+   CurrentFile = "moncommand42.html";
+   CurrentFileID = "64";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    <br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    <br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

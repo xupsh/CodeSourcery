@@ -1,0 +1,988 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:22:26 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe Professional Hardware Manual" />
+    <title>LEDs on Sourcery Probe Professional</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("Hardware Specifications","hardware_specs1","Sourcery Probe Professional Specifications","hardware_specs2","naV","naV","25");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp5349"></a><h1 class="pHeading2 FontLevel1" id="MGC5349">
+
+<a name="CRefID10328"></a>
+LEDs on Sourcery Probe Professional
+</h1>
+<a name="wp5350"></a><p class="pBody">
+
+<a href="hardware_specs2.html#wp5356"  onclick='oT("CRF","hardware_specs2.html#wp5356");return false;'><span class=" cLinkOverride">Figure&#160;5&#8209;1</span></a><span class=" cBold CBlack"> </span>shows the various LEDs of the probe.
+</p>
+
+<a name="wp5356"></a><p class="pFigureTitle" id="MGC5356">
+
+Figure 5&#8209;1. <a name="CRefID49982"></a>Sourcery Probe Professional &#151; Top View<a name='Graphic8082'></a><img src="images/giga_jtag_top.jpg"  style='width:3.10951in;'  class="Aligncenter" id='wp8082' border='0' hspace='0' vspace='0'/>
+
+
+</p>
+
+
+<a name="wp5357"></a><h2 class="pHeading3NoSplit FontLevel2" id="MGC5357">
+
+
+Heartbeat Indicator
+</h2>
+<a name="wp5358"></a><p class="pBody">
+
+The Heartbeat LED (labeled HEARTBEAT) indicates the status of communication between the probe and the network:
+</p>
+
+<a name="wp5360"></a>
+<ul><li class="LL1BulSolid">The LED is red until the probe boot code starts running.</li></ul>
+
+<a name="wp5361"></a>
+<ul><li class="LL1BulSolid">The LED flashes orange (1Hz) during configuration of the network interface.</li></ul>
+
+<a name="wp5362"></a>
+<ul><li class="LL1BulSolid">The LED flashes green (1Hz) after the network interface is successfully configured and the probe is ready for use. During firmware updates, the LED flashes green at a higher frequency (5Hz).</li></ul>
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp5365"></a><p class="pnoteNote">
+
+        	Do not remove power, unplug the network, or press the reset button during firmware updates.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp5367"></a>
+<ul><li class="LL1BulSolid">The LED is unlit if the probe is not powered on.</li></ul>
+
+<a name="wp5368"></a>
+<ul><li class="LL1BulSolid">The LED flashes red if the probe is overheating.</li></ul>
+<a name="EW24"></a>
+<a name="wp5369"></a><h2 class="pHeading3NoSplit WarninG FontLevel2" id="MGC5369">
+
+
+Run/Pause Indicator
+</h2>
+<a name="wp5370"></a><p class="pBody">
+
+The status LED (labeled RUN/PAUSE) indicates the state of the target:
+</p>
+
+<a name="wp5371"></a>
+<ul><li class="LL1BulSolid">The LED is initially unlit and remains so until the debugger connects to the probe.</li></ul>
+
+<a name="wp10298"></a>
+<ul><li class="LL1BulSolid">The LED is green when the target is in run mode.</li></ul>
+
+<a name="wp5372"></a>
+<ul><li class="LL1BulSolid">The LED is red when the target is in pause mode.</li></ul>
+
+<a name="wp5373"></a>
+<ul><li class="LL1BulSolid">The LED is orange when the target is in mixed mode.</li></ul>
+
+<a name="wp5379"></a><h2 class="pHeading3NoSplit FontLevel2" id="MGC5379">
+
+
+Target Power Indicator
+</h2>
+<a name="wp5380"></a><p class="pBody">
+
+The target power LED (labeled TARGET POWER) indicates whether the probe detects target power.
+</p>
+
+<a name="wp5382"></a>
+<ul><li class="LL1BulSolid">The LED is green when target power is detected.</li></ul>
+
+<a name="wp5383"></a>
+<ul><li class="LL1BulSolid">The LED is unlit when no target power is detected.</li></ul>
+
+<a name="wp5387"></a><h2 class="pHeading3NoSplit FontLevel2" id="MGC5387">
+
+
+Active Indicator
+</h2>
+<a name="wp5388"></a><p class="pBody">
+
+The active LED (labeled ACTIVE) is unused at this time.
+</p>
+
+<a name="wp7784"></a><h2 class="pHeading3NoSplit FontLevel2" id="MGC7784">
+
+
+Measure Indicator
+</h2>
+<a name="wp7782"></a><p class="pBody">
+
+The measure LED (labeled MEASURE) is unused at this time.
+</p>
+
+<a name="wp5406"></a><h2 class="pHeading3NoSplit FontLevel2" id="MGC5406">
+
+
+RJ-45 Ethernet Connector with Link and Activity Indicators
+</h2>
+<a name="wp5408"></a><p class="pBody">
+
+The Sourcery Probe Professional interface consists of an RJ-45 connector and a built-in twisted pair MAU that connects directly to 10/100/1000BaseT twisted pair networks. See <a name="EW25"></a><a href="network_conn2.html#CRefID88883" onclick='oT("CRF","network_conn2.html#CRefID88883");'><span class=" cLinkOverride">Connecting the Probe to the Network</span></a> for more information on connecting to a network.
+</p>
+
+<a name="wp5412"></a><p class="pBody">
+
+The probe link and activity indicators are integrated into the RJ-45 probe connector:
+</p>
+
+<a name="wp5860"></a>
+<ul><li class="LL1BulSolid">The yellow indicator is turned on when the probe is connected to any network, and flickers when data is being transferred across the network.</li></ul>
+
+<a name="wp5415"></a>
+<ul><li class="LL1BulSolid">The green indicator is turned on when the probe is connected to a 1000BaseT network and flickers when data is being transferred across the network.</li></ul>
+
+<a name="wp5417"></a><h2 class="pHeading3NoSplit FontLevel2" id="MGC5417">
+
+<a name="CRefID25702"></a>Sourcery Probe Professional Status Indicators
+</h2>
+<a name="wp5418"></a><p class="pBody">
+
+The probe uses LEDs to indicate its status. If you encounter problems related to Ethernet communication, consult the status indicator information in <a href="hardware_specs2.html#wp7805"  onclick='oT("CRF","hardware_specs2.html#wp7805");return false;'>Table&#160;5&#8209;1</a>.
+</p>
+
+<a name="wp5882"></a><p class="pBody">
+
+
+</p>
+<div id="TableDivQz"></div>
+<div align="center">
+
+
+<a name="wp7805"></a><p class="pTableTitle" id="MGC7805">
+
+Table 5&#8209;1. <a name="CRefID38902"></a>Sourcery Probe Professional Status Indicators&#160;
+</p>
+
+
+<table border="1" cellpadding="5" cellspacing="0" id="wp7805table5883">
+  <tr bgcolor="#CCCCCC"  align="center" valign="middle">
+    <th>
+
+<a name="wp7813"></a><p class="pTableHeading" id="MGC7805">
+LED
+</p>
+</th>
+
+    <th>
+
+<a name="wp7815"></a><p class="pTableHeading">
+
+Location
+</p>
+
+</th>
+
+    <th>
+
+<a name="wp7817"></a><p class="pTableHeading">
+
+Activity
+</p>
+
+</th>
+
+    <th>
+
+<a name="wp7819"></a><p class="pTableHeading">
+
+Description
+</p>
+
+</th>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td colspan="1" rowspan="5">
+
+<a name="wp7821"></a><p class="pTableCell">
+HEARTBEAT</p></td>
+
+    <td colspan="1" rowspan="5">
+
+<a name="wp7823"></a><p class="pTableCell">
+Top</p></td>
+
+    <td id='Row2Column3'  style='width:1.26389in'>
+
+
+<a name="wp7825"></a><p class="pTableCell">
+Off</p></td>
+
+    <td id='Row2Column4'  style='width:2.41667in'>
+
+
+<a name="wp7827"></a><p class="pTableCell">
+Probe is not powered on.</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row3Column3' >
+
+
+<a name="wp7833"></a><p class="pTableCell">
+Solid Red</p></td>
+
+    <td id='Row3Column4' >
+
+
+<a name="wp7835"></a><p class="pTableCell">
+Probe is executing the BootLoader or has failed to boot.</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row4Column3' >
+
+
+<a name="wp7841"></a><p class="pTableCell">
+Orange heartbeat</p></td>
+
+    <td id='Row4Column4' >
+
+
+<a name="wp7843"></a><p class="pTableCell">
+Probe Operating System running and network interface is initializing.</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row5Column3' >
+
+
+<a name="wp7849"></a><p class="pTableCell">
+Green heartbeat</p></td>
+
+    <td id='Row5Column4' >
+
+
+<a name="wp7851"></a><p class="pTableCell">
+Probe Operating System running and network interface successfully configured.</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row6Column3' >
+
+
+<a name="wp7857"></a><p class="pTableCell">
+Red heartbeat</p></td>
+
+    <td id='Row6Column4' >
+
+
+<a name="wp7859"></a><p class="pTableCell">
+Probe is overheating. Remove airflow obstructions, and contact Customer Support if the problem persists.</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td colspan="1" rowspan="4">
+
+<a name="wp7861"></a><p class="pTableCell">
+RUN/PAUSE</p></td>
+
+    <td colspan="1" rowspan="4">
+
+<a name="wp7863"></a><p class="pTableCell">
+Top </p></td>
+
+    <td id='Row7Column3' >
+
+
+<a name="wp7865"></a><p class="pTableCell">
+Off</p></td>
+
+    <td id='Row7Column4' >
+
+
+<a name="wp7867"></a><p class="pTableCell">
+Debugger is not connected to probe.</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row8Column3' >
+
+
+<a name="wp7873"></a><p class="pTableCell">
+Solid red</p></td>
+
+    <td id='Row8Column4' >
+
+
+<a name="wp7875"></a><p class="pTableCell">
+Probe is in pause mode.</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row9Column3' >
+
+
+<a name="wp7881"></a><p class="pTableCell">
+Solid green</p></td>
+
+    <td id='Row9Column4' >
+
+
+<a name="wp7883"></a><p class="pTableCell">
+Probe is in run mode.</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row10Column3' >
+
+
+<a name="wp7889"></a><p class="pTableCell">
+Solid orange</p></td>
+
+    <td id='Row10Column4' >
+
+
+<a name="wp7891"></a><p class="pTableCell">
+Probe is in mixed mode.</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td colspan="1" rowspan="2">
+
+<a name="wp7893"></a><p class="pTableCell">
+TARGET POWER</p></td>
+
+    <td colspan="1" rowspan="2">
+
+<a name="wp7895"></a><p class="pTableCell">
+Top</p></td>
+
+    <td id='Row11Column3' >
+
+
+<a name="wp7897"></a><p class="pTableCell">
+Off</p></td>
+
+    <td id='Row11Column4' >
+
+
+<a name="wp7899"></a><p class="pTableCell">
+Target system power is not detected.</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row12Column3' >
+
+
+<a name="wp7905"></a><p class="pTableCell">
+Solid green</p></td>
+
+    <td id='Row12Column4' >
+
+
+<a name="wp7907"></a><p class="pTableCell">
+Target system power is detected.</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td colspan="1" rowspan="4">
+
+<a name="wp7909"></a><p class="pTableCell">
+ACTIVE</p></td>
+
+    <td colspan="1" rowspan="4">
+
+<a name="wp7911"></a><p class="pTableCell">
+Top</p></td>
+
+    <td id='Row13Column3' >
+
+
+<a name="wp7913"></a><p class="pTableCell">
+Off</p></td>
+
+    <td id='Row13Column4' >
+
+
+<a name="wp7915"></a><p class="pTableCell">
+  &#160;</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td colspan="2" rowspan="3">
+
+<a name="wp7921"></a><p class="pTableCell">
+  &#160;</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+
+</tr>
+
+  <tr align="left" valign="top">
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td colspan="1" rowspan="4">
+
+<a name="wp7941"></a><p class="pTableCell">
+MEASURE</p></td>
+
+    <td colspan="1" rowspan="4">
+
+<a name="wp7943"></a><p class="pTableCell">
+Top</p></td>
+
+    <td id='Row17Column3' >
+
+
+<a name="wp7945"></a><p class="pTableCell">
+Off</p></td>
+
+    <td id='Row17Column4' >
+
+
+<a name="wp7947"></a><p class="pTableCell">
+  &#160;</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td colspan="2" rowspan="3">
+
+<a name="wp7953"></a><p class="pTableCell">
+  &#160;</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+
+</tr>
+
+  <tr align="left" valign="top">
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td colspan="1" rowspan="2">
+
+<a name="wp7973"></a><p class="pTableCell">
+ACTIVITY</p></td>
+
+    <td colspan="1" rowspan="2">
+
+<a name="wp7975"></a><p class="pTableCell">
+Ethernet Connector</p></td>
+
+    <td id='Row21Column3' >
+
+
+<a name="wp7977"></a><p class="pTableCell">
+Off</p></td>
+
+    <td id='Row21Column4' >
+
+
+<a name="wp7979"></a><p class="pTableCell">
+Ethernet is not transmitting or receiving data.</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row22Column3' >
+
+
+<a name="wp7985"></a><p class="pTableCell">
+Green heartbeat</p></td>
+
+    <td id='Row22Column4' >
+
+
+<a name="wp7987"></a><p class="pTableCell">
+Ethernet is transmitting or receiving.</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td colspan="1" rowspan="2">
+
+<a name="wp7989"></a><p class="pTableCell">
+LINK</p></td>
+
+    <td colspan="1" rowspan="2">
+
+<a name="wp7991"></a><p class="pTableCell">
+Ethernet Connector</p></td>
+
+    <td id='Row23Column3' >
+
+
+<a name="wp7993"></a><p class="pTableCell">
+Off</p></td>
+
+    <td id='Row23Column4' >
+
+
+<a name="wp7995"></a><p class="pTableCell">
+Ethernet is not linked.</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row24Column3' >
+
+
+<a name="wp8001"></a><p class="pTableCell">
+Solid Orange</p></td>
+
+    <td id='Row24Column4' >
+
+
+<a name="wp8003"></a><p class="pTableCell">
+Ethernet is linked.</p></td>
+
+
+</tr>
+
+
+</table>
+
+</div>
+<div id='EndTable'> </div>
+<p class="pBody">
+
+<br clear='left' class='Blank4Table' />
+
+
+</p>
+
+<a name="wp5482"></a><h1 class="pHeading2NoSplit FontLevel1" id="MGC5482">
+
+
+Host Connectors on Sourcery Probe Professional
+</h1>
+<a name="wp5485"></a><p class="pBody">
+
+<a href="hardware_specs2.html#wp5487"  onclick='oT("CRF","hardware_specs2.html#wp5487");return false;'>Figure&#160;5&#8209;2</a> shows the host connectors of the probe.
+</p>
+
+<a name="wp5487"></a><p class="pFigureTitle" id="MGC5487">
+
+Figure 5&#8209;2. <a name="CRefID80940"></a>Sourcery Probe Professional &#151; Host End View<a name='Graphic8101'></a><img src="images/giga_jtag_host_end.jpg"  style='width:4.37999in;'  class="Aligncenter" id='wp8101' border='0' hspace='0' vspace='0'/>
+
+
+</p>
+
+
+<a name="wp5488"></a><h3 class="pHeading4 FontLevel3" id="MGC5488">
+
+
+Reset Button
+</h3>
+<a name="wp5489"></a><p class="pBody">
+
+The reset button is used to reboot the probe.
+</p>
+
+<a name="wp5490"></a><h3 class="pHeading4 FontLevel3" id="MGC5490">
+
+
+Power Connector
+</h3>
+<a name="wp5491"></a><p class="pBody">
+
+The Power connector on the probe is used to connect the DC power supply cable.
+</p>
+
+<a name="wp5493"></a><h3 class="pHeading4 FontLevel3" id="MGC5493">
+
+
+RJ-45 Ethernet Connector
+</h3>
+<a name="wp5494"></a><p class="pBody">
+
+Use the Ethernet connector on the probe to connect to an 10/100/1000BaseT Ethernet.
+</p>
+
+<a name="wp5496"></a><h3 class="pHeading4 FontLevel3" id="MGC5496">
+
+
+Config USB Connector
+</h3>
+<a name="wp5497"></a><p class="pBody">
+
+The Config USB port on the probe acts as a virtual serial device that supports RS-232 communication protocol at 115200 baud. The Config USB port is used for configuring network communication, entering routing tables, and diagnostics.
+</p>
+
+<a name="wp5501"></a><h1 class="pHeading2NoSplit FontLevel1" id="MGC5501">
+
+
+Target Connectors on the Sourcery Probe Professional
+</h1>
+<a name="wp5504"></a><p class="pBody">
+
+<a href="hardware_specs2.html#wp6419"  onclick='oT("CRF","hardware_specs2.html#wp6419");return false;'>Figure&#160;5&#8209;3</a> shows the target connectors of the probe.
+</p>
+
+<a name="wp6419"></a><p class="pFigureTitle" id="MGC6419">
+
+Figure 5&#8209;3. <a name="CRefID92851"></a>Sourcery Probe Professional &#151; Target End View<a name='Graphic8117'></a><img src="images/giga_jtag_target_end.jpg"  style='width:4.78665in;'  class="Aligncenter" id='wp8117' border='0' hspace='0' vspace='0'/>
+
+
+</p>
+
+
+<a name="wp5520"></a><h3 class="pHeading4 FontLevel3" id="MGC5520">
+
+
+RJ-25 Target Serial Connector
+</h3>
+<a name="wp5521"></a><p class="pBody">
+
+The probe provides a target serial port that can be configured to access your target&#8217;s serial port. This is useful if your host computer is not near the target and you need to access your target&#8217;s serial port remotely over your network.
+</p>
+
+<a name="wp5524"></a><p class="pBody">
+
+<a href="hardware_specs2.html#wp6649"  onclick='oT("CRF","hardware_specs2.html#wp6649");return false;'>Table&#160;5&#8209;2</a> shows the pinout definition of the target serial port.
+</p>
+<div id="TableDivQz"></div>
+<div align="center">
+
+
+<a name="wp6649"></a><p class="pTableTitle" id="MGC6649">
+
+Table 5&#8209;2. <a name="CRefID71936"></a>
+Pinout Definitions for Target Serial Port&#160;
+</p>
+
+
+<table border="1" cellpadding="5" cellspacing="0" id="wp6649table6647">
+  <tr bgcolor="#CCCCCC"  align="center" valign="middle">
+    <th>
+
+<a name="wp6653"></a><p class="pTableHeading" id="MGC6649">
+Pin
+</p>
+</th>
+
+    <th>
+
+<a name="wp6655"></a><p class="pTableHeading">
+
+Signal
+</p>
+
+</th>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row2Column1'  style='width:0.36111in'>
+
+
+<a name="wp6657"></a><p class="pTableCell">
+1</p></td>
+
+    <td id='Row2Column2'  style='width:1.54167in'>
+
+
+<a name="wp6659"></a><p class="pTableCell">
+Ready to Send (RTS)</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row3Column1' >
+
+
+<a name="wp6661"></a><p class="pTableCell">
+2</p></td>
+
+    <td id='Row3Column2' >
+
+
+<a name="wp6663"></a><p class="pTableCell">
+Ground</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row4Column1' >
+
+
+<a name="wp6665"></a><p class="pTableCell">
+3</p></td>
+
+    <td id='Row4Column2' >
+
+
+<a name="wp6667"></a><p class="pTableCell">
+Receive Data (RxD)</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row5Column1' >
+
+
+<a name="wp6669"></a><p class="pTableCell">
+4</p></td>
+
+    <td id='Row5Column2' >
+
+
+<a name="wp6671"></a><p class="pTableCell">
+Transmit Data (TxD)</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row6Column1' >
+
+
+<a name="wp6673"></a><p class="pTableCell">
+5</p></td>
+
+    <td id='Row6Column2' >
+
+
+<a name="wp6675"></a><p class="pTableCell">
+Ground</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row7Column1' >
+
+
+<a name="wp6677"></a><p class="pTableCell">
+6</p></td>
+
+    <td id='Row7Column2' >
+
+
+<a name="wp6679"></a><p class="pTableCell">
+Clear to Send (CTS)</p></td>
+
+
+</tr>
+
+
+</table>
+
+</div>
+<div id='EndTable'> </div>
+<p class="pBody">
+
+<br clear='left' class='Blank4Table' />
+
+
+</p>
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp5525"></a><p class="pnoteNote">
+
+        	Pin 1 is located on the right side when you view the RJ-11 socket with the locking tab on the bottom.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp5526"></a><h3 class="pHeading4 FontLevel3" id="MGC5526">
+
+
+Run Control Probe Tip Cable Connector
+</h3>
+<a name="wp5527"></a><p class="pBody">
+
+The probe tip ribbon cable is connected to the 50-pin connector on the probe.
+</p>
+
+<a name="wp5528"></a><h3 class="pHeading4 FontLevel3" id="MGC5528">
+
+
+Debug Port Connector
+</h3>
+<a name="wp5529"></a><p class="pBody">
+
+The debug port socket is on the end of the probe tip and is used to connect the probe to a debug port header on your target system.
+</p>
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp5542"></a><p class="pnoteNote">
+
+        	Ensure that Pin 1 of the probe tip is connected to the Pin 1 of the header.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp5543"></a><h1 class="pHeading2NoSplit FontLevel1" id="MGC5543">
+
+Sourcery Probe Professional Specifications
+</h1>
+<a name="wp8813"></a><p class="pBody">
+
+The dimensions of the probe are shown in <a href="hardware_specs2.html#wp8818"  onclick='oT("CRF","hardware_specs2.html#wp8818");return false;'>Figure&#160;5&#8209;4</a>.
+</p>
+
+<a name="wp8818"></a><p class="pFigureTitle" id="MGC8818">
+
+Figure 5&#8209;4. <a name="CRefID69809"></a><a name='Graphic8816'></a><img src="images/giga_jtag_top_dimensions.jpg"  style='width:4.18181in;'  class="Aligncenter" id='wp8816' border='0' hspace='0' vspace='0'/>
+
+
+Sourcery Probe Professional Dimensions</p>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_professional";
+   DocTitle = "Mentor Embedded Sourcery Probe Professional Hardware Manual";
+   PageTitle = "LEDs on Sourcery Probe Professional";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "LEDs.on.Sourcery.Probe.Professional"
+   ThisTopic = "ProductDisposal";
+   CurrentFile = "hardware_specs2.html";
+   CurrentFileID = "25";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe Professional Hardware Manual&nbsp;2.3.4
+    
+<br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    
+<br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

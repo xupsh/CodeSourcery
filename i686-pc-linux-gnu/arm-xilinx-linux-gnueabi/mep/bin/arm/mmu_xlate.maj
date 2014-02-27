@@ -1,0 +1,24 @@
++Q
+//Does a Virtual to Physical Translation of a single address and display results
+//
+//  Usage:   xlat v_address      (does a VA - PY Translation with condensed output)
+//           xlat v_address x    (any second arg outputs verbose MMU Table Information for the VA)
+//
+//Example:   xlat 0x1000
+//           xlat 0x1000 1
+//
+//dv "\n"
+if ($$0 == 1) { goto XLAT_SIMPLE } {goto XLAT_VERBOSE }
+//
+//........................................................................
+:XLAT_SIMPLE
+ew 0x30F00080:da = $$1      //display a va - py translation
+goto EXIT
+//
+//........................................................................
+:XLAT_VERBOSE
+ew 0x30F00084:da = $$1      //display a va - py translation and MMU Table Information 
+//
+//........................................................................
+:EXIT
+dv "\n"

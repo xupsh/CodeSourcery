@@ -1,0 +1,1138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:23:56 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>space Address Space Designator</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("MON Command Language ","moncommand01","MON Operands","moncommand50","space Address Space Designator","moncommand59","81");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp7017"></a><h1 class="pzCmdFunc FontLevel1" id="MGC7017">
+
+
+space <a name="CRefID22851"></a>Address Space Designator
+</h1>
+
+
+
+<a name="wp7019"></a><p class="pzShortDesc">
+
+The <span class=" cItalic">space</span> operand specifies an explicit address &ldquo;space&rdquo; for the address value it is applied to. If no <span class=" cItalic">space</span> is given, the address value is an offset in the default virtual memory address space. In addition to the default virtual memory space and some special MIPS-specific memory spaces, MON supports the following spaces for all processors.
+</p>
+
+
+<a name="wp12239"></a><p class="pzBody">
+
+<a href="moncommand59.html#wp7027"  onclick='oT("CRF","moncommand59.html#wp7027");return false;'>Table&#160;4&#8209;7</a> and <a href="moncommand59.html#wp7051"  onclick='oT("CRF","moncommand59.html#wp7051");return false;'>Table&#160;4&#8209;8</a> describe the space designators.
+</p>
+
+
+<a name="wp7046"></a><h3 class="pHeading5 FontLevel3" id="MGC7046">
+
+
+
+Space Designators For All Processors
+
+</h3>
+
+<div id="TableDivQz"></div>
+
+<div align="center">
+
+
+
+
+
+<a name="wp7027"></a><p class="pTableTitle" id="MGC7027">
+
+
+
+Table 4&#8209;7. <a name="CRefID96715"></a>
+
+Space Designators for All Processors&#160;
+
+</p>
+
+
+
+
+
+<table border="1" cellpadding="5" cellspacing="0" id="wp7027table7022">
+
+  <tr align="left" valign="top">
+
+    <td id='Row1Column1'  style='width:0.52778in'>
+
+
+
+
+
+<a name="wp7031"></a><p class="pTableHeading" id="MGC7027">
+
+Space
+
+</p>
+
+</td>
+
+
+
+    <td id='Row1Column2'  style='width:1.75in'>
+
+
+
+
+
+<a name="wp33650"></a><p class="pTableHeading">
+
+
+
+Processor
+
+</p>
+
+
+
+</td>
+
+
+
+    <td id='Row1Column3'  style='width:3.0in'>
+
+
+
+
+
+<a name="wp7033"></a><p class="pTableHeading">
+
+
+
+Location
+
+</p>
+
+
+
+</td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row2Column1'  style='width:0.52778in'>
+
+
+
+
+
+<a name="wp7035"></a><p class="pTableCell">
+
+<span class=" cBold">:P</span></p></td>
+
+
+
+    <td id='Row2Column2'  style='width:1.75in'>
+
+
+
+
+
+<a name="wp33652"></a><p class="pBody">
+
+
+
+ALL
+
+</p>
+
+</td>
+
+
+
+    <td id='Row2Column3'  style='width:3.0in'>
+
+
+
+
+
+<a name="wp7037"></a><p class="pBody">
+
+
+
+Physical Memory space
+
+</p>
+
+</td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row3Column1' >
+
+
+
+
+
+<a name="wp7039"></a><p class="pTableCell">
+
+<span class=" cBold">:LP</span></p></td>
+
+
+
+    <td id='Row3Column2' >
+
+
+
+
+
+<a name="wp33654"></a><p class="pBody">
+
+
+
+ARM and MIPS Only
+
+</p>
+
+</td>
+
+
+
+    <td id='Row3Column3' >
+
+
+
+
+
+<a name="wp7041"></a><p class="pBody">
+
+
+
+Logical to Physical translation space. This is a pseudo space, where the value returned is the physical address corresponding to a given virtual address.
+
+</p>
+
+</td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row4Column1' >
+
+
+
+
+
+<a name="wp7043"></a><p class="pTableCell">
+
+<span class=" cBold">:DA</span></p></td>
+
+
+
+    <td id='Row4Column2' >
+
+
+
+
+
+<a name="wp33656"></a><p class="pBody">
+
+
+
+ARM and MIPS Only
+
+</p>
+
+</td>
+
+
+
+    <td id='Row4Column3' >
+
+
+
+
+
+<a name="wp7045"></a><p class="pBody">
+
+
+
+Debug Agent Memory space. This is a pseudo space that accesses special features of the Sourcery Probe.
+
+</p>
+
+</td>
+
+
+
+
+
+</tr>
+
+
+
+
+
+</table>
+
+
+
+</div>
+
+<div id='EndTable'> </div>
+
+<h3 class="pHeading5 FontLevel3" id="MGC7046">
+
+<br clear='left' class='Blank4Table' />
+
+
+
+
+
+</h3>
+<a name="wp7094"></a><h3 class="pHeading5 FontLevel3" id="MGC7094">
+
+
+
+Space Designators for 32-bit MIPS Processors
+
+</h3>
+
+<div id="TableDivQz"></div>
+
+<div align="center">
+
+
+
+
+
+<a name="wp7051"></a><p class="pTableTitle" id="MGC7051">
+
+
+
+Table 4&#8209;8. <a name="CRefID39743"></a>
+
+Space Designators for 32-bit MIPS Processors&#160;
+
+</p>
+
+
+
+
+
+<table border="1" cellpadding="5" cellspacing="0" id="wp7051table7049">
+
+  <tr align="left" valign="top">
+
+    <td id='Row1Column1'  style='width:0.52778in'>
+
+
+
+
+
+<a name="wp7055"></a><p class="pTableHeading" id="MGC7051">
+
+Space
+
+</p>
+
+</td>
+
+
+
+    <td id='Row1Column2'  style='width:2.84722in'>
+
+
+
+
+
+<a name="wp7057"></a><p class="pTableHeading">
+
+
+
+Location
+
+</p>
+
+
+
+</td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row2Column1'  style='width:0.52778in'>
+
+
+
+
+
+<a name="wp7059"></a><p class="pTableCell">
+
+<span class=" cBold">:U</span></p></td>
+
+
+
+    <td id='Row2Column2'  style='width:2.84722in'>
+
+
+
+
+
+<a name="wp7061"></a><p class="pTableCell">
+
+offset from kuseg (default): 0</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row3Column1' >
+
+
+
+
+
+<a name="wp7063"></a><p class="pTableCell">
+
+<span class=" cBold">:0</span></p></td>
+
+
+
+    <td id='Row3Column2' >
+
+
+
+
+
+<a name="wp7065"></a><p class="pTableCell">
+
+offset from kseg0: 0x80000000</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row4Column1' >
+
+
+
+
+
+<a name="wp7067"></a><p class="pTableCell">
+
+<span class=" cBold">:1</span></p></td>
+
+
+
+    <td id='Row4Column2' >
+
+
+
+
+
+<a name="wp7069"></a><p class="pTableCell">
+
+offset from kseg1: 0xA0000000</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row5Column1' >
+
+
+
+
+
+<a name="wp7071"></a><p class="pTableCell">
+
+<span class=" cBold">:2 |:S</span></p></td>
+
+
+
+    <td id='Row5Column2' >
+
+
+
+
+
+<a name="wp7073"></a><p class="pTableCell">
+
+offset from kseg2 or ksseg: 0xC0000000</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row6Column1' >
+
+
+
+
+
+<a name="wp7075"></a><p class="pTableCell">
+
+<span class=" cBold">:3</span></p></td>
+
+
+
+    <td id='Row6Column2' >
+
+
+
+
+
+<a name="wp7077"></a><p class="pTableCell">
+
+offset from kseg3: 0xE0000000</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row7Column1' >
+
+
+
+
+
+<a name="wp7079"></a><p class="pTableCell">
+
+<span class=" cBold">:R</span></p></td>
+
+
+
+    <td id='Row7Column2' >
+
+
+
+
+
+<a name="wp7081"></a><p class="pTableCell">
+
+offset from reset vector: 0xBFC00000</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row8Column1' >
+
+
+
+
+
+<a name="wp7083"></a><p class="pTableCell">
+
+<span class=" cBold">:D</span></p></td>
+
+
+
+    <td id='Row8Column2' >
+
+
+
+
+
+<a name="wp7085"></a><p class="pTableCell">
+
+offset in DCache memory</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row9Column1' >
+
+
+
+
+
+<a name="wp7087"></a><p class="pTableCell">
+
+<span class=" cBold">:I</span></p></td>
+
+
+
+    <td id='Row9Column2' >
+
+
+
+
+
+<a name="wp7089"></a><p class="pTableCell">
+
+offset in ICache memory</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row10Column1' >
+
+
+
+
+
+<a name="wp7091"></a><p class="pTableCell">
+
+<span class=" cBold">:L2</span></p></td>
+
+
+
+    <td id='Row10Column2' >
+
+
+
+
+
+<a name="wp7093"></a><p class="pTableCell">
+
+offset in L2 cache memory</p></td>
+
+
+
+
+
+</tr>
+
+
+
+
+
+</table>
+
+
+
+</div>
+
+<div id='EndTable'> </div>
+
+<h3 class="pHeading5 FontLevel3" id="MGC7094">
+
+<br clear='left' class='Blank4Table' />
+
+
+
+
+
+</h3>
+<a name="wp7095"></a><p class="pBody">
+
+The MIPS architecture maps several virtual address segments into a common physical address space. These segments are not distinct address spaces in the usual sense. Instead, accessing a memory location through a segment implies: a base address in physical memory, the privilege level required to access the memory, and a cacheable or uncacheable attribute.
+</p>
+
+<a name="wp17784"></a><h3 class="pHeading5 FontLevel3" id="MGC17784">
+
+
+Space Designators for 64-bit MIPS Processors
+</h3>
+<a name="wp17647"></a><p class="pBody">
+
+
+</p>
+<div id="TableDivQz"></div>
+<div align="center">
+
+
+<a name="wp17651"></a><p class="pTableTitle" id="MGC17651">
+
+Table 4&#8209;9. 
+Space Designators for 64-bit MIPS Processors 
+</p>
+
+
+<table border="1" cellpadding="5" cellspacing="0" id="wp17651table17649">
+  <tr bgcolor="#CCCCCC"  align="center" valign="middle">
+    <th>
+
+<a name="wp17655"></a><p class="pTableHeading" id="MGC17651">
+Space
+</p>
+</th>
+
+    <th>
+
+<a name="wp17657"></a><p class="pTableHeading">
+
+Location
+</p>
+
+</th>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row2Column1'  style='width:0.52778in'>
+
+
+<a name="wp17659"></a><p class="pTableCell">
+<span class=" cBold">:U</span></p></td>
+
+    <td id='Row2Column2'  style='width:3.80557in'>
+
+
+<a name="wp17661"></a><p class="pTableCell">
+offset from kuseg (default): <span class=" cCourier cP10">0</span></p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row3Column1' >
+
+
+<a name="wp17663"></a><p class="pTableCell">
+<span class=" cBold">:XU</span></p></td>
+
+    <td id='Row3Column2' >
+
+
+<a name="wp17665"></a><p class="pTableCell">
+offset from xuseg: <span class=" cCourier cP10">0</span> </p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row4Column1' >
+
+
+<a name="wp17667"></a><p class="pTableCell">
+<span class=" cBold">:XS</span></p></td>
+
+    <td id='Row4Column2' >
+
+
+<a name="wp17669"></a><p class="pTableCell">
+offset from xxseg: <span class=" cCourier cP10">0x4000000000000000</span></p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row5Column1' >
+
+
+<a name="wp17671"></a><p class="pTableCell">
+<span class=" cBold">:XP</span></p></td>
+
+    <td id='Row5Column2' >
+
+
+<a name="wp17673"></a><p class="pTableCell">
+offset from xkphys: <span class=" cCourier cP10">0x8000000000000000</span></p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row6Column1' >
+
+
+<a name="wp17675"></a><p class="pTableCell">
+<span class=" cBold">:XK</span></p></td>
+
+    <td id='Row6Column2' >
+
+
+<a name="wp17677"></a><p class="pTableCell">
+offset from xkseq: <span class=" cCourier cP10">0xc000000000000000</span></p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row7Column1' >
+
+
+<a name="wp17679"></a><p class="pTableCell">
+<span class=" cBold">:0</span></p></td>
+
+    <td id='Row7Column2' >
+
+
+<a name="wp17681"></a><p class="pTableCell">
+offset from kseg0: <span class=" cCourier cP10">0xFFFFFFFF80000000</span></p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row8Column1' >
+
+
+<a name="wp17683"></a><p class="pTableCell">
+<span class=" cBold">:1</span></p></td>
+
+    <td id='Row8Column2' >
+
+
+<a name="wp17685"></a><p class="pTableCell">
+offset from kseg1: <span class=" cCourier cP10">0xFFFFFFFFA0000000</span></p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row9Column1' >
+
+
+<a name="wp17687"></a><p class="pTableCell">
+<span class=" cBold">:R</span></p></td>
+
+    <td id='Row9Column2' >
+
+
+<a name="wp17689"></a><p class="pTableCell">
+offset from reset vector: <span class=" cCourier cP10">0xFFFFFFFFBFC00000</span></p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row10Column1' >
+
+
+<a name="wp17691"></a><p class="pTableCell">
+<span class=" cBold">:S</span></p></td>
+
+    <td id='Row10Column2' >
+
+
+<a name="wp17693"></a><p class="pTableCell">
+offset from sseg: <span class=" cCourier cP10">0xFFFFFFFFC0000000</span></p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row11Column1' >
+
+
+<a name="wp17695"></a><p class="pTableCell">
+<span class=" cBold">:3</span></p></td>
+
+    <td id='Row11Column2' >
+
+
+<a name="wp17697"></a><p class="pTableCell">
+offset from sseg: <span class=" cCourier cP10">0xFFFFFFFFE0000000</span></p></td>
+
+
+</tr>
+
+
+</table>
+
+</div>
+<div id='EndTable'> </div>
+<p class="pBody">
+<br clear='left' class='Blank4Table' />
+
+
+</p>
+
+<a name="wp17648"></a><p class="pBody">
+
+Refer to a description of the MIPS RISC architecture for the complete details of memory segments.
+</p>
+
+<a name="wp7096"></a><p class="pBody">
+
+The <span class=" cItalic">space </span>designator tells MON to use the physical space, or to modify the given virtual address by adding the base address of the segment specified. (See <a href="moncommand51.html"  onclick='oT("CRF","moncommand51.html");return false;'>addr Address</a>.)
+</p>
+
+<a name="wp7100"></a><p class="pBody">
+
+The exact mapping from virtual address to physical address is dependent on the particular processor variant in use.
+</p>
+
+<a name="wp33779"></a><h3 class="pHeading5 FontLevel3" id="MGC33779">
+
+Space Designators for PowerPC Processors
+
+</h3>
+
+<div id="TableDivQz"></div>
+
+<div align="center">
+
+
+
+
+
+<a name="wp33768"></a><p class="pTableTitle" id="MGC33768">
+
+
+
+Table 4&#8209;10. 
+
+Space Designators for PowerPC Processors&#160;
+
+</p>
+
+
+
+
+
+<table border="1" cellpadding="5" cellspacing="0" id="wp33768table33761">
+
+  <tr align="left" valign="top">
+
+    <td id='Row1Column1'  style='width:0.52778in'>
+
+
+
+
+
+<a name="wp33772"></a><p class="pTableHeading" id="MGC33768">
+
+Space
+
+</p>
+
+</td>
+
+
+
+    <td id='Row1Column2'  style='width:2.84722in'>
+
+
+
+
+
+<a name="wp33774"></a><p class="pTableHeading">
+
+
+
+Location
+
+</p>
+
+
+
+</td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row2Column1'  style='width:0.52778in'>
+
+
+
+
+
+<a name="wp33776"></a><p class="pTableCell">
+
+<span class=" cBold">:IN</span></p></td>
+
+
+
+    <td id='Row2Column2'  style='width:2.84722in'>
+
+
+
+
+
+<a name="wp33778"></a><p class="pTableCell">
+
+Read memory using instruction addressing.</p></td>
+
+
+
+
+
+</tr>
+
+
+
+
+
+</table>
+
+
+
+</div>
+
+<div id='EndTable'> </div>
+
+<h3 class="pHeading5 FontLevel3" id="MGC33779">
+
+<br clear='left' class='Blank4Table' />
+
+
+
+
+
+</h3>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "space Address Space Designator";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "space.Address.Space.Designator"
+   ThisTopic = "UserDefinedAccessLists";
+   CurrentFile = "moncommand59.html";
+   CurrentFileID = "81";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    <br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    <br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

@@ -1,0 +1,45 @@
++q
+/****************************************************************************/
+/*                                                                          */
+/*  This script file displays probe configuration information which may be  */
+/*  useful when investigating technical difficulties with a Mentor Embedded */
+/*  Sourcery Probe.  It also creates several command aliases that support   */
+/*  remote troubleshooting by Mentor Graphics technical support personel.   */
+/*                                                                          */
+/*  Please run this command file from MON, or the MDI console in CodeBench  */
+/*  and send the results along with the problem report to technical support.*/
+/*                                                                          */
+/*      embedded_support@mentor.com                                         */
+/*      Support Hotline: 1-800-547-4303                                     */
+/*      http://supportnet.mentor.com                                        */
+/*                                                                          */
+/****************************************************************************/
+
+// Create aliases for use by Technical Support
+
+ea meplog_off   p 0 0 	    // Debug messages off
+ea meplog_error p 1 2 	    // Diagnostic error messages
+ea meplog_exec  p 0x1003 4 	// Display execution msgs on host
+ea meplog_xfer  p 0x1041 4 	// Display mem/reg XFer msgs on host
+ea meplog_xfex  p 0x1043 4 	// Display XFer & exec msgs on host
+ea meplog_jtagv p 0x3001 5 	// JTAG vervose
+ea meplog_jtag  p 0x3001 3 	// JTAG less verbose
+ea meplog_ejtag p 0x3001 2 	// MIPS EJTAG only
+ea meplog_eice  p 0x3001 2 	// ARM EmbeddedICE only
+
+// Display current settings
+
+dv "DI Screen:\n"
+dv "==========\n\n"
+di
+dv "\n\n"
+dv "DO Screen:\n"
+dv "==========\n"
+do
+dv "\n\n"
+dv "MC Screen:\n"
+dv "==========\n\n"
+mc
+dv "\nFinished reading $$#.\n"
+
+// <eof>

@@ -1,0 +1,2317 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:23:56 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>reg_name Register Name</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("MON Command Language ","moncommand01","MON Operands","moncommand50","reg_name Register Name","moncommand58","80");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp6823"></a><h1 class="pzCmdFunc FontLevel1" id="MGC6823">
+
+<a name="CRefID36262"></a>
+reg_name <a name="CRefID33096"></a>Register Name
+</h1>
+
+
+
+<a name="wp6824"></a><p class="pBody">
+
+See the following tables.
+</p>
+
+<a name="wp6825"></a><p class="pzHeading">
+
+Description
+</p>
+
+<a name="wp6826"></a><p class="pzShortDesc">
+
+The <span class=" cItalic">reg_name</span> operand is used to specify the address of any of the processor&#8217;s internal registers or, in the case of <span class=" cBold">PC</span>, the current execution address. Some registers have multiple names such as a generic name as well as the specific name defined in the processor architecture manual.
+</p>
+
+
+<a name="wp6827"></a><p class="pBody">
+
+In addition to the predefined names listed below, <span class=" cItalic">reg_name</span> can be a user-defined register name. If a <span class=" cItalic">reg_name</span> matches the name of a symbol in the program being debugged, the name must be prefixed with a &ldquo;<span class=" cBold">.</span>&rdquo; to be recognized as a register name.
+</p>
+
+<a name="wp6828"></a><p class="pBody">
+
+See <a name="EW41"></a><a href="majicconfig10.html#CRefID25144" onclick='oT("CRF","majicconfig10.html#CRefID25144");'><span class=" cLinkOverride">Register Definition File</span></a> for more information.
+</p>
+
+<a name="wp6943"></a><h3 class="pHeading5 FontLevel3" id="MGC6943">
+
+<a name="CRefID10510"></a>
+
+MIPS Register Names
+
+</h3>
+
+<div id="TableDivQz"></div>
+
+<div align="center">
+
+
+
+
+
+<a name="wp6840"></a><p class="pTableTitle" id="MGC6840">
+
+
+
+Table 4&#8209;3. 
+
+MIPS Register Names&#160;
+
+</p>
+
+
+
+
+
+<table border="1" cellpadding="5" cellspacing="0" id="wp6840table6833">
+
+  <tr bgcolor="#CCCCCC"  align="center" valign="middle">
+
+    <th>
+
+
+
+<a name="wp6844"></a><p class="pTableHeading" id="MGC6840">
+
+Register Name
+
+</p>
+
+</th>
+
+
+
+    <th>
+
+
+
+<a name="wp6846"></a><p class="pTableHeading">
+
+
+
+Description
+
+</p>
+
+
+
+</th>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row2Column1'  style='width:2.51909in'>
+
+
+
+
+
+<a name="wp6848"></a><p class="pTableCell">
+
+<span class=" cBold">r{0..31}</span></p></td>
+
+
+
+    <td id='Row2Column2'  style='width:3.72744in'>
+
+
+
+
+
+<a name="wp6850"></a><p class="pTableCell">
+
+Generic names for the 32 general registers.</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row3Column1' >
+
+
+
+
+
+<a name="wp6852"></a><p class="pTableCell">
+
+zero</p></td>
+
+
+
+    <td id='Row3Column2' >
+
+
+
+
+
+<a name="wp6854"></a><p class="pTableCell">
+
+Register <span class=" cBold">r0</span> (always has the value 0).</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row4Column1' >
+
+
+
+
+
+<a name="wp6856"></a><p class="pTableCell">
+
+at</p></td>
+
+
+
+    <td id='Row4Column2' >
+
+
+
+
+
+<a name="wp6858"></a><p class="pTableCell">
+
+Register <span class=" cBold">r1</span> (Assembler Temporary).</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row5Column1' >
+
+
+
+
+
+<a name="wp6860"></a><p class="pTableCell">
+
+<span class=" cBold">v0|v1</span></p></td>
+
+
+
+    <td id='Row5Column2' >
+
+
+
+
+
+<a name="wp6862"></a><p class="pTableCell">
+
+Registers <span class=" cBold">r2</span> and <span class=" cBold">r3</span> (results/expressions).</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row6Column1' >
+
+
+
+
+
+<a name="wp6864"></a><p class="pTableCell">
+
+<span class=" cBold">a0</span><span class=" cBold">..</span><span class=" cBold">a3</span></p></td>
+
+
+
+    <td id='Row6Column2' >
+
+
+
+
+
+<a name="wp6866"></a><p class="pTableCell">
+
+Registers <span class=" cBold">r4..r7</span> (Arguments).</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row7Column1' >
+
+
+
+
+
+<a name="wp6868"></a><p class="pTableCell">
+
+<span class=" cBold">t0</span><span class=" cBold">..</span><span class=" cBold">t9</span></p></td>
+
+
+
+    <td id='Row7Column2' >
+
+
+
+
+
+<a name="wp6870"></a><p class="pTableCell">
+
+Registers <span class=" cBold">r8..r15</span> and <span class=" cBold">r24..r25</span> (Temporaries).</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row8Column1' >
+
+
+
+
+
+<a name="wp6872"></a><p class="pTableCell">
+
+<span class=" cBold">s0</span><span class=" cBold">..</span><span class=" cBold">s8</span></p></td>
+
+
+
+    <td id='Row8Column2' >
+
+
+
+
+
+<a name="wp6874"></a><p class="pTableCell">
+
+Registers <span class=" cBold">r16..r23</span> and <span class=" cBold">r30</span> (Saved temporaries).</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row9Column1' >
+
+
+
+
+
+<a name="wp6876"></a><p class="pTableCell">
+
+<span class=" cBold">k[t]{0|1}</span></p></td>
+
+
+
+    <td id='Row9Column2' >
+
+
+
+
+
+<a name="wp6878"></a><p class="pTableCell">
+
+Registers <span class=" cBold">r26</span> and<span class="cDefault"> </span><span class=" cBold">r27</span> (Kernel/OS Usage).</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row10Column1' >
+
+
+
+
+
+<a name="wp6880"></a><p class="pTableCell">
+
+gp</p></td>
+
+
+
+    <td id='Row10Column2' >
+
+
+
+
+
+<a name="wp6882"></a><p class="pTableCell">
+
+Register <span class=" cBold">r28</span> (Global data Pointer).</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row11Column1' >
+
+
+
+
+
+<a name="wp6884"></a><p class="pTableCell">
+
+sp</p></td>
+
+
+
+    <td id='Row11Column2' >
+
+
+
+
+
+<a name="wp6886"></a><p class="pTableCell">
+
+Register <span class=" cBold">r29</span> (Stack Pointer).</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row12Column1' >
+
+
+
+
+
+<a name="wp6888"></a><p class="pTableCell">
+
+ra</p></td>
+
+
+
+    <td id='Row12Column2' >
+
+
+
+
+
+<a name="wp6890"></a><p class="pTableCell">
+
+Register <span class=" cBold">r30</span> (Return Address).</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row13Column1' >
+
+
+
+
+
+<a name="wp6892"></a><p class="pTableCell">
+
+<span class=" cBold">mdhi|mdlo</span></p></td>
+
+
+
+    <td id='Row13Column2' >
+
+
+
+
+
+<a name="wp6894"></a><p class="pTableCell">
+
+Multiply/divide special registers.</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row14Column1' >
+
+
+
+
+
+<a name="wp6896"></a><p class="pTableCell">
+
+<span class=" cBold">g{0</span><span class=" cBold">..</span><span class=" cBold">2}_{0</span><span class=" cBold">..</span><span class=" cBold">31}</span></p></td>
+
+
+
+    <td id='Row14Column2' >
+
+
+
+
+
+<a name="wp6898"></a><p class="pTableCell">
+
+General registers <span class=" cBold">$0..$31</span> for coprocessors 0..2.</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row15Column1' >
+
+
+
+
+
+<a name="wp6900"></a><p class="pTableCell">
+
+<span class=" cBold">c</span><span class=" cBold">{</span><span class=" cBold">0</span><span class=" cBold">..</span><span class=" cBold">2</span><span class=" cBold">}</span><span class=" cBold">_</span><span class=" cBold">{</span><span class=" cBold">0</span><span class=" cBold">..</span><span class=" cBold">31</span><span class=" cBold">}</span></p></td>
+
+
+
+    <td id='Row15Column2' >
+
+
+
+
+
+<a name="wp6902"></a><p class="pTableCell">
+
+Control registers <span class=" cBold">$0..$31</span> for coprocessors 0..2.</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row16Column1' >
+
+
+
+
+
+<a name="wp6904"></a><p class="pTableCell">
+
+<span class=" cBold">fgr</span><span class=" cBold">{</span><span class=" cBold">0</span><span class=" cBold">..</span><span class=" cBold">31</span><span class=" cBold">}</span></p></td>
+
+
+
+    <td id='Row16Column2' >
+
+
+
+
+
+<a name="wp6906"></a><p class="pTableCell">
+
+Alternate naming convention for Coprocessor 1 general registers <span class=" cBold">$0..$31</span>.</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row17Column1' >
+
+
+
+
+
+<a name="wp6908"></a><p class="pTableCell">
+
+<span class=" cBold">fcr</span><span class=" cBold">{</span><span class=" cBold">0</span><span class=" cBold">..</span><span class=" cBold">31</span><span class=" cBold">}</span></p></td>
+
+
+
+    <td id='Row17Column2' >
+
+
+
+
+
+<a name="wp6910"></a><p class="pTableCell">
+
+Alternate naming convention for Coprocessor 1 control registers <span class=" cBold">$0..$31</span>.</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row18Column1' >
+
+
+
+
+
+<a name="wp6912"></a><p class="pTableCell">
+
+<span class=" cBold">{</span><span class=" cBold">f</span><span class=" cBold">|</span><span class=" cBold">d</span><span class=" cBold">}{</span><span class=" cBold">0</span><span class=" cBold">..</span><span class=" cBold">31</span><span class=" cBold">}</span></p></td>
+
+
+
+    <td id='Row18Column2' >
+
+
+
+
+
+<a name="wp6914"></a><p class="pTableCell">
+
+Alternate naming convention for Coprocessor 1 general registers <span class=" cBold">$0..$30</span> (only even numbers are valid). An <span class=" cBold">f </span>reference implies single precision, a <span class=" cBold">d</span> double precision.</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row19Column1' >
+
+
+
+
+
+<a name="wp6916"></a><p class="pTableCell">
+
+<span class=" cBold">ict{n}</span><span class=" cBold">, </span><span class=" cBold">dct{n},</span><span class=" cBold"> </span><span class=" cBold">l2t{n}</span></p></td>
+
+
+
+    <td id='Row19Column2' >
+
+
+
+
+
+<a name="wp6918"></a><p class="pTableCell">
+
+ICache, DCache and L2 cache tags, where n is the tag entry number (0-N).</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row20Column1' >
+
+
+
+
+
+<a name="wp6920"></a><p class="pTableCell">
+
+<span class=" cBold">sr|cause|epc|prid|index| random|entrylo|context|badvaddr|entryhi|...</span></p></td>
+
+
+
+    <td id='Row20Column2' >
+
+
+
+
+
+<a name="wp6922"></a><p class="pTableCell">
+
+System coprocessor (CP0) registers can be referenced by name.</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row21Column1' >
+
+
+
+
+
+<a name="wp6924"></a><p class="pTableCell">
+
+<span class=" cBold">tle</span><span class=" cItalic">#</span></p></td>
+
+
+
+    <td id='Row21Column2' >
+
+
+
+
+
+<a name="wp6926"></a><p class="pTableCell">
+
+<span class=" cItalic">// TLB entry #</span><span class=" cNoBold cNoItalic cBlack">Lo, even</span></p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row22Column1' >
+
+
+
+
+
+<a name="wp6928"></a><p class="pTableCell">
+
+<span class=" cBold">tlo</span><span class=" cItalic">#</span></p></td>
+
+
+
+    <td id='Row22Column2' >
+
+
+
+
+
+<a name="wp6930"></a><p class="pTableCell">
+
+<span class=" cItalic">// TLB entry #</span><span class=" cNoBold cNoItalic cBlack">Lo, odd</span></p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row23Column1' >
+
+
+
+
+
+<a name="wp6932"></a><p class="pTableCell">
+
+<span class=" cBold">th</span><span class=" cItalic">#</span><span class=" cBold">	</span></p></td>
+
+
+
+    <td id='Row23Column2' >
+
+
+
+
+
+<a name="wp6934"></a><p class="pTableCell">
+
+<span class=" cBold">// TLB entry </span><span class=" cItalic">#</span><span class=" cNoBold cNoItalic cBlack">High</span></p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row24Column1' >
+
+
+
+
+
+<a name="wp6936"></a><p class="pTableCell">
+
+<span class=" cBold">tm</span><span class=" cItalic">#</span><span class=" cBold">	</span></p></td>
+
+
+
+    <td id='Row24Column2' >
+
+
+
+
+
+<a name="wp6938"></a><p class="pTableCell">
+
+<span class=" cBold">// TLB entry </span><span class=" cItalic">#</span><span class=" cNoBold cNoItalic cBlack">Mask</span></p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row25Column1' >
+
+
+
+
+
+<a name="wp6940"></a><p class="pTableCell">
+
+<span class=" cBold">pc</span></p></td>
+
+
+
+    <td id='Row25Column2' >
+
+
+
+
+
+<a name="wp6942"></a><p class="pTableCell">
+
+The current Program Counter. This is not an actual register, but the address of the next instruction to be executed.</p></td>
+
+
+
+
+
+</tr>
+
+
+
+
+
+</table>
+
+
+
+</div>
+
+<div id='EndTable'> </div>
+
+<h3 class="pHeading5 FontLevel3" id="MGC6943">
+
+
+<br clear='left' class='Blank4Table' />
+
+
+
+
+
+</h3>
+<a name="wp16421"></a><h3 class="pHeading5 FontLevel3" id="MGC16421">
+
+
+
+ARM Cortex-M Register Names
+
+</h3>
+
+<div id="TableDivQz"></div>
+
+<div align="center">
+
+
+
+
+
+<a name="wp16504"></a><p class="pTableTitle" id="MGC16504">
+
+
+
+Table 4&#8209;4. 
+
+ARM Cortex-M Register Names&#160;
+
+</p>
+
+
+
+
+
+<table border="1" cellpadding="5" cellspacing="0" id="wp16504table16497">
+
+  <tr bgcolor="#CCCCCC"  align="center" valign="middle">
+
+    <th>
+
+
+
+<a name="wp16508"></a><p class="pTableHeading" id="MGC16504">
+
+Register Name
+
+</p>
+
+</th>
+
+
+
+    <th>
+
+
+
+<a name="wp16510"></a><p class="pTableHeading">
+
+
+
+Description
+
+</p>
+
+
+
+</th>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row2Column1'  style='width:2.26041in'>
+
+
+
+
+
+<a name="wp16512"></a><p class="pTableCell">
+
+<span class=" cBold">apsr </span></p></td>
+
+
+
+    <td id='Row2Column2'  style='width:2.79167in'>
+
+
+
+
+
+<a name="wp16514"></a><p class="pTableCell">
+
+Application PSR (APSR) contains the condition code flags.</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row3Column1' >
+
+
+
+
+
+<a name="wp16743"></a><p class="pTableCell">
+
+<span class=" cBold">basepri </span></p></td>
+
+
+
+    <td id='Row3Column2' >
+
+
+
+
+
+<a name="wp16955"></a><p class="pTableCell">
+
+Dynamic exception priority control, special-purpose registers.</p>
+
+<a name="wp16745"></a><p class="pTableCell">
+
+Dynamic management of configurable exceptions supported.</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row4Column1' >
+
+
+
+
+
+<a name="wp16747"></a><p class="pTableCell">
+
+<span class=" cBold">basepri_max </span></p></td>
+
+
+
+    <td id='Row4Column2' >
+
+
+
+
+
+<a name="wp16960"></a><p class="pTableCell">
+
+Dynamic exception priority control, special-purpose registers.</p>
+
+<a name="wp16749"></a><p class="pTableCell">
+
+Dynamic management of configurable exceptions supported.</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row5Column1' >
+
+
+
+
+
+<a name="wp16739"></a><p class="pTableCell">
+
+<span class=" cBold">control </span></p></td>
+
+
+
+    <td id='Row5Column2' >
+
+
+
+
+
+<a name="wp16741"></a><p class="pTableCell">
+
+Control Register. Identifies current stack.</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row6Column1' >
+
+
+
+
+
+<a name="wp16769"></a><p class="pTableCell">
+
+<span class=" cBold">eapsr</span></p></td>
+
+
+
+    <td id='Row6Column2' >
+
+
+
+
+
+<a name="wp16771"></a><p class="pTableCell">
+
+Execution Application PSR (EAPSR). Accesses EPSR and APSR.</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row7Column1' >
+
+
+
+
+
+<a name="wp16797"></a><p class="pTableCell">
+
+<span class=" cBold">epsr </span></p></td>
+
+
+
+    <td id='Row7Column2' >
+
+
+
+
+
+<a name="wp16799"></a><p class="pTableCell">
+
+The Execution PSR (EPSR) contains the Thumb state bit (T-bit).</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row8Column1' >
+
+
+
+
+
+<a name="wp16779"></a><p class="pTableCell">
+
+<span class=" cBold">faultmask </span></p></td>
+
+
+
+    <td id='Row8Column2' >
+
+
+
+
+
+<a name="wp16941"></a><p class="pTableCell">
+
+Dynamic exception priority control, special-purpose registers.</p>
+
+<a name="wp16944"></a><p class="pTableCell">
+
+Dynamic management of configurable exceptions supported.</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row9Column1' >
+
+
+
+
+
+<a name="wp16783"></a><p class="pTableCell">
+
+<span class=" cBold">iapsr</span></p></td>
+
+
+
+    <td id='Row9Column2' >
+
+
+
+
+
+<a name="wp16785"></a><p class="pTableCell">
+
+The Interrupt Application PSR (IAPSR) contains the Interrupt Service Routine (ISR) number of the current exception activation. Accesses IPSR and APSR.</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row10Column1' >
+
+
+
+
+
+<a name="wp16787"></a><p class="pTableCell">
+
+<span class=" cBold">iepsr </span></p></td>
+
+
+
+    <td id='Row10Column2' >
+
+
+
+
+
+<a name="wp16789"></a><p class="pTableCell">
+
+The Interrupt Execution PSR (IEPSR) contains the Interrupt Service Routine (ISR) number of the current exception activation. A composite of IPSR and EPSR.</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row11Column1' >
+
+
+
+
+
+<a name="wp16825"></a><p class="pTableCell">
+
+<span class=" cBold">ipsr</span></p></td>
+
+
+
+    <td id='Row11Column2' >
+
+
+
+
+
+<a name="wp16924"></a><p class="pTableCell">
+
+The Interrupt PSR (IPSR) contains the Interrupt Service Routine (ISR) number of the current exception activation.</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row12Column1' >
+
+
+
+
+
+<a name="wp16835"></a><p class="pTableCell">
+
+<span class=" cBold">lr</span></p></td>
+
+
+
+    <td id='Row12Column2' >
+
+
+
+
+
+<a name="wp16837"></a><p class="pTableCell">
+
+Link Register</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row13Column1' >
+
+
+
+
+
+<a name="wp16839"></a><p class="pTableCell">
+
+<span class=" cBold">msp </span></p></td>
+
+
+
+    <td id='Row13Column2' >
+
+
+
+
+
+<a name="wp17014"></a><p class="pTableCell">
+
+Main Stack Pointer. In Handler mode, the processor uses the Main Stack Pointer instead of the Process Stack Pointer.</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row14Column1' >
+
+
+
+
+
+<a name="wp16866"></a><p class="pTableCell">
+
+<span class=" cBold">primask</span></p></td>
+
+
+
+    <td id='Row14Column2' >
+
+
+
+
+
+<a name="wp16868"></a><p class="pTableCell">
+
+Register to mask out configurable exceptions. Special-Purpose Priority Mask Register for priority boosting. Manages the prioritization scheme for exceptions and interrupts. When set, raises execution priority to 0.</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row15Column1' >
+
+
+
+
+
+<a name="wp16862"></a><p class="pTableCell">
+
+<span class=" cBold">psp</span></p></td>
+
+
+
+    <td id='Row15Column2' >
+
+
+
+
+
+<a name="wp16864"></a><p class="pTableCell">
+
+The Process Stack pointer.</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row16Column1' >
+
+
+
+
+
+<a name="wp16520"></a><p class="pTableCell">
+
+<span class=" cBold">sp</span></p></td>
+
+
+
+    <td id='Row16Column2' >
+
+
+
+
+
+<a name="wp16991"></a><p class="pTableCell">
+
+Stack Pointer. The stack pointer used in exception entry and exit is described in the pseudocode sequences of the exception entry and exit.</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row17Column1' >
+
+
+
+
+
+<a name="wp16705"></a><p class="pTableCell">
+
+<span class=" cBold">sp_main</span></p></td>
+
+
+
+    <td id='Row17Column2' >
+
+
+
+
+
+<a name="wp16707"></a><p class="pTableCell">
+
+Stack Pointer Main. Active stack pointer</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row18Column1' >
+
+
+
+
+
+<a name="wp16665"></a><p class="pTableCell">
+
+<span class=" cBold">sp_process</span></p></td>
+
+
+
+    <td id='Row18Column2' >
+
+
+
+
+
+<a name="wp16667"></a><p class="pTableCell">
+
+Stack Pointer Process. Active stack pointer</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row19Column1' >
+
+
+
+
+
+<a name="wp16661"></a><p class="pTableCell">
+
+<span class=" cBold">xpsr</span></p></td>
+
+
+
+    <td id='Row19Column2' >
+
+
+
+
+
+<a name="wp16663"></a><p class="pTableCell">
+
+A composite of all three PSR registers.</p></td>
+
+
+
+
+
+</tr>
+
+
+
+
+
+</table>
+
+
+
+</div>
+
+<div id='EndTable'> </div>
+
+<h3 class="pHeading5 FontLevel3" id="MGC16421">
+
+
+<br clear='left' class='Blank4Table' />
+
+
+
+
+
+</h3>
+<a name="wp16488"></a><h3 class="pHeading5 FontLevel3" id="MGC16488">
+
+<a name="CRefID33861"></a>
+
+ARM Register Names
+
+</h3>
+
+<div id="TableDivQz"></div>
+
+<div align="center">
+
+
+
+
+
+<a name="wp6956"></a><p class="pTableTitle" id="MGC6956">
+
+
+
+Table 4&#8209;5. 
+
+ARM Register Names&#160;
+
+</p>
+
+
+
+
+
+<table border="1" cellpadding="5" cellspacing="0" id="wp6956table6949">
+
+  <tr bgcolor="#CCCCCC"  align="center" valign="middle">
+
+    <th>
+
+
+
+<a name="wp6960"></a><p class="pTableHeading" id="MGC6956">
+
+Register Name
+
+</p>
+
+</th>
+
+
+
+    <th>
+
+
+
+<a name="wp6962"></a><p class="pTableHeading">
+
+
+
+Description
+
+</p>
+
+
+
+</th>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row2Column1'  style='width:2.26041in'>
+
+
+
+
+
+<a name="wp6964"></a><p class="pTableCell">
+
+<span class=" cBold">cP_R</span></p></td>
+
+
+
+    <td id='Row2Column2'  style='width:2.79167in'>
+
+
+
+
+
+<a name="wp6966"></a><p class="pTableCell">
+
+Coprocessor P register R.</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row3Column1' >
+
+
+
+
+
+<a name="wp6968"></a><p class="pTableCell">
+
+<span class=" cBold">cP_R_oO_M</span></p></td>
+
+
+
+    <td id='Row3Column2' >
+
+
+
+
+
+<a name="wp6970"></a><p class="pTableCell">
+
+Coprocessor P register with crn=N, opt2=O and crm=M.</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row4Column1' >
+
+
+
+
+
+<a name="wp6972"></a><p class="pTableCell">
+
+<span class=" cBold">cp15_cntrl, cp15_cpuid, ...</span></p></td>
+
+
+
+    <td id='Row4Column2' >
+
+
+
+
+
+<a name="wp6974"></a><p class="pTableCell">
+
+Cp15 registers can also be accessed by name.</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row5Column1' >
+
+
+
+
+
+<a name="wp6976"></a><p class="pTableCell">
+
+<span class=" cBold">r0, r1, r2, r3, r4, r5, r6, r7, cpsr</span></p></td>
+
+
+
+    <td id='Row5Column2' >
+
+
+
+
+
+<a name="wp6978"></a><p class="pTableCell">
+
+Unique registers.</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row6Column1' >
+
+
+
+
+
+<a name="wp6980"></a><p class="pTableCell">
+
+<span class=" cBold">r8, r9, r10, r11, r12, r13, sp, r14, lr, r15, pc, spsr</span></p></td>
+
+
+
+    <td id='Row6Column2' >
+
+
+
+
+
+<a name="wp6982"></a><p class="pTableCell">
+
+Banked registers, selected by the mode of the processor (as determined by the 5 LSBs currently found in cpsr).</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row7Column1' >
+
+
+
+
+
+<a name="wp6984"></a><p class="pTableCell">
+
+<span class=" cBold">r8_fiq, r9_fiq, r10_fiq, r11_fiq, r12_fiq, r13_fiq, r14_fiq, sp_fiq, lr_fiq, spsr_fiq</span></p></td>
+
+
+
+    <td id='Row7Column2' >
+
+
+
+
+
+<a name="wp6986"></a><p class="pTableCell">
+
+Selects the FIQ mode registers.</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row8Column1' >
+
+
+
+
+
+<a name="wp6988"></a><p class="pTableCell">
+
+<span class=" cBold">r8_user, r9_user, r10_user, r11_user, r12_user, r8_usr, r9_usr, r10_usr, r11_usr, r12_usr</span></p></td>
+
+
+
+    <td id='Row8Column2' >
+
+
+
+
+
+<a name="wp6990"></a><p class="pTableCell">
+
+user indicates non-FIQ mode registers.</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row9Column1' >
+
+
+
+
+
+<a name="wp6992"></a><p class="pTableCell">
+
+<span class=" cBold">r13_user, r14_user, lr_user, sp_user, r13_usr, r14_usr, lr_usr, sp_usr</span></p></td>
+
+
+
+    <td id='Row9Column2' >
+
+
+
+
+
+<a name="wp6994"></a><p class="pTableCell">
+
+Selects the user mode or system mode registers.</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row10Column1' >
+
+
+
+
+
+<a name="wp6996"></a><p class="pTableCell">
+
+<span class=" cBold">r13_svc, r14_svc, sp_svc, lr_svc, spsr_svc</span></p></td>
+
+
+
+    <td id='Row10Column2' >
+
+
+
+
+
+<a name="wp6998"></a><p class="pTableCell">
+
+Selects the supervisor mode registers.</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row11Column1' >
+
+
+
+
+
+<a name="wp7000"></a><p class="pTableCell">
+
+<span class=" cBold">r13_irq, r14_irq, sp_irq, lr_irq, spsr_irq</span></p></td>
+
+
+
+    <td id='Row11Column2' >
+
+
+
+
+
+<a name="wp7002"></a><p class="pTableCell">
+
+Selects the IRQ mode registers.</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row12Column1' >
+
+
+
+
+
+<a name="wp7004"></a><p class="pTableCell">
+
+<span class=" cBold">r13_abort, r14_abort, sp_abort, lr_abort, spsr_abort, r13_abt, r14_abt, sp_abt, lr_abt, spsr_abt</span></p></td>
+
+
+
+    <td id='Row12Column2' >
+
+
+
+
+
+<a name="wp7006"></a><p class="pTableCell">
+
+Selects the Abort mode registers.</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row13Column1' >
+
+
+
+
+
+<a name="wp7008"></a><p class="pTableCell">
+
+<span class=" cBold">r13_undef, r14_undef, sp_undef, lr_undef, spsr_undef, r13_und, r14_und, lr_und, sp_und, spsr_und</span></p></td>
+
+
+
+    <td id='Row13Column2' >
+
+
+
+
+
+<a name="wp7010"></a><p class="pTableCell">
+
+Selects the Undefined mode registers.</p>
+
+<a name="wp16420"></a><p class="pTableCell">
+
+  &#160;</p></td>
+
+
+
+
+
+</tr>
+
+
+
+
+
+</table>
+
+
+
+</div>
+
+<div id='EndTable'> </div>
+
+<h3 class="pHeading5 FontLevel3" id="MGC16488">
+
+
+<br clear='left' class='Blank4Table' />
+
+
+
+
+
+</h3>
+<a name="wp33369"></a><h3 class="pHeading5 FontLevel3" id="MGC33369">
+
+PowerPC Register Names
+</h3>
+<a name="wp33371"></a><p class="pBody">
+
+
+</p>
+<div id="TableDivQz"></div>
+<div align="center">
+
+
+<a name="wp33407"></a><p class="pTableTitle" id="MGC33407">
+
+Table 4&#8209;6. PowerPC Register Names
+</p>
+
+
+<table border="1" cellpadding="5" cellspacing="0" id="wp33407table33405">
+  <tr bgcolor="#CCCCCC"  align="center" valign="middle">
+    <th>
+
+<a name="wp33411"></a><p class="pTableHeading" id="MGC33407">
+Register Name
+</p>
+</th>
+
+    <th>
+
+<a name="wp33413"></a><p class="pTableHeading">
+
+Description
+</p>
+
+</th>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row2Column1'  style='width:2.93056in'>
+
+
+<a name="wp33415"></a><p class="pTableCell">
+pc</p></td>
+
+    <td id='Row2Column2'  style='width:2.0in'>
+
+
+<a name="wp33417"></a><p class="pTableCell">
+Program counter</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row3Column1' >
+
+
+<a name="wp33419"></a><p class="pTableCell">
+r0 - r31</p></td>
+
+    <td id='Row3Column2' >
+
+
+<a name="wp33421"></a><p class="pTableCell">
+General registers</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row4Column1' >
+
+
+<a name="wp33423"></a><p class="pTableCell">
+spr0 - spr1023</p></td>
+
+    <td id='Row4Column2' >
+
+
+<a name="wp33425"></a><p class="pTableCell">
+Special purpose registers</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row5Column1' >
+
+
+<a name="wp33427"></a><p class="pTableCell">
+cr</p></td>
+
+    <td id='Row5Column2' >
+
+
+<a name="wp33429"></a><p class="pTableCell">
+Condition register</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row6Column1' >
+
+
+<a name="wp33431"></a><p class="pTableCell">
+msr</p></td>
+
+    <td id='Row6Column2' >
+
+
+<a name="wp33433"></a><p class="pTableCell">
+Machine state register</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row7Column1' >
+
+
+<a name="wp33435"></a><p class="pTableCell">
+fpscr</p></td>
+
+    <td id='Row7Column2' >
+
+
+<a name="wp33437"></a><p class="pTableCell">
+Floating point status and control register</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row8Column1' >
+
+
+<a name="wp33439"></a><p class="pTableCell">
+l2mmu_tlb0 - l2mmu_tlb512</p>
+<a name="wp33637"></a><p class="pTableCell">
+l2mmu_cam0 - l2mmu_cam15 (e500v2) </p>
+<a name="wp33629"></a><p class="pTableCell">
+l2mmu_cam0 - l2mmu_cam128 (e500mc)</p></td>
+
+    <td id='Row8Column2' >
+
+
+<a name="wp33441"></a><p class="pTableCell">
+Translation lookaside registers</p></td>
+
+
+</tr>
+
+
+</table>
+
+</div>
+<div id='EndTable'> </div>
+<p class="pBody">
+
+<br clear='left' class='Blank4Table' />
+
+
+</p>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "reg_name Register Name";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "regname.Register.Name"
+   ThisTopic = "UserDefinedAccessLists";
+   CurrentFile = "moncommand58.html";
+   CurrentFileID = "80";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    
+<br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    
+<br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

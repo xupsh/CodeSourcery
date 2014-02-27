@@ -1,0 +1,225 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:23:56 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>S Step</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("MON Command Language ","moncommand01","MON Command Details","moncommand04","S Step","moncommand43","65");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp16142"></a><h1 class="pzCmdFunc FontLevel1" id="MGC16142">
+
+<a name="CRefID84987"></a>
+S Step
+</h1>
+
+
+
+<a name="wp16177"></a><p class="pzMiscInfo">
+
+Availability: MON, or a script file under MDI
+</p>
+
+<a name="wp16178"></a><p class="pzHeading">
+
+Syntax
+</p>
+
+<a name="wp16179"></a><p class="pzMiscInfo">
+
+S[F|O][Q|V] [=<span class=" cItalic">addr</span>] [<span class=" cItalic">number</span>] [{[<span class=" cItalic">cmd_list</span>]}]
+</p>
+
+<a name="wp16180"></a><p class="pzHeading">
+
+Description
+</p>
+
+<a name="wp16181"></a><p class="pzShortDesc">
+
+This command executes number instructions (default is 1) starting at addr (default is the current execute address), one at a time. Execution terminates after number instructions, or when a breakpoint is encountered. If a command list is given, it is executed every time execution or stepping stops. It remains in effect until canceled by a Step or Go command with an empty command list (for example, <span class=" cBold">S {}</span>).
+</p>
+
+
+<a name="wp16182"></a><p class="pzShortDesc">
+
+A Step command may be repeated by hitting the &lt;Enter&gt; key until some other command is entered.
+</p>
+
+
+<a name="wp16183"></a>
+<ul><li class="LL1BulSolid"> O &#151; Step Over (SO) allows the current instruction to fully complete before returning control to the debugger prompt. In this mode, both subroutines and exceptions are allowed to finish before control is returned to the user.</li></ul>
+
+<a name="wp16224"></a>
+<ul><li class="LL1BulSolid"> F &#151; Step Forward (SF) steps into calls but over exceptions (including interrupts).</li></ul>
+
+<a name="wp16227"></a>
+<ul><li class="LL1BulSolid"> V&#151;Verbose mode. When a step count is given, each instruction will be displayed before it is executed. A side effect of this is that breakpoints are not enabled.</li></ul>
+
+<a name="wp16230"></a>
+<ul><li class="LL1BulSolid"> Q &#151; Quiet mode. When a step count is given, nothing is displayed until execution terminates, at which point the next instruction to be executed is displayed.</li></ul>
+
+<a name="wp16233"></a>
+<ul><li class="LL1BulSolid"> Q/V&#151;If neither Q nor V are specified, the mode of the previous Step command is retained, with Quiet mode as the initial default.</li></ul>
+
+<a name="wp16236"></a>
+<ul><li class="LL1BulSolid"> =<span class=" cItalic">addr</span> &#151; If specified, this is the address where stepping begins. Otherwise stepping begins at the current Program Counter location.</li></ul>
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp16242"></a><p class="pnoteNote">
+
+        	The address must be in a valid address space for instructions. addr must be an address in a valid code address space.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp16189"></a>
+<ul><li class="LL1BulSolid"> <span class=" cItalic">number</span> &#151; The (decimal) number of instructions to be executed. If not specified, one (1) instruction will be executed. In Quiet mode, execution will terminate before number instructions have been executed if a breakpoint is encountered. number is decimal by default.</li></ul>
+
+<a name="wp16268"></a>
+<ul><li class="LL1BulSolid"> <span class=" cItalic">cmd_list</span>&#151;If specified, the list of commands will be executed each time execution stops for any reason. This type of automatic command list is useful for displaying interesting values every time execution stops. If execution stops due to hitting a breakpoint that also has an associated command list, the breakpoint&#8216;s command list is executed first. A <span class=" cItalic">cmd_list</span> can contain a Go or Step command, in which case program execution will resume automatically.</li></ul>
+
+<a name="wp16283"></a><p class="pL1Body">
+It is legal for additional commands to follow a Go or Step command in a command list. They will be stacked for execution in the proper order when execution finally stops for the last time, but this can be confusing. It is recommended that you avoid this situation by ensuring that a Go or Step is the last command to be executed in the list.</p>
+<a name="wp16192"></a><p class="pL1Body">
+Curly braces surrounding cmd_list are required and the entire Step command must be entered on one line. The current <span class=" cItalic">end execution</span> cmd_list can be displayed with the BL command. It remains in effect until canceled by a Go or Step command with a new or empty command list (for example, <span class=" cBold">S {}</span>).</p>
+<a name="wp16193"></a><p class="pzShortDesc">
+
+A Step command can be repeated (except for the effect of =<span class=" cItalic">addr</span>) until some other command is entered, by pressing <span class=" cCourier cP10">&lt;Enter&gt;</span> at the MON&gt; prompt.
+</p>
+
+
+<a name="wp16194"></a><p class="pzHeading">
+
+Examples
+</p>
+
+<a name="wp16195"></a><pre class="pCode">
+s 100 {if (@global_var&lt;100) {s 100} {dv &quot;clobbered global_var = %ld\n&quot;, 
+@global_var} }
+</pre>
+
+<a name="wp16314"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp16196"></a><p class="pzShortDesc">
+
+This example executes the program, 100 instructions at a time, until the variable <span class=" cItalic">global_var</span> is detected to have an invalid value.
+</p>
+
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp16146"></a><p class="pnoteNote">
+
+        	This example, like all debugger commands, must be entered on one line.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "S Step";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "S.Step"
+   ThisTopic = "UserDefinedAccessLists";
+   CurrentFile = "moncommand43.html";
+   CurrentFileID = "65";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    <br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    <br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

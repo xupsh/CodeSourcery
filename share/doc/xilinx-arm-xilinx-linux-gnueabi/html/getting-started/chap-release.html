@@ -1,0 +1,255 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Appendix A. Sourcery CodeBench Lite Release Notes</title><link rel="stylesheet" href="cs.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.74.0"><meta name="description" content=" This appendix contains information about changes in this release of Sourcery CodeBench Lite for Xilinx GNU/Linux. You should read through these notes to learn about new features and bug fixes."><link rel="home" href="index.html" title="Sourcery CodeBench Lite"><link rel="up" href="index.html" title="Sourcery CodeBench Lite"><link rel="prev" href="ch06s02.html" title="6.2. Manuals for GNU Toolchain Components"><link rel="next" href="chap-license.html" title="Appendix B. Sourcery CodeBench Lite Licenses"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Appendix A. Sourcery CodeBench Lite Release Notes</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch06s02.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="chap-license.html">Next</a></td></tr></table><hr></div><div class="appendix" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="chap-release"></a>Appendix A. Sourcery CodeBench Lite Release Notes</h2></div><div><div class="abstract"><p class="title"><b></b></p><p>
+     This appendix contains information about changes in this
+     release of Sourcery CodeBench Lite for Xilinx GNU/Linux.  You should read
+     through these notes to learn about new features and bug fixes.
+    </p></div></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="chap-release.html#sec-release-notes">A.1. Changes in Sourcery CodeBench Lite for Xilinx GNU/Linux</a></span></dt></dl></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sec-release-notes"></a>A.1. Changes in Sourcery CodeBench Lite for Xilinx GNU/Linux</h2></div></div></div><p>
+      This section documents Sourcery CodeBench Lite changes for each released revision.
+    </p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id348060"></a>A.1.1. Changes in Sourcery CodeBench Lite 2012.09-104</h3></div></div></div><p><b>GCC version 4.7.2. </b>
+	   Sourcery CodeBench Lite for Xilinx GNU/Linux is now based on GCC
+	   version 4.7.2. For more information about changes from GCC
+	   version 4.6 that was included in previous releases, see
+	   <code class="uri">http://gcc.gnu.org/gcc-4.7/changes.html</code>.
+	</p><p><b><code class="option">-march</code> default value fix. </b>
+          A compiler bug that caused the default value for
+          <code class="option">-march</code> to be <code class="literal">armv5te</code>
+          instead of <code class="literal">armv7-a</code> has been fixed.
+        </p><p><b>Pointer comparison bug fixed. </b>
+	  A bug in GCC that caused it to incorrectly optimize away a pointer
+	  comparison has been fixed.
+        </p><p><b>Incorrect warnings for naked functions fixed. </b>
+          A bug in the C++ compiler has been fixed that caused it to
+	  incorrectly warn about missing return statements in functions
+	  with the <code class="code">naked</code> attribute, which can only include
+	  inline assembly statements.
+        </p><p><b>Code size optimization improvement. </b>
+          When compiling with <code class="option">-Os</code> or <code class="option">-O2</code>
+          and higher GCC no longer enables the <code class="option">-funroll-loops</code>
+          option by default.  This change reduces the size of optimized code
+          produced by Sourcery CodeBench and brings its behavior back into conformance
+          with other GCC distributions.
+          For more information about the tradeoffs between optimizing for
+          size versus speed please see the
+          <a class="ulink" href="https://support.codesourcery.com/GNUToolchain/kbentry77" target="_top">
+            Sourcery CodeBench Knowledge Base
+          </a>.
+        </p><p><b>Loop optimization bug fix. </b>
+          A compiler bug that caused some forms
+          of loop to be mis-optimized when using the
+          <code class="option">-fpromote-loop-indices</code> option
+	  <span>(enabled by default when optimizing for
+          speed)</span> has been fixed.
+        </p><p><b>Wrong-code bug fix. </b>
+	  A bug in GCC's scheduler has been fixed that sometimes caused
+          incorrect code to be generated.
+        </p><p><b>Performance regression fixed. </b> A bug that introduced unnecessary instructions to
+	  zero-extend unsigned <code class="type">char</code> or <code class="type">short</code> values
+	  has been fixed.
+	</p><p><b>Binutils version 2.23. </b>
+          Sourcery CodeBench Lite for Xilinx GNU/Linux is now based on binutils
+          version 2.23.
+        </p><p><b>Linker raw binary input crash fix. </b>
+          A bug that caused the linker to crash when linking binary
+          inputs (<code class="option">--format=binary</code>) while using
+          <code class="option">--gc-sections</code> has been fixed.
+        </p><p><b>Linker script symbols. </b>
+          The linker now supports a new <code class="code">HIDDEN</code> keyword to define
+          symbols with object scope.  Refer to the linker manual for details.
+        </p><p><b>Installing multiple targets in one directory. </b>
+          Due to changes in the installer, Sourcery CodeBench Lite for Xilinx GNU/Linux
+          can no longer be installed into a directory already containing an
+          existing Sourcery CodeBench installation for a different target.  The
+          installer detects this situation and asks you to select a different
+          directory.
+        </p><p><b>Install to empty directory failure fixed. </b>
+          A bug that prevented installation of Sourcery CodeBench Lite into an existing
+          empty directory has been fixed.
+        </p><p><b>Support for Xilinx ZC702 Evaluation Kit. </b>
+          Sourcery CodeBench Lite now includes support for creating and debugging
+          of applications for the Xilinx Zynq-7000 EPP ZC702
+          Evaluation Kit.
+        </p><p><b>EGLIBC version 2.16. </b>
+          Sourcery CodeBench Lite for Xilinx GNU/Linux now includes EGLIBC version 2.16
+          library which is based on GNU C Library version 2.16.
+          For more information about changes, see
+          <code class="uri">http://www.eglibc.org/news#eglibc_2_16</code>.
+        </p><p><b>Linux kernel headers update. </b>
+          Linux kernel header files have been updated to version
+          3.5.4.
+        </p><p><b>GDB update. </b>
+	  The included version of GDB has been updated to
+	  7.4.50.20120716.  This update adds numerous bug fixes and
+	  features.  Refer to <code class="uri">http://www.gnu.org/software/gdb/news</code>
+	  for more information.
+        </p><p><b>Misleading GDB warning fixed. </b>
+          A bug has been fixed that formerly caused GDB to display a 
+          warning about being unable to load symbols for ELF libraries
+          
+          
+          that are contained in the Linux kernel itself.
+        </p><p><b>Updated system requirements. </b>
+          The host operating system requirements for Sourcery CodeBench Lite have 
+          been updated. The minimum versions of GNU/Linux now supported 
+          are Red Hat Enterprise Linux 5, SuSE Enterprise Linux 10, 
+          Fedora Core 6, Ubuntu 8.04, and Debian 5, or later versions 
+          of these distributions running on 32-bit or 64-bit Intel or 
+          AMD CPUs.
+        </p><p><b>Removal of the Sourcery CodeBench Debug Sprite. </b>
+          The Sourcery CodeBench Debug Sprite has been removed.
+        </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id348870"></a>A.1.2. Changes in Sourcery CodeBench Lite 2012.03-79</h3></div></div></div><p><b>A change in support for Xilinx Zynq-7000 EPP ZC702
+        Evaluation Kit. </b>
+          Sourcery CodeBench Lite now supports the on-chip RAM instead of the DDR
+          SDRAM on the Xilinx Zynq-7000 EPP ZC702 Evaluation Kit.
+        </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id348945"></a>A.1.3. Changes in Sourcery CodeBench Lite 2012.03-75</h3></div></div></div><p><b>Fix for internal compiler error. </b>
+          A bug that caused GCC to report an internal compiler error in
+          <code class="code">push_minipool_fix</code> has been fixed.
+        </p><p><b>Nondeterministic code generation bug fix. </b>
+          A GCC bug has been fixed that caused nondeterministic code
+          generation for some input files when optimizing.
+        </p><p><b>Fix for compiler hang. </b>
+          A bug that caused GCC to become stuck in an infinite
+	  loop in the optimizer has been fixed.
+        </p><p><b>Internal compiler error. </b>
+          A GCC bug has been fixed that caused an internal compiler
+          error when sign extending the result of an array subscript
+          expression with an index greater than 255.
+        </p><p><b>Fix for internal compiler error. </b>
+          A GCC bug has been fixed that caused an internal compiler
+          error when using pointer casts in C++0x <code class="code">constexpr</code>
+          initialization expressions.
+        </p><p><b>Fix for bit-field optimization bug. </b>
+          A compiler bug that caused incorrect code to be generated for
+	  programs using bit-fields has been fixed.
+        </p><p><b>GCC version 4.6.3. </b>
+          Sourcery CodeBench Lite for Xilinx GNU/Linux is now based on GCC
+          version 4.6.3. For more information about issues that
+          have been fixed since version 4.6.1, see
+          <code class="uri">http://gcc.gnu.org/gcc-4.6/changes.html</code>.
+        </p><p><b>Compiler crash fixed. </b>
+          A GCC bug that occasionally caused an internal compiler
+	  error during register allocation has been fixed.
+        </p><p><b>ARM miscompilation fix. </b>
+          A bug has been fixed that caused miscompilation of some
+          expressions involving the minimum or maximum idiom, such as
+          <code class="code">(a &gt; 0) ? a : 0</code>.
+        </p><p><b>Register allocation bug fix. </b>
+          A bug in the register allocator that caused incorrect code
+	  generation has been fixed.
+        </p><p><b>Linker <code class="option">--gc-sections</code> bug fix. </b>
+          A linker bug that incorrectly caused undefined references to be 
+	  diagnosed when the <code class="option">--gc-sections</code> option is used
+	  has been fixed.
+        </p><p><b>Linker COMDAT group code size optimization. </b>
+          The linker supports a new option <code class="option">-Wl,--shared-comdat</code>
+	  that causes it to resolve COMDAT group symbols to definitions
+	  provided by shared libraries when possible, discarding any
+	  duplicate definitions of the group in relocatable files included
+	  in the link.
+	  This optimization can produce smaller C++ executables and shared
+	  libraries at the expense of additional runtime overhead.  
+        </p><p><b>Linker <code class="option">--gc-sections</code> option bug fix. </b>
+          A bug has been fixed that caused the linker to incorrectly
+          remove the <code class="code">.debug_types</code> section when using the
+          <code class="option">--gc-sections</code> option.
+        </p><p><b>Installer failure during upgrade. </b>
+        Some recent releases were affected by an installer bug
+        on Windows hosts that caused installing a newer version of
+        Sourcery CodeBench Lite into the same directory to fail with the error
+        <code class="literal">Sourcery CodeBench Lite for Xilinx GNU/Linux upgrade failed</code>.
+        This bug has now been fixed, but the affected releases cannot be
+        upgraded.  As a workaround, uninstall the older release before
+        installing the new version.
+       </p><p><b>Freescale i.MX53 QSB support. </b>
+          Sourcery CodeBench Lite now supports the Freescale i.MX53 QSB board.
+          
+        </p><p><b>RPC library functions. </b>
+          GLIBC has been changed so that programs may again be built
+          to use its RPC library functions.  The ability to build
+          programs using these functions had previously been disabled.
+        </p><p><b><code class="command">zic</code> bug fix. </b>
+          A bug has been fixed in GLIBC's <code class="command">zic</code>
+          command (included in the target sysroot) that
+          caused <code class="literal">too many transitions</code> errors on
+          some valid input files.
+        </p><p><b>EGLIBC version 2.15. </b>
+          Sourcery CodeBench Lite for Xilinx GNU/Linux now includes EGLIBC version 2.15
+          library which is based on GNU C Library version 2.15.
+          For more information about changes, see
+          <code class="uri">http://www.eglibc.org/news#eglibc_2_15</code>.
+        </p><p><b>Linux kernel headers update. </b>
+          Linux kernel header files have been updated to version
+          3.2.10.
+        </p><p><b>C++ debugging bug fix. </b>
+          A GDB bug has been fixed that caused GDB to fail to
+          find <code class="code">enum</code> constants in base classes when
+          debugging C++ code.
+        </p><p><b>Fix for crash in GDB. </b>
+          A memory corruption bug in GDB has been fixed that under very rare
+          circumstances made it crash or exhibit other unpredictable behavior.
+          <span>
+            On GNU/Linux hosts, this bug caused crashes with an error message
+            similar to: <code class="literal">*** glibc detected *** arm-xilinx-linux-gnueabi-gdb:
+            free(): invalid next size (normal): 0x09466198 ***</code>
+            followed by a backtrace.
+          </span>
+        </p><p><b>Fix debugger remote target interruption. </b>
+	  A bug in GDB's handling of requests to interrupt execution on a
+	  remote target has been fixed that caused it to stop the target but
+	  not emit a stopped MI record.
+	  
+	</p><p><b>GDB internal error fix. </b>
+          A bug has been fixed that caused GDB to produce messages of
+	  the form: <code class="literal">warning: (Internal error: pc 0x1000a0 in
+	  read in psymtab, but not in symtab.)</code>
+	  when taking the addresses of symbols from objects added with
+	  the <code class="command">add-symbol-file</code> command.
+        </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id349964"></a>A.1.4. Changes in Sourcery CodeBench Lite 2011.09-50</h3></div></div></div><p><b>Internal compiler error with NEON intrinsics. </b>
+          A compiler bug has been fixed that caused internal compiler
+          errors when using certain NEON intrinsics.
+        </p><p><b>GCC version 4.6. </b>
+          Sourcery CodeBench Lite for Xilinx GNU/Linux is now based on GCC
+          version 4.6. For more information about changes from GCC
+          version 4.5 that was included in previous releases, see
+          <code class="uri">http://gcc.gnu.org/gcc-4.6/changes.html</code>.
+        </p><p><b>ARM VFP9-S errata workaround. </b>
+	  A compiler workaround for ARM Errata Notice GENC-010704
+	  (760019: Canceled FDIV or FSQRT can be executed twice) has been
+	  implemented.
+        </p><p><b>GCC stack usage improvement. </b>
+          GCC now generates better code for stack allocation in some
+          cases when compiling with <code class="option">-fno-strict-aliasing</code>.
+        </p><p><b>Binutils version 2.21. </b>
+          Sourcery CodeBench Lite for Xilinx GNU/Linux is now based on binutils
+          version 2.21.
+        </p><p><b>Assembler crash. </b>
+          The assembler now warns when there is line information for
+	  the <code class="literal">*ABS*</code> section, rather than crash.
+	  This can occur when the <code class="code">.offset</code> directive is
+	  used incorrectly.
+        </p><p><b>Linux kernel headers update. </b>
+          Linux kernel header files have been updated to version
+          3.0.1.
+        </p><p><b>Fix for crash in GDB <code class="command">maint print arch</code>. </b>
+          A bug in the GDB command <code class="command">maint print arch</code>
+          that sometimes caused GDB to crash has been fixed.
+        </p><p><b>GDB interrupt handling bug fix. </b>
+	  A bug in GDB has been fixed that caused it to sometimes fail
+	  to interrupt lengthy single-step operations (as by a
+	  <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>C</strong></span>
+	  when using GDB from the command line).
+	</p><p><b>Fix GDB crash during connection to debug agent. </b>
+          A bug has been fixed that caused GDB to crash while connecting
+	  to any debug agent through standard IO where the debug agent
+	  had detected an early error and terminated the communication.
+        </p><p><b>Debug Sprite option defaults. </b>
+          The Sourcery CodeBench Debug Sprite now uses default option values
+	  specified in board configuration files.  Options included in
+	  the device URL override the default values.
+        </p><p><b>Changes to host operating system requirements. </b>
+          The minimum required Microsoft Windows OS needed to run
+          Sourcery CodeBench Lite is now Windows XP (SP1).
+        </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id350506"></a>A.1.5. Changes in Older Releases</h3></div></div></div><p>
+        For information about changes in older releases of
+	Sourcery CodeBench Lite for Xilinx GNU/Linux, 
+	please refer to the Getting Started guide packaged with those
+	releases.
+      </p></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch06s02.html">Prev</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="chap-license.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">6.2. Manuals for GNU Toolchain Components </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Appendix B. Sourcery CodeBench Lite Licenses</td></tr></table></div></body></html>

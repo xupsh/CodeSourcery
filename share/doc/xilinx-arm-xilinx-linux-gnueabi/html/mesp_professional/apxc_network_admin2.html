@@ -1,0 +1,256 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:22:37 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe Professional Hardware Manual" />
+    <title>Sourcery Probe Professional Network Ports</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("Network Administration","apxc_network_admin1","Sourcery Probe Professional Network Ports","apxc_network_admin2","naV","naV","30");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp5647"></a><h1 class="pHeading2 FontLevel1" id="MGC5647">
+
+<a name="CRefID88552"></a>Sourcery Probe Professional Network Ports
+</h1>
+<a name="wp8184"></a><p class="pBody">
+
+Software communicates with the probe through various network ports. In the case where the probe and host software are on the same network, it is not necessary to be aware of these ports. However, in the case of a probe located on a protected network, an administrator must provide access to these ports if you want to connect to the probe from another network. <a href="apxc_network_admin2.html#wp8194"  onclick='oT("CRF","apxc_network_admin2.html#wp8194");return false;'>Table&#160;B&#8209;1</a> shows the ports used by the probe and provides a brief description of each port.
+</p>
+<div id="TableDivQz"></div>
+<div align="center">
+
+
+<a name="wp8194"></a><p class="pTableTitle" id="MGC8194">
+
+Table B&#8209;1. <a name="CRefID68613"></a>Sourcery Probe Professional Network Ports
+</p>
+
+
+<table border="1" cellpadding="5" cellspacing="0" id="wp8194table8188">
+  <tr bgcolor="#CCCCCC"  align="center" valign="middle">
+    <th>
+
+<a name="wp8198"></a><p class="pTableHeading" id="MGC8194">
+Port Number
+</p>
+</th>
+
+    <th>
+
+<a name="wp8200"></a><p class="pTableHeading">
+
+Description
+</p>
+
+</th>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row2Column1'  style='width:1.06944in'>
+
+
+<a name="wp8202"></a><p class="pTableCell">
+23</p></td>
+
+    <td id='Row2Column2'  style='width:5.19792in'>
+
+
+<a name="wp8204"></a><p class="pTableCell">
+Telnet access to configuration console</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row3Column1' >
+
+
+<a name="wp8206"></a><p class="pTableCell">
+1082</p></td>
+
+    <td id='Row3Column2' >
+
+
+<a name="wp8208"></a><p class="pTableCell">
+Telnet access to target serial port</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row4Column1' >
+
+
+<a name="wp8210"></a><p class="pTableCell">
+1087</p></td>
+
+    <td id='Row4Column2' >
+
+
+<a name="wp8212"></a><p class="pTableCell">
+Used for system firmware updates and by the PowerPC debugger to initialize the probe</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row5Column1' >
+
+
+<a name="wp8214"></a><p class="pTableCell">
+19119</p></td>
+
+    <td id='Row5Column2' >
+
+
+<a name="wp8216"></a><p class="pTableCell">
+Used by ARM and MIPS debuggers for probe configuration</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row6Column1' >
+
+
+<a name="wp8218"></a><p class="pTableCell">
+41474</p></td>
+
+    <td id='Row6Column2' >
+
+
+<a name="wp8220"></a><p class="pTableCell">
+Used by the PowerPC debugger to control the probe</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row7Column1' >
+
+
+<a name="wp8222"></a><p class="pTableCell">
+51410</p></td>
+
+    <td id='Row7Column2' >
+
+
+<a name="wp8224"></a><p class="pTableCell">
+Used by ARM and MIPS debuggers to control the probe</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row8Column1' >
+
+
+<a name="wp8226"></a><p class="pTableCell">
+53099</p></td>
+
+    <td id='Row8Column2' >
+
+
+<a name="wp8228"></a><p class="pTableCell">
+Used by the PowerPC debugger to check probe status</p></td>
+
+
+</tr>
+
+
+</table>
+
+</div>
+<div id='EndTable'> </div>
+<p class="pBody">
+<br clear='left' class='Blank4Table' />
+
+
+</p>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_professional";
+   DocTitle = "Mentor Embedded Sourcery Probe Professional Hardware Manual";
+   PageTitle = "Sourcery Probe Professional Network Ports";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "Sourcery.Probe.Professional.Network.Ports"
+   ThisTopic = "PhysicalConsiderations";
+   CurrentFile = "apxc_network_admin2.html";
+   CurrentFileID = "30";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe Professional Hardware Manual&nbsp;2.3.4
+    <br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    <br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

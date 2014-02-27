@@ -1,0 +1,390 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:23:56 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>MT Memory Test</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("MON Command Language ","moncommand01","MON Command Details","moncommand04","MT Memory Test","moncommand38","60");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp6252"></a><h1 class="pzCmdFunc FontLevel1" id="MGC6252">
+
+<a name="CRefID37053"></a>
+MT <a name="CRefID23101"></a>Memory Test
+</h1>
+
+
+
+<a name="wp29187"></a><p class="pzMiscInfo">
+
+Availability: MIPS and ARM
+</p>
+
+<a name="wp6253"></a><p class="pzHeading">
+
+Syntax
+</p>
+
+<a name="wp6254"></a><p class="pzUsage">
+
+MT <span class="cOptRpl">range</span> [,<span class="cOptRpl">mt_id</span>][,{H|V|Q|S} ... ] [,<span class="cOptRpl">repeat_cnt</span>] 
+</p>
+
+<a name="wp6255"></a><p class="pzUsage">
+
+MT <span class="cOptRpl">range</span>,8,<span class="cOptRpl">delay</span>[,{H|V|Q|S} ... ] [,<span class="cOptRpl">repeat_cnt</span>] 
+</p>
+
+<a name="wp6256"></a><p class="pzUsage">
+
+MT <span class="cOptRpl">range</span>,<span class="cOptRpl">mt_loop</span>[,<span class="cOptRpl">data</span>] [,<span class="cOptRpl">repeat_cnt</span>]
+</p>
+
+<a name="wp6257"></a><p class="pzHeading">
+
+Description
+</p>
+
+<a name="wp6258"></a><p class="pzShortDesc">
+
+The Memory Test command initiates a test of the target&#8217;s memory system, or one of three &ldquo;scope loops&rdquo;.
+</p>
+
+
+<a name="wp6259"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cItalic">range</span> - Specifies memory space, starting and ending addresses to be tested.</li></ul>
+
+<a name="wp6260"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cItalic">mt_id</span> - Is a decimal number specifying the test type. The default is 9.</li></ul>
+
+<a name="wp6290"></a><p class="pBodyRelative">
+
+
+</p>
+<div id="TableDivQz"></div>
+<div align="center">
+
+
+<table border="0" cellpadding="2" cellspacing="2" id="wp6263table6261">
+  <tr align="left" valign="top">
+    <td id='Row1Column1'  style='width:0.59726in'>
+
+
+<a name="wp6263"></a><p class="pBody">
+1
+</p>
+</td>
+    <td id='Row1Column2'  style='width:2.70371in'>
+
+
+<a name="wp6265"></a><p class="pBody">
+
+Basic patterns
+</p>
+</td>
+
+</tr>
+  <tr align="left" valign="top">
+    <td id='Row2Column1'  style='width:0.59726in'>
+
+
+<a name="wp6267"></a><p class="pBody">
+
+2
+</p>
+</td>
+    <td id='Row2Column2'  style='width:2.70371in'>
+
+
+<a name="wp6269"></a><p class="pBody">
+
+Walking 1&#8217;s and 0&#8217;s
+</p>
+</td>
+
+</tr>
+  <tr align="left" valign="top">
+    <td id='Row3Column1' >
+
+
+<a name="wp6271"></a><p class="pBody">
+
+3
+</p>
+</td>
+    <td id='Row3Column2' >
+
+
+<a name="wp6273"></a><p class="pBody">
+
+Rotating address
+</p>
+</td>
+
+</tr>
+  <tr align="left" valign="top">
+    <td id='Row4Column1' >
+
+
+<a name="wp6275"></a><p class="pBody">
+
+4
+</p>
+</td>
+    <td id='Row4Column2' >
+
+
+<a name="wp6277"></a><p class="pBody">
+
+Inverted rotating address
+</p>
+</td>
+
+</tr>
+  <tr align="left" valign="top">
+    <td id='Row5Column1' >
+
+
+<a name="wp6279"></a><p class="pBody">
+
+5
+</p>
+</td>
+    <td id='Row5Column2' >
+
+
+<a name="wp6281"></a><p class="pBody">
+
+Partial word access
+</p>
+</td>
+
+</tr>
+  <tr align="left" valign="top">
+    <td id='Row6Column1' >
+
+
+<a name="wp6283"></a><p class="pBody">
+
+8
+</p>
+</td>
+    <td id='Row6Column2' >
+
+
+<a name="wp6285"></a><p class="pBody">
+
+Refresh
+</p>
+</td>
+
+</tr>
+  <tr align="left" valign="top">
+    <td id='Row7Column1' >
+
+
+<a name="wp6287"></a><p class="pBody">
+
+9
+</p>
+</td>
+    <td id='Row7Column2' >
+
+
+<a name="wp6289"></a><p class="pBody">
+
+Each of 1, 2, 3, 4, and 5 in turn.
+</p>
+</td>
+
+</tr>
+
+</table>
+
+</div>
+<div id='EndTable'> </div>
+<p class="pBodyRelative">
+<br clear='left' class='Blank4Table' />
+
+
+</p>
+
+<a name="wp6304"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cItalic">mt_loop</span> - Is a decimal number specifying a type of scope loop.
+
+<div id="TableDivQz"></div>
+<div align="center">
+
+
+<table border="0" cellpadding="2" cellspacing="2" id="wp6293table6291">
+  <tr align="left" valign="top">
+    <td id='Row1Column1'  style='width:0.59726in'>
+
+
+<a name="wp6293"></a><p class="pBody">
+10
+</p>
+</td>
+    <td id='Row1Column2'  style='width:2.70371in'>
+
+
+<a name="wp6295"></a><p class="pBody">
+
+read only
+</p>
+</td>
+
+</tr>
+  <tr align="left" valign="top">
+    <td id='Row2Column1'  style='width:0.59726in'>
+
+
+<a name="wp6297"></a><p class="pBody">
+
+11
+</p>
+</td>
+    <td id='Row2Column2'  style='width:2.70371in'>
+
+
+<a name="wp6299"></a><p class="pBody">
+
+write only
+</p>
+</td>
+
+</tr>
+  <tr align="left" valign="top">
+    <td id='Row3Column1' >
+
+
+<a name="wp6301"></a><p class="pBody">
+
+12
+</p>
+</td>
+    <td id='Row3Column2' >
+
+
+<a name="wp6303"></a><p class="pBody">
+
+write then read
+</p>
+</td>
+
+</tr>
+
+</table>
+
+</div>
+<div id='EndTable'> </div>
+
+<br clear='left' class='Blank4Table' />
+</li></ul>
+
+<a name="wp6305"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cItalic">delay</span> - Is a decimal number specifying the delay time in milliseconds, between writes and reads. It applies only to test 8 (refresh test).</li></ul>
+
+<a name="wp6306"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cItalic">data</span> - Specifies that <span class=" cItalic">data</span> and its one&#8217;s complement are alternatively written. (Required if <span class=" cItalic">mt_loop </span>= 11 or 12.)</li></ul>
+
+<a name="wp6307"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cBold">H</span> - Halt-on-error: prompt to abort testing upon error.</li></ul>
+
+<a name="wp6308"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cBold">V</span> - Verbose: constant updates on test in progress.</li></ul>
+
+<a name="wp6309"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cBold">Q</span> - Quiet: pass completions are not reported individually.</li></ul>
+
+<a name="wp6310"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cBold">S</span> - Silent: errors are not reported individually.</li></ul>
+
+<a name="wp6311"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cItalic">repeat_cnt</span> - Is a decimal number specifying the number of times to run the test. Default is forever. Either <span class=" cItalic">mt_id</span>, <span class=" cItalic">mt_loop</span>, <span class=" cBold">H</span>, <span class=" cBold">V</span>, <span class=" cBold">Q</span>, or <span class=" cBold">S </span>is required if <span class=" cItalic">repeat_cnt</span> is to be specified.</li></ul>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "MT Memory Test";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "MT.Memory.Test"
+   ThisTopic = "UserDefinedAccessLists";
+   CurrentFile = "moncommand38.html";
+   CurrentFileID = "60";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    <br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    <br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

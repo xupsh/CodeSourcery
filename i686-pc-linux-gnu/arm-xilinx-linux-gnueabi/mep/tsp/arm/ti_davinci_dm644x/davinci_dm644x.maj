@@ -1,0 +1,597 @@
++q  // Enter quiet mode
+//___________________________________________________________________
+//
+//               Copyright (c) 2011 Mentor Graphics Corporation
+//                           All rights reserved
+//
+//   THIS WORK CONTAINS TRADE SECRETS AND PROPRIETARY INFORMATION WHICH IS
+//    THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS LICENSORS AND IS
+//                        SUBJECT TO LICENSE TERMS.
+//
+//___________________________________________________________________
+//
+// Mentor Embedded Sourcery Probe target initialization file for the
+// TI DM644XEVM REVC reference platform.  It supports this platform as-is,
+// and can be adapted to a new target based on this reference board,
+// as detailed below.  For a brand new custom board not related to
+// this reference board, it may be better to start from the template
+// rather than trying to adapt this file.
+//
+// Target Description:
+//
+//     Board:   TI DM644XEVM REVC
+//     Device:  TI TMS320DM6446
+//     CPU ID:  ARM926EJS
+//     Endian:  Little
+//     Cores:   1
+//
+// Porting Guide:
+//
+// The user should make the following adaptations to port this file
+// to a new target board based on the associated reference platform:
+//
+//        0. Review the MEP Probe Initialization section at
+//           "TO DO #0" below to make sure the settings are
+//           right for your board.
+//        1. Update the memory configuration table for changes
+//           in the new board's  *Physical*  memory map.  See
+//           'TO DO #1' below.
+//        2. If your target board requires any special MEP
+//           settings, they should be added to the end of the
+//           ONE_TIME_SETUP section.  See 'TO DO #2' below.
+//        3. Decide whether the target should be automatically
+//           reset and/or initialized upon start-up by choosing
+//           the desired command at 'TO DO #3' below.  This
+//           really depends on your use case.
+//        4. If the board has no boot code (or bad boot code),
+//           and you want to download into RAM, then you may
+//           have to adapt the memory controller initialization
+//           script at 'TO DO #4' below to account for changes
+//           relative to the reference platform.
+//        5. If you care about programming your target's NOR
+//           Flash, then review the Flash Initialization section at
+//           "TO DO #5" below to add any special flash unlock code
+//           that may be needed.
+//
+// NOTE:  Additional information on MON commands and the configuration
+//        options used here is available in the online help system.
+//___________________________________________________________________
+dv "Reading $$# ...\n"
+
+
+// Initialization script preparation
+// =================================
+
+// The RTI, RTNI, and TI command aliases call script functions in this file.
+// These command aliases should never be changed.
+
+ea RTI   $$#.DO_RTI  // RTI  call DO_RTI script function  (Reset Target and Initialize)
+ea RTNI  $$#.DO_RTNI // RTNI call DO_RTNI script function (Reset Target with No Initialization)
+ea TI    $$#.DO_TI   // TI   call DO_TI script function   (Target Initialize without resetting)
+
+
+// MEP Probe Initialization
+// ==========================
+
+// TO DO #0 -- Review the following MEP configuration options to make
+//             sure they are right for your target board hardware and
+//             processor device design.
+
+// The  Trgt_Resets_JTAG  option informs the MEP probe whether the target
+// board will forward a system reset (nSRST) to the JTAG interface (nTRST),
+// or reset the system only without resetting the JTAG interface.  When in
+// doubt, a YES setting is safer.  When the two reset circuits are known
+// to be independent, which is strongly recommended, then a NO setting is
+// recommended.
+
+eo Trgt_Resets_JTAG  = no
+
+// The  Ice_Reset_Delay  option controls how long the MEP probe waits
+// after a system reset before it attempts to take control of the
+// processor.
+
+eo ice_reset_delay = 0
+
+// The  Ice_JTAG_Use_RTCLK  and  Ice_JTAG_Clock_Freq  options are related
+// and must be considered together.  An  Ice_JTAG_Use_RTCLK  setting of
+// ON  selects adaptive clocking mode, where the JTAG clock is dynamically
+// controlled by the target processor.  When  Ice_JTAG_Use_RTCLK  is set
+// OFF  then normal (unthrottled) clocking is selected.
+//
+// When adaptive clocking is disabled, the  Ice_JTAG_Clock_Freq  option
+// specifies the the JTAG clock (TCK) frequency in Megahertz, from
+// 0.002 to 100 (depending on probe hardware capability).  A lower setting
+// is safer, a higher setting yields higher performance.  Note that the
+// requested frequency will be adjusted down to the closest frequency
+// supported by the probe hardware (displaying this option will show the
+// actual TCK frequency).
+//
+//     IJUR  Clock mode
+//     ====  ========================
+//     OFF   Free running TCK at specified frequency (RTCK is ignored)
+//     ON    Adaptive clocking with frequency controlled by RTCK
+//           (Ice_JTAG_Clock_Freq is ignored)
+//
+// Note that enabling  Ice_JTAG_Use_RTCLK  on target boards that do not
+// drive the RTCK signal will lock up the JTAG interface.
+
+eo Ice_JTAG_Use_RTCLK  = off
+eo Ice_JTAG_Clock_Freq = 1.8   // start off slow, then increase later
+if (@$Ice_JTAG_Use_RTCLK) {doq Ice_JTAG_Use_RTCLK} {doq Ice_JTAG_Clock_Freq}
+
+// The following command can be used to define the details of the JTAG
+// daisy chain.  It is only required for targets on which the MEP
+// auto-detection algorithm cannot correctly determine the JTAG connection
+// details.  On most boards this command can be omitted.
+//
+//    ew MEP_JTAG_DIMENSION = TAP_CNT, IR1_CNT [ , IR2_CNT ]  ...
+
+// The following commands can be used to define special JTAG initialization
+// operations required by certain processors.  The first one, if defined,
+// is scanned in right after the JTAG reset cycle completes, but before the
+// standard JTAG initialization performed by the MEP.  The second, if
+// defined, is scanned in right after the standard JTAG initialization
+// performed by the MEP.  On most boards these can both be omitted.
+//
+//    ew MEP_JTAG_INIT0 = <scan-op> [ , <scan-op> ]  ...
+//    ew MEP_JTAG_INIT1 = <scan-op> [ , <scan-op> ]  ...
+
+// The  Ice_Power_Sense  option enables the target power monitor.  When
+// target power is detected, the debug interface is enabled.
+
+eo Ice_Power_Sense = VREF
+
+// The  Ice_JTAG_TAP_Select  option controls which TAP on a multi-TAP
+// daisy chain is associated with this debug connection.  This option
+// can be omitted on targets which have one TAP.  Note that TAPs are
+// numbered from 1-N, with TAP 1 being the one whose TDO is connected
+// to the MEP probe.
+//
+//    eo Ice_JTAG_TAP_Select = <num>
+//
+// Note that the ARM926EJS is normally TAP #2, but if the EMU0 and EMU1
+// jumpers are set to 00, then the ARM926EJS will be TAP #1.
+
+eo    Ice_JTAG_TAP_Select = 2   // (EMU0 != 0) || (EMU1 != 0)
+// eo Ice_JTAG_TAP_Select = 1   // (EMU0 == 0) && (EMU1 == 0)
+
+
+// Flash Initialization
+//
+// TO DO #5 --  If your target board requires any special initialization
+//              commands to prepare for running the targetflash programming
+//              utility, add those commands here.
+//
+//              example:  ea FLASH_INIT ew 0xa0020800 = 0x10101010; ew 0xa0020818 = 0x10101010
+
+ea FLASH_INIT dv "J4 (EM_CS2_SELECT) must be jumpered for FLASH\nbefore you can access the NOR Flash\n"
+
+
+// Physical Memory Configuration
+// =============================
+
+mc *:P, inv     // start with all *physical* memory (*:P) marked as invalid
+
+// TO DO #1 -- Change the address range(s) below to match the  *physical*
+//             address ranges of your ROM/flash and RAM areas.  Add more
+//             MC commands as necessary for each memory mapped area.
+//
+// WARNING:  DO NOT confuse virtual (MVA) addresses with physical space.
+//           Make sure to use physical addresses in the MC table.
+//
+// EXAMPLE:
+//
+//     mc  ________:P  ________:P,  PWE, JAM, RW    // DRAM
+//     mc  ________:P  ________:P,  PWD, JAM, RO    // Flash or ROM
+//     mc  ________:P  ________:P,  PWD, JAM, RW    // Peripheral registers
+//
+// Note that if your boot code remaps physical memory, then the MC table
+// should reflect the mapping that is in effect for the code you are trying
+// to debug.  When debugging boot code in flash, MC should match the mapping
+// in effect when booting.  When debugging code in RAM, MC should match the
+// mapping in effect when running code from RAM.
+//
+// Address Range          PWE  Access
+// ---------------------- ---- -------
+mc 00000000:P 00003FFF:P, PWE, JAM, RW  // ARM Instruction RAM
+mc 00004000:P 00007FFF:P, PWD, JAM, RO  // ARM Instruction ROM
+mc 01BC0000:P 01BC18FF:P, PWE, JAM, RW  // ARM ETB Extend Trace memory map
+mc 01C00000:P 01E20023:P, PWE, JAM, RW  // ARM Peripheral memory map
+//
+// Off-chip memory map 
+mc 02000000:P 03FFFFFF:P, PWE, JAM, RO  // AEMIF CS2 NOR FLASH Instruction code
+mc 04000000:P 05FFFFFF:P, PWE, JAM, RW  // AEMIF CS3
+mc 06000000:P 07FFFFFF:P, PWE, JAM, RW  // AEMIF CS4
+mc 08000000:P 0BFFFFFF:P, PWE, JAM, RW  // AEMIF CS5
+mc 0C000000:P 0FFFFFFF:P, PWE, JAM, RW  // VLYNQ Remote
+//
+//DDR2 Memory
+mc 20000000:P 200000E7:P, PWE, JAM, RW  // DDR2 Control
+mc 80000000:P 8FFFFFFF:P, PWE, JAM, RW  // DDR2 SDRAM (128MB*2)
+//
+//DSP RAM memory map 
+mc 11100000:P 111FFFFF:P, PWE, JAM, RW  // DSP UMAP1 ImgCop
+mc 11800000:P 1180FFFF:P, PWE, JAM, RW  // DSP UMAP0 L2 Cache
+mc 11E08000:P 11E0FFFF:P, PWE, JAM, RW  // DSP L1P Cache
+mc 11F04000:P 11F0FFFF:P, PWE, JAM, RW  // DSP L1D RAM
+mc 11F10000:P 11F17FFF:P, PWE, JAM, RW  // DSP L1D Cache
+// ---------------------- ---- -------
+
+//        ____User Supplied Setup Commands Go Here____
+
+// TO DO #2 -- If your target board requires any special MEP settings
+//             (e.g. special JTAG initialization), add the commands to
+//             make those settings here.
+
+
+// End of initial one-time only setup script.  If this is a non-intrusive
+// attach connection, or if a normal debug connection fails to connect
+// properly, then exit at this point.  Otherwise continue on with optional
+// additional initialization.
+
+if (@.4$INIT_TYPE != 0) {dv "Non-intrusive attach connection\n"; goto EXIT}
+if (@$trgt_cpu_state != $tcs.halt) {dv "Debug connection failed, "; doq TCS; goto EXIT}
+
+// TO DO #3 -- Comment out all but one of the next three commands to
+//             control IF and HOW the target is initialized when the
+//             debugger is launched.  If no reset or target initialization
+//             is needed then all these can be left commented out.
+
+TI
+//   RTI
+//   RTNI
+
+:EXIT
+dv "Finished reading $$#.\n"
+return
+
+//___________________________________________________________________
+::DO_RTNI  // Reset Target with No Initialization.
+
+    // Normally an  rt  command is sufficient, but it may be necessary
+    // to slow down the JTAG clock first, depending on the affect of
+    // reset on the processor.
+
+    dv "Executing RTNI script function\n"
+    eo Ice_JTAG_Clock_Freq = 1.8   // reduce JTAG frequency before resetting
+    if (@$Ice_JTAG_Use_RTCLK) {doq Ice_JTAG_Use_RTCLK} {doq Ice_JTAG_Clock_Freq}
+    rt
+    return
+
+//___________________________________________________________________
+::DO_RTI   // Reset Target and Initialize.
+
+    // Note that it may be necessary to slow down the JTAG clock first, 
+    // depending on the affect of reset on the processor.
+
+    dv "Executing RTI script function\n"
+    eo Ice_JTAG_Clock_Freq = 1.8   // reduce JTAG frequency before resetting
+    if (@$Ice_JTAG_Use_RTCLK) {doq Ice_JTAG_Use_RTCLK} {doq Ice_JTAG_Clock_Freq}
+    rt
+    TI	// call script DO_TI function
+    return
+
+//___________________________________________________________________
+::DO_TI  // Target Initialize.
+
+    if (@$trgt_cpu_state != $tcs.halt) { dv "Target Initialization commands skipped due to CPU state\n"; doq TCS; return }
+    dv "Initializing target...\n"
+
+    //  Memory Controller Setup
+    //
+    // TO DO #4 -- If your board has a different memory configuration than
+    //             the reference board, then you may need to adapt the
+    //             memory controller initialization script accordingly.
+    //             These settings should match the settings used by your
+    //             boot code during its hardware initialization phase.
+
+    ew $PINMUX0 =   0x01C40000
+    ew $PINMUX1 =   0x01C40004
+    ew $VDD3P3V_PWDN = 0x01C40048
+
+    ew @$PINMUX0 = 0x80000C1F
+    //ew PINMUX1 = 0x000404F1
+    ew @$PINMUX1 = 0x00000081
+    ew @$VDD3P3V_PWDN = 0x00000000
+
+    // setup pointers to the control registers in MON local variables
+    ew $PSC_BASE        = 0x01C41000
+    ew $PSC_EPCPR       = 0x01C41070
+    ew $PSC_PTCMD       = 0x01C41120
+    ew $PSC_PTSTAT      = 0x01C41128
+    ew $PSC_PDSTAT0     = 0x01C41200
+    ew $PSC_PDSTAT1     = 0x01C41204
+    ew $PSC_PDCTL0      = 0x01C41300
+    ew $PSC_PDCTL1      = 0x01C41304
+    ew $PSC_EPCCR       = 0x01C41078
+    ew $PSC_MDSTAT_BASE = 0x01C41800
+    ew $PSC_MDCTL_BASE  = 0x01C41A00
+
+    ew $MDCTL0_VPSS_DMA = 0x01C41A00
+    ew $MDCTL1_VPSS_MMR = 0x01C41A04
+    ew $MDCTL2_EDMACC   = 0x01C41A08
+    ew $MDCTL3_EDMATC0  = 0x01C41A0C
+    ew $MDCTL4_EDMATC1  = 0x01C41A10
+    ew $MDCTL5_EMAC     = 0x01C41A14
+    ew $MDCTL6_EMAC_MC  = 0x01C41A18
+    ew $MDCTL7_MDIO     = 0x01C41A1C
+    ew $MDCTL9_USB      = 0x01C41A24
+    ew $MDCTL10_ATA_CF  = 0x01C41A28
+    ew $MDCTL11_VLYNQ   = 0x01C41A2C
+    ew $MDCTL13_DDR2    = 0x01C41A34
+    ew $MDCTL14_EMIFA   = 0x01C41A38
+    ew $MDCTL15_MMC_SD  = 0x01C41A3C
+    ew $MDCTL16_Reserved    = 0x01C41A40
+    ew $MDCTL17_ASP     = 0x01C41A44
+    ew $MDCTL18_I2C     = 0x01C41A48
+    ew $MDCTL19_UART0   = 0x01C41A4C
+    ew $MDCTL20_UART1   = 0x01C41A50
+    ew $MDCTL21_UART2   = 0x01C41A54
+    ew $MDCTL22_SPI     = 0x01C41A58
+    ew $MDCTL23_PWM0    = 0x01C41A5C
+    ew $MDCTL24_PWM1    = 0x01C41A60
+    ew $MDCTL25_PWM2    = 0x01C41A64
+    ew $MDCTL26_GPIO    = 0x01C41A68
+    ew $MDCTL27_TIMER0  = 0x01C41A6C
+    ew $MDCTL28_TIMER1  = 0x01C41A70
+    ew $MDCTL39_C64x_CPU    = 0x01C41A9C
+    ew $MDCTL40_VICP    = 0x01C41AA0
+
+    // Set AlwaysOn power domain
+    ew @$MDCTL0_VPSS_DMA    = @@$MDCTL0_VPSS_DMA    | 0x00000003 
+    ew @$MDCTL1_VPSS_MMR    = @@$MDCTL1_VPSS_MMR    | 0x00000003 
+    ew @$MDCTL2_EDMACC  = @@$MDCTL2_EDMACC  | 0x00000003 
+    ew @$MDCTL3_EDMATC0 = @@$MDCTL3_EDMATC0 | 0x00000003 
+    ew @$MDCTL4_EDMATC1 = @@$MDCTL4_EDMATC1 | 0x00000003 
+    ew @$MDCTL5_EMAC    = @@$MDCTL5_EMAC    | 0x00000003 
+    ew @$MDCTL6_EMAC_MC = @@$MDCTL6_EMAC_MC | 0x00000003 
+    ew @$MDCTL7_MDIO    = @@$MDCTL7_MDIO    | 0x00000003 
+    ew @$MDCTL9_USB     = @@$MDCTL9_USB     | 0x00000003 
+    ew @$MDCTL10_ATA_CF = @@$MDCTL10_ATA_CF | 0x00000003 
+    ew @$MDCTL11_VLYNQ  = @@$MDCTL11_VLYNQ  | 0x00000003 
+    ew @$MDCTL13_DDR2   = @@$MDCTL13_DDR2   | 0x00000003 
+    ew @$MDCTL14_EMIFA  = @@$MDCTL14_EMIFA  | 0x00000003 
+    ew @$MDCTL15_MMC_SD = @@$MDCTL15_MMC_SD | 0x00000003 
+    ew @$MDCTL16_Reserved   = @@$MDCTL16_Reserved   | 0x00000003 
+    ew @$MDCTL17_ASP    = @@$MDCTL17_ASP    | 0x00000003 
+    ew @$MDCTL18_I2C    = @@$MDCTL18_I2C    | 0x00000003 
+    ew @$MDCTL19_UART0  = @@$MDCTL19_UART0  | 0x00000003 
+    ew @$MDCTL20_UART1  = @@$MDCTL20_UART1  | 0x00000003 
+    ew @$MDCTL21_UART2  = @@$MDCTL21_UART2  | 0x00000003 
+    ew @$MDCTL22_SPI    = @@$MDCTL22_SPI    | 0x00000003 
+    ew @$MDCTL23_PWM0   = @@$MDCTL23_PWM0   | 0x00000003 
+    ew @$MDCTL24_PWM1   = @@$MDCTL24_PWM1   | 0x00000003 
+    ew @$MDCTL25_PWM2   = @@$MDCTL25_PWM2   | 0x00000003 
+    ew @$MDCTL26_GPIO   = @@$MDCTL26_GPIO   | 0x00000003 
+    ew @$MDCTL27_TIMER0 = @@$MDCTL27_TIMER0 | 0x00000003 
+    ew @$MDCTL28_TIMER1 = @@$MDCTL28_TIMER1 | 0x00000003 
+    ew @$MDCTL39_C64x_CPU   = @@$MDCTL39_C64x_CPU   | 0x00000003 
+    ew @$MDCTL40_VICP   = @@$MDCTL40_VICP   | 0x00000003 
+
+    // Set EMURSTIE to 1 on the following
+    ew @$MDCTL1_VPSS_MMR    = @@$MDCTL1_VPSS_MMR    | 0x00000203
+    ew @$MDCTL5_EMAC    = @@$MDCTL5_EMAC    | 0x00000203
+    ew @$MDCTL6_EMAC_MC = @@$MDCTL6_EMAC_MC | 0x00000203
+    ew @$MDCTL7_MDIO    = @@$MDCTL7_MDIO    | 0x00000203
+    ew @$MDCTL9_USB     = @@$MDCTL9_USB     | 0x00000203
+    ew @$MDCTL10_ATA_CF = @@$MDCTL10_ATA_CF | 0x00000203
+    ew @$MDCTL11_VLYNQ  = @@$MDCTL11_VLYNQ  | 0x00000203
+    ew @$MDCTL13_DDR2   = @@$MDCTL13_DDR2   | 0x00000203
+    ew @$MDCTL14_EMIFA  = @@$MDCTL14_EMIFA  | 0x00000203
+    ew @$MDCTL15_MMC_SD = @@$MDCTL15_MMC_SD | 0x00000203
+    ew @$MDCTL16_Reserved   = @@$MDCTL16_Reserved   | 0x00000203
+    ew @$MDCTL17_ASP    = @@$MDCTL17_ASP    | 0x00000203
+    ew @$MDCTL26_GPIO   = @@$MDCTL26_GPIO   | 0x00000203
+    ew @$MDCTL40_VICP   = @@$MDCTL40_VICP   | 0x00000203
+
+    // start power state transition for ALWAYSON
+    ew @$PSC_PTCMD = @@$PSC_PTCMD | 0x000000001
+    :CHECK_PTSTAT1
+    ew $fmBuf = @@$PSC_PTSTAT & 0x000000001
+    // Loop while !ready //  if (@$fmBuf != 0x00000000) {dv "waiting for ALWAYSON power state tran\n" ; w 100; goto CHECK_PTSTAT1}
+
+    // start power state transition for DSP
+    ew @$PSC_PTCMD = @@$PSC_PTCMD | 0x000000002
+    :CHECK_PTSTAT2
+    ew $fmBuf = @@$PSC_PTSTAT & 0x000000002
+    // Loop while !ready //  if (@$fmBuf != 0x00000000) {dv "waiting for DSP power state trans\n" ; w 100; goto CHECK_PTSTAT2}
+
+    // Set EMURSTIE to 0 on the following
+    ew @$MDCTL1_VPSS_MMR    = @@$MDCTL1_VPSS_MMR    & 0x00000003
+    ew @$MDCTL5_EMAC    = @@$MDCTL5_EMAC    & 0x00000003
+    ew @$MDCTL6_EMAC_MC = @@$MDCTL6_EMAC_MC & 0x00000003
+    ew @$MDCTL7_MDIO    = @@$MDCTL7_MDIO    & 0x00000003
+    ew @$MDCTL9_USB     = @@$MDCTL9_USB     & 0x00000003
+    ew @$MDCTL10_ATA_CF = @@$MDCTL10_ATA_CF & 0x00000003
+    ew @$MDCTL11_VLYNQ  = @@$MDCTL11_VLYNQ  & 0x00000003
+    ew @$MDCTL13_DDR2   = @@$MDCTL13_DDR2   & 0x00000003
+    ew @$MDCTL14_EMIFA  = @@$MDCTL14_EMIFA  & 0x00000003
+    ew @$MDCTL15_MMC_SD = @@$MDCTL15_MMC_SD & 0x00000003
+    ew @$MDCTL16_Reserved   = @@$MDCTL16_Reserved   & 0x00000003
+    ew @$MDCTL17_ASP    = @@$MDCTL17_ASP    & 0x00000003
+    ew @$MDCTL26_GPIO   = @@$MDCTL26_GPIO   & 0x00000003
+    ew @$MDCTL40_VICP   = @@$MDCTL40_VICP   & 0x00000003
+
+    // Starting setup PLL
+    ew $PLL1_BASE     = 0x01C40800
+    ew $PLL1_PLLCTL   = @$PLL1_BASE + 0x100
+    ew $PLL1_PLLM     = @$PLL1_BASE + 0x110
+
+    ew $PLL2_BASE     = 0x01C40C00
+    ew $PLL2_PLLCTL   = @$PLL2_BASE + 0x100
+    ew $PLL2_PLLM     = @$PLL2_BASE + 0x110
+    ew $PLL2_PLLDIV1  = @$PLL2_BASE + 0x118
+    ew $PLL2_PLLDIV2  = @$PLL2_BASE + 0x11C
+    ew $PLL2_PLLCMD   = @$PLL2_BASE + 0x138
+    ew $PLL2_PLLSTAT  = @$PLL2_BASE + 0x13C
+
+    //ew $pll1_mul_fm = 0x00000010 //multiplier set to 16 (459 MHz)
+    ew $pll1_mul_fm   = 0x00000014 //multiplier set to 21 (594 MHz)
+
+    //PLL2 - DDR2 135Mhz
+    ew $pll2_mul_fm   = 0x00000013
+    ew $pll2_div1_fm  = 0x00000009
+    ew $pll2_div2_fm  = 0x00000001
+
+    //PLL2 - DDR2 125MHZ
+    //------------------
+    //ew $pll2_mul_fm   = 0x0000000D
+    //ew $pll2_div1_fm  = 0x00000006
+    //ew $pll2_div2_fm  = 0x00000000
+
+
+    //Set PLL1
+    ew @$PLL1_PLLCTL = @@$PLL1_PLLCTL & 0xFFFFFEFF // Set clock source mode internal oscillator
+    ew @$PLL1_PLLCTL = @@$PLL1_PLLCTL & 0xFFFFFFDE // bypass mode
+
+    w 1000 // Wait Bypass mode switch
+
+    ew @$PLL1_PLLCTL = @@$PLL1_PLLCTL & 0xFFFFFFF7 // reset PLL
+    ew @$PLL1_PLLCTL = @@$PLL1_PLLCTL | 0x00000010 // disable PLL
+    ew @$PLL1_PLLCTL = @@$PLL1_PLLCTL & 0xFFFFFFFD // disable PLL
+    ew @$PLL1_PLLCTL = @@$PLL1_PLLCTL & 0xFFFFFFEF // enable PLL
+
+    ew @$PLL1_PLLM = @$pll1_mul_fm // multiplier PLL1
+
+    w 1000 // Wait for PLL to reset
+
+    ew @$PLL1_PLLCTL = @@$PLL1_PLLCTL | 0x00000008 // Release PLL from Reset
+
+    w 1000 // Wait for PLL to lock
+    ew @$PLL1_PLLCTL = @@$PLL1_PLLCTL | 0x00000001 // set PLL to PLL mode
+
+    //Set PLL2
+    ew @$PLL2_PLLCTL = @@$PLL2_PLLCTL & 0xFFFFFEFF // Set clock source mode internal oscillator
+    ew @$PLL2_PLLCTL = @@$PLL2_PLLCTL & 0xFFFFFFDE // bypass mode
+
+    w 1000 // Wait Bypass mode switch
+
+    ew @$PLL2_PLLCTL = @@$PLL2_PLLCTL & 0xFFFFFFF7 // reset PLL
+    ew @$PLL2_PLLCTL = @@$PLL2_PLLCTL | 0x00000010 // disable PLL
+    ew @$PLL2_PLLCTL = @@$PLL2_PLLCTL & 0xFFFFFFFD // disable PLL
+    ew @$PLL2_PLLCTL = @@$PLL2_PLLCTL & 0xFFFFFFEF // enable PLL
+
+    ew @$PLL2_PLLM      = @$pll2_mul_fm     // multiplier PLL2
+    ew @$PLL2_PLLDIV1   = @$pll2_div1_fm    // divider1 PLL2
+    ew @$PLL2_PLLDIV2   = @$pll2_div2_fm    // divider2 PLL2
+    ew @$PLL2_PLLDIV1   = @@$PLL2_PLLDIV1 | 0x00008000 // enable PLL divider
+    ew @$PLL2_PLLDIV2   = @@$PLL2_PLLDIV2 | 0x00008000 // enable PLL divider
+    ew @$PLL2_PLLCMD    = 0x00000001        // set phase alignment
+
+    :CHECK_PLL2STAT
+    ew $fmBuf = @@$PLL2_PLLSTAT & 0x000000001
+    // Loop while !ready //  if (@$fmBuf != 0x00000000) {dv "waiting for PLL2_PLLSTAT phase aligment\n" ; w 100; goto CHECK_PLL2STAT}
+
+    w 1000 // Wait for PLL to reset
+
+    ew @$PLL2_PLLCTL = @@$PLL2_PLLCTL | 0x00000008 // Release PLL from Reset
+
+    w 1000 // Wait for PLL to lock
+
+    ew @$PLL2_PLLCTL = @@$PLL2_PLLCTL | 0x00000001 // set PLL to PLL mode
+
+    dv "\nSpeeding up Ice_JTAG_Clock_Freq\n"
+    eo ice_jtag_clock_freq = 22
+    if (@$Ice_JTAG_Use_RTCLK) {doq Ice_JTAG_Use_RTCLK} {doq Ice_JTAG_Clock_Freq}
+
+    // Starting setup DDR2
+    ew $DDR_BASE = 0x20000000
+    ew $SDRSTAT  = 0x20000004
+    ew $SDCFG    = 0x20000008 
+    ew $SDREF    = 0x2000000C 
+    ew $SDTIM0   = 0x20000010 
+    ew $SDTIM1   = 0x20000014 
+    ew $DDRCTL   = 0x200000E4 
+    ew $PBBPR    = 0x20000020 
+    ew $DDRIRR   = 0x200000C0 
+    ew $DDRIMR   = 0x200000C4 
+    ew $DDRIMSR  = 0x200000C8 
+    ew $DDRIMCR  = 0x200000CC 
+
+    ew $PSC_BASE        = 0x01C41000
+    ew $PSC_EPCPR       = 0x01C41070 
+    ew $PSC_PTCMD       = 0x01C41120 
+    ew $PSC_PTSTAT      = 0x01C41128 
+    ew $PSC_PDSTAT0     = 0x01C41200 
+    ew $PSC_PDSTAT1     = 0x01C41204 
+    ew $PSC_PDCTL0      = 0x01C41300 
+    ew $PSC_PDCTL1      = 0x01C41304 
+    ew $PSC_EPCCR       = 0x01C41078 
+    ew $PSC_MDSTAT_BASE = 0x01C41800 
+    ew $PSC_MDCTL_BASE  = 0x01C41A00 
+    ew $PSC_MDSTAT_DDR  = @$PSC_MDSTAT_BASE + (4 * D) 
+    ew $PSC_MDCTL_DDR   = @$PSC_MDCTL_BASE  + (4 * D) 
+
+    ew @$DDRCTL = 0x50006405 // DDR PHY Ctrl - DLL powered, ReadLatency=6
+
+    ew @$SDCFG  = 0x00178832 // DDR Bank Cfg - 32-bit bus, CAS=4, 8 banks, 1024-word pages
+
+    ew @$SDTIM0 = 0x229229c9 // DDR Timing
+    ew @$SDTIM1 = 0x0012c722 // DDR Timing
+
+    //--From original flash setup
+    //ew @$SDTIM0 = 0x30923A91 // DDR Timing
+    //ew @$SDTIM1 = 0x0019C722 // DDR Timing
+
+    ew @$SDCFG  = 0x00170832 // DDR Bank Cfg - disable timing reg access
+
+    //ew @$SDREF  = 0x000003D6 // DDR Refresh Ctrl - 126 MHz * 7.8us
+    ew @$SDREF = 0x0000041D // DDR Refresh Ctrl - 135 MHz * 7.8us
+    //--From original flash setup
+    //ew @$SDREF = 0x000005C3 // DDR Refresh Ctrl - 
+
+    ew @$PBBPR = 0x00000020 // DDR Bus Burst priority register- 
+
+    //  Reset DDR2 PHY
+    ew @$PSC_MDCTL_DDR  = @@$PSC_MDCTL_DDR  & 0xFFFFFFFC // Clear state
+    ew @$PSC_MDCTL_DDR  = @@$PSC_MDCTL_DDR  | 0x00000081 // Set to SyncReset
+    ew @$PSC_PTCMD      = @@$PSC_PTCMD      | 0x00000001 // Start power state transition
+
+    // Wait for power state transtion to finish
+    :CHECK_PSC_PTSTAT1
+    ew $fmBuf = @@$PSC_PTSTAT & 0x000000001
+    // Loop while !ready //  if (@$fmBuf != 0x00000000) {dv "waiting for PSC_PTSTAT power state transition\n" ; w 100; goto CHECK_PSC_PTSTAT1}
+
+    // Wait for module state syncreset
+    :PSC_MDSTAT_DDR1
+    ew $fmBuf = @@$PSC_MDSTAT_DDR & 0x00000001F
+    // Loop while !ready //  if (@$fmBuf != 0x00000001) {dv "waiting for PSC_MDSTAT_DDR sync reset transition\n" ; w 100; goto PSC_MDSTAT_DDR1}
+
+    // DDR2 Phy Reset done
+
+    // Enable DDR2 PHY
+    ew @$PSC_MDCTL_DDR  = @@$PSC_MDCTL_DDR  & 0xFFFFFFFC // Clear state
+    ew @$PSC_MDCTL_DDR  = @@$PSC_MDCTL_DDR  | 0x00000083 // Set to Enable and de-assert local reset
+    ew @$PSC_PTCMD      = @@$PSC_PTCMD      | 0x00000001 // Start power state transition
+
+    :CHECK_PSC_PTSTAT2
+    ew $fmBuf = @@$PSC_PTSTAT & 0x000000001
+    // Loop while !ready //  if (@$fmBuf != 0x00000000) {dv "waiting for PSC_PTSTAT power state transition\n" ; w 100; goto CHECK_PSC_PTSTAT2}
+
+    // Wait for module state enable
+    :PSC_MDSTAT_DDR2
+    ew $fmBuf = @@$PSC_MDSTAT_DDR & 0x00000001F
+    // Loop while !ready //  if (@$fmBuf != 0x00000003) {dv "waiting for PSC_MDSTAT_DDR sync reset transition\n" ; w 100; goto PSC_MDSTAT_DDR2}
+
+    // Starting setup EMIF\n"
+    ew $AEMIF_BASE  = 0x01E00000
+    ew $WAITCFG = 0x01E00004 // Async Wait Cycle Config Register
+    ew $ACFG2   = 0x01E00010 // Async Bank1 Config Register
+    ew $ACFG3   = 0x01E00014 // Async Bank2 Config Register
+    ew $ACFG4   = 0x01E00018 // Async Bank3 Config Register
+    ew $ACFG5   = 0x01E0001C // Async Bank4 Config Register
+    ew $NANDCTL = 0x01E00060 // NAND Flash Control Register
+
+    ew @$WAITCFG    = 0x00000000  //Asynchronous Wait Cycles Configuration Control Register
+    ew @$ACFG2  = 0x3FFFFFFD  //Asynchronous Banks - MAX TIMEOUT
+    ew @$ACFG3  = 0x3FFFFFFD
+    ew @$ACFG4  = 0x3FFFFFFD
+    ew @$ACFG5  = 0x3FFFFFFD
+    ew @$NANDCTL    = 0x00000000
+
+    dv "Initializing target done.\n"
+    return
+
+//___________________________________________________________________
+
+// <eof>

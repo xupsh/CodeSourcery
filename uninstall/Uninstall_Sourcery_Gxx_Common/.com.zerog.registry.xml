@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<registry install_date="2014-01-06 14:37:25" version="1.1" last_modified="2014-01-06 14:37:27">
+	<products>
+		<product name="Sourcery G++ Common" id="d4bc5c81-77c7-4703-8f94-5e063b518f3b" version="1.0.0.388078" copyright="2010" info_url="http://www.codesourcery.com" support_url="http://www.codesourcery.com/support/" location="/root/CodeSourcery" last_modified="2014-01-06 14:37:27">
+		<![CDATA[Sourcery G++ Common]]>
+			<vendor name="CodeSourcery" id="7f1ebb3c-1ec7-11b2-8037-c0d9e9f9d7a6" home_page="http://www.codesourcery.com" email="Sourcery_Sales@mentor.com"/>
+			<feature short_name="Sourcery G++ Common" name="Sourcery G++ Common" last_modified="2014-01-06 14:37:27">
+			<![CDATA[This installs the Sourcery G++ Common feature.]]>
+				<component ref_id="735297d0-0269-4636-a3b6-c97cb0380fc9" version="1.0.0.388078" location="/root/CodeSourcery/uninstall/Uninstall_Sourcery_Gxx_Common/Uninstall_Sourcery_Gxx_Common"/>
+				<component ref_id="2953cb23-86ff-42a1-92be-8c002a0ad7fc" version="1.0.0.388078" location="/root/CodeSourcery/uninstall/features/Common.key"/>
+			</feature>
+		</product>
+	</products>
+	<components>
+		<component id="2953cb23-86ff-42a1-92be-8c002a0ad7fc" version="1.0.0.388078" name="Sourcery G++ Common" location="/root/CodeSourcery/uninstall/features/Common.key">
+			<resource keyfile="false" name="uninstall" location="/root/CodeSourcery/uninstall" type="directory" uninstall="true" rollbackEnabledCancel="true">
+			<![CDATA[false]]>
+			</resource>
+			<resource keyfile="false" name="features" location="/root/CodeSourcery/uninstall/features" type="directory" uninstall="true" rollbackEnabledCancel="true">
+			<![CDATA[false]]>
+			</resource>
+			<resource keyfile="true" name="Common.key" location="/root/CodeSourcery/uninstall/features/Common.key" type="file" uninstall="true" rollbackEnabledCancel="true"/>
+			<resource keyfile="false" name="create-links-iamm-common_files-xilinx-2012.09-104-arm-xilinx-linux-gnueabi" location="/root/CodeSourcery/uninstall/create-links-iamm-common_files-xilinx-2012.09-104-arm-xilinx-linux-gnueabi" type="file" uninstall="true" rollbackEnabledCancel="true"/>
+			<resource keyfile="false" name="remove-links-iamm-common_files-xilinx-2012.09-104-arm-xilinx-linux-gnueabi" location="/root/CodeSourcery/uninstall/remove-links-iamm-common_files-xilinx-2012.09-104-arm-xilinx-linux-gnueabi" type="file" uninstall="true" rollbackEnabledCancel="true"/>
+		</component>
+		<component id="735297d0-0269-4636-a3b6-c97cb0380fc9" version="1.0.0.388078" name="InstallAnywhere Uninstall Component" location="/root/CodeSourcery/uninstall/Uninstall_Sourcery_Gxx_Common/Uninstall_Sourcery_Gxx_Common" vendor="CodeSourcery">
+			<resource keyfile="false" name="Sourcery_Gxx_Common Installer.log" location="/root/CodeSourcery/uninstall/Sourcery_Gxx_Common Installer.log" type="file" uninstall="true" rollbackEnabledCancel="true"/>
+			<resource keyfile="false" name="uninstall" location="/root/CodeSourcery/uninstall" type="directory" uninstall="true" rollbackEnabledCancel="true">
+			<![CDATA[false]]>
+			</resource>
+			<resource keyfile="false" name="Uninstall_Sourcery_Gxx_Common" location="/root/CodeSourcery/uninstall/Uninstall_Sourcery_Gxx_Common" type="directory" uninstall="true" rollbackEnabledCancel="true">
+			<![CDATA[false]]>
+			</resource>
+			<resource keyfile="false" name="uninstaller.jar" location="/root/CodeSourcery/uninstall/Uninstall_Sourcery_Gxx_Common/uninstaller.jar" type="file" uninstall="true" rollbackEnabledCancel="true"/>
+			<resource keyfile="true" name="Uninstall_Sourcery_Gxx_Common" location="/root/CodeSourcery/uninstall/Uninstall_Sourcery_Gxx_Common/Uninstall_Sourcery_Gxx_Common" type="executable" uninstall="true" rollbackEnabledCancel="true"/>
+			<resource keyfile="false" name="Uninstall_Sourcery_Gxx_Common.lax" location="/root/CodeSourcery/uninstall/Uninstall_Sourcery_Gxx_Common/Uninstall_Sourcery_Gxx_Common.lax" type="file" uninstall="true" rollbackEnabledCancel="true"/>
+			<resource keyfile="false" name=".com.zerog.registry.xml" location="/root/CodeSourcery/uninstall/Uninstall_Sourcery_Gxx_Common/.com.zerog.registry.xml" type="file" uninstall="true" rollbackEnabledCancel="true"/>
+		</component>
+	</components>
+</registry>

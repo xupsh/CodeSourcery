@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:22:17 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe Professional Hardware Manual" />
+    <title>Connecting the Probe to the Network</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("Connecting to a Network","network_conn1","Connecting the Probe to the Network","network_conn2","Configuring the Probe Network Settings","network_conn2","14");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp5374"></a><h1 class="pHeading2 FontLevel1" id="MGC5374">
+
+<a name="CRefID88883"></a>
+Connecting the Probe to the Network
+</h1>
+<a name="wp5376"></a><p class="pBody">
+
+The probe&#8217;s default operation is to acquire its network configuration automatically using DHCP, and optionally, attempt to register its hostname with a name server. The factory assigned host name is FSL<span class=" cItalic">xxyyzz</span> where <span class=" cItalic">xxyyzz</span> is the last three octets of the Ethernet MAC address provided on a label on the bottom side of the probe. For example, if the probe&#8217;s Ethernet MAC address is 00:04:9f:00:77:31, the host name is FSL007731.
+</p>
+
+<a name="wp8549"></a><p class="pBody">
+
+As shipped, the probe acquires its network configuration automatically using DHCP. If the network has a DHCP server, then it is best to leave the probe configured to use it. If you cannot use DHCP, then you must configure the probe for your network using static IP address resolution. See <a name="EW5"></a><a href="apxc_network_admin3.html#CRefID48655" onclick='oT("CRF","apxc_network_admin3.html#CRefID48655");'><span class=" cLinkOverride">Using netparam to Configure the Sourcery Probe Professional</span></a> for details on configuring the probe to use a static IP address.
+</p>
+
+<a name="wp9650"></a><p class="pBody">
+
+The Sourcery CodeBench debugger can automatically find probes on the local subnet. However, if the probe is on a different subnet than your computer, for example if it is in the downstairs lab, then you may have to know the probe&#8217;s IP address. You can find this using the Sourcery Probe console. See <a name="EW6"></a><a href="professional_probe2.html#CRefID94684" onclick='oT("CRF","professional_probe2.html#CRefID94684");'><span class=" cLinkOverride">Sourcery Probe Console</span></a>.
+</p>
+
+<a name="wp9672"></a><h2 class="pHeading3NoSplit FontLevel2" id="MGC9672">
+
+Connecting to a Twisted Pair Interface
+</h2>
+<a name="wp9673"></a><p class="pBody">
+
+You can connect the probe directly to a network using twisted pair (10/100/1000BaseT) cables. 
+</p>
+
+<a name="wp9674"></a><p class="pHTaskSubhead">
+
+Procedure
+</p>
+
+<a name="wp9675"></a>
+<ol start="1"><li class="LL1Seq">Plug one end of the supplied RJ-45 cable (p/n 600-75499) into the RJ-45 connector of the probe, shown in <a href="network_conn2.html#wp9686"  onclick='oT("CRF","network_conn2.html#wp9686");return false;'>Figure&#160;2&#8209;1</a>. </li></ol>
+<a name="wp9686"></a><p class="pFigureTitle" id="MGC9686">
+
+Figure 2&#8209;1. <a name="CRefID49681"></a>Sourcery Probe Professional with RJ-45 Cable Attached<a name='Graphic9684'></a><img src="images/giga_jtag_powerandrj45.jpg"  style='width:3.26111in;'  class="Aligncenter" id='wp9684' border='0' hspace='0' vspace='0'/>
+
+
+</p>
+
+
+<a name="wp9687"></a>
+<ol start="2"><li class="LL1Seq">Connect the other end of the RJ-45 cable into the RJ-45 connector of your twisted pair network or host computer.</li></ol>
+<a name="wp9688"></a><p class="pHTaskSubhead">
+
+Notes
+</p>
+
+<a name="wp9689"></a>
+<ul><li class="LL1BulSolid">When you configure the debugger for the hardware connection, you must provide the IP address or hostname of the probe. The Sourcery CodeBench debugger can automatically find probes that are on a local subnet, but you must specify the address or hostname if the debugger and probe are on different subnets.</li></ul>
+
+<a name="wp9693"></a>
+<ul><li class="LL1BulSolid">Depending on the type and complexity of your network, your network administrator might need to update network server tables so the network accesses the probe correctly. Updating network server tables requires both a detailed knowledge of Ethernet address resolution and network routing with write access permission to the server tables. See <a name="EW7"></a><a href="apxc_network_admin1.html#CRefID83678" onclick='oT("CRF","apxc_network_admin1.html#CRefID83678");'><span class=" cLinkOverride">Network Administration</span></a> for more information on managing your network.</li></ul>
+
+<a name="wp9712"></a><p class="pHTaskSubhead">
+
+Related Topics
+</p>
+<div id="TableDivQz"></div>
+<div align="left">
+
+
+<table border="0" cellpadding="2" cellspacing="0" width="96%" id="wp9701table9697">
+  <tr align="left" valign="top">
+    <td id='Row1Column1'  style='width:3.25in'>
+
+
+<a name="wp9701"></a><p class="pTableCell">
+<a name="EW2"></a><a href="professional_probe2.html#CRefID21027" onclick='oT("CRF","professional_probe2.html#CRefID21027");'><span class=" cNoBold cNoItalic cBlack">Accessing the Sourcery Probe Console Using Telnet</span></a></p></td>
+    <td id='Row1Column2'  style='width:3.25in'>
+
+
+<a name="wp9704"></a><p class="pTableCell">
+  &#160;</p></td>
+
+</tr>
+  <tr align="left" valign="top">
+    <td id='Row2Column1'  style='width:3.25in'>
+
+
+<a name="wp9708"></a><p class="pTableCell">
+<a name="EW3"></a><a href="apxc_network_admin3.html#CRefID56761" onclick='oT("CRF","apxc_network_admin3.html#CRefID56761");'><span class=" cLinkOverride">Using netparam to Configure the Sourcery Probe Professional</span></a></p></td>
+    <td id='Row2Column2'  style='width:3.25in'>
+
+
+<a name="wp9711"></a><p class="pTableCell">
+  &#160;</p></td>
+
+</tr>
+
+</table>
+
+</div>
+<div id='EndTable'> </div>
+<p class="pHTaskSubhead">
+
+
+<br clear='left' class='Blank4Table' />
+
+</p>
+
+<a name="wp8626"></a><h2 class="pHeading3NoSplit FontLevel2" id="MGC8626">
+
+
+Configuring the Probe Network Settings
+</h2>
+<a name="wp8618"></a><p class="pBody">
+
+<a name="CRefID85142"></a>To manually configure the network settings of the probe for your network, use the <a name="EW8"></a><a href="professional_probe2.html#CRefID94684" onclick='oT("CRF","professional_probe2.html#CRefID94684");'><span class=" cLinkOverride">Sourcery Probe Console</span></a> to access the built-in setup utility, <span class=" cCourier cP10">netparam</span>. The <span class=" cCourier cP10">netparam</span> utility lets you select and modify network parameters that are saved in probe memory. Use <span class=" cCourier cP10">netparam</span> to configure the probe to match your network address resolution and routing protocols, as described in <a name="EW9"></a><a href="apxc_network_admin3.html#CRefID56761" onclick='oT("CRF","apxc_network_admin3.html#CRefID56761");'><span class=" cLinkOverride">Using netparam to Configure the Sourcery Probe Professional</span></a>.
+</p>
+
+<a name="wp8619"></a><p class="pBody">
+
+If the probe is able to communicate with hosts on other subnets, you will need to configure the probe for one of the following routing options:
+</p>
+
+<a name="wp8620"></a>
+<ul><li class="LL1BulSolid">Default gateways</li></ul>
+
+<a name="wp8621"></a>
+<ul><li class="LL1BulSolid">Static routing tables</li></ul>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_professional";
+   DocTitle = "Mentor Embedded Sourcery Probe Professional Hardware Manual";
+   PageTitle = "Connecting the Probe to the Network";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "Connecting.the.Probe.to.the.Network"
+   ThisTopic = "ProductDisposal";
+   CurrentFile = "network_conn2.html";
+   CurrentFileID = "14";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe Professional Hardware Manual&nbsp;2.3.4
+    
+
+<br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    
+
+<br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

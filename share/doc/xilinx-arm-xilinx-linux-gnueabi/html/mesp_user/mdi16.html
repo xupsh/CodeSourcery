@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:25:46 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>MDI Interface Logging</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("Meta Debug Interface (MDI)","mdi01","Troubleshooting","mdi15","MDI Interface Logging","mdi16","115");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp8714"></a><h1 class="pHeading3 FontLevel1" id="MGC8714">
+
+
+MDI Interface Logging
+</h1>
+
+<a name="wp8715"></a><p class="pBody">
+
+If your Sourcery Probe appears to be operating properly when using MON, the next question is whether the culprit is the MDILib or the debugger itself. This may not be easy to determine from the visible symptoms, so the MDILib includes a logging facility that can record all of the MDI operations requested by the debugger and their results. The log file will provide the detailed information needed by customer support to see exactly what is going wrong with the debug session.
+</p>
+
+<a name="wp8716"></a><p class="pBody">
+
+Logging can be enabled via two different methods (a change to your MDI configuration file, or an environment variable). Both methods are described in the following sections.
+</p>
+
+<a name="wp8717"></a><h2 class="pHeading4 FontLevel2" id="MGC8717">
+
+
+Setup Logging via the Configuration File
+</h2>
+<a name="wp8718"></a><p class="pBody">
+
+This is accomplished by editing the <span class=" cItalic">mdi.cfg</span> file that is in use by your debugger of choice. In this file, you&#39;ll find a section named Define Global as shown in the following example. There should already be some options specified under this global section.
+</p>
+
+<a name="wp8719"></a><pre class="pCode">
+Define Global 
+</pre>
+
+<a name="wp8720"></a><pre class="pCode">
+      PATH ...
+</pre>
+
+<a name="wp8721"></a><pre class="pCode">
+      CommandFile ... 
+</pre>
+
+<a name="wp9701"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp8722"></a><p class="pBody">
+
+To enable logging, add the LogFile option as shown in the following example.
+</p>
+
+<a name="wp8723"></a><pre class="pCode">
+LogFile LogPathString 
+</pre>
+
+<a name="wp9707"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp8724"></a>
+<ul><li class="LL1BulSolid"><span class=" cItalic">LogPathString</span> is the full or relative path name of a file which will have detailed MDI session log information and console output written to it. If spaces are used in the path or filename, then the path needs to be quoted. The path can contain either &quot;\&quot; or &quot;/&quot; as directory separators, but backslashes need to be doubled (C expression rules). See the following examples:</li></ul>
+
+<a name="wp13129"></a><pre class="pCode">
+c:\\temp\\my_log.txt
+</pre>
+
+<a name="wp13143"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp13144"></a><p class="pL1Body">
+or</p>
+<a name="wp13142"></a><pre class="pCode">
+/usr/my_log.txt
+</pre>
+
+<a name="wp13137"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp8729"></a><p class="pBody">
+
+The details presented here are also covered in the section describing the configuration file, but these instructions act as a focal point if you simply need to enable logging.
+</p>
+
+<a name="wp8730"></a><h2 class="pHeading4 FontLevel2" id="MGC8730">
+
+
+Setup Logging via an Environment Variable
+</h2>
+<a name="wp8731"></a><p class="pBody">
+
+Another way to enable MDI session logging is to define an environment variable named MEPLOG whose value is the pathname of the file which will contain the log output. It is also possible to set <span class=" cCourier cP10">MEPLOG</span> to <span class=" cCourier cP10">&quot;console&quot;</span>, in which case the log output is sent to the debugger via its MDICBOutput() callback function. Generally, logging to a file is the preferable method.
+</p>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "MDI Interface Logging";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "MDI.Interface.Logging"
+   ThisTopic = "MDIInterfaceLogging";
+   CurrentFile = "mdi16.html";
+   CurrentFileID = "115";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    <br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    <br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

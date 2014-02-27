@@ -1,0 +1,581 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:22:37 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe Professional Hardware Manual" />
+    <title>Using netparam to Configure the Sourcery Probe Professional</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("Network Administration","apxc_network_admin1","Using netparam to Configure the Sourcery Probe Professional","apxc_network_admin3","Entering Static Routes","apxc_network_admin3","31");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp8241"></a><h1 class="pHeading2 FontLevel1" id="MGC8241">
+
+<a name="CRefID56761"></a>
+<a name="CRefID48655"></a>
+Using netparam to Configure the Sourcery Probe Professional
+</h1>
+<a name="wp5746"></a><p class="pBody">
+
+Use the <span class=" cCourier cP10">netparam</span> command to select the network parameters:
+</p>
+
+<a name="wp5748"></a>
+<ul><li class="LL1BulSolid">Address resolution protocol</li></ul>
+
+<a name="wp5940"></a>
+<ul><li class="LL1BulSolid">Static address resolution data</li></ul>
+
+<a name="wp5948"></a>
+<ul><li class="LL1BulSolid">Static routing tables</li></ul>
+
+<table class="notes">
+  <tr class="NotesUpperRuleRed">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesRed">Caution</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp5757"></a><p class="pnoteSWCaution">
+
+        <span class=" cCourier cP10">	netparam</span> writes its settings into non-volatile flash memory on the probe. Each time you enter a netparam command, wait for the <span class=" cCourier cP10">core&gt;</span> prompt to re-appear before entering the next command.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleRed">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp9847"></a><h2 class="pHeading3NoSplit FontLevel2" id="MGC9847">
+
+Configuring a Dynamic IP Address
+</h2>
+<a name="wp9848"></a><p class="pzShortDesc">
+
+To configure a dynamic IP address, perform these steps.
+</p>
+
+<a name="wp9797"></a><p class="pHTaskSubhead">
+
+Procedure
+</p>
+
+<a name="wp9869"></a>
+<ol start="1"><li class="LL1Seq">Connect to the probe internal setup utility. For example, from a command shell, type <span class=" cCourier cP10">telnet </span><span class=" cCourier cP10 cItalic">probe_ip_address</span>.<span class=" cCourier cP10"> </span>For more information, see <a href="apxc_network_admin3.html"  onclick='oT("CRF","apxc_network_admin3.html");return false;'>Using netparam to Configure the Sourcery Probe Professional</a>.</li></ol>
+<a name="wp9873"></a>
+<ol start="2"><li class="LL1Seq">At the <span class=" cCourier cP10">core&gt; </span>prompt, use <span class=" cCourier cP10">netparam</span> to specify the protocol appropriate to your network: </li></ol>
+<a name="wp9874"></a><pre class="pCodeIndent">
+netparam bootconfig dhcp[:hostname] 
+</pre>
+
+<a name="wp9875"></a><pre class="pCodeIndent">
+
+</pre>
+
+<a name="wp9798"></a><p class="pL1Body">
+DHCP is the default setting. If you specify a hostname for the probe, the probe will attempt to register the host name with the DHCP server, that will then update any name servers on the network.</p>
+<a name="wp9906"></a><h2 class="pHeading3NoSplit FontLevel2" id="MGC9906">
+
+Configuring a Static IP Address
+</h2>
+<a name="wp9954"></a><p class="pBody">
+
+This section covers the set up of a static IP address for the Sourcery Probe Professional. If you are unfamiliar with IP address concepts, refer to the section <a href="apxc_network_admin4.html"  onclick='oT("CRF","apxc_network_admin4.html");return false;'>Step-by-Step Guide to Configuring a Static IP</a>.
+</p>
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp9965"></a><p class="pnoteNote">
+
+        	Because this is a proven method to add a probe to a TCP/IP network, we recommend using it if you have any network communication problems.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp9966"></a><p class="pBody">
+
+To enter the IP and optional netmask in flash, perform the following steps.
+</p>
+
+<a name="wp9910"></a><p class="pHTaskSubhead">
+
+Procedure
+</p>
+
+<a name="wp9980"></a>
+<ol start="1"><li class="LL1Seq">Ask your network administrator to assign an unused IP (Internet Protocol) address and host name to the probe.</li></ol>
+<a name="wp9981"></a>
+<ol start="2"><li class="LL1Seq">Enter the name/address pair into the <span class=" cCourier cP10">hosts</span> database file. Windows hosts files are typically located in the <span class=" cItalic">%system_root%\system32\drivers\etc\ </span>directory. </li></ol>
+<a name="wp9987"></a><p class="pExampleTitle" id="MGC9987">
+
+Example B&#8209;1. 
+Probe Entries in a hosts File for a Windows Host Environment<a name='Graphic9985'></a><img src="images/hosts_entry_example.gif"  style='width:6.55453in;'  class="Aligncenter" id='wp9985' border='0' hspace='0' vspace='0'/>
+
+
+</p>
+
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp9995"></a><p class="pnoteNote" id="MGC9987">
+
+        	You should create or update the <span class=" cCourier cP10">hosts</span> file on the network server or on each local workstation that requires access to the probe.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp9996"></a>
+<ol start="3"><li class="LL1Seq">At the <span class=" cCourier cP10">core&gt;</span> prompt, use <span class=" cCourier cP10">netparam</span> to set and store the IP address and netmask (subnetting only) in the probe flash EPROM.</li></ol>
+<a name="wp9997"></a><pre class="pCodeIndent">
+netparam static_ip_address nnn.nnn.nnn.nnn 
+</pre>
+
+<a name="wp9998"></a><pre class="pCodeIndent">
+[:mmm.mmm.mmm.mmm] 
+</pre>
+
+<a name="wp9999"></a><pre class="pCodeIndent">
+
+</pre>
+
+<a name="wp9911"></a><p class="pL1Body">
+Where <span class=" cItalic">nnn.nnn.nnn.nnn</span> represents the IP address and <span class=" cItalic">mmm.mmm.mmm.mmm</span> represents the subnet mask.</p>
+<a name="wp5793"></a><h2 class="pHeading3NoSplit FontLevel2" id="MGC5793">
+
+<a name="CRefID43736"></a>
+
+Static Routing
+</h2>
+<a name="wp5794"></a><p class="pBody">
+
+The simplest networks consist of one or more subnets. Routers forward network traffic from one point on the network to another across these subnets.
+</p>
+
+<a name="wp5795"></a><p class="pBody">
+
+If the probe uses DHCP to automatically acquire its network settings, it is most likely that a default gateway setting was acquired and the probe will be accessible on other subnets.
+</p>
+
+<a name="wp5796"></a><p class="pBody">
+
+However, when using a static IP configuration or where the DHCP configuration is incomplete, you might need to provide additional routing information, including: 
+</p>
+
+<a name="wp5798"></a>
+<ul><li class="LL1BulSolid">Store a default gateway in flash memory</li></ul>
+
+<a name="wp6164"></a>
+<ul><li class="LL1BulSolid">Load static routing tables into flash memory</li></ul>
+
+<a name="wp5804"></a><h2 class="pHeading3NoSplit FontLevel2" id="MGC5804">
+
+
+Specify a Default Gateway or Static Route Table (Optional)
+</h2>
+<a name="wp5805"></a><p class="pBody">
+
+If you are using a static IP configuration, or your DHCP configuration does not specify a default gateway, you can manually enter the IP address of the default gateway to use. This gateway must be accessible on your local subnet.
+</p>
+
+<a name="wp5806"></a><h3 class="pHeading4 FontLevel3" id="MGC5806">
+
+
+To Specify a Default Gateway
+</h3>
+<a name="wp5807"></a><p class="pBody">
+
+A default gateway entry must specify the IP address of the first gateway that network traffic from the probe crosses. Failing to specify gateway information can cause problems with the probe&#39;s discovery feature. This gateway must be aware of the network&#8217;s complete route table. Use the following netparam syntax: 
+</p>
+
+<a name="wp5808"></a><pre class="pCode">
+netparam add_route 0.0.0.0 gateway_ip 1 
+</pre>
+
+<a name="wp5810"></a><p class="pBody">
+
+For <span class=" cItalic">gateway_ip</span>, provide the IP address of the router or gateway in dot notation. The default value is <span class=" cItalic">0.0.0.0</span>.
+</p>
+
+<a name="wp10031"></a><h3 class="pHeading4 FontLevel3" id="MGC10031">
+
+Changing an Existing Route Entry
+</h3>
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp10076"></a><p class="pnoteNote">
+
+        	If you enter static routes in the probe, they are not updated automatically. You must update these routes if changes in the network topology affect the static routes.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp10077"></a><p class="pBody">
+
+Before entering static routes, make a map of all gateway paths between the probe, as a starting point, and each workstation that must have access to it.
+</p>
+
+<a name="wp10078"></a><p class="pBody">
+
+To change an existing routing entry. perform the following steps.
+</p>
+
+<a name="wp10035"></a><p class="pHTaskSubhead">
+
+Procedure
+</p>
+
+<a name="wp10107"></a>
+<ol start="1"><li class="LL1Seq">At the <span class=" cCourier cP10">core&gt;</span> prompt, delete the existing routing entry:</li></ol>
+<a name="wp10108"></a><pre class="pCodeIndent">
+netparam delete_route <span class=" cItalic">host_ip
+</span></pre>
+
+<a name="wp10109"></a><pre class="pCodeIndent">
+
+</pre>
+
+<a name="wp10110"></a>
+<ol start="2"><li class="LL1Seq">Enter the new route:</li></ol>
+<a name="wp10111"></a><pre class="pCodeIndent">
+netparam add_route <span class=" cItalic">host_ip</span> gateway_ip hop_#
+</pre>
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp10120"></a><p class="pnoteNote">
+
+        	host_ip can identify an individual workstation or a network serving multiple hosts. The gateway_ip is the first gateway the probe traffic crosses when communicating with the destination workstation. The hop_# is the decimal number of gateways between the probe and the destination workstation.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp10145"></a><h2 class="pHeading3NoSplit FontLevel2" id="MGC10145">
+
+
+
+Entering Static Routes
+</h2>
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp10194"></a><p class="pnoteNote">
+
+        	When you enter static routes into the probe, static routes are not updated automatically. You must update these routes if changes in network topology affect the static routes.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp10195"></a><p class="pBody">
+
+Before entering static routes, make a map of all gateway paths between the probe, as a starting point, and each workstation must have access to it.
+</p>
+
+<a name="wp10146"></a><p class="pzShortDesc">
+
+To enter a static route or default gateway, perform the following steps.
+</p>
+
+<a name="wp10149"></a><p class="pHTaskSubhead">
+
+Procedure
+</p>
+
+<a name="wp10241"></a>
+<ol start="1"><li class="LL1Seq">At the <span class=" cCourier cP10">core&gt;</span> prompt, use the netparam command to enter the first host/gateway pair:</li></ol>
+<a name="wp10242"></a><pre class="pCodeIndent">
+netparam add_route host_ip gateway_ip hop_#
+</pre>
+
+<a name="wp10243"></a><pre class="pCodeIndent">
+
+</pre>
+
+<a name="wp10244"></a><p class="pL2Body">
+<span class=" cBold">NOTE:</span> Wait for the <span class=" cItalic">core&gt;</span> prompt between each netparam entry.</p>
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp10252"></a><p class="pnoteNote">
+
+        <span class=" cItalic">	host_ip</span> can identify an individual host or a network serving multiple hosts. The <span class=" cItalic">gateway_ip</span> is the first gateway the probe crosses when communicating with the destination host. The <span class=" cItalic">hop_# </span>is the decimal number of gateways between the probe and the destination host.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp10253"></a>
+<ol start="2"><li class="LL1Seq">Add routes until all destination hosts or networks are defined.</li></ol>
+<a name="wp10254"></a>
+<ol start="3"><li class="LL1Seq">When the <span class=" cCourier cP10">core&gt;</span> prompt returns, reset the probe by cycling power, or by entering the <span class=" cCourier cP10">reset</span> command.</li></ol>
+<a name="wp10257"></a><p class="pExampleTitle" id="MGC10257">
+
+Example B&#8209;2. 
+Static Route Example </p>
+
+
+<a name="wp10261"></a><p class="pBody" id="MGC10257">
+
+<a href="apxc_network_admin3.html#wp10268"  onclick='oT("CRF","apxc_network_admin3.html#wp10268");return false;'>Figure&#160;B&#8209;1</a> shows three class &ldquo;C&rdquo; networks joined together by a single IP router, making each probe accessible from three workstations (elmer, tweety, and brutus).
+</p>
+
+<a name="wp10268"></a><p class="pFigureTitle" id="MGC10268">
+
+Figure B&#8209;1. <a name="CRefID90434"></a><a name='Graphic10264'></a><img src="images/example_3class-c_networks-1router.jpg"  style='width:5.20999in;'  class="Aligncenter" id='wp10264' border='0' hspace='0' vspace='0'/>
+
+
+
+Example Network with 1 Router</p>
+
+
+<a name="wp10269"></a><p class="pBody" id="MGC10268">
+
+No static routing information is required to make a probe accessible from a workstation local to it on a network. For example, the probe <span class=" cCourier cP10">goofy</span> on network <span class=" cItalic">198.9.230.0</span> communicates directly with workstation <span class=" cCourier cP10">elmer</span>.
+</p>
+
+<a name="wp10270"></a><p class="pBody">
+
+When static routing is used, a routing entry is required on a probe for each workstation on a non-local network that accesses it. The probe <span class=" cCourier cP10">goofy</span> requires two entries, one for workstation <span class=" cCourier cP10">tweety</span> on network <span class=" cItalic">198.9.231.0</span> and one for workstation <span class=" cCourier cP10">brutus</span> on network <span class=" cItalic">198.9.232.0</span>.
+</p>
+
+<a name="wp10271"></a><p class="pBody">
+
+Each static route entry is made using a <span class=" cCourier cP10">netparam</span> command and consists of a <span class=" cItalic">network address</span> and a <span class=" cItalic">host address</span>. The <span class=" cCourier cP10">netparam</span> commands for the static route entries for probe <span class=" cCourier cP10">goofy</span> are:
+</p>
+
+<a name="wp10272"></a><pre class="pCode">
+netparam add_route 198.9.231.0 198.9.230.1 1 
+</pre>
+
+<a name="wp10273"></a><pre class="pCode">
+netparam add_route 198.9.232.0 198.9.230.1 1 
+</pre>
+
+<a name="wp10274"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp10275"></a><p class="pBody">
+
+Each of the three probe hosts must have a static route entry for each remote workstation that accesses it.
+</p>
+
+<a name="wp10276"></a><p class="pBody">
+
+To delete a static route, use the <span class=" cCourier cP10">netparam</span> command:
+</p>
+
+<a name="wp10277"></a><pre class="pCode">
+core&gt; netparam delete_route 1
+</pre>
+
+<a name="wp10278"></a><pre class="pCode">
+SIOCADDRT: Network is unreachable
+</pre>
+
+<a name="wp10279"></a><pre class="pCode">
+core&gt; netparam
+</pre>
+
+<a name="wp10280"></a><pre class="pCode">
+ethernet_address        = 00:04:9F:00:FF:80
+</pre>
+
+<a name="wp10281"></a><pre class="pCode">
+bootconfig              = static:MEGJ
+</pre>
+
+<a name="wp10282"></a><pre class="pCode">
+static_ip_address       = 192.168.0.201:255.255.255.0
+</pre>
+
+<a name="wp10283"></a><pre class="pCode">
+static_dns_server       = 0.0.0.0
+</pre>
+
+<a name="wp10284"></a><pre class="pCode">
+static_hosts            = &lt;none&gt;
+</pre>
+
+<a name="wp10285"></a><pre class="pCode">
+static_routes           = destination     gateway         metric
+</pre>
+
+<a name="wp10286"></a><pre class="pCode">
+                          --------------- --------------- ------
+</pre>
+
+<a name="wp10287"></a><pre class="pCode">
+                          default         134.86.179.254  1
+</pre>
+
+<a name="wp10288"></a><pre class="pCode">
+core&gt; netparam delete_route default
+</pre>
+
+<a name="wp10289"></a><pre class="pCode">
+core&gt; netparam
+</pre>
+
+<a name="wp10290"></a><pre class="pCode">
+ethernet_address        = 00:04:9F:00:FF:80
+</pre>
+
+<a name="wp10291"></a><pre class="pCode">
+bootconfig              = static:MEGJ
+</pre>
+
+<a name="wp10292"></a><pre class="pCode">
+static_ip_address       = 192.168.0.201:255.255.255.0
+</pre>
+
+<a name="wp10293"></a><pre class="pCode">
+static_dns_server       = 0.0.0.0
+</pre>
+
+<a name="wp10294"></a><pre class="pCode">
+static_hosts            = &lt;none&gt;
+</pre>
+
+<a name="wp10295"></a><pre class="pCode">
+static_routes           = &lt;none&gt;
+</pre>
+
+<a name="wp10296"></a><pre class="pCode">
+core&gt;
+</pre>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_professional";
+   DocTitle = "Mentor Embedded Sourcery Probe Professional Hardware Manual";
+   PageTitle = "Using netparam to Configure the Sourcery Probe Professional";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "Using.netparam.to.Configure.the.Sourcery.Probe.Professional"
+   ThisTopic = "PhysicalConsiderations";
+   CurrentFile = "apxc_network_admin3.html";
+   CurrentFileID = "31";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe Professional Hardware Manual&nbsp;2.3.4
+    <br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    <br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

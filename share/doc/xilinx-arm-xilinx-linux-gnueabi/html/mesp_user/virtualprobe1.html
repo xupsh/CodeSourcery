@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:26:08 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title> Using the Virtual Sourcery Probe</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("Using the Virtual Sourcery Probe","virtualprobe1","naV","naV","naV","naV","130");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp28914"></a><h1 class="pHeading1 FontLevel1" id="MGC28914">
+
+<a name="CRefID21126"></a>
+Using the Virtual Sourcery Probe
+</h1>
+
+
+<a name="wp37131"></a><p class="pBody">
+
+The traditional Sourcery Probe debug environment is comprised of debugger software running on a PC, connected to a hardware probe via an Ethernet or USB connection. The Sourcery Probe connects to the system under test via JTAG (plus some dedicated special function I/O signals). The debugger software provides the user interface, and implements high level debug features using debug services provided by the Sourcery Probe.
+</p>
+
+<a name="wp33774"></a><p class="pBody">
+
+In the Virtual Sourcery Probe debug environment, the Sourcery Probe software runs on a PC instead of dedicated probe hardware, providing an interface to the virtual JTAG port of a processor model running on a hardware emulator. This enables software debugging to begin on the actual hardware design long before any SOC devices are produced, allowing hardware and software to be brought up together. The advantages of hardware/software co-debug include:
+</p>
+
+<a name="wp36269"></a>
+<ul><li class="LL1BulSolid">Ability to test software on an actual hardware design</li></ul>
+
+<a name="wp36276"></a>
+<ul><li class="LL1BulSolid">Ability to exercise hardware using realistic software scenarios instead of manually generating test vectors.</li></ul>
+
+<a name="wp36290"></a>
+<ul><li class="LL1BulSolid">The emulation software provides visibility into the hardware operation and the interactions between the hardware and software that&#8217;s not possible with actual hardware.</li></ul>
+
+<a name="wp37339"></a>
+<ul><li class="LL1BulSolid">Ability to view the following in the source code: variables, registers, memory, run control, and single stepping.</li></ul>
+
+<a name="wp37346"></a>
+<ul><li class="LL1BulSolid">Ability to view test bench waveforms and assertions.</li></ul>
+
+<a name="wp36297"></a>
+<ul><li class="LL1BulSolid">Schedule reduction by overlapping hardware and software development phases.</li></ul>
+
+<a name="wp38042"></a><p class="pBody">
+
+The Virtual Sourcery Probe uses a JTAG Transactor API to access the JTAG interface of a hardware simulation/emulation model of the Design Under Test (DUT). The JTAG Transactor option for the Veloce emulator interfaces to the virtual JTAG port using TestBench Xpress (TBX). It has a HDL part written in System Verilog, which is integrated into the hardware design, and a SW part written in C++ to which the virtual probe connects.
+</p>
+
+<a name="wp38044"></a><p class="pFigureTitle" id="MGC38044">
+
+Figure 7&#8209;1. <a name="CRefID23485"></a>Virtual Sourcery Probe Development Environment <a name='Graphic38071'></a><img src="images/block_diagram.png"  style='width:5.125in;'  class="Aligncenter" id='wp38071' border='0' hspace='0' vspace='0'/>
+
+
+</p>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "Using the Virtual Sourcery Probe";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "Using.the.Virtual.Sourcery.Probe"
+   ThisTopic = "CommandInterpreter";
+   CurrentFile = "virtualprobe1.html";
+   CurrentFileID = "130";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    <br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    <br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

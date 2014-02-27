@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:23:56 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>Command Parameters</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("MON Command Language ","moncommand01","Command Script Files","moncommand66","Command Parameters","moncommand67","89");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp7695"></a><h1 class="pHeading3 FontLevel1" id="MGC7695">
+
+<a name="CRefID40335"></a>
+Command Parameters
+</h1>
+
+<a name="wp7697"></a><p class="pBody">
+
+Command files can accept and process parameters. Each parameter is an arbitrary string of text delimited by white-space (blank or tab). When each line of the command file is read in, it will be scanned for parameter strings of the form <span class=" cItalic">$$*</span> or <span class=" cItalic">$$n</span>, where <span class=" cItalic">n</span> is a one- or two-digit decimal number. 
+</p>
+
+<a name="wp7699"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cBold">$$n </span>-<span class=" cBold"> </span>Parameter replaced with the <span class=" cItalic">n</span>th parameter of the <span class=" cBold">FR</span> <span class=" cBold">C</span> command.</li></ul>
+
+<a name="wp7701"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cBold">$$0</span> -<span class=" cBold"> </span>Special parameter which evaluates to the number of parameters remaining to be processed.</li></ul>
+
+<a name="wp7704"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cBold">$$*</span> -<span class=" cBold"> </span>Special<span class=" cBold"> </span>parameter which evaluates to all parameters supplied via the 		<span class=" cBold">FR</span> <span class=" cBold">C</span> command.</li></ul>
+
+<a name="wp17895"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cBold">$$#</span> - References the pathname of the currently executing <span class=" cItalic">.maj</span> file.</li></ul>
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp7714"></a><p class="pnoteNote">
+
+        	If no argument was supplied for a particular <span class=" cItalic">$$n</span> parameter, the parameter will simply be removed from the command line during parameter substitution.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp7715"></a><p class="pBody">
+
+The replacement text can be &ldquo;pasted&rdquo; into a larger token by using &ldquo;<span class=" cBold">\</span>&rdquo; as a delimiter character.
+</p>
+
+<a name="wp7718"></a><p class="pzHeading">
+
+Examples 
+</p>
+
+<a name="wp7719"></a><pre class="pCode">
+FR C example A B C         // Invocation of command file including the following
+                     // examples.
+</pre>
+
+<a name="wp7720"></a><pre class="pCode">
+$$1\3                      // Replaced with A3
+</pre>
+
+<a name="wp7721"></a><pre class="pCode">
+MY\$$2\IDENT                // Replaced with MYBIDENT
+</pre>
+
+<a name="wp7722"></a><pre class="pCode">
+temp\$$3                   // Replaced with tempC
+</pre>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "Command Parameters";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "Command.Parameters"
+   ThisTopic = "CommandParameters";
+   CurrentFile = "moncommand67.html";
+   CurrentFileID = "89";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    <br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    <br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

@@ -1,0 +1,410 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:21:47 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe Personal Hardware Manual" />
+    <title>Connecting to a Linux PC</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("Connecting to the Target and Host Computer","connecting01","Connecting to a Linux PC","connecting04","naV","naV","14");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp10315"></a><h1 class="pHeading2 FontLevel1" id="MGC10315">
+
+<a name="CRefID14903"></a>
+Connecting to a Linux PC
+</h1>
+<a name="wp10326"></a><p class="pBody">
+
+The ARM and MIPS models of the Sourcery Probe Personal support remote CDC Ethernet for TCP/IP communication over USB. This section describes how to configure the probe and Linux for use with USB.
+</p>
+
+<a name="wp10730"></a><p class="pBody">
+
+Because the Sourcery Probe Personal models for PowerPC do not use TCP/IP communication, this section does not apply to those models.
+</p>
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp9459"></a><p class="pnoteNote">
+
+        	Although this setup description is valid for Ubuntu 10.04 LTS, the same steps are likely to work with many distributions. A quick Internet search on static IP setup for your Linux distribution should help resolve discrepancies.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp10339"></a><h4 class="pHeading5 FontLevel4" id="MGC10339">
+
+
+Known Issues
+</h4>
+<a name="wp10340"></a><p class="pBody">
+
+The Linux kernel can assign different network interface names when you add or remove network interfaces.
+</p>
+
+<a name="wp15316"></a><p class="pHTaskSubhead">
+
+Prerequisites
+</p>
+
+<a name="wp15729"></a><p class="pBody">
+
+Before setting the PC&#8217;s network adapter static IP address, you must pick a suitable address. The address must be unique, but within the same range as the probe&#39;s address. New probes are configured for Local Link mode, which means the probe will assign itself an address in the range 169.254.xxx.yyy. You may want to check what value the probe picked using the <a href="connecting06.html"  onclick='oT("CRF","connecting06.html");return false;'>Sourcery Probe Console</a>, but in practice you can probably just pick any number from 1-254 for each of xxx and yyy. If the PC reports that the address you chose is already in use, then just try another value for xxx or yyy.
+</p>
+
+<a name="wp15311"></a><p class="pBody">
+
+However, if the probe was reconfigured to use a static IP address, then you must pick an address within the range set in the probe. If the probe&#39;s IP address is unknown, you can find it by using the <a href="connecting08.html"  onclick='oT("CRF","connecting08.html");return false;'>Sourcery Probe Personal Console Menu</a>.
+</p>
+
+<a name="wp10364"></a><h4 class="pHeading5 FontLevel4" id="MGC10364">
+
+
+Procedure
+</h4>
+<a name="wp9493"></a>
+<ol start="1"><li class="LL1Seq">Determine your interface name.</li></ol>
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp15347"></a><p class="pnoteNote">
+
+        	The Linux kernel can assign different network interface names when you add or remove network interfaces. If you discover your interface name has changed, revisit this document section and go through the setup instructions again to adjust your configuration. Be sure to remove any previous manual setup you configured for your probe.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp9495"></a>
+<ol start="1."><li class="LL2Seq">Look at your current network device settings with your probe unplugged. You should see your normal wired or wireless network setup with its current IP address listed. Use the <span class=" cItalic">ifconfig</span> command to show your current network interfaces and settings. </li></ol>
+<a name="wp9830"></a><pre class="pCodeIndent">
+$ ifconfig
+</pre>
+
+<a name="wp9831"></a><pre class="pCodeIndent">
+eth1      &lt;snip&gt;
+</pre>
+
+<a name="wp9828"></a><pre class="pCodeIndent">
+lo        &lt;snip&gt;
+</pre>
+
+<a name="wp9838"></a><pre class="pCodeIndent">
+
+</pre>
+
+<a name="wp9496"></a>
+<ol start="2."><li class="LL2Seq">Plug in the Sourcery Probe Personal and repeat the <span class=" cItalic">ifconfig</span> command. Note the new Ethernet device listing and also that it does not have an IP address assigned. In this example the new device is <span class=" cBold">eth2</span>:</li></ol>
+<a name="wp9497"></a><pre class="pCodeIndent">
+$ ifconfig
+</pre>
+
+<a name="wp9498"></a><pre class="pCodeIndent">
+eth1      &lt;snip&gt;
+</pre>
+
+<a name="wp9499"></a><pre class="pCodeIndent">
+eth2      Link encap:Ethernet  HWaddr 00:80:cf:88:88:88  
+</pre>
+
+<a name="wp9500"></a><pre class="pCodeIndent">
+          inet6 addr: fe80::280:cfff:fe88:8888/64 Scope:Link
+</pre>
+
+<a name="wp9501"></a><pre class="pCodeIndent">
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+</pre>
+
+<a name="wp9502"></a><pre class="pCodeIndent">
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+</pre>
+
+<a name="wp9503"></a><pre class="pCodeIndent">
+          TX packets:10 errors:0 dropped:0 overruns:0 carrier:0
+</pre>
+
+<a name="wp9504"></a><pre class="pCodeIndent">
+          collisions:0 txqueuelen:1000 
+</pre>
+
+<a name="wp9505"></a><pre class="pCodeIndent">
+          RX bytes:0 (0.0 B)  TX bytes:1836 (1.8 KB)
+</pre>
+
+<a name="wp9506"></a><pre class="pCodeIndent">
+lo        &lt;snip&gt;
+</pre>
+
+<a name="wp9643"></a><pre class="pCodeIndent">
+
+</pre>
+
+<a name="wp9509"></a>
+<ol start="2"><li class="LL1Seq">Permanently add a static IP setting for your probe:</li></ol>
+<a name="wp9511"></a>
+<ol start="1."><li class="LL2Seq">Edit a Linux network configuration file:</li></ol>
+<a name="wp9512"></a><pre class="pCodeIndent">
+$ sudo vi /etc/network/interfaces
+</pre>
+
+<a name="wp9659"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp9513"></a><p class="pL2Body">
+<span class=" cBold">NOTE</span>: You can substitute your favorite editor in place of vi.</p>
+<a name="wp14154"></a><p class="pL2Body">
+This file likely has these settings to start with:</p>
+<a name="wp9516"></a><pre class="pCodeIndent">
+auto lo
+</pre>
+
+<a name="wp9517"></a><pre class="pCodeIndent">
+iface lo inet loopbacka
+</pre>
+
+<a name="wp9668"></a><pre class="pCodeIndent">
+
+</pre>
+
+<a name="wp9519"></a>
+<ol start="2."><li class="LL2Seq">Below the current settings in your file, add the following settings using your probe&#8217;s adapter name. In this example, the adapter name is <span class=" cItalic">eth2</span>.</li></ol>
+<a name="wp9527"></a><p class="pL2Body">
+The complete file should look like the following:</p>
+<a name="wp9529"></a><pre class="pCodeIndent">
+auto lo
+</pre>
+
+<a name="wp9530"></a><pre class="pCodeIndent">
+iface lo inet loopback
+</pre>
+
+<a name="wp9531"></a><pre class="pCodeIndent">
+auto eth2
+</pre>
+
+<a name="wp9532"></a><pre class="pCodeIndent">
+iface eth2 inet static
+</pre>
+
+<a name="wp9533"></a><pre class="pCodeIndent">
+address 169.254.10.1
+</pre>
+
+<a name="wp9534"></a><pre class="pCodeIndent">
+netmask 255.255.0.0
+</pre>
+
+<a name="wp9535"></a><pre class="pCodeIndent">
+broadcast 169.254.255.255
+</pre>
+
+<a name="wp9536"></a><pre class="pCodeIndent">
+
+</pre>
+
+<a name="wp9537"></a>
+<ol start="3."><li class="LL2Seq">Save the file.</li></ol>
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp9708"></a><p class="pnoteNote">
+
+        	This example uses an address in the Local Link IP range. If your probe was configured to use a static IP address, the same procedure applies, but you must pick an IP address for the network adapter that is compatible with that of the probe.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp9538"></a>
+<ol start="4."><li class="LL2Seq">Use the following command to cause Linux to load the changed network setup:</li></ol>
+<a name="wp9539"></a><pre class="pCode">
+     $ sudo ifup eth2
+</pre>
+
+<a name="wp14181"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp9541"></a>
+<ol start="5."><li class="LL2Seq">Verify the interface with the following command. It should show the IP address you associated with it:</li></ol>
+<a name="wp9543"></a><pre class="pCodeIndent">
+$ ifconfig eth2
+</pre>
+
+<a name="wp9544"></a><pre class="pCodeIndent">
+eth2      Link encap:Ethernet  HWaddr 00:80:cf:88:88:88  
+</pre>
+
+<a name="wp9545"></a><pre class="pCodeIndent">
+          inet addr:169.254.10.1  Bcast:169.254.255.255  
+Mask:255.255.0.0
+</pre>
+
+<a name="wp9546"></a><pre class="pCodeIndent">
+          inet6 addr: fe80::280:cfff:fe88:8888/64 Scope:Link
+</pre>
+
+<a name="wp9547"></a><pre class="pCodeIndent">
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+</pre>
+
+<a name="wp9548"></a><pre class="pCodeIndent">
+          RX packets:4 errors:0 dropped:0 overruns:0 frame:0
+</pre>
+
+<a name="wp9549"></a><pre class="pCodeIndent">
+          TX packets:60 errors:0 dropped:0 overruns:0 carrier:0
+</pre>
+
+<a name="wp9550"></a><pre class="pCodeIndent">
+          collisions:0 txqueuelen:1000 
+</pre>
+
+<a name="wp9551"></a><pre class="pCodeIndent">
+          RX bytes:280 (280.0 B)  TX bytes:10556 (10.5 KB)
+</pre>
+
+<a name="wp15739"></a><pre class="pCodeIndent">
+
+</pre>
+
+<a name="wp15740"></a><p class="pL1Body">
+Alternatively, you can also set up a temporary static IP. If you want to use a temporary IP setting rather than editing system files, use the following command instead:</p>
+<a name="wp15748"></a><pre class="pCodeIndent">
+$sudo ifconfig eth2 169.254.10.1 netmask 255.255.0.0 up
+</pre>
+
+<a name="wp9552"></a><pre class="pCodeIndent">
+
+</pre>
+
+<a name="wp15782"></a>
+<ol start="3"><li class="LL1Seq">Run mep_update to find the IP address of the probe, then quit and use ping to test communication with it.</li></ol>
+<a name="wp14490"></a><p class="pHTaskSubhead">
+
+Related Topics
+</p>
+
+<a name="wp15202"></a><p class="pBody">
+
+<a href="connecting06.html"  onclick='oT("CRF","connecting06.html");return false;'>Sourcery Probe Console</a>
+</p>
+
+<a name="wp15101"></a><p class="pBody">
+
+<a href="connecting09.html"  onclick='oT("CRF","connecting09.html");return false;'>Connecting to the Sourcery Probe Console from Sourcery CodeBench</a>
+</p>
+
+<a name="wp15205"></a><p class="pBody">
+
+<a href="connecting05.html"  onclick='oT("CRF","connecting05.html");return false;'>Changing the IP Address of the Probe (Optional)</a>
+</p>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_personal";
+   DocTitle = "Mentor Embedded Sourcery Probe Personal Hardware Manual";
+   PageTitle = "Connecting to a Linux PC";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "Connecting.to.a.Linux.PC"
+   ThisTopic = "StandardElectrostaticPrecautions";
+   CurrentFile = "connecting04.html";
+   CurrentFileID = "14";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe Personal Hardware Manual&nbsp;2.3.4
+    <br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    <br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

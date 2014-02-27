@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:25:46 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>Required Services</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("Meta Debug Interface (MDI)","mdi01","Interoperability","mdi17","Required Services","mdi18","117");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp8734"></a><h1 class="pHeading3 FontLevel1" id="MGC8734">
+
+<a name="CRefID64033"></a>
+Required Services
+</h1>
+
+<a name="wp8735"></a><p class="pBody">
+
+The Sourcery CodeBench MDILib implements all required MDILib services. However, there are a few cases where the MDI Specification leaves aspects of the implementation of a required service up to the MDILib, or where the implementation does not exactly match the specification. These cases are detailed in the following sections.
+</p>
+
+<a name="wp8736"></a><p class="pBody">
+
+Most services defined by the MDI specification are provided by functions in the MDILib that are called by the debugger. There are also a few services that the debugger is required to provide for use by the MDILib, via callback functions. We list the ones that the Sourcery CodeBench MDILib actually uses.
+</p>
+
+<a name="wp8737"></a><h2 class="pHeading4 FontLevel2" id="MGC8737">
+
+
+MDICacheFlush
+</h2>
+<a name="wp8738"></a><p class="pBody">
+
+This function allows the debugger to request that the processor&#39;s Instruction and/or Data caches be flushed and/or invalidated. MDILib supports this service by passing the request on to the Sourcery Probe. But what the Sourcery Probe does with it can vary depending on the capabilities of the actual CPU. For example, it may not be possible to flush the cache without also invalidating it.
+</p>
+
+<a name="wp8739"></a><h2 class="pHeading4 FontLevel2" id="MGC8739">
+
+
+MDIRunState
+</h2>
+<a name="wp8740"></a><p class="pBody">
+
+This function returns the current status of the target system (running, hit breakpoint, and so on) to the debugger. The MDI Specification requires the debugger to call MDIRunState() frequently when the target is running and not running.
+</p>
+
+<a name="wp8741"></a><p class="pBody">
+
+The Sourcery Probe may occasionally send status or event notification messages when the processor is not running, such as when target power is turned on or off. So the MDILib does depend on the debugger calling MDIRunState() when the target is not running, to process these events in a timely manner. If the debugger does not make these calls, notifications may be delayed until the next MDI service is requested or can even be lost entirely.
+</p>
+
+<a name="wp8742"></a><h2 class="pHeading4 FontLevel2" id="MGC8742">
+
+
+MDIRead
+</h2>
+<a name="wp8743"></a><p class="pBody">
+
+This function is called by the debugger to read the contents of memory and registers. The debugger passes an address, an object size, and a count of the number of objects to read. An address consists of an offset and a <span class=" cCourier cP10">&quot;resource&quot;</span>. Resources are values that identify specific memory and register address types, and are architecture-specific. MDILib support for some resources is optional. To allow the debugger to determine whether a particular resource is supported, the MDI Specification assigns special meaning to MDIRead() calls with a count of zero. When the requested count is zero, the MDILib is required to just check the address and return a success or error status, based on whether the address is valid and supported.
+</p>
+
+<a name="wp8744"></a><p class="pBody">
+
+Currently, the Sourcery Probe does not provide a way to directly query whether an address is valid for the current target. Instead, it generates an error message when a transfer to an invalid or unsupported address is actually attempted. So the MDILib uses built-in knowledge of the CPU type to determine whether to return a success status for MDIRead() calls with a count of zero. This works well enough for typical usage, like whether or not there are floating point registers or cache tag registers. But there are cases, like cores that allow optional coprocessors to be added, where the MDILib can not know whether the target has the corresponding registers or not. In such cases, it will return success to the zero count query, but actual reads and writes may fail after displaying an error message.
+</p>
+
+<a name="wp8745"></a><h2 class="pHeading4 FontLevel2" id="MGC8745">
+
+
+MDIDoCommand
+</h2>
+<a name="wp8746"></a><p class="pBody">
+
+This function is called by the debugger to cause the MDILib to execute an ASCII command using its internal command interpreter. Recognizing that no debugger API can possibly abstract all possible features of all possible debug tools, the MDI Specification allows the MDILib to provide additional functionality via a command interpreter. MDIDoCommand() is unusual in that it is an optional service, but if it is provided by the MDILib then the debugger is required to use it. That is, the debugger must provide a way for you to enter arbitrary command lines that the debugger will pass to MDIDoCommand().
+</p>
+
+<a name="wp8747"></a><p class="pBody">
+
+The MDILib does implement an extensive command language, and, therefore, relies on the debugger to support MDIDoCommand(). Nearly all the MON commands described in the <a name="EW72"></a><a href="moncommand01.html#CRefID21126" onclick='oT("CRF","moncommand01.html#CRefID21126");'><span class=" cLinkOverride">MON Command Language</span></a> are available in the MDILib as well, with the notable exceptions being breakpoint and execution commands.
+</p>
+
+<a name="wp8748"></a><h2 class="pHeading4 FontLevel2" id="MGC8748">
+
+
+MDICBInput, MDICBOutput
+</h2>
+<a name="wp8749"></a><p class="pBody">
+
+These are required callback functions provided by the debugger. MDICBOutput() allows the MDILib to pass strings that the debugger must display, while MDICBInput() allows the MDILib to get keyboard input from you.
+</p>
+
+<a name="wp8750"></a><p class="pBody">
+
+The MDILib relies on MDICBOutput() to display informational and warning messages, target program output generated via the EPI-OS or semi-hosting features supported by MIPS and ARM Sourcery Probe, and output generated by commands passed to MDIDoCommand(). It also relies on MDICBInput() to get input for the target program, interactive commands passed to MDIDoCommand(), and sometimes responses to error or warning message prompts. If the debugger does not provide these required services, it is not MDI-compliant and it will not be able to connect to the MDILib successfully.
+</p>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "Required Services";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "Required.Services"
+   ThisTopic = "RequiredServices";
+   CurrentFile = "mdi18.html";
+   CurrentFileID = "117";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    
+<br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    
+<br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

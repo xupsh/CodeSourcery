@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:21:47 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe Personal Hardware Manual" />
+    <title>Configuring the USB Serial Interface</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("Connecting to the Target and Host Computer","connecting01","Sourcery Probe Console","connecting06","Configuring the USB Serial Interface","connecting07","17");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp17061"></a><h1 class="pHeading3 FontLevel1" id="MGC17061">
+
+<a name="CRefID37455"></a>
+Configuring the USB Serial Interface
+</h1>
+
+<a name="wp17062"></a><p class="pBody">
+
+Perform the steps in this section to configure the USB serial interface to communicate with your probe.
+</p>
+
+<a name="wp17063"></a><p class="pHTaskSubhead">
+
+Procedure
+</p>
+
+<a name="wp17064"></a>
+<ol start="1"><li class="LL1Seq">Plug in the probe&#8217;s USB cable.</li></ol>
+<a name="wp17065"></a>
+<ol start="2"><li class="LL1Seq">After plugging in the probe&#39;s USB cable, Windows automatically registers the port as COM<span class=" cItalic">X</span>, where X is the next available number. Linux registers it as <span class=" cItalic">/dev/ttyACMX</span>, where X is the next available number.</li></ol>
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack"><img src="../MGC/images/blank2x2.png" /></span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteTip"></td>
+    <td valign="top">
+            
+<a name="wp17069"></a><p class="pnoteInfo">
+
+        <span class=" cBold">	Tip</span><span class=" cCourier cP10">: /dev/ttyACM0</span> is the typical device name created by the OS, but if other USB serial devices are active at connection time, the number portion (0) may increase.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp17070"></a>
+<ol start="3"><li class="LL1Seq">Connect to the probe with a terminal emulator. You can use the emulator that comes with Sourcery CodeBench. See <a href="connecting09.html"  onclick='oT("CRF","connecting09.html");return false;'>Connecting to the Sourcery Probe Console from Sourcery CodeBench</a>. </li></ol>
+<a name="wp17074"></a>
+<ol start="4"><li class="LL1Seq">After connecting, press the <span class=" cBold">&lt;esc&gt;</span> key in the terminal emulator. This brings up the Sourcery Probe Personal Console Menu.</li></ol>
+<a name="wp17078"></a>
+<ol start="5"><li class="LL1Seq">In this menu, you can replay (option 5), the bootup log. This log shows you the currently assigned IP address.</li></ol>
+<table class="notes">
+  <tr class="NotesUpperRuleRed">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesRed">Caution</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp17088"></a><p class="pnoteSWCaution">
+
+        	Always close the terminal program or the Terminal view in Sourcery CodeBench before you unplug the probe.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleRed">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp15427"></a><p class="pBody">
+
+The serial port settings for Sourcery Probe Personal are as follows. See <a href="connecting09.html#wp17046"  onclick='oT("CRF","connecting09.html#wp17046");return false;'>Figure&#160;2&#8209;4</a> for an example.
+</p>
+
+<a name="wp10837"></a>
+<ul><li class="LL1BulSolid">Port: COM<span class=" cItalic">X</span> (<span class=" cBold">NOTE:</span> for Linux it is <span class=" cItalic">/dev/ttyACMX)</span></li></ul>
+
+<a name="wp16692"></a>
+<ul><li class="LL1BulSolid">Baud: 115200</li></ul>
+
+<a name="wp10838"></a>
+<ul><li class="LL1BulSolid">Data Bits: 8</li></ul>
+
+<a name="wp10839"></a>
+<ul><li class="LL1BulSolid">Parity: None</li></ul>
+
+<a name="wp10840"></a>
+<ul><li class="LL1BulSolid">Stop Bits: 1</li></ul>
+
+<a name="wp10841"></a>
+<ul><li class="LL1BulSolid">Flow control: none</li></ul>
+
+<a name="wp17119"></a><p class="pHTaskSubhead">
+
+Related Topics
+</p>
+
+<a name="wp17127"></a><p class="pBody">
+
+<a href="connecting09.html"  onclick='oT("CRF","connecting09.html");return false;'>Connecting to the Sourcery Probe Console from Sourcery CodeBench</a>
+</p>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_personal";
+   DocTitle = "Mentor Embedded Sourcery Probe Personal Hardware Manual";
+   PageTitle = "Configuring the USB Serial Interface";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "Configuring.the.USB.Serial.Interface"
+   ThisTopic = "ConfiguringtheUSBSerialInterface";
+   CurrentFile = "connecting07.html";
+   CurrentFileID = "17";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe Personal Hardware Manual&nbsp;2.3.4
+    <br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    <br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

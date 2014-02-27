@@ -1,0 +1,368 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:22:23 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>User Defined Access Lists</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("Sourcery Probe Configuration ","majicconfig01","Automatic Access Mode","majicconfig14","User Defined Access Lists","majicconfig15","22");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp27282"></a><h1 class="pHeading3 FontLevel1" id="MGC27282">
+
+
+User Defined Access Lists
+</h1>
+
+<a name="wp27283"></a><p class="pBody">
+
+To use the ON_RESET, ON_STOP, ON_GO, and IDLE_MODE features, you must define a set of memory accesses to perform on those event(s). The Mentor Embedded Sourcery Probe provides various access list descriptors for defining the access sequence for each case, and the <span class=" cItalic">cmd_desc.maj</span> command file provides primitives for describing these sequences. This file should be read in the target initialization command file for your board if you intend to use any of these features.
+</p>
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp27295"></a><p class="pnoteNote">
+
+        	Do NOT change the <span class=" cItalic">cmd_desc.maj</span> command file. It is read during initialization to define the primitives you require to define access sequences appropriate for your target.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp27296"></a><p class="pBody">
+
+Normally the commands to preset these sequences are added to the target initialization file. Each descriptor is a maximum of 16 words long, in the following format:
+</p>
+
+<a name="wp27297"></a><pre class="pCode">
+ew MEP_ON_STOP_CMD   = en,  { @op, addr [ , data [ , mask ] ] }...
+</pre>
+
+<a name="wp27298"></a><pre class="pCode">
+ew MEP_ON_GO_CMD     = en,  { @op, addr [ , data [ , mask ] ] }...
+</pre>
+
+<a name="wp27299"></a><pre class="pCode">
+ew MEP_ON_RESET_CMD  = en,  { @op, addr [ , data [ , mask ] ] }...
+</pre>
+
+<a name="wp27300"></a><pre class="pCode">
+ew MEP_IDLE_MODE_CMD = int, { @op, addr [ , data [ , mask ] ] }...
+</pre>
+
+<a name="wp27637"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp27345"></a><p class="pBody">
+
+Where:
+</p>
+<div id="TableDivQz"></div>
+<div align="center">
+
+
+<a name="wp27306"></a><p class="pTableTitle" id="MGC27306">
+
+Table 3&#8209;13. 
+Descriptor Components
+</p>
+
+
+<table border="1" cellpadding="5" cellspacing="0" id="wp27306table27302">
+  <tr align="left" valign="top">
+    <td id='Row1Column1'  style='width:0.617in'>
+
+
+<a name="wp27310"></a><p class="pTableCell" id="MGC27306">
+en</p></td>
+
+    <td id='Row1Column2'  style='width:5.0in'>
+
+
+<a name="wp27312"></a><p class="pTableCell">
+enable:    0 to disable, 1 to enable</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row2Column1'  style='width:0.617in'>
+
+
+<a name="wp27314"></a><p class="pTableCell">
+int</p></td>
+
+    <td id='Row2Column2'  style='width:5.0in'>
+
+
+<a name="wp27316"></a><p class="pTableCell">
+interval: 0 to disable, non-0 for interval in milliseconds.</p>
+<a name="wp27317"></a><p class="pTableCell">
+  &#160;</p>
+<a name="wp27318"></a><p class="pTableCell">
+	Although specified in milliseconds, timing accuracy is not maintained below 100ms granularity.</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row3Column1' >
+
+
+<a name="wp27320"></a><p class="pTableCell">
+op</p></td>
+
+    <td id='Row3Column2' >
+
+
+<a name="wp27322"></a><p class="pTableCell">
+opcode:</p>
+<a name="wp28506"></a><p class="pTableCell">
+  &#160;</p>
+<a name="wp28507"></a><p class="pTableCell">
+$ucd_rd8     //  8-bit read operation</p>
+<a name="wp28508"></a><p class="pTableCell">
+$ucd_rd16    // 16-bit read operation</p>
+<a name="wp27326"></a><p class="pTableCell">
+$ucd_rd32    // 32-bit read operation </p>
+<a name="wp27327"></a><p class="pTableCell">
+$ucd_wr8     //  8-bit write operation </p>
+<a name="wp27328"></a><p class="pTableCell">
+$ucd_wr16    // 16-bit write operation </p>
+<a name="wp27329"></a><p class="pTableCell">
+$ucd_wr32    // 32-bit write operation </p>
+<a name="wp27330"></a><p class="pTableCell">
+$ucd_rmw8    //  8-bit RdModWr operation</p>
+<a name="wp27331"></a><p class="pTableCell">
+$ucd_rmw16   // 16-bit RdModWr operation</p>
+<a name="wp27332"></a><p class="pTableCell">
+$ucd_rmw32   // 32-bit RdModWr operation</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row4Column1' >
+
+
+<a name="wp27334"></a><p class="pTableCell">
+addr</p></td>
+
+    <td id='Row4Column2' >
+
+
+<a name="wp27336"></a><p class="pTableCell">
+Address of the access (must be properly aligned for op size). If you are using an MMU, the address should be specified as a virtual address that is always accessible. 	 The address is always 32-bits. On MIPS64 targets, the address is sign extended for kseg0/1 addresses.</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row5Column1' >
+
+
+<a name="wp27338"></a><p class="pTableCell">
+data</p></td>
+
+    <td id='Row5Column2' >
+
+
+<a name="wp27340"></a><p class="pTableCell">
+Data value for $ucd_wr and $ucd_rmw (omit for $ucd_rd) </p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row6Column1' >
+
+
+<a name="wp27342"></a><p class="pTableCell">
+mask</p></td>
+
+    <td id='Row6Column2' >
+
+
+<a name="wp27344"></a><p class="pTableCell">
+Data mask for $ucd_rmw (1&#39;s are bits to replace with data)</p></td>
+
+
+</tr>
+
+
+</table>
+
+</div>
+<div id='EndTable'> </div>
+<p class="pBody">
+<br clear='left' class='Blank4Table' />
+
+
+</p>
+
+<a name="wp27346"></a><p class="pzHeading">
+
+Examples
+</p>
+
+<a name="wp27347"></a><pre class="pCode">
+ew MEP_ON_RESET_CMD = 1, @$ucd_rd8, FFF00003
+</pre>
+
+<a name="wp27348"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp27349"></a><p class="pBody">
+
+Defines an On-Reset command that reads the byte at 0xFFF00003 after the probe resets the target.
+</p>
+
+<a name="wp27350"></a><pre class="pCode">
+ew MEP_ON_STOP_CMD = 1, @$ucd_rmw16, 80000000, C00, F00
+</pre>
+
+<a name="wp27351"></a><pre class="pCode">
+ew MEP_ON_GO_CMD   = 1, @$ucd_rmw16, 80000000, 300, F00
+</pre>
+
+<a name="wp27352"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp27353"></a><p class="pBody">
+
+Defines On-Stop and On-Go commands that read a 16-bit value from 80000000, masks off bits 11..8, sets those bits to 1100 (On-Stop) or 0011 (On-Go), then writes the result back to 80000000. Other bits in that register are not changed by these commands.
+</p>
+
+<a name="wp27354"></a><pre class="pCode">
+ew MEP_IDLE_MODE_CMD = 0n250, @$ucd_wr32, 0x40000000, 0n5000
+</pre>
+
+<a name="wp27355"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp27356"></a><p class="pBody">
+
+Defines an Idle-Mode command that writes the 32-bit value 5000 (decimal) to the register at 0x40000000 every 250 milliseconds.
+</p>
+
+<a name="wp27357"></a><pre class="pCode">
+ew MEP_ON_RESET_CMD  = 0
+</pre>
+
+<a name="wp27358"></a><pre class="pCode">
+ew MEP_ON_STOP_CMD   = 0
+</pre>
+
+<a name="wp27359"></a><pre class="pCode">
+ew MEP_ON_GO_CMD     = 0
+</pre>
+
+<a name="wp27360"></a><pre class="pCode">
+ew MEP_IDLE_MODE_CMD = 0
+</pre>
+
+<a name="wp27361"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp27216"></a><p class="pBody">
+
+Disables the On-Reset, On-Stop, On-Go, and Idle-Mode command descriptors.
+</p>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "User Defined Access Lists";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "User.Defined.Access.Lists"
+   ThisTopic = "UserDefinedAccessLists";
+   CurrentFile = "majicconfig15.html";
+   CurrentFileID = "22";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    <br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    <br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

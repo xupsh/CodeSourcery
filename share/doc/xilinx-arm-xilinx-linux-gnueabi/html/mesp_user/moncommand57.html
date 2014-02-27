@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:23:56 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>range Address Range</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("MON Command Language ","moncommand01","MON Operands","moncommand50","range Address Range","moncommand57","79");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp6801"></a><h1 class="pzCmdFunc FontLevel1" id="MGC6801">
+
+<a name="CRefID59915"></a>
+range <a name="CRefID34090"></a>Address Range
+</h1>
+
+
+
+<a name="wp6802"></a><p class="pBody">
+
+[<span class=" cItalic">addr</span>] [<span class=" cBold">L</span> <span class=" cItalic">number</span>]
+</p>
+
+<a name="wp6803"></a><pre class="pCode">
+<span class=" cItalic">addr addr2
+</span></pre>
+
+<a name="wp6804"></a><pre class="pCode">
+<span class=" cBold">*</span>[<span class=" cBold">:</span><span class=" cNoBold cNoItalic cBlack">space</span>]
+</pre>
+
+<a name="wp6805"></a><p class="pzHeading">
+
+Description
+</p>
+
+<a name="wp6806"></a><p class="pzShortDesc">
+
+The <span class=" cItalic">range </span>operand specifies the location of one or more objects in either a memory address space or a register space for the Display/Find, Move, and Enter/Fill commands.
+</p>
+
+
+<a name="wp6807"></a><pre class="pCode">
+<span class=" cItalic">addr</span> &#151; Specifies the starting address for the range.
+</pre>
+
+<a name="wp6808"></a><pre class="pCode">
+<span class=" cItalic">number</span> &#151; Decimal number of objects in the range.
+</pre>
+
+<a name="wp6809"></a><pre class="pCode">
+<span class=" cItalic">addr2</span><span class=" cNoBold cNoItalic cBlack"> </span><span class=" cItalic">&#151; addr</span><span class=" cNoBold cNoItalic cBlack"> </span>specifying the last address in the <span class=" cItalic">range</span>.
+The <span class=" cItalic">range </span>consists of the objects through and including the object at this 
+address.
+</pre>
+
+<a name="wp6810"></a><pre class="pCode">
+<span class=" cBold">*[:</span><span class=" cNoBold cNoItalic cBlack">space</span><span class=" cBold">]</span>&#151; All addresses in the virtual or specified memory space.
+</pre>
+
+<a name="wp6811"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp6812"></a><p class="pBody">
+
+If<span class=" cItalic"> addr</span> is not supplied, the<span class=" cItalic"> range </span>begins where the <span class=" cItalic">range </span>of the previous Display or Enter command left off, or at virtual address 0 if this is the first Display or Enter command. If neither &ldquo;<span class=" cBold">L</span><span class=" cItalic"> number</span>&rdquo; nor <span class=" cItalic">addr2</span> is supplied, the<span class=" cItalic"> range </span>consists of a default number of objects.
+</p>
+
+<a name="wp6813"></a><p class="pzHeading">
+
+Examples
+</p>
+
+<a name="wp6814"></a><pre class="pCode">
+a0000000 a00003ff // 1k starting at virtual address a0000000.
+</pre>
+
+<a name="wp6815"></a><pre class="pCode">
+0:P L 1024              // 1k starting at physical address 0.
+</pre>
+
+<a name="wp6816"></a><pre class="pCode">
+100:0 L 10               // 10 objects beginning at offset 100 in kseg0 space.
+</pre>
+
+<a name="wp6817"></a><pre class="pCode">
+my_ptr                  // Default number of objects at offset in space
+                  // indicated by the symbol my_ptr.
+</pre>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "range Address Range";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "range.Address.Range"
+   ThisTopic = "UserDefinedAccessLists";
+   CurrentFile = "moncommand57.html";
+   CurrentFileID = "79";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    <br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    <br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

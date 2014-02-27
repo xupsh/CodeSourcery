@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:23:56 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>FW File Write</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("MON Command Language ","moncommand01","MON Command Details","moncommand04","FW File Write","moncommand26","48");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp5988"></a><h1 class="pzCmdFunc FontLevel1" id="MGC5988">
+
+<a name="CRefID41528"></a>
+FW <a name="CRefID13984"></a>File Write
+</h1>
+
+
+
+<a name="wp29096"></a><p class="pzMiscInfo">
+
+Availability: ALL
+</p>
+
+<a name="wp5989"></a><p class="pzHeading">
+
+Syntax
+</p>
+
+<a name="wp5990"></a><p class="pzUsage">
+
+FW[A|O] {O|C|M} {file_name|-|+} [range]
+</p>
+
+<a name="wp5991"></a><p class="pzUsage">
+
+FW[A|O] {MDI} {file_name} 
+</p>
+
+<a name="wp5992"></a><p class="pzHeading">
+
+Description
+</p>
+
+<a name="wp5993"></a><p class="pzShortDesc">
+
+The File Write command allows you to write a file. The type of file is specified by the first parameter. The valid types for a File Write are described in the following text.
+</p>
+
+
+<a name="wp5994"></a>
+<ul class="ulSmSpace"><li class="LLzptArg">[<span class=" cBold">A</span>|<span class=" cBold">O</span>] - Means append to or overwrite the indicated file unconditionally. Normally, if the file specified exists, you will be prompted for permission to overwrite or (for command and output files) append to it. To avoid that prompt, use the <span class=" cBold">FWA</span> command to append without prompt or the <span class=" cBold">FWO</span> command to overwrite without prompt.</li></ul>
+
+<a name="wp5995"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cBold">M</span> - Specifies a memory image file (binary). The default filename extension is<span class=" cItalic"> .mem</span>.</li></ul>
+
+<a name="wp5996"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cBold">C</span> - Specifies a command file; each command subsequently entered is written to the command file before it is executed. This makes it easy to capture a command sequence which can be replayed later with an FR command. The default filename extension is <span class=" cItalic">.maj</span>.</li></ul>
+
+<a name="wp5997"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cBold">O</span> - Specifies an output capture log file. The default filename extension is <span class=" cItalic">.out</span>.</li></ul>
+
+<a name="wp5998"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cBold">MDI </span>- Specifies a MDI Configuration file. The default filename extension is <span class=" cItalic">.cfg</span>.</li></ul>
+
+<a name="wp5999"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cItalic">file_name</span> - Is the pathname of the file to be written, relative to the current working directory. If <span class=" cItalic">file_name</span> does not include an extension, MON will supply the default file name extension. If no extension is desired, <span class=" cItalic">file_name </span>should end with a &ldquo;<span class=" cBold">.</span>&rdquo;, which will be removed before opening the file.</li></ul>
+
+<a name="wp6000"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cItalic">range</span> - Specifies the region of memory (or block of registers) to be written to the memory image file. See <a href="moncommand57.html"  onclick='oT("CRF","moncommand57.html");return false;'>range Address Range</a>. <span class=" cItalic">range</span> and <span class=" cItalic">addr</span> specify the range of data to be written to a Memory image file.</li></ul>
+
+<a name="wp6004"></a>
+<ul class="ulSmSpace"><li class="LLzptArg">{+|-} - Means to suspend/restart writing to a file (O and C only). Once writing to a Command or Output file has been initiated, output can be temporarily suspended with &ldquo;<span class=" cBold">-</span>&rdquo; and later resumed with &ldquo;<span class=" cBold">+</span>&rdquo;.</li></ul>
+
+<a name="wp6005"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cItalic">p_value</span> is a parameter value (Valid only with &ldquo;FR C&rdquo;).</li></ul>
+
+<a name="wp6006"></a><p class="pzShortDesc">
+
+Doing a File Write to the <span class=" cBold">O</span> (Output) file type causes each line in the MAJIC view (including the echo of commands entered) to be logged into the specified file. Doing a File Write to a <span class=" cBold">C </span>(Command) file type records only the commands entered, but not the prompts and responses from MON. This is a convenient way to create script files that can be used to automate repetitive command sequences or to quickly recreate an interrupted debugging session.
+</p>
+
+
+<a name="wp6007"></a><p class="pzShortDesc">
+
+Memory image files contain raw binary data &ldquo;uploaded&rdquo; from the target. They normally represent the contents of some range of memory at the time they were created, but they can also contain a dump of the processor&#8217;s register contents. The file contains no control information (such as the original address<span class=" cItalic"> range</span> written to the file), so a Memory file can be written from one location and later read back into a different location.
+</p>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "FW File Write";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "FW.File.Write"
+   ThisTopic = "UserDefinedAccessLists";
+   CurrentFile = "moncommand26.html";
+   CurrentFileID = "48";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    <br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    <br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:23:56 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>MON Command Basics</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("MON Command Language ","moncommand01","MON Command Basics","moncommand02","Command Lists","moncommand02","24");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp5368"></a><h1 class="pHeading2 FontLevel1" id="MGC5368">
+
+<a name="CRefID54017"></a><a name="CRefID76741"></a>
+MON Command Basics
+</h1>
+<a name="wp5369"></a><p class="pBody">
+
+In learning the MON Command Language, it helps to know some of its design philosophy. Commands are usually formed from the first letter of each word in the spoken command name. Command names are of the form Action, Action Object, or Object Action (for example, Go, Display Word, or File Read).
+</p>
+
+<a name="wp5370"></a><p class="pBody">
+
+Command names were chosen for being easy to remember, and the command mnemonics are simple abbreviations. The number of basic commands is kept to a minimum - there is just one Display command, for instance. With the exception that symbolic MON commands are not case sensitive. 
+</p>
+
+<a name="wp5375"></a><h2 class="pHeading3NoSplit FontLevel2" id="MGC5375">
+
+<a name="CRefID24313"></a>
+MON Help
+</h2>
+<a name="wp5377"></a><p class="pBody">
+
+MON features a hierarchical help system. The following types of commands are available:
+</p>
+
+<a name="wp5378"></a><pre class="pCode">
+H          // shows the list of commands.
+</pre>
+
+<a name="wp5379"></a><pre class="pCode">
+H&#160;D          // gives general help on display commands.
+</pre>
+
+<a name="wp5380"></a><pre class="pCode">
+H&#160;DW          // gives detailed help on the display word command.
+</pre>
+
+<a name="wp5381"></a><pre class="pCode">
+H ops          // shows the list of command operands for which on-line help 
+         // is available.
+</pre>
+
+<a name="wp5382"></a><pre class="pCode">
+H addr         // gives detailed help on address operands.
+</pre>
+
+<a name="wp5383"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp5387"></a><h2 class="pHeading3NoSplit FontLevel2" id="MGC5387">
+
+<a name="CRefID96508"></a>
+Command Lists
+</h2>
+<a name="wp5389"></a><p class="pBody">
+
+You can enter multiple commands on a single line, separated by &ldquo;<span class=" cBold">;</span>&rdquo;. For example, the following line sets the stack pointer and then displays it. 
+</p>
+
+<a name="wp5390"></a><pre class="pCode">
+ew sp = a00ff000; dw sp
+
+</pre>
+
+<a name="wp5391"></a><p class="pBody">
+
+Command lines can contain C-style comments (for example, &ldquo;/*This is a comment*/&rdquo;) and C++ comments (for example, &ldquo;//...&rdquo;). 
+</p>
+
+<a name="wp12141"></a><p class="pBody">
+
+Comments are replaced with a single blank character when the command is being interpreted. Comments are useful for documenting command files.
+</p>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "MON Command Basics";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "MON.Command.Basics"
+   ThisTopic = "UserDefinedAccessLists";
+   CurrentFile = "moncommand02.html";
+   CurrentFileID = "24";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    <br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    <br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

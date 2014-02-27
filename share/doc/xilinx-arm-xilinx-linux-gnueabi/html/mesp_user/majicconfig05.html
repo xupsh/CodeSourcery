@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:22:23 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>Creating a Custom Initialization Script Using a Template</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("Sourcery Probe Configuration ","majicconfig01","Sourcery Probe Target Initialization Scripts","majicconfig04","Creating a Custom Initialization Script Using a Template","majicconfig05","12");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp26423"></a><h1 class="pHeading3 FontLevel1" id="MGC26423">
+
+<a name="CRefID47175"></a>
+Creating a Custom Initialization Script Using a Template
+</h1>
+
+<a name="wp26424"></a><p class="pBody">
+
+This section describes how to create a custom initialization script from a raw template to adapt to your custom board. If your board is based on a supported reference platform, then you should follow the procedure in <a href="majicconfig06.html"  onclick='oT("CRF","majicconfig06.html");return false;'>Adapting a Reference Board Initialization Script to Your Board</a> instead.
+</p>
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp26432"></a><p class="pnoteNote">
+
+        	The script file <span class=" cItalic">template.maj</span> provides detailed instructions for editing it to support your specific board. You must follow these instructions to complete your initialization script.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp28135"></a><p class="pHTaskSubhead">
+
+Prerequisite
+</p>
+
+<a name="wp28133"></a><p class="pBody">
+
+Locate the Sourcery Probe target initialization files within the Sourcery CodeBench installation.
+</p>
+
+<a name="wp26460"></a><p class="pHTaskSubhead">
+
+Procedure
+</p>
+
+<a name="wp26461"></a>
+<ol start="1"><li class="LL1Seq">Import <span class=" cItalic">template.maj</span> from the Sourcery CodeBench installation into your project using <span class=" cItalic">File &gt; Import... / General / File System</span>:</li></ol>
+<a name="wp28266"></a><p class="pL1Body">
+See <a name="EW11"></a><a href="majic_setup2.html#CRefID12259" onclick='oT("CRF","majic_setup2.html#CRefID12259");'><span class=" cLinkOverride">Table&#160;1&#8209;1</span></a> for the installation directory for your specific architecture and OS, then look in the <span class=" cItalic">tsp/_templates </span>subdirectory.</p>
+<a name="wp26463"></a>
+<ol start="2"><li class="LL1Seq">Rename <span class=" cItalic">template.maj</span> in your project to a more suitable name (<span class=" cItalic">&lt;target&gt;.maj</span>). It is recommended to use the name of the board because it is a board initialization file.</li></ol>
+<a name="wp26467"></a>
+<ol start="3"><li class="LL1Seq">Open <span class=" cItalic">&lt;target&gt;.maj</span> within Sourcery CodeBench or use a text editor.</li></ol>
+<a name="wp26468"></a>
+<ol start="4"><li class="LL1Seq">Carefully read the comment block at the top of the board initialization file. This comment block outlines what needs to be modified to accommodate the details of your board. </li></ol>
+<a name="wp26469"></a>
+<ol start="5"><li class="LL1Seq">Edit the file to accommodate your board:</li></ol>
+<a name="wp26470"></a>
+<ul><li class="LL2BulSolid">The target initialization script must be compatible with the boot code. In general it is best to do a bare minimum of initialization in the script and leave as much as possible to the boot code.</li></ul>
+<a name="wp26471"></a>
+<ul><li class="LL2BulSolid">Depending on the existing level of support for your target, you should consult different sources for answers to the template questions:</li></ul>
+<a name="wp26472"></a><p class="pL2Body">
+If there was no prior support for your target anywhere, consult your board documentation. 
+<br />
+<br />If you have access to existing bootloader code, consult the system clocking and memory controller initialization code and derive the script startup code from it. Additionally, consult your board supplier for existing probe initialization scripts.</p>
+<a name="wp26473"></a>
+<ul><li class="LL2BulSolid">When you get to TODO #4, Memory Controller Setup, consider defining names to help make the script more readable. For example, the AMC_RCR register controls whether the memory is laid out in reboot mode or remap mode in many ARM targets. You can manage this register in several ways:</li></ul>
+<a name="wp26474"></a>
+<ul><li class="LL3BulHollow">Directly by adding the following command to set the register to 1 through its memory-mapped address:</li></ul>
+<a name="wp26475"></a><pre class="pCodeIndent">
+   ew 0xFFE00020:P = 0x00000001 //Write AMC_RCR:Issue Re-map command
+</pre>
+
+<a name="wp26476"></a><pre class="pCodeIndent">
+
+</pre>
+
+<a name="wp26479"></a>
+<ul><li class="LL3BulHollow">Set a MON local variable to the register&#39;s address (see <a name="EW12"></a><a href="moncommand63.html#CRefID64155" onclick='oT("CRF","moncommand63.html#CRefID64155");'><span class=" cLinkOverride">MON Local Variables and Option References</span></a>) and then de-reference that variable to set the register:</li></ul>
+<a name="wp26481"></a><pre class="pCodeIndent">
+   ew $AMC_RCR = 0xFFE00020:P               //Set $AMC_RCR to the register address
+</pre>
+
+<a name="wp26482"></a><pre class="pCodeIndent">
+   ew @$AMC_RCR = 0x00000001               //Write AMC_RCR : Issue Re-map command
+</pre>
+
+<a name="wp26483"></a><pre class="pCodeIndent">
+
+</pre>
+
+<a name="wp26484"></a><p class="pL3Body">
+Note that this method also can only reference memory-mapped registers.</p>
+<a name="wp26488"></a>
+<ul><li class="LL3BulHollow">Use a <a href="majicconfig10.html"  onclick='oT("CRF","majicconfig10.html");return false;'>Register Definition File</a> to declare the register name and field names, and set the register value by name:</li></ul>
+<a name="wp26489"></a><pre class="pCodeIndent">
+   ew AMC_RCR = 0x00000001 // Write to AMC_RCR by name
+</pre>
+
+<a name="wp26490"></a><pre class="pCodeIndent">
+
+</pre>
+
+<a name="wp26491"></a><p class="pL3Body">
+Note that if your register names conflict with any program symbols you have loaded, the program symbols have precedence. You can still refer to the register name by adding a &ldquo;.&rdquo; (dot) in front of the register name.</p>
+<a name="wp26492"></a>
+<ul><li class="LL3BulHollow">Create and reference a memory-mapped symbol using the EN Enter Names command. The disadvantage of this approach is that program symbols take precedence and there is no way to reference this particular symbol in such a case. It also limits references to memory-mapped registers. Example usage:</li></ul>
+<a name="wp26493"></a><pre class="pCodeIndent">
+   en AMC_RCR = 0xFFE00020:P // Set AMC_RCR to the register address
+</pre>
+
+<a name="wp26494"></a><pre class="pCodeIndent">
+   ew AMC_RCR = 0x00000001 // Write AMC_RCR : Issue Re-map command
+</pre>
+
+<a name="wp26495"></a><pre class="pCodeIndent">
+
+</pre>
+
+<a name="wp26496"></a><p class="pHTaskSubhead">
+
+Related Topics
+</p>
+
+<a name="wp26500"></a><p class="pBody">
+
+<a href="majicconfig07.html"  onclick='oT("CRF","majicconfig07.html");return false;'>Components of Initialization Files</a>
+</p>
+
+<a name="wp26504"></a><p class="pBody">
+
+<a href="majicconfig04.html"  onclick='oT("CRF","majicconfig04.html");return false;'>Sourcery Probe Target Initialization Scripts</a>
+</p>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "Creating a Custom Initialization Script Using a Template";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "Creating.a.Custom.Initialization.Script.Using.a.Template"
+   ThisTopic = "CreatingaCustomInitializationScriptUsingaTemplate";
+   CurrentFile = "majicconfig05.html";
+   CurrentFileID = "12";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    
+<br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    
+<br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

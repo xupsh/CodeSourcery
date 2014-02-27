@@ -1,0 +1,452 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:23:56 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>expr Expression</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("MON Command Language ","moncommand01","MON Operands","moncommand50","expr Expression","moncommand53","75");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp6564"></a><h1 class="pzCmdFunc FontLevel1" id="MGC6564">
+
+<a name="CRefID74799"></a>
+expr <a name="CRefID15762"></a>Expression
+</h1>
+
+
+
+<a name="wp6565"></a><p class="pzHeading">
+
+Syntax
+</p>
+
+<a name="wp6566"></a><p class="pzUsage">
+
+<span class="cOptRpl">addr</span>
+</p>
+
+<a name="wp6567"></a><p class="pzUsage">
+
+(<span class="cOptRpl">expr</span>)
+</p>
+
+<a name="wp6568"></a><p class="pzUsage">
+
+<span class="cOptRpl">expr op expr</span>
+</p>
+
+<a name="wp6569"></a><p class="pzUsage">
+
+<span class="cOptRpl">unary-op expr</span>
+</p>
+
+<a name="wp6570"></a><p class="pzHeading">
+
+Description
+</p>
+
+<a name="wp6571"></a><p class="pzShortDesc">
+
+This operand describes the expressions constructed from addresses. Expressions combine addresses using the operators listed below. Parenthesized sub-expressions are allowed.
+</p>
+
+
+<a name="wp6572"></a><p class="pzShortDesc">
+
+All arithmetic and comparisons are performed in unsigned 64-bit integer mode, even if the operands appear signed. For instance, &ldquo;-1&rdquo; is treated as the unsigned value
+</p>
+
+
+<a name="wp6573"></a><p class="pzBody">
+
+&ldquo;0xffffffffffffffff&rdquo;. This also means that the right shift operation always zero fills the high order bits.
+</p>
+
+
+<a name="wp6574"></a><p class="pzBody">
+
+The following operators are listed in order of decreasing precedence. Unless modified by parentheses, the associativity of operators of the same precedence is left-to-right except unary operators, which associate right-to-left.
+</p>
+<div id="TableDivQz"></div>
+<div align="center">
+
+
+<table border="0" cellpadding="2" cellspacing="2" id="wp6579table6575">
+  <tr align="left" valign="top">
+    <td id='Row1Column1'  style='width:0.90828in'>
+
+&#160;</td>
+    <td id='Row1Column2'  style='width:1.11539in'>
+
+
+<a name="wp6579"></a><p class="pTableCell">
+(  )</p></td>
+    <td id='Row1Column3'  style='width:2.85996in'>
+
+
+<a name="wp6581"></a><p class="pTableCell">
+Parenthesized sub-expressions</p></td>
+
+</tr>
+  <tr align="left" valign="top">
+    <td id='Row2Column1'  style='width:0.90828in'>
+
+
+<a name="wp6583"></a><p class="pTableCell">
+<span class=" cItalic">unary-op</span></p></td>
+    <td id='Row2Column2'  style='width:1.11539in'>
+
+
+<a name="wp6585"></a><p class="pTableCell">
++ - ~ ! @</p></td>
+    <td id='Row2Column3'  style='width:2.85996in'>
+
+
+<a name="wp6587"></a><p class="pTableCell">
+Unary plus, unary minus, bit wise complement, logical NOT, address at</p></td>
+
+</tr>
+  <tr align="left" valign="top">
+    <td id='Row3Column1' >
+
+&#160;</td>
+    <td id='Row3Column2' >
+
+
+<a name="wp6591"></a><p class="pTableCell">
+<span class=" cBold">@</span>.<span class="cDefault">{</span>1<span class="cDefault">|</span>2<span class="cDefault">|</span>4<span class="cDefault">|</span>8<span class="cDefault">}</span></p></td>
+    <td id='Row3Column3' >
+
+
+<a name="wp6593"></a><p class="pTableCell">
+1, 2, 4, or 8 byte value at (indirection)</p></td>
+
+</tr>
+  <tr align="left" valign="top">
+    <td id='Row4Column1' >
+
+
+<a name="wp6595"></a><p class="pTableCell">
+<span class=" cItalic">op</span></p></td>
+    <td id='Row4Column2' >
+
+
+<a name="wp6597"></a><p class="pTableCell">
+*  /  %</p></td>
+    <td id='Row4Column3' >
+
+
+<a name="wp6599"></a><p class="pTableCell">
+Multiply, Divide, Modulo</p></td>
+
+</tr>
+  <tr align="left" valign="top">
+    <td id='Row5Column1' >
+
+&#160;</td>
+    <td id='Row5Column2' >
+
+
+<a name="wp6603"></a><p class="pTableCell">
++  - </p></td>
+    <td id='Row5Column3' >
+
+
+<a name="wp6605"></a><p class="pTableCell">
+Add, Subtract</p></td>
+
+</tr>
+  <tr align="left" valign="top">
+    <td id='Row6Column1' >
+
+&#160;</td>
+    <td id='Row6Column2' >
+
+
+<a name="wp6609"></a><p class="pTableCell">
+&lt;&lt;  &gt;&gt;</p></td>
+    <td id='Row6Column3' >
+
+
+<a name="wp6611"></a><p class="pTableCell">
+Left shift, Right shift</p></td>
+
+</tr>
+  <tr align="left" valign="top">
+    <td id='Row7Column1' >
+
+&#160;</td>
+    <td id='Row7Column2' >
+
+
+<a name="wp6615"></a><p class="pTableCell">
+&lt; &lt;= &gt; &gt;=</p></td>
+    <td id='Row7Column3' >
+
+
+<a name="wp6617"></a><p class="pTableCell">
+Relational</p></td>
+
+</tr>
+  <tr align="left" valign="top">
+    <td id='Row8Column1' >
+
+&#160;</td>
+    <td id='Row8Column2' >
+
+
+<a name="wp6621"></a><p class="pTableCell">
+== != </p></td>
+    <td id='Row8Column3' >
+
+
+<a name="wp6623"></a><p class="pTableCell">
+Equals, Not equals</p></td>
+
+</tr>
+  <tr align="left" valign="top">
+    <td id='Row9Column1' >
+
+&#160;</td>
+    <td id='Row9Column2' >
+
+
+<a name="wp6627"></a><p class="pTableCell">
+&amp; </p></td>
+    <td id='Row9Column3' >
+
+
+<a name="wp6629"></a><p class="pTableCell">
+Bitwise AND</p></td>
+
+</tr>
+  <tr align="left" valign="top">
+    <td id='Row10Column1' >
+
+&#160;</td>
+    <td id='Row10Column2' >
+
+
+<a name="wp6633"></a><p class="pTableCell">
+^</p></td>
+    <td id='Row10Column3' >
+
+
+<a name="wp6635"></a><p class="pTableCell">
+Bitwise XOR</p></td>
+
+</tr>
+  <tr align="left" valign="top">
+    <td id='Row11Column1' >
+
+&#160;</td>
+    <td id='Row11Column2' >
+
+
+<a name="wp6639"></a><p class="pTableCell">
+|</p></td>
+    <td id='Row11Column3' >
+
+
+<a name="wp6641"></a><p class="pTableCell">
+Bitwise OR</p></td>
+
+</tr>
+  <tr align="left" valign="top">
+    <td id='Row12Column1' >
+
+&#160;</td>
+    <td id='Row12Column2' >
+
+
+<a name="wp6645"></a><p class="pTableCell">
+&amp;&amp;</p></td>
+    <td id='Row12Column3' >
+
+
+<a name="wp6647"></a><p class="pTableCell">
+Logical AND</p></td>
+
+</tr>
+  <tr align="left" valign="top">
+    <td id='Row13Column1' >
+
+&#160;</td>
+    <td id='Row13Column2' >
+
+
+<a name="wp6651"></a><p class="pTableCell">
+|| </p></td>
+    <td id='Row13Column3' >
+
+
+<a name="wp6653"></a><p class="pTableCell">
+Logical OR</p></td>
+
+</tr>
+
+</table>
+
+</div>
+<div id='EndTable'> </div>
+<p class="pzBody">
+<br clear='left' class='Blank4Table' />
+
+</p>
+
+
+<a name="wp24941"></a><p class="pzShortDesc">
+
+Type information (int, float, pointer-to, and so on) is not available. All numeric operands are assumed to be integers, all arithmetic is performed unsigned, and symbols evaluate to their address. Some symbols are scalar values and evaluate to their constant value. An option enum reference is a good example: $&lt;option_name&gt;.&lt;enum&gt; evaluates to the referenced enum&#39;s scalar value.
+</p>
+
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp6663"></a><p class="pnoteNote">
+
+        	The indirection operator is &ldquo;@&rdquo;, rather than the normal C operator &ldquo;*&rdquo;. This is to emphasize that MON does not have the data type information that the C operator requires. &ldquo;@&rdquo; means &ldquo;fetch the address at&rdquo;, so a full word (or double word, for 64-bit MIPS targets) will always be fetched. @.<span class=" cItalic">digit</span> fetches a specific datum size of <span class=" cItalic">digit</span> bytes (1, 2, 4, or 8) from <span class=" cItalic">addr</span>.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp6664"></a><p class="pzShortDesc">
+
+Any reference to a register designator or symbolic name is replaced by the address of the object, not its contents. The first such reference in the expression will also cause the register or symbol&#8217;s address space (for example, &ldquo;General Registers&rdquo; or &ldquo;kuseg&rdquo;) to become the address space associated with the whole expression.
+</p>
+
+
+<a name="wp6665"></a><p class="pzHeading">
+
+Examples
+</p>
+
+<a name="wp6666"></a><pre class="pCode">
+main + 20          // Location 32 bytes after the symbol main.
+</pre>
+
+<a name="wp6667"></a><pre class="pCode">
+@R2            // Location in memory whose virtual address is in R2.
+</pre>
+
+<a name="wp6668"></a><pre class="pCode">
+@PC            // Location of the next instruction to be executed.
+            // Indirection through .PC is especially useful. The
+            // command &ldquo;DW @PC L 10,i&rdquo; will disassemble the 10
+            // instructions beginning with the next instruction to be
+            // executed.
+</pre>
+
+<a name="wp6669"></a><pre class="pCode">
+@RA            // Location in memory whose virtual address is in RA.
+</pre>
+
+<a name="wp6670"></a><pre class="pCode">
+@ptr            // Virtual address pointed to by the value at the location
+            // defined by the symbol ptr.
+</pre>
+
+<a name="wp6671"></a><pre class="pCode">
+(@ptr+5*4)         // ptr is a symbol that describes a location in some
+            // address space. This expr fetches the word at that
+            // location and adds 20 (decimal) to it.
+</pre>
+
+<a name="wp6672"></a><pre class="pCode">
+(@ptr)|8          // Value at ptr or&#8217;ed with 8.
+</pre>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "expr Expression";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "expr.Expression"
+   ThisTopic = "UserDefinedAccessLists";
+   CurrentFile = "moncommand53.html";
+   CurrentFileID = "75";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    <br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    <br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

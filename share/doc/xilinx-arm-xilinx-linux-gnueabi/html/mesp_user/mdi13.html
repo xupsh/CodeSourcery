@@ -1,0 +1,399 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:25:46 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>MDI Configuration File Format</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("Meta Debug Interface (MDI)","mdi01","Advanced Configuration","mdi10","MDIDeviceList","mdi13","112");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp8653"></a><h1 class="pHeading3 FontLevel1" id="MGC8653">
+
+
+MDI Configuration File Format
+</h1>
+
+<a name="wp8654"></a><p class="pBody">
+
+The MDI configuration file is an ASCII file containing comments (C++ style) and keyword-value pairs. Keywords are not case-sensitive. There are two types of values, strings and numbers. Strings must be enclosed in double quotes (&quot;), unless they are valid identifiers (start with an alphabetic or underscore, and contain only alphanumerics and underscores). Numbers and quoted strings conform to C/C++ language syntax.
+</p>
+
+<a name="wp8655"></a><p class="pBody">
+
+The sample configuration file uses line breaks and indentation to improve readability, but these are not required. As long as there is at least one whitespace character (space, tab, or line break) between all keywords and values the file will be processed correctly.
+</p>
+
+<a name="wp8656"></a><h1 class="pHeading3NoSplit FontLevel1" id="MGC8656">
+
+
+Organization
+</h1>
+<a name="wp8657"></a><p class="pBody">
+
+The configuration file is organized into sections, where each section defines <a href="mdi13.html#wp8658"  onclick='oT("CRF","mdi13.html#wp8658");return false;'>Global</a> settings, a <a href="mdi13.html#wp8669"  onclick='oT("CRF","mdi13.html#wp8669");return false;'>Device</a>, a <a href="mdi13.html#wp8682"  onclick='oT("CRF","mdi13.html#wp8682");return false;'>Controller</a>, or the <a href="mdi13.html#wp8694"  onclick='oT("CRF","mdi13.html#wp8694");return false;'>MDIDeviceList</a>. Conventionally, the Global section is first, followed by all the Device sections, followed by Controller sections and finally the MDIDeviceList section. But the only requirement is that the MDIDeviceList section follows all the Device and Controller sections.
+</p>
+
+<a name="wp8658"></a><h1 class="pHeading3NoSplit FontLevel1" id="MGC8658">
+
+<a name="CRefID50992"></a>
+Global
+</h1>
+<a name="wp8659"></a><p class="pBody">
+
+The Global section defines values for configuration settings that are not associated with a particular target device or connection. This section is optional, but it is strongly recommended to include it and specify the PATH value. The syntax is as follows:
+</p>
+
+<a name="wp8660"></a><pre class="pCode">
+Define Global 
+</pre>
+
+<a name="wp9459"></a><pre class="pCode">
+      PATH          &#160;&#160;&#160;PATHString 
+</pre>
+
+<a name="wp9460"></a><pre class="pCode">
+      LogFile        &#160;&#160;&#160;LogPathString 
+</pre>
+
+<a name="wp9461"></a><pre class="pCode">
+      CommandFile CmdPathString 
+</pre>
+
+<a name="wp9462"></a><pre class="pCode">
+      ConnectMode TargetConnectMode 
+</pre>
+
+<a name="wp9463"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp8661"></a>
+<ul><li class="LL1BulSolid"><span class=" cItalic">PATHString</span> is the full path name of the directory into which Sourcery CodeBench was installed. It is used to locate various files needed by the MDILib without having to add specific directories to the PATH environment variable.</li></ul>
+
+<a name="wp8662"></a>
+<ul><li class="LL1BulSolid"><span class=" cItalic">LogPathString</span> is the full or relative path name of a file which will have detailed MDI session log information and console output written to it. This entry should only be used when requested by Mentor Graphics technical support.</li></ul>
+
+<a name="wp8665"></a>
+<ul><li class="LL1BulSolid"><span class=" cItalic">CmdPathString</span> is the full or relative path name of a default target initialization script (normally <span class=" cItalic">&lt;target&gt;.maj</span>) that will be processed automatically when a device is opened which does not specify a more specific <span class=" cCourier cP10">CommandFile</span> value in its <span class=" cCourier cP10">MDIDeviceList</span>, <span class=" cCourier cP10">Device</span>, or <span class=" cCourier cP10">Controller</span> definitions.</li></ul>
+
+<a name="wp8666"></a>
+<ul><li class="LL1BulSolid">The <span class=" cItalic">CommandFile</span> entry is optional in every definition section, but at least one applicable value is required for every <span class=" cCourier cP10">DevNameString</span> defined in the <a href="mdi13.html#wp8694"  onclick='oT("CRF","mdi13.html#wp8694");return false;'>MDIDeviceList</a> section. If multiple values are available, the order of precedence is the value specified in the <span class=" cCourier cP10">DevNameString</span> definition itself, followed by the value specified in the referenced <a href="mdi13.html#wp8669"  onclick='oT("CRF","mdi13.html#wp8669");return false;'>Device</a> definition, followed by the referenced <a href="mdi13.html#wp8682"  onclick='oT("CRF","mdi13.html#wp8682");return false;'>Controller</a> definition, followed by the <a href="mdi13.html#wp8658"  onclick='oT("CRF","mdi13.html#wp8658");return false;'>Global</a> definition.</li></ul>
+
+<a name="wp9493"></a><p class="pL1Body">
+CommandFile is normally specified in the Device definition, since there are commonly different configuration commands needed for different devices. Specifying a default in the Global definition is useful if you have several devices sharing a common startup command file.</p>
+<a name="wp8668"></a>
+<ul><li class="LL1BulSolid"><span class=" cItalic">TargetConnectMode</span> is one of the following: Default, Reset, Halt, Run. Reset tells MDI to reset the target at target connection time. Halt interrupts the target at connect time, but does not reset it. Run connects to the target, but does not disturb its state. Default is the same as Reset.</li></ul>
+
+<a name="wp8669"></a><h1 class="pHeading3NoSplit FontLevel1" id="MGC8669">
+
+<a name="CRefID39879"></a>
+Device
+</h1>
+<a name="wp8670"></a><p class="pBody">
+
+Each Device section defines a target device and includes the CPU type, memory organization, and the various identification strings required by the MDI Specification. If you have more than one target type with different CPU types or memory organizations, you must provide multiple Device sections to define them. The syntax is as follows: 
+</p>
+
+<a name="wp9504"></a><pre class="pCode">
+Define Device                DevIDString
+</pre>
+
+<a name="wp9505"></a><pre class="pCode">
+      Family &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;FamilyString
+</pre>
+
+<a name="wp9506"></a><pre class="pCode">
+      Class &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;ClassString
+</pre>
+
+<a name="wp9507"></a><pre class="pCode">
+      ISA &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;ISAString
+</pre>
+
+<a name="wp9508"></a><pre class="pCode">
+      Part &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;PartString
+</pre>
+
+<a name="wp9509"></a><pre class="pCode">
+      Vendor &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;VendorString
+</pre>
+
+<a name="wp9510"></a><pre class="pCode">
+      VendorFamily &#160;&#160;VendorFamilyString
+</pre>
+
+<a name="wp9511"></a><pre class="pCode">
+      VendorPart &#160;&#160;&#160;&#160;VendorPartString
+</pre>
+
+<a name="wp9512"></a><pre class="pCode">
+      VendorPartRev &#160;VendorPartRevisionString
+</pre>
+
+<a name="wp9513"></a><pre class="pCode">
+      VendorPartData VendorPartDataString
+</pre>
+
+<a name="wp9514"></a><pre class="pCode">
+      Endian        &#160;&#160;&#160;&#160;&#160;&#160;&#160;{ Big | Little }
+</pre>
+
+<a name="wp9515"></a><pre class="pCode">
+      Cpuid &#160;&#160;&#160;&#160;&#160;&#160;         CPUString
+</pre>
+
+<a name="wp8671"></a><pre class="pCode">
+      CommandFile &#160;&#160;&#160;CmdPathString
+</pre>
+
+<a name="wp13105"></a><pre class="pCode">
+      CoreAccessSel         { 0...32 }
+</pre>
+
+<a name="wp9522"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp8672"></a>
+<ul><li class="LL1BulSolid"><span class=" cItalic">DevIDString</span> is an arbitrary string value used to identify the Device section when it is referenced from the MDIDeviceList section.</li></ul>
+
+<a name="wp9531"></a>
+<ul><li class="LL1BulSolid"><span class=" cItalic">CPUString</span> is a string value giving the specific CPU type identifier. This is the same value specified by the -v command line option when running MON (see <a name="EW68"></a><a href="moncommand01.html#CRefID21126" onclick='oT("CRF","moncommand01.html#CRefID21126");'><span class=" cLinkOverride">MON Command Language</span></a>).</li></ul>
+
+<a name="wp9540"></a>
+<ul><li class="LL1BulSolid">The <span class=" cItalic">Endian</span> value specifies the target system&#39;s memory organization (big-endian or little-endian).</li></ul>
+
+<a name="wp9550"></a>
+<ul><li class="LL1BulSolid"><span class=" cItalic">CmdPathString</span> is the full or relative path name of a startup command file (normally <span class=" cItalic">target.maj</span>) that will be processed automatically when a device is opened which does not specify a more specific CommandFile value in its MDIDeviceList definition. If CommandFile is specified here, the value overrides values specified in the Global and Controller definitions.</li></ul>
+
+<a name="wp13108"></a>
+<ul><li class="LL1BulSolid"><span class=" cItalic">CoreAccessSel</span> corresponds to MON&#39;s -c option. This optional parameter is valid only on multi-core environments and signals the core to which to connect. Note that this option can be overridden in the startup script referenced in the command file. A value of 0 is the same as no selection. This setting is also valid in the MDIDeviceList section. A value here overrides any setting provided in a specific <a href="mdi13.html#wp8694"  onclick='oT("CRF","mdi13.html#wp8694");return false;'>MDIDeviceList</a> device.</li></ul>
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp13706"></a><p class="pnoteNote">
+
+        	Any setting in <a href="mdi13.html#wp8669"  onclick='oT("CRF","mdi13.html#wp8669");return false;'>Device</a> overrides a setting here.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp8678"></a><p class="pBody">
+
+All of the other values are string values that are passed to the debugger to identify the CPU type. The intent of the MDI specification is that each chip vendor will document standard values for these strings for their parts. That may or may not happen, but the Sourcery CodeBench MDI library makes no use of these values. You can set these values to whatever strings your debugger is expecting, if any. Otherwise, the values are arbitrary.
+</p>
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp8681"></a><p class="pnoteNote">
+
+        	Only the Endian and Cpuid values are required to be present in a Device section. The Family and Class values are set to the MDI-specified strings by default, so they can always be omitted. The rest are set to the string NotSet by default, and can be omitted unless your debugger expects them to be set to a particular value (which it must document).
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp8682"></a><h1 class="pHeading3NoSplit FontLevel1" id="MGC8682">
+
+<a name="CRefID33815"></a>
+Controller
+</h1>
+<a name="wp8683"></a><p class="pBody">
+
+Each Controller section defines a particular Sourcery Probe to connect to and includes the communication port (serial port or Ethernet host name), baud rate, and optionally the startup command file to load for initialization. If you have more than one Sourcery Probe, or more than one startup initialization file, you must provide multiple Controller sections to define them. The syntax is as follows:
+</p>
+
+<a name="wp8684"></a><pre class="pCode">
+Define Controller ControllerIDString 
+</pre>
+
+<a name="wp9574"></a><pre class="pCode">
+         Port &#160;&#160;&#160;&#160;&#160;&#160;&#160;PortString 
+</pre>
+
+<a name="wp9575"></a><pre class="pCode">
+         CommandFile CmdPathString 
+</pre>
+
+<a name="wp9577"></a><pre class="pCode">
+         ConnectMode TargetConnectMode 
+</pre>
+
+<a name="wp9581"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp8685"></a>
+<ul><li class="LL1BulSolid"><span class=" cItalic">ControllerIDString</span> is an arbitrary string value used to identify the Controller section when it is referenced from the MDIDeviceList section.</li></ul>
+
+<a name="wp9590"></a>
+<ul><li class="LL1BulSolid"><span class=" cItalic">PortString</span> is a string value that provides the Ethernet hostname or Ethernet IP address to use to connect to the Sourcery Probe. When using the virtual probe, this would be the hostname or IP address of the computer running the virtual probe software (See <a name="EW69"></a><a href="virtualprobe1.html#CRefID21126" onclick='oT("CRF","virtualprobe1.html#CRefID21126");'><span class=" cLinkOverride">Using the Virtual Sourcery Probe</span></a>).This is the same value specified by the -d command line option when running MON (see <a name="EW70"></a><a href="moncommand01.html#CRefID21126" onclick='oT("CRF","moncommand01.html#CRefID21126");'><span class=" cLinkOverride">MON Command Language</span></a>). On MESP Personal Probes for PowerPC a connection is not based on Ethernet network addresses.  Instead, you can use either :0 (if you only have one probe attached, or :&lt;serial #&gt; which can be found on the bottom side of the probe.</li></ul>
+
+<a name="wp9605"></a>
+<ul><li class="LL1BulSolid"><span class=" cItalic">CmdPathString</span> is the full or relative path name of a target initialization script (normally <span class=" cItalic">&lt;target&gt;.maj</span>) that will be processed automatically when a device is opened which does not specify a more specific CommandFile value in its MDIDeviceList or Device definition. If CommandFile is specified here, the value overrides a value specified in the Global definition.</li></ul>
+
+<a name="wp9617"></a>
+<ul><li class="LL1BulSolid"><span class=" cItalic">TargetConnectMode</span> is one of the following: Default, Reset, Halt, Run. Reset tells MDI to reset the target at target connection time. Halt interrupts the target at connect time, but does not reset it. Run connects to the target, but does not disturb its state. Default is the same as Reset.</li></ul>
+
+<a name="wp9623"></a><p class="pL1Body">
+If a ConnectMode reference is specified here, the value overrides a value specified in the Global definition.</p>
+<a name="wp8694"></a><h1 class="pHeading3NoSplit FontLevel1" id="MGC8694">
+
+<a name="CRefID61015"></a>
+MDIDeviceList
+</h1>
+<a name="wp8695"></a><p class="pBody">
+
+The last section in the configuration file is the MDIDeviceList section. It defines the MDI device name strings that the debugger will display, and associates each name with a specific Device and Controller section. The syntax is as follows:
+</p>
+
+<a name="wp8696"></a><pre class="pCode">
+Define MDIDeviceList 
+</pre>
+
+<a name="wp8697"></a><pre class="pCode">
+      { DevNameString 
+</pre>
+
+<a name="wp9633"></a><pre class="pCode">
+         Device &#160;&#160;&#160;&#160;&#160;DevIDString 
+</pre>
+
+<a name="wp9634"></a><pre class="pCode">
+         Controller &#160;ControllerIDString 
+</pre>
+
+<a name="wp9635"></a><pre class="pCode">
+         CommandFile CmdPathString 
+</pre>
+
+<a name="wp13576"></a><pre class="pCode">
+         CoreAccessSel         { 0...32 }
+</pre>
+
+<a name="wp8698"></a><pre class="pCode">
+}.... 
+</pre>
+
+<a name="wp9636"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp8699"></a><p class="pBody">
+
+If you have more than one Device or Controller section, the MDIDeviceList section will contain multiple sets of DevNameString + Device + Controller entries to list and name all the valid combinations of Device and Controller.
+</p>
+
+<a name="wp8700"></a>
+<ul><li class="LL1BulSolid"><span class=" cItalic">DevNameString</span> is a string value to be passed to the debugger to identify a particular MDI Device that the debugger can connect to. If there is only one <span class=" cItalic">DevNameString</span> entry in the MDIDeviceList section, the debugger may just automatically open the device. Otherwise, the debugger should present you with a list of the DevNameString values and let you select value to which to connect.</li></ul>
+
+<a name="wp9648"></a>
+<ul><li class="LL1BulSolid"><span class=" cItalic">CmdPathString</span> is the full or relative path name of a startup command file (normally <span class=" cItalic">target.maj</span>) that will be processed automatically when the device is opened. If CommandFile is specified here, the value overrides values specified in the Global, Controller, and Device definitions.</li></ul>
+
+<a name="wp13571"></a>
+<ul><li class="LL1BulSolid"><span class=" cItalic">CoreAccessSel</span> corresponds to MON&#39;s -c option. This optional parameter is valid only on multi-core environments and signals the core to which to connect. Note that this option can be overridden in the startup script referenced in <span class=" cItalic">CmdPathString</span> above. A value of 0 is the same as no selection. Also, note that any setting in the <a href="mdi13.html#wp8669"  onclick='oT("CRF","mdi13.html#wp8669");return false;'>Device</a> section overrides a setting here.</li></ul>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "MDI Configuration File Format";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "MDI.Configuration.File.Format"
+   ThisTopic = "MDIConfigurationFileFormat";
+   CurrentFile = "mdi13.html";
+   CurrentFileID = "112";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    
+<br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    
+<br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

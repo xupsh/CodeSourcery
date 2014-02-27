@@ -1,0 +1,791 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:22:35 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe Professional Hardware Manual" />
+    <title> Debug Connector Information</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("Debug Connector Information","apxa_jtag_cop_conn1","naV","naV","naV","naV","28");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp1916"></a><h1 class="pH1Apndx FontLevel1" id="MGC1916">
+
+  <a name="CRefID29858"></a>
+Debug Connector Information
+</h1>
+
+
+<a name="wp5808"></a><p class="pBody">
+
+The debug connector depends on the probe tip that is installed. There are three different kinds: ARM, MIPS, and PPC/COP.
+</p>
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack"><img src="../MGC/images/blank2x2.png" /></span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteTip"></td>
+    <td valign="top">
+            
+<a name="wp9068"></a><p class="pnoteInfo">
+
+        <span class=" cBold">	Tip</span>: If you have a PowerPC probe tip that is labeled &ldquo;PA JTAG Probe Tip&rdquo;, this works exactly the same as the &ldquo;PPC JTAG Probe Tip&rdquo;. The only difference is the label on the hardware.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp5809"></a><p class="pBody">
+
+Refer to the <span class=" cItalic">Mentor Embedded Sourcery Probe Target Connection</span> application note for information about pin assignments for the various debug connectors:
+</p>
+
+<a name="wp9249"></a><p class="pBody">
+
+<a href="http://supportnet.mentor.com/reference/appnotes/library/10891.pdf"   target="_window">If you have a SupportNet account, you can access the application note here: </a><span class=" cLinkOverride">http://supportnet.mentor.com/reference/appnotes/library/10891.pdf</span><a href="https://sourcery.mentor.com/GNUToolchain/kbentry247"   target="_window">.<br /><br />If you have a CodeSourcery Portal account, you can find the application note here:<br /></a><span class=" cLinkOverride">https://sourcery.mentor.com/GNUToolchain/kbentry247</span>.
+</p>
+
+<a name="wp5810"></a><p class="pBody">
+
+<a href="apxa_jtag_cop_conn1.html#wp7948"  onclick='oT("CRF","apxa_jtag_cop_conn1.html#wp7948");return false;'>Table&#160;A&#8209;1</a> lists the signal names, direction, pin numbers, descriptions, drive capabilities, and operational requirements.
+</p>
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp8185"></a><p class="pnoteNote">
+
+        	 To ensure proper and stable operation between the probe and the target system, the JTAG and debug I/O signals must meet the requirements listed in <a href="apxa_jtag_cop_conn1.html#wp7948"  onclick='oT("CRF","apxa_jtag_cop_conn1.html#wp7948");return false;'>Table&#160;A&#8209;1</a>.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp6176"></a><p class="pBody">
+
+
+</p>
+<div id="TableDivQz"></div>
+<div align="center">
+
+
+<a name="wp7948"></a><p class="pTableTitle" id="MGC7948">
+
+Table A&#8209;1. <a name="CRefID25944"></a>Sourcery Probe Professional for JTAG/COP Signal Descriptions&#160; 
+</p>
+
+
+<table border="1" cellpadding="5" cellspacing="0" id="wp7948table6021">
+  <tr bgcolor="#CCCCCC"  align="center" valign="middle">
+    <th>
+
+<a name="wp7958"></a><p class="pTableHeading" id="MGC7948">
+ARM
+</p>
+</th>
+
+    <th>
+
+<a name="wp7960"></a><p class="pTableHeading">
+
+MIPS
+</p>
+
+</th>
+
+    <th>
+
+<a name="wp7962"></a><p class="pTableHeading">
+
+PowerPC
+</p>
+
+</th>
+
+    <th>
+
+<a name="wp7964"></a><p class="pTableHeading">
+
+Signal Direction
+</p>
+
+</th>
+
+    <th>
+
+<a name="wp7966"></a><p class="pTableHeading">
+
+Electrical Specification
+</p>
+
+</th>
+
+    <th>
+
+<a name="wp8119"></a><p class="pTableHeading">
+
+Requirement
+</p>
+
+</th>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row2Column1'  style='width:0.95in'>
+
+
+<a name="wp7968"></a><p class="pTableCell">
+TCK</p></td>
+
+    <td id='Row2Column2'  style='width:0.72362in'>
+
+
+<a name="wp7970"></a><p class="pTableCell">
+TCK</p></td>
+
+    <td id='Row2Column3'  style='width:0.81043in'>
+
+
+<a name="wp7972"></a><p class="pTableCell">
+TCK</p></td>
+
+    <td id='Row2Column4'  style='width:0.86632in'>
+
+
+<a name="wp7974"></a><p class="pTableCell">
+From probe connector</p></td>
+
+    <td id='Row2Column5'  style='width:1.1in'>
+
+
+<a name="wp7976"></a><p class="pTableCell">
+50mA driver</p></td>
+
+    <td id='Row2Column6'  style='width:2.0in'>
+
+
+<a name="wp8212"></a><p class="pTableCell">
+Must be wired to the target processor.</p>
+<a name="wp8213"></a><p class="pTableCell">
+The probe drives the TCK output with up to 50mA. Keep the TCK trace run as short as possible and maintain a &quot;two signal width&quot; spacing from any other parallel dynamic signal trace.</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row3Column1' >
+
+
+<a name="wp9188"></a><p class="pTableCell">
+RTCK</p></td>
+
+    <td id='Row3Column2' >
+
+
+<a name="wp9190"></a><p class="pTableCell">
+-</p></td>
+
+    <td id='Row3Column3' >
+
+
+<a name="wp9192"></a><p class="pTableCell">
+-</p></td>
+
+    <td id='Row3Column4' >
+
+
+<a name="wp9194"></a><p class="pTableCell">
+From Target</p></td>
+
+    <td id='Row3Column5' >
+
+
+<a name="wp9196"></a><p class="pTableCell">
+17PF</p></td>
+
+    <td id='Row3Column6' >
+
+
+<a name="wp9202"></a><p class="pTableCell">
+Wired to the target processor.</p>
+<a name="wp9198"></a><p class="pTableCell">
+RTCK is an output from the target processor and an input to the probe. The RTCK trace run should be kept short and maintain a &quot;two signal width&quot; spacing from any other parallel dynamic signal trace. If not used, it should be grounded or pulled up with a 10K resistor. This is not connected on MIPS or PowerPC probe tips.</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row4Column1' >
+
+
+<a name="wp7978"></a><p class="pTableCell">
+TMS</p></td>
+
+    <td id='Row4Column2' >
+
+
+<a name="wp7980"></a><p class="pTableCell">
+TMS</p></td>
+
+    <td id='Row4Column3' >
+
+
+<a name="wp7982"></a><p class="pTableCell">
+TMS</p></td>
+
+    <td id='Row4Column4' >
+
+
+<a name="wp7984"></a><p class="pTableCell">
+From probe connector</p></td>
+
+    <td id='Row4Column5' >
+
+
+<a name="wp7986"></a><p class="pTableCell">
+50mA driver</p></td>
+
+    <td id='Row4Column6' >
+
+
+<a name="wp8219"></a><p class="pTableCell">
+Must be wired to the target processor.</p>
+<a name="wp8220"></a><p class="pTableCell">
+The probe drives the TMS output with up to 50mA. Keep the TMS as short as possible and maintain a &quot;two signal width&quot; spacing from any other parallel dynamic signal trace. TMS should have a parallel termination option at the processor.</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row5Column1' >
+
+
+<a name="wp7988"></a><p class="pTableCell">
+TDI</p></td>
+
+    <td id='Row5Column2' >
+
+
+<a name="wp7990"></a><p class="pTableCell">
+TDI</p></td>
+
+    <td id='Row5Column3' >
+
+
+<a name="wp7992"></a><p class="pTableCell">
+TDI</p></td>
+
+    <td id='Row5Column4' >
+
+
+<a name="wp7994"></a><p class="pTableCell">
+From probe connector</p></td>
+
+    <td id='Row5Column5' >
+
+
+<a name="wp7996"></a><p class="pTableCell">
+50mA driver</p></td>
+
+    <td id='Row5Column6' >
+
+
+<a name="wp8127"></a><p class="pTableCell">
+Must be wired to the target processor.</p>
+<a name="wp8128"></a><p class="pTableCell">
+The probe drives the TDI output with up to 50mA. The TDI trace should be kept short and maintain a &quot;two signal width&quot; spacing from any other parallel dynamic signal trace. TDI should have a parallel termination option at the processor.</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row6Column1' >
+
+
+<a name="wp7998"></a><p class="pTableCell">
+TDO</p></td>
+
+    <td id='Row6Column2' >
+
+
+<a name="wp8000"></a><p class="pTableCell">
+TDO</p></td>
+
+    <td id='Row6Column3' >
+
+
+<a name="wp8002"></a><p class="pTableCell">
+TDO</p></td>
+
+    <td id='Row6Column4' >
+
+
+<a name="wp8004"></a><p class="pTableCell">
+From target</p></td>
+
+    <td id='Row6Column5' >
+
+
+<a name="wp8006"></a><p class="pTableCell">
+17pF load</p></td>
+
+    <td id='Row6Column6' >
+
+
+<a name="wp8226"></a><p class="pTableCell">
+Must be wired to the target processor.</p>
+<a name="wp8227"></a><p class="pTableCell">
+TDO is an output from the target processor and an input to the probe. The TDO trace run should be kept short and maintain a &quot;two signal width&quot; spacing from any other parallel dynamic signal trace. TDO should have a series termination resistor located near the target processor.</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row7Column1' >
+
+
+<a name="wp8008"></a><p class="pTableCell">
+nTRST</p></td>
+
+    <td id='Row7Column2' >
+
+
+<a name="wp8010"></a><p class="pTableCell">
+TRST*</p></td>
+
+    <td id='Row7Column3' >
+
+
+<a name="wp8012"></a><p class="pTableCell">
+<span class=" cOverline">TRST</span></p></td>
+
+    <td id='Row7Column4' >
+
+
+<a name="wp8014"></a><p class="pTableCell">
+From probe connector</p></td>
+
+    <td id='Row7Column5' >
+
+
+<a name="wp8019"></a><p class="pTableCell">
+50mA driver<a href='apxa_jtag_cop_conn1.html#wp8018'><span class='cFootnote'>1</span></a></p></td>
+
+    <td id='Row7Column6' >
+
+
+<a name="wp8233"></a><p class="pTableCell">
+Must be wired to the target processor.</p>
+<a name="wp8234"></a><p class="pTableCell">
+The probe drives the TRST output with up to 50mA. To gain control of the processor, the probe negates TRST approximately 250 milliseconds before negation of HRST. This allows the probe to issue COP commands through the JTAG/COP interface and gain control of the processor upon negation of HRST. The TRST trace run should be kept short and maintain a &quot;two signal width&quot; spacing from any other parallel dynamic signal trace.</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row8Column1' >
+
+
+<a name="wp8021"></a><p class="pTableCell">
+nSRST</p></td>
+
+    <td id='Row8Column2' >
+
+
+<a name="wp8023"></a><p class="pTableCell">
+RST*</p></td>
+
+    <td id='Row8Column3' >
+
+
+<a name="wp8025"></a><p class="pTableCell">
+<span class=" cOverline">SRST</span></p></td>
+
+    <td id='Row8Column4' >
+
+
+<a name="wp8027"></a><p class="pTableCell">
+Bi-directional</p></td>
+
+    <td id='Row8Column5' >
+
+
+<a name="wp8029"></a><p class="pTableCell">
+Open-drain. 100Ohm to ground when asserted by probe, 22pF load when not asserted. 1</p></td>
+
+    <td id='Row8Column6' >
+
+
+<a name="wp8240"></a><p class="pTableCell">
+Can be wired to the target processor.</p>
+<a name="wp8241"></a><p class="pTableCell">
+During reset, the probe drives SRST to ground through a 100Ohm resistor. </p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row9Column1' >
+
+
+<a name="wp8031"></a><p class="pTableCell">
+-</p></td>
+
+    <td id='Row9Column2' >
+
+
+<a name="wp8033"></a><p class="pTableCell">
+-</p></td>
+
+    <td id='Row9Column3' >
+
+
+<a name="wp8035"></a><p class="pTableCell">
+<span class=" cOverline">HRST</span></p></td>
+
+    <td id='Row9Column4' >
+
+
+<a name="wp8037"></a><p class="pTableCell">
+Bi-directional</p></td>
+
+    <td id='Row9Column5' >
+
+
+<a name="wp8039"></a><p class="pTableCell">
+Open-drain. 100Ohm to ground when asserted by probe, 22pF load when not asserted. 1</p></td>
+
+    <td id='Row9Column6' >
+
+
+<a name="wp8247"></a><p class="pTableCell">
+Must be wired to the target processor.</p>
+<a name="wp8248"></a><p class="pTableCell">
+During reset, the probe drives HRST to ground through a 100Ohm resistor.</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row10Column1' >
+
+
+<a name="wp8041"></a><p class="pTableCell">
+DBGRQ</p></td>
+
+    <td id='Row10Column2' >
+
+
+<a name="wp8043"></a><p class="pTableCell">
+DINT</p></td>
+
+    <td id='Row10Column3' >
+
+
+<a name="wp8045"></a><p class="pTableCell">
+<span class=" cOverline">CKSI</span></p></td>
+
+    <td id='Row10Column4' >
+
+
+<a name="wp8047"></a><p class="pTableCell">
+From probe connector</p></td>
+
+    <td id='Row10Column5' >
+
+
+<a name="wp8049"></a><p class="pTableCell">
+50mA driver</p></td>
+
+    <td id='Row10Column6' >
+
+
+<a name="wp8143"></a><p class="pTableCell">
+Need not be wired to the target.</p>
+<a name="wp8144"></a><p class="pTableCell">
+ARM and PowerPC probes do not currently use this signal. The DINT signal may be asserted on some MIPS targets to force entry to debug mode, but is not normally used.</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row11Column1' >
+
+
+<a name="wp8051"></a><p class="pTableCell">
+DBGACK</p></td>
+
+    <td id='Row11Column2' >
+
+
+<a name="wp8053"></a><p class="pTableCell">
+-</p></td>
+
+    <td id='Row11Column3' >
+
+
+<a name="wp8055"></a><p class="pTableCell">
+<span class=" cOverline">CKSO</span></p></td>
+
+    <td id='Row11Column4' >
+
+
+<a name="wp8057"></a><p class="pTableCell">
+From target</p></td>
+
+    <td id='Row11Column5' >
+
+
+<a name="wp8059"></a><p class="pTableCell">
+17pF Load2</p></td>
+
+    <td id='Row11Column6' >
+
+
+<a name="wp8269"></a><p class="pTableCell">
+Wired to the target processor.</p>
+<a name="wp8270"></a><p class="pTableCell">
+The probe senses CKSO to determine if the processor halted execution in a checkstop state.</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row12Column1' >
+
+
+<a name="wp8061"></a><p class="pTableCell">
+-</p></td>
+
+    <td id='Row12Column2' >
+
+
+<a name="wp8063"></a><p class="pTableCell">
+-</p></td>
+
+    <td id='Row12Column3' >
+
+
+<a name="wp8065"></a><p class="pTableCell">
+HALTED</p></td>
+
+    <td id='Row12Column4' >
+
+
+<a name="wp8067"></a><p class="pTableCell">
+From target</p></td>
+
+    <td id='Row12Column5' >
+
+
+<a name="wp8349"></a><p class="pTableCell">
+17pF load</p></td>
+
+    <td id='Row12Column6' >
+
+
+<a name="wp8255"></a><p class="pTableCell">
+Should be wired to the PowerPC HALTED signal on those processors which support it. This is not connected on ARM or MIPS probe tips.</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row13Column1' >
+
+
+<a name="wp8071"></a><p class="pTableCell">
+-</p></td>
+
+    <td id='Row13Column2' >
+
+
+<a name="wp8073"></a><p class="pTableCell">
+-</p></td>
+
+    <td id='Row13Column3' >
+
+
+<a name="wp8075"></a><p class="pTableCell">
+<span class=" cOverline">QACK</span></p></td>
+
+    <td id='Row13Column4' >
+
+
+<a name="wp8077"></a><p class="pTableCell">
+From probe connector</p></td>
+
+    <td id='Row13Column5' >
+
+
+<a name="wp8079"></a><p class="pTableCell">
+100Ohm pull-down</p></td>
+
+    <td id='Row13Column6' >
+
+
+<a name="wp8276"></a><p class="pTableCell">
+Can be wired to the target processor. </p>
+<a name="wp8277"></a><p class="pTableCell">
+QACK is an input to most PowerPC processors and must remain low while the probe is connected to the target. The probe connects this signal internally to the JTAG/COP GND pin (16) through a 100Ohm resistor.</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row14Column1' >
+
+
+<a name="wp8081"></a><p class="pTableCell">
+VREF</p></td>
+
+    <td id='Row14Column2' >
+
+
+<a name="wp8083"></a><p class="pTableCell">
+VREF</p></td>
+
+    <td id='Row14Column3' >
+
+
+<a name="wp8085"></a><p class="pTableCell">
+TGT PWR</p></td>
+
+    <td id='Row14Column4' >
+
+
+<a name="wp8087"></a><p class="pTableCell">
+From target</p></td>
+
+    <td id='Row14Column5' >
+
+
+<a name="wp8089"></a><p class="pTableCell">
+2MOhm pull-down, plus 0.01uF load.</p></td>
+
+    <td id='Row14Column6' >
+
+
+<a name="wp8261"></a><p class="pTableCell">
+Must be wired to the target.</p>
+<a name="wp8262"></a><p class="pTableCell">
+The probe uses this signal to determine if power is applied to the target. This signal is also used as a voltage reference for the signals driven by the probe (CKSI, TRST, TCK, TMS, TDI). </p>
+<a name="wp8263"></a><p class="pTableCell">
+TGT PWR (pin 6) should be connected to target Vcc through a 1KOhm pull-up resister.</p></td>
+
+
+</tr>
+
+
+</table>
+
+</div>
+<div id='EndTable'> </div>
+
+<a name="wp8018"></a><p class="pTableFootnote">
+
+<a href='apxa_jtag_cop_conn1.html#wp8019'><span class='cFootnote'>1</span></a>4.7KOhm pull-up to buffered TGT PWR.
+</p>
+
+<p class="pBody">
+<br clear='left' class='Blank4Table' />
+
+
+</p>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_professional";
+   DocTitle = "Mentor Embedded Sourcery Probe Professional Hardware Manual";
+   PageTitle = "Debug Connector Information";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "Debug.Connector.Information"
+   ThisTopic = "PhysicalConsiderations";
+   CurrentFile = "apxa_jtag_cop_conn1.html";
+   CurrentFileID = "28";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe Professional Hardware Manual&nbsp;2.3.4
+    <br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    <br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

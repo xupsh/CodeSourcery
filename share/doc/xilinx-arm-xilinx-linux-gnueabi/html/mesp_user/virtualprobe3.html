@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:26:08 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>MESP/Virtual Invocation Line</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("Using the Virtual Sourcery Probe","virtualprobe1","MESP/Virtual Invocation Line","virtualprobe3","naV","naV","132");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="EW74"></a>
+<a name="wp35836"></a><h1 class="pHeading2 WarninG FontLevel1" id="MGC35836">
+
+MESP/Virtual Invocation Line
+</h1>
+<a name="wp35862"></a><p class="pBody">
+
+The MESP/Virtual program provides several command line switches to control its behavior. To quit MESP/Virtual , just press ^C, or use the Sourcery Probe setup menu.
+</p>
+
+<a name="wp35864"></a><pre class="pCodeIndent">
+./vmajic [-d xyz] [-j lib] [-s] [-z]
+</pre>
+
+<a name="wp35906"></a><pre class="pCodeIndent">
+
+</pre>
+
+<a name="wp35913"></a><p class="pBodyRelative">
+
+
+</p>
+<div id="TableDivQz"></div>
+<div align="center">
+
+
+<a name="wp35920"></a><p class="pTableTitle" id="MGC35920">
+
+Table 7&#8209;1. <a name="CRefID92064"></a>MESP/Virtual Command Line Switches
+</p>
+
+
+<table border="1" cellpadding="5" cellspacing="0" id="wp35920table35918">
+  <tr bgcolor="#CCCCCC"  align="center" valign="middle">
+    <th>
+
+<a name="wp35924"></a><p class="pTableHeading" id="MGC35920">
+Command Line Switch
+</p>
+</th>
+
+    <th>
+
+<a name="wp35926"></a><p class="pTableHeading">
+
+Description
+</p>
+
+</th>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row2Column1'  style='width:2.8in'>
+
+
+<a name="wp35928"></a><p class="pTableCell">
+-d xyz</p></td>
+
+    <td id='Row2Column2'  style='width:3.5in'>
+
+
+<a name="wp35930"></a><p class="pTableCell">
+Device string specific to the virtual transactor library. For the Veloce JTAG transactor, this is the IP address or hostname of the PC running the TBX software in <a href="virtualprobe1.html#wp38044"  onclick='oT("CRF","virtualprobe1.html#wp38044");return false;'>Figure&#160;7&#8209;1</a>. Without the -d switch, MESP/Virtual assumes the JTAG transactor is on the local host. Therefore, the -d switch can be omitted if MESP/Virtual is running on the Veloce comodel host.</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row3Column1' >
+
+
+<a name="wp35932"></a><p class="pTableCell">
+-j lib</p></td>
+
+    <td id='Row3Column2' >
+
+
+<a name="wp35934"></a><p class="pTableCell">
+File name (and optionally path) of the virtual JTAG transactor library; for example, <span class=" cItalic">-j $TBX_VMAJIC_HOME/lib/linux/libJTagClient.so</span></p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row4Column1' >
+
+
+<a name="wp35936"></a><p class="pTableCell">
+-s</p></td>
+
+    <td id='Row4Column2' >
+
+
+<a name="wp35938"></a><p class="pTableCell">
+Automatically display the MESP/Virtual setup menu on the console. If omitted, the setup menu can be brought up by pressing the &lt;ESC&gt; key in the MESP/Virtual console.</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row5Column1' >
+
+
+<a name="wp35940"></a><p class="pTableCell">
+-z</p></td>
+
+    <td id='Row5Column2' >
+
+
+<a name="wp35942"></a><p class="pTableCell">
+Start MESP/Virtual in stand-alone mode - it does not load any JTAG transactor library, and you can do very little with it but verify uplink communication to the debugger.</p></td>
+
+
+</tr>
+
+
+</table>
+
+</div>
+<div id='EndTable'> </div>
+<p class="pBodyRelative">
+<br clear='left' class='Blank4Table' />
+
+
+
+</p>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "MESP/Virtual Invocation Line";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "MESPVirtual.Invocation.Line"
+   ThisTopic = "CommandInterpreter";
+   CurrentFile = "virtualprobe3.html";
+   CurrentFileID = "132";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    <br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    <br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

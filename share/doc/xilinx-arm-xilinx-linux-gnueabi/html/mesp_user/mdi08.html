@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:25:46 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>The Debug Environment</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("Meta Debug Interface (MDI)","mdi01","Getting Started with MDI","mdi04","The Debug Environment","mdi08","107");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp8594"></a><h1 class="pHeading3 FontLevel1" id="MGC8594">
+
+<a name="CRefID83128"></a>
+The Debug Environment
+</h1>
+
+<a name="wp8595"></a><p class="pBody">
+
+The following sections outline the basic steps necessary to configure the debug environment using MON.
+</p>
+
+<a name="wp8597"></a><p class="pBody">
+
+Because every target system is different, the Sourcery Probe needs information about the target system design to operate correctly. The primary file, called &lt;<span class=" cItalic">target&gt;.maj</span>, configures the JTAG interface, certain capabilities of the Sourcery Probe, minimally initializes the target hardware, and declares memory for the board.
+</p>
+
+<a name="wp8598"></a>
+<ol start="1"><li class="LL1Seq">Create a new, empty directory for staging the configuration files, then cd into that directory. For example: </li></ol>
+<a name="wp8599"></a><pre class="pCodeIndent">
+mkdir SourceryProbe 
+</pre>
+
+<a name="wp8600"></a><pre class="pCodeIndent">
+cd SourceryProbe
+</pre>
+
+<a name="wp9244"></a><pre class="pCodeIndent">
+
+</pre>
+
+<a name="wp8601"></a>
+<ol start="2"><li class="LL1Seq">Sourcery CodeBench includes pre-validated startup files for many common reference platforms in the<span class=" cCourier cP10 cItalic"> </span><span class=" cItalic">/tsp</span> directory of your Sourcery CodeBench installation. See <a name="EW64"></a><a href="majic_setup2.html#CRefID33022" onclick='oT("CRF","majic_setup2.html#CRefID33022");'><span class=" cLinkOverride">Sourcery Probe Default Installation Directories</span></a> for the installation directory for your specific architecture and OS. If you are using a standard reference platform, you can simply copy the corresponding files into the <span class=" cItalic">SourceryProbe</span> configuration directory you created in step 1. If your board is similar to a standard reference platform, you may need to adjust it to account for the hardware differences by editing it with your preferred text editor. See <a name="EW65"></a><a href="majicconfig06.html#CRefID52206" onclick='oT("CRF","majicconfig06.html#CRefID52206");'><span class=" cLinkOverride">Adapting a Reference Board Initialization Script to Your Board</span></a>.</li></ol>
+<a name="wp8602"></a><pre class="pCode">
+cp &lt;install_dir&gt;/mep/tsp/<span class=" cItalic">&lt;arch&gt;</span>/&lt;target&gt;/*.maj . /* using arm or mips as 
+appropriate */ 
+</pre>
+
+<a name="wp9252"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp8603"></a><p class="pBody">
+
+If your board is your own design, you will need to create suitable startup files. Copy the template file from the <span class=" cItalic">&lt;install_dir&gt;/&lt;host&gt;/&lt;target&gt;/mep/tsp/&lt;arch&gt;/_template</span><span class=" cCourier cP10 cItalic"> </span>directory, then fill in the details, as explained in the comment blocks and <span class=" cItalic">readme.txt</span> file.
+</p>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "The Debug Environment";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "The.Debug.Environment"
+   ThisTopic = "TheDebugEnvironment";
+   CurrentFile = "mdi08.html";
+   CurrentFileID = "107";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    
+<br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    
+<br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

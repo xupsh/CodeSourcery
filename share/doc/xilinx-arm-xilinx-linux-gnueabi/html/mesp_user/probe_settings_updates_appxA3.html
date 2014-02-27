@@ -1,0 +1,383 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:26:20 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>Updating the Sourcery Probe Firmware from the Command Line</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("Probe Settings and Updates","probe_settings_updates_appxA1","Updating the Sourcery Probe Firmware from the Command Line","probe_settings_updates_appxA3","naV","naV","136");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp5953"></a><h1 class="pHeading2 FontLevel1" id="MGC5953">
+
+<a name="CRefID89106"></a>
+Updating the Sourcery Probe Firmware from the Command Line
+</h1>
+<a name="wp7128"></a><p class="pBody">
+
+Run the <span class=" cCourier cP10">mep_update</span> console application to update the firmware for the Sourcery Probes from the command line.
+<br />
+<br />The <span class=" cItalic">mep_update</span> utility is in the <span class=" cCourier cP10 cItalic">/mep/bin</span> directory within the Sourcery CodeBench installation. See <a name="EW79"></a><a href="majic_setup2.html#CRefID12259" onclick='oT("CRF","majic_setup2.html#CRefID12259");'><span class=" cLinkOverride">Table&#160;1&#8209;1</span></a> for default installation directory locations.
+</p>
+
+<a name="wp7427"></a><p class="pBody">
+
+For a default Sourcery CodeBench for ARM EABI installation on Windows, this is at <span class=" cCourier cP10 cItalic">&lt;install_dir&gt;/i686-mingw32/arm-none-eabi/mep/bin.</span>
+</p>
+
+<a name="wp7129"></a><p class="pzHeading">
+
+Prerequisites
+</p>
+
+<a name="wp5959"></a>
+<ul><li class="LL1BulSolid">You must be using an ARM or MIPS model of Mentor Embedded Sourcery Probe Professional or Personal.</li></ul>
+
+<a name="wp5960"></a><p class="pzHeading">
+
+Procedure
+</p>
+
+<a name="wp5964"></a>
+<ol start="1"><li class="LL1Seq">Change to the <span class=" cCourier cP10 cItalic">/mep/bin </span>directory of your Sourcery CodeBench installation.</li></ol>
+<a name="wp5965"></a>
+<ol start="2"><li class="LL1Seq">Issue the <span class=" cCourier cP10">mep_update</span> command. The <span class=" cCourier cP10">mep_update </span>command discovers probes visible on your network. It enables you to select a probe, and searches for probe firmware updates within your installation. Example output from mep_update:</li></ol>
+<a name="wp8616"></a><pre class="pCodeIndent">
+MEP Update Ver 0.1.0 Copyright 2010 Mentor Graphics Inc.
+</pre>
+
+<a name="wp8617"></a><pre class="pCodeIndent">
+
+</pre>
+
+<a name="wp8618"></a><pre class="pCodeIndent">
+Scanning for visible Probes...
+</pre>
+
+<a name="wp8619"></a><pre class="pCodeIndent">
+    Model:                        Serial #:      IP Addr:         UnitName:
+</pre>
+
+<a name="wp8659"></a><pre class="pCodeIndent">
+ 0: MESP-Pro / ARM                  FSL01E3A8   134.86.101.113      FSL01E3A8
+</pre>
+
+<a name="wp8660"></a><pre class="pCodeIndent">
+ 1: MESP-Pro / ARM                  FSL01E3B2   134.86.101.197      FSL01E3B2
+</pre>
+
+<a name="wp8661"></a><pre class="pCodeIndent">
+                           Hostname: alm101dyn197.alm.mentorg.com
+</pre>
+
+<a name="wp8656"></a><pre class="pCodeIndent">
+ 2: Giga JTAG / COP                  FLS00FF7A   134.86.100.185   FSL00FF7A
+</pre>
+
+<a name="wp8624"></a><pre class="pCodeIndent">
+                           Hostname: alm100dyn185.alm.mentorg.com
+</pre>
+
+<a name="wp8625"></a><pre class="pCodeIndent">
+ 3: MESP-Pro / COP                  FSL00FF97   134.86.100.135      FSL00FF97
+</pre>
+
+<a name="wp8626"></a><pre class="pCodeIndent">
+                           Hostname: alm100dyn135.alm.mentorg.com
+</pre>
+
+<a name="wp8627"></a><pre class="pCodeIndent">
+ 4: Giga JTAG / COP                  FLS00FF90   134.86.100.186   FSL00FF90
+</pre>
+
+<a name="wp8628"></a><pre class="pCodeIndent">
+                           Hostname: alm100dyn186.alm.mentorg.com
+</pre>
+
+<a name="wp8629"></a><pre class="pCodeIndent">
+ 5: MESP-Pro / ARM                  FSL00FF73   134.86.101.72      FSL00FF73
+</pre>
+
+<a name="wp8630"></a><pre class="pCodeIndent">
+
+</pre>
+
+<a name="wp5975"></a><pre class="pCodeIndent">
+Select a Probe 0..5, q&gt; 
+</pre>
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack"><img src="../MGC/images/blank2x2.png" /></span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteTip"></td>
+    <td valign="top">
+            
+<a name="wp5979"></a><p class="pnoteInfo">
+
+        <span class=" cBold">	Tip</span>: To exit the mep_update console, enter <span class=" cBold">q </span>at the command prompt.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp5980"></a>
+<ol start="3"><li class="LL1Seq">Select a probe from the list of probes that mep_update displays. For example, to select the MESP-Personal /ARM probe, enter <span class=" cBold">0 </span>at the command prompt. This displays the current firmware version for the selected probe and displays a list of available firmware update files (<span class=" cItalic">.mud</span>).</li></ol>
+<a name="wp5981"></a>
+<ol start="4"><li class="LL1Seq">Select the appropriate firmware from the displayed list and press <span class=" cBold">Enter</span> to begin the update. For a list of valid update files for your probe, see <a href="probe_settings_updates_appxA2.html#wp5908"  onclick='oT("CRF","probe_settings_updates_appxA2.html#wp5908");return false;'>&quot;Valid Update Files for Sourcery Probes&quot;</a>.</li></ol>
+<a name="wp5985"></a><p class="pL1Body">
+If the update is successful, a message similar to the following displays:</p>
+<a name="wp5986"></a><pre class="pCodeIndent">
+.......... 
+</pre>
+
+<a name="wp5987"></a><pre class="pCodeIndent">
+Downloaded 563200 bytes in 0.000 sec. 
+</pre>
+
+<a name="wp5988"></a><pre class="pCodeIndent">
+Programming image - Checksum 0x0210f5a3 
+</pre>
+
+<a name="wp5989"></a><pre class="pCodeIndent">
+Firmware image update completed successfully 
+</pre>
+
+<a name="wp5990"></a><pre class="pCodeIndent">
+Probe Update is complete. 
+</pre>
+
+<a name="wp5991"></a><pre class="pCodeIndent">
+Please cycle the power of your probe to activate the new firmware
+</pre>
+
+<a name="wp5994"></a><p class="pExampleTitle" id="MGC5994">
+
+Example A&#8209;1. 
+Updating the Firmware for a Probe on a Linux Host</p>
+
+
+<a name="wp5995"></a><pre class="pCode" id="MGC5994">
+$./mep_update 
+</pre>
+
+<a name="wp5996"></a><pre class="pCode">
+MEP Update Ver 0.1.0 Copyright 2010 Mentor Graphics Inc.
+</pre>
+
+<a name="wp5997"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp5998"></a><pre class="pCode">
+Scanning for visible Probes...
+</pre>
+
+<a name="wp5999"></a><pre class="pCode">
+    Model:           Serial #:      IP Addr:        UnitName:      
+</pre>
+
+<a name="wp6000"></a><pre class="pCode">
+ 0: Giga JTAG / COP  FSL00FF65      134.86.178.63   FSL00FF65      
+</pre>
+
+<a name="wp6001"></a><pre class="pCode">
+                                    Hostname: mep3.sje.mentorg.com
+</pre>
+
+<a name="wp6002"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp6003"></a><pre class="pCode">
+Select a Probe 0..0, q&gt; 0
+</pre>
+
+<a name="wp6004"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp9006"></a><pre class="pCode">
+Probe update (.mud) files found:
+</pre>
+
+<a name="wp9007"></a><pre class="pCode">
+    0: ../mep_firmware/mesp-personal_v225b3.mud
+</pre>
+
+<a name="wp9008"></a><pre class="pCode">
+    1: ../mep_firmware/mesp-professional_v225b3.mud
+</pre>
+
+<a name="wp9009"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp9010"></a><pre class="pCode">
+Choose a probe update file from the list (0..1, q): 0
+</pre>
+
+<a name="wp9011"></a><pre class="pCode">
+  Processing Update file ../mep_firmware/mesp-personal_v225b3.mud header:
+</pre>
+
+<a name="wp9012"></a><pre class="pCode">
+  # majic update file
+</pre>
+
+<a name="wp9013"></a><pre class="pCode">
+  type = fw_app p6.1
+</pre>
+
+<a name="wp9014"></a><pre class="pCode">
+  checksum = 0x99de3c4a
+</pre>
+
+<a name="wp9015"></a><pre class="pCode">
+  # revision: 2.2.5 build 3 date: fri jan 13 11:49:20 2012
+</pre>
+
+<a name="wp9016"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp9017"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp9018"></a><pre class="pCode">
+  Downloading majic update from file: ../mep_firmware/mesp-
+personal_v225b3.mud
+</pre>
+
+<a name="wp9019"></a><pre class="pCode">
+  .............
+</pre>
+
+<a name="wp9020"></a><pre class="pCode">
+  Downloaded 842732 bytes in 0.682 sec.
+</pre>
+
+<a name="wp9021"></a><pre class="pCode">
+  Programming image - Checksum 0x99de3c4a
+</pre>
+
+<a name="wp9022"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp9023"></a><pre class="pCode">
+  Firmware image update completed successfully
+</pre>
+
+<a name="wp9024"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp6025"></a><pre class="pCode">
+  Probe Update is complete.
+</pre>
+
+<a name="wp6026"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp6027"></a><p class="pHTaskSubhead">
+
+Related Topics
+</p>
+
+<a name="wp6031"></a><p class="pBody">
+
+<a href="probe_settings_updates_appxA2.html"  onclick='oT("CRF","probe_settings_updates_appxA2.html");return false;'>Updating the Sourcery Probe Firmware Using CodeBench</a>
+</p>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "Updating the Sourcery Probe Firmware from the Command Line";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "Updating.the.Sourcery.Probe.Firmware.from.the.Command.Line"
+   ThisTopic = "CommandInterpreter";
+   CurrentFile = "probe_settings_updates_appxA3.html";
+   CurrentFileID = "136";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    
+<br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    
+<br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

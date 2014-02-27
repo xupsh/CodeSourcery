@@ -1,0 +1,504 @@
++q  // Enter quiet mode
+//___________________________________________________________________
+//
+//               Copyright (c) 2011 Mentor Graphics Corporation
+//                           All rights reserved
+//
+//   THIS WORK CONTAINS TRADE SECRETS AND PROPRIETARY INFORMATION WHICH IS
+//    THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS LICENSORS AND IS
+//                        SUBJECT TO LICENSE TERMS.
+//
+//___________________________________________________________________
+//
+// Mentor Embedded Sourcery Probe target initialization file for the
+// SPEAr13xx CPU CARD platform.  It supports this platform as-is,
+// and can be adapted to a new target based on this reference board,
+// as detailed below.  For a brand new custom board not related to
+// this reference board, it may be better to start from the template
+// rather than trying to adapt this file.
+//
+// Target Description:
+//
+//     Board:   SPEAr13xx CPU CARD
+//     Device:  SPEAR1310-2
+//     CPU ID:  Cortex-A9
+//     Endian:  Little
+//     Cores:   2
+//
+// Porting Guide:
+//
+// The user should make the following adaptations to port this file
+// to a new target board based on the associated reference platform:
+//
+//        0. Review the MEP Probe Initialization section at
+//           "TO DO #0" below to make sure the settings are
+//           right for your board.
+//        1. Update the memory configuration table for changes
+//           in the new board's  *Physical*  memory map.  See
+//           'TO DO #1' below.
+//        2. If your target board requires any special MEP
+//           settings, they should be added to the end of the
+//           ONE_TIME_SETUP section.  See 'TO DO #2' below.
+//        3. Decide whether the target should be automatically
+//           reset and/or initialized upon start-up by choosing
+//           the desired command at 'TO DO #3' below.  This
+//           really depends on your use case.
+//        4. If the board has no boot code (or bad boot code),
+//           and you want to download into RAM, then you may
+//           have to adapt the memory controller initialization
+//           script at 'TO DO #4' below to account for changes
+//           relative to the reference platform.
+//        5. If you care about programming your target's NOR
+//           Flash, then review the Flash Initialization section at
+//           "TO DO #5" below to add any special flash unlock code
+//           that may be needed.
+//
+// NOTE:  Additional information on MON commands and the configuration
+//        options used here is available in the online help system.
+//___________________________________________________________________
+dv "Reading $$# ...\n"
+
+
+// Initialization script preparation
+// =================================
+
+// The RTI, RTNI, and TI command aliases call script functions in this file.
+// These command aliases should never be changed.
+
+ea RTI   $$#.DO_RTI  // RTI  call DO_RTI script function  (Reset Target and Initialize)
+ea RTNI  $$#.DO_RTNI // RTNI call DO_RTNI script function (Reset Target with No Initialization)
+ea TI    $$#.DO_TI   // TI   call DO_TI script function   (Target Initialize without resetting)
+
+
+// MEP Probe Initialization
+// ==========================
+
+// TO DO #0 -- Review the following MEP configuration options to make
+//             sure they are right for your target board hardware and
+//             processor device design.
+
+// The  Trgt_Resets_JTAG  option informs the MEP probe whether the target
+// board will forward a system reset (nSRST) to the JTAG interface (nTRST),
+// or reset the system only without resetting the JTAG interface.  When in
+// doubt, a YES setting is safer.  When the two reset circuits are known
+// to be independent, which is strongly recommended, then a NO setting is
+// recommended.
+
+eo Trgt_Resets_JTAG  = no
+
+// The  Ice_JTAG_Use_RTCLK  and  Ice_JTAG_Clock_Freq  options are related
+// and must be considered together.  An  Ice_JTAG_Use_RTCLK  setting of
+// ON  selects adaptive clocking mode, where the JTAG clock is dynamically
+// controlled by the target processor.  When  Ice_JTAG_Use_RTCLK  is set
+// OFF  then normal (unthrottled) clocking is selected.
+//
+// When adaptive clocking is disabled, the  Ice_JTAG_Clock_Freq  option
+// specifies the the JTAG clock (TCK) frequency in Megahertz, from
+// 0.002 to 100 (depending on probe hardware capability).  A lower setting
+// is safer, a higher setting yields higher performance.  Note that the
+// requested frequency will be adjusted down to the closest frequency
+// supported by the probe hardware (displaying this option will show the
+// actual TCK frequency).
+//
+//     IJUR  Clock mode
+//     ====  ========================
+//     OFF   Free running TCK at specified frequency (RTCK is ignored)
+//     ON    Adaptive clocking with frequency controlled by RTCK
+//           (Ice_JTAG_Clock_Freq is ignored)
+//
+// For Virtual MESP, both options should be removed.
+//
+// Note that enabling  Ice_JTAG_Use_RTCLK  on target boards that do not
+// drive the RTCK signal will lock up the JTAG interface.
+
+eo Ice_JTAG_Use_RTCLK  = off
+eo Ice_JTAG_Clock_Freq = 2
+if (@$Ice_JTAG_Use_RTCLK) {doq Ice_JTAG_Use_RTCLK} {doq Ice_JTAG_Clock_Freq}
+
+// The following command can be used to define the details of the JTAG
+// daisy chain.  It is only required for targets on which the MEP
+// auto-detection algorithm cannot correctly determine the JTAG connection
+// details.  On most boards this command can be omitted.
+//
+//    ew MEP_JTAG_DIMENSION = TAP_CNT, IR1_CNT [ , IR2_CNT ]  ...
+
+// The following commands can be used to define special JTAG initialization
+// operations required by certain processors.  The first one, if defined,
+// is scanned in right after the JTAG reset cycle completes, but before the
+// standard JTAG initialization performed by the MEP.  The second, if
+// defined, is scanned in right after the standard JTAG initialization
+// performed by the MEP.  On most boards these can both be omitted.
+//
+//    ew MEP_JTAG_INIT0 = <scan-op> [ , <scan-op> ]  ...
+//    ew MEP_JTAG_INIT1 = <scan-op> [ , <scan-op> ]  ...
+
+// The  Ice_Power_Sense  option enables the target power monitor.  When
+// target power is detected, the debug interface is enabled.
+
+eo Ice_Power_Sense = VREF
+
+// The  Ice_JTAG_TAP_Select  option controls which TAP on a multi-TAP
+// daisy chain is associated with this debug connection.  This option
+// can be omitted on targets which have one TAP.  Note that TAPs are
+// numbered from 1-N, with TAP 1 being the one whose TDO is connected
+// to the MEP probe.
+//
+//    eo Ice_JTAG_TAP_Select = <num>
+
+// The  Ice_Multi_Session  option specifies whether the probe should accept
+// multiple simultaneous debugger connections. This options needs to be set
+// on target boards which have multiple cores that you wish to debug at the
+// same time.  If multi-core debugger is not required, this option can be
+// safely omitted. 
+//
+ eo Ice_Multi_Session = on
+
+
+// Flash Initialization
+//
+// TO DO #5 --  If your target board requires any special initialization
+//              commands to prepare for running the targetflash programming
+//              utility, add those commands here.
+//
+//              example:  ea FLASH_INIT ew 0xa0020800 = 0x10101010; ew 0xa0020818 = 0x10101010
+
+ea FLASH_INIT  /* nothing special required */
+
+
+// Physical Memory Configuration
+// =============================
+
+mc *:P, inv     // start with all *physical* memory (*:P) marked as invalid
+
+// TO DO #1 -- Change the address range(s) below to match the  *physical*
+//             address ranges of your ROM/flash and RAM areas.  Add more
+//             MC commands as necessary for each memory mapped area.
+//
+// WARNING:  DO NOT confuse virtual (MVA) addresses with physical space.
+//           Make sure to use physical addresses in the MC table.
+//
+// EXAMPLE:
+//
+//     mc  ________:P  ________:P,  PWE, JAM, RW    // DRAM
+//     mc  ________:P  ________:P,  PWD, JAM, RO    // Flash or ROM
+//     mc  ________:P  ________:P,  PWD, JAM, RW    // Peripheral registers
+//
+// Note that if your boot code remaps physical memory, then the MC table
+// should reflect the mapping that is in effect for the code you are trying
+// to debug.  When debugging boot code in flash, MC should match the mapping
+// in effect when booting.  When debugging code in RAM, MC should match the
+// mapping in effect when running code from RAM.
+//
+// Address Range          PWE  Access
+// ---------------------- ---- -------
+mc 0x00000000:P 0x3FFFFFFF:P, PWE, JAM, RW	// MPMC SDRAM
+mc 0x40000000:P 0xB37FFFFF:P, PWD, JAM, RW	// Mixed Peripherals, NOR, NAND.
+mc 0xB3800000:P 0xB3FFFFFF:P, PWE, JAM, RW	// SYSRAM0
+mc 0xB4000000:P 0xE07FFFFF:P, PWD, JAM, RW	// Mixed Peripherals
+mc 0xE0800000:P 0xE0FFFFFF:P, PWE, JAM, RW	// SYSRAM1
+mc 0xE1000000:P 0xFEFFFFFF:P, PWD, JAM, RW	// Mixed Peripherals
+mc 0xFF000000:P 0xFFFFFFFF:P, PWD, JAM, RO	// SYSROM
+
+//        ____User Supplied Setup Commands Go Here____
+
+// TO DO #2 -- If your target board requires any special MEP settings
+//             (e.g. special JTAG initialization), add the commands to
+//             make those settings here.
+
+
+// End of initial one-time only setup script.  If this is a non-intrusive
+// attach connection, or if a normal debug connection fails to connect
+// properly, then exit at this point.  Otherwise continue on with optional
+// additional initialization.
+
+if (@.4$INIT_TYPE != 0) {dv "Non-intrusive attach connection\n"; goto EXIT}
+if (@$trgt_cpu_state != $tcs.halt) {dv "Debug connection failed, "; doq TCS; goto EXIT}
+
+// TO DO #3 -- Comment out all but one of the next three commands to
+//             control IF and HOW the target is initialized when the
+//             debugger is launched.  If no reset or target initialization
+//             is needed then all these can be left commented out.
+
+//   TI			// Used for bare-metal application only (No U-boot/OS).
+//   RTI
+//   RTNI
+
+// The semihosting vector is +8 from the vector area base address, which
+// on Cortex-A9 is configurable via the system coprocessor.  This option
+// is required for hosted mode applications, and ignored for unhosted
+// mode.
+//
+
+ew $semi_hosting_vector = @cp15_snvba + 8
+
+:EXIT
+dv "Finished reading $$#.\n"
+return
+
+//___________________________________________________________________
+::DO_RTNI  // Reset Target with No Initialization.
+
+    // Normally an  rt  command is sufficient, but it may be necessary
+    // to slow down the JTAG clock first, depending on the affect of
+    // reset on the processor.
+
+    dv "Executing RTNI script function\n"
+    rt
+    return
+
+//___________________________________________________________________
+::DO_RTI   // Reset Target and Initialize.
+
+    // Note that it may be necessary to slow down the JTAG clock first, 
+    // depending on the affect of reset on the processor.
+
+    dv "Executing RTI script function\n"
+    rt
+    TI	// call script DO_TI function
+    return
+
+//___________________________________________________________________
+::DO_TI  // Target Initialize.
+
+    if (@$trgt_cpu_state != $tcs.halt) { dv "Target Initialization commands skipped due to CPU state\n"; doq TCS; return }
+    dv "Initializing target...\n"
+
+    //  Memory Controller Setup
+    //
+    // TO DO #4 -- If your board has a different memory configuration than
+    //             the reference board, then you may need to adapt the
+    //             memory controller initialization script accordingly.
+    //             These settings should match the settings used by your
+    //             boot code during its hardware initialization phase.
+	
+	
+ew 0xE0700204:P = 0x00000002	//Clear system reset status.
+ew 0xE0700200:P = 0x0000001A    // Put system in SLOW clock mode. 
+ew 0xE0700208:P = 0x000007F8    // TimerOut value for SLOW to NORMAL switch.
+ew 0xE070020C:P = 0x000007F8    // TimerOut value for DOZE to SLOW  switch.
+ew 0xE0700218:P = 0x7D000006	// Set PLL1 to 1000MHz.
+ew 0xE0700214:P = 0x00003E02	// Release PLL1 reset.	
+ew 0xE0700224:P = 0x7D000403	// Set PLL2 at 125MHz.
+ew 0xE0700220:P = 0x00003E02	// Release PLL2 reset.
+ew 0xE0700230:P = 0x53000203	// Set PLL3 at 332 MHz.
+ew 0xE070022C:P = 0x00003E02	// Release PLL3 reset.
+ew 0xE070023C:P = 0x6F000105	// Set PLL4 DDR frequency at 533 MHz.
+ew 0xE0700238:P = 0x0000060A	
+ew 0xE0700238:P = 0x0000060E
+ew 0xE0700238:P = 0x00000606
+ew 0xE0700238:P = 0x0000060E
+ew 0xE0700314:P = 0x0811E83A	//USB PHY
+
+w 100							//Wait for all PLL lock.
+
+ew 0xE0700244:P = 0x00000000	//Configure non AMBA peripherial clocks.
+ew 0xE0700200:P = 0x008F031C 	// Set system state to NORMAL.
+
+w 100							//Wait for system to switch to normal state.
+
+ew 0xE0700278:P = 0x00000007	//PERIP2_CLK_ENB
+ew 0xE070028C:P = 0x000005D8	//PLL1 synthesizer configuration
+
+ew 0xE070027C:P = 0x00000000	// Release peripheral's reset state.
+ew 0xE0700280:P = 0x00000000	// Release peripheral's reset state. 
+ew 0xE0700288:P = 0x00000000	// Release all RAS peripheral's reset state.
+
+//DDR clock Initialization
+ew 0xE0700244:P = 0x00000400	//PLL4 asynchronous DDR operation.
+ew 0xE0700278:P = 0x00000007	//Enable MPMC core and control clocks. 
+ew 0xE0700280:P = 0x00000003	//Set MPMC core and control in release. 
+ew 0xE0700280:P = 0x00000000	//Set MPMC core and control release state.
+
+//MPMC controller initialization 
+ew 0xEC000000:P = 0x00000101
+ew 0xEC000004:P = 0x00000100
+ew 0xEC000008:P = 0x01010001
+ew 0xEC00000C:P = 0x00000100
+ew 0xEC000010:P = 0x00000000
+ew 0xEC000014:P = 0x00010101
+ew 0xEC000018:P = 0x00000001
+ew 0xEC00001C:P = 0x00000001
+ew 0xEC000020:P = 0x00000000
+ew 0xEC000024:P = 0x00000000
+ew 0xEC000028:P = 0x00000000
+ew 0xEC00002C:P = 0x00000101
+ew 0xEC000030:P = 0x00000101
+ew 0xEC000034:P = 0x01010001
+ew 0xEC000038:P = 0x00000000
+ew 0xEC00003C:P = 0x01000000
+ew 0xEC000040:P = 0x00000000
+ew 0xEC000044:P = 0x00000000
+ew 0xEC000048:P = 0x02000201
+ew 0xEC00004C:P = 0x02010102
+ew 0xEC000050:P = 0x00020200
+ew 0xEC000054:P = 0x03030000
+ew 0xEC000058:P = 0x02030301
+ew 0xEC00005C:P = 0x03030303
+ew 0xEC000060:P = 0x03030403
+ew 0xEC000064:P = 0x03070700
+ew 0xEC000068:P = 0x00000400
+ew 0xEC00006C:P = 0x02000100
+ew 0xEC000070:P = 0x04030402
+ew 0xEC000074:P = 0x01000104
+ew 0xEC000078:P = 0x02020000
+ew 0xEC00007C:P = 0x0606060A
+ew 0xEC000080:P = 0x06060606
+ew 0xEC000084:P = 0x05050506
+ew 0xEC000088:P = 0x05050505
+ew 0xEC00008C:P = 0x04040405
+ew 0xEC000090:P = 0x04040404
+ew 0xEC000094:P = 0x03030304
+ew 0xEC000098:P = 0x03030303
+ew 0xEC00009C:P = 0x02020203
+ew 0xEC0000A0:P = 0x02020202
+ew 0xEC0000A4:P = 0x01010102
+ew 0xEC0000A8:P = 0x01010101
+ew 0xEC0000AC:P = 0x06070C01
+ew 0xEC0000B0:P = 0x000F0E00
+ew 0xEC0000B4:P = 0x05040204
+ew 0xEC0000B8:P = 0x04080702
+ew 0xEC0000BC:P = 0x02090606
+ew 0xEC0000C0:P = 0x0000110E
+ew 0xEC0000C4:P = 0x0F040407
+ew 0xEC0000C8:P = 0x08020609
+ew 0xEC0000CC:P = 0x3F003F08
+ew 0xEC0000D0:P = 0x191B1400
+ew 0xEC0000D4:P = 0x00000028
+ew 0xEC0000D8:P = 0x00000000
+ew 0xEC0000DC:P = 0x00000000
+ew 0xEC0000E0:P = 0x00000000
+ew 0xEC0000E4:P = 0x00004000
+ew 0xEC0000E8:P = 0x03000000
+ew 0xEC0000EC:P = 0x03031203
+ew 0xEC0000F0:P = 0x07140C04
+ew 0xEC0000F4:P = 0x00006456
+ew 0xEC0000F8:P = 0x00640064
+ew 0xEC0000FC:P = 0x00640064
+ew 0xEC000100:P = 0x00100064
+ew 0xEC000104:P = 0x0000000A
+ew 0xEC000108:P = 0x00400100
+ew 0xEC00010C:P = 0x10330200
+ew 0xEC000110:P = 0x10331033
+ew 0xEC000114:P = 0x10331033
+ew 0xEC000118:P = 0x10331033
+ew 0xEC00011C:P = 0x08300830
+ew 0xEC000120:P = 0x00460046
+ew 0xEC000124:P = 0x00080008
+ew 0xEC000128:P = 0x00000000
+ew 0xEC00012C:P = 0xFF005555
+ew 0xEC000130:P = 0xAAAA00FF
+ew 0xEC000134:P = 0xFF005555
+ew 0xEC000138:P = 0x00000007
+ew 0xEC00013C:P = 0x00000000
+ew 0xEC000140:P = 0x00000000
+ew 0xEC000144:P = 0x00080000
+ew 0xEC000148:P = 0x00080008
+ew 0xEC00014C:P = 0x00070008
+ew 0xEC000150:P = 0x00000000
+ew 0xEC000154:P = 0x00000000
+ew 0xEC000158:P = 0x00060000
+ew 0xEC00015C:P = 0x00050006
+ew 0xEC000160:P = 0x00030001
+ew 0xEC000164:P = 0x00000000 
+ew 0xEC000168:P = 0x00000000
+ew 0xEC00016C:P = 0x00000000
+ew 0xEC000170:P = 0x00000000
+ew 0xEC000174:P = 0x00000000
+ew 0xEC000178:P = 0x00000000
+ew 0xEC00017C:P = 0x00000000
+ew 0xEC000180:P = 0x02000000
+ew 0xEC000184:P = 0x91D30004
+ew 0xEC000188:P = 0x005B000D
+ew 0xEC00018C:P = 0x20400200
+ew 0xEC000190:P = 0x00030002
+ew 0xEC000194:P = 0x00040003
+ew 0xEC000198:P = 0x00000000
+ew 0xEC00019C:P = 0x00000000
+ew 0xEC0001A0:P = 0x00000000
+ew 0xEC0001A4:P = 0x00024100
+ew 0xEC0001A8:P = 0x00000000
+ew 0xEC0001AC:P = 0x00000001
+ew 0xEC0001B0:P = 0x00000001
+ew 0xEC0001B4:P = 0x00000001
+ew 0xEC0001B8:P = 0x00000001
+ew 0xEC0001BC:P = 0x00000001
+ew 0xEC0001C0:P = 0x0000FFFF
+ew 0xEC0001C4:P = 0x00000000
+ew 0xEC0001C8:P = 0x00040EE6
+ew 0xEC0001CC:P = 0x00000050
+ew 0xEC0001D0:P = 0x00000050
+ew 0xEC0001D4:P = 0x00000050
+ew 0xEC0001D8:P = 0x00000050
+ew 0xEC0001DC:P = 0x00000050
+ew 0xEC0001E0:P = 0x00000050
+ew 0xEC0001EC:P = 0x00000000 
+ew 0xEC0001F0:P = 0x00386100
+ew 0xEC0001F4:P = 0x00386100
+ew 0xEC0001F8:P = 0x00386100
+ew 0xEC0001FC:P = 0x00486100
+ew 0xEC000200:P = 0x00304001
+ew 0xEC000204:P = 0x00200002
+ew 0xEC000208:P = 0x15054210
+ew 0xEC00020C:P = 0x15054210
+ew 0xEC000210:P = 0x15054210
+ew 0xEC000214:P = 0x15054210
+ew 0xEC000218:P = 0x2288A108
+ew 0xEC00021C:P = 0x01000000
+ew 0xEC000220:P = 0x01000000
+ew 0xEC000224:P = 0x01000000
+ew 0xEC000228:P = 0x01000000
+ew 0xEC00022C:P = 0x01000000
+ew 0xEC000230:P = 0x01000000
+ew 0xEC000234:P = 0x01000000
+ew 0xEC000238:P = 0x01000000
+ew 0xEC00023C:P = 0x01000000
+ew 0xEC000240:P = 0x01000000
+ew 0xEC000244:P = 0x036DB6DB
+ew 0xEC000248:P = 0x04924924
+ew 0xEC00024C:P = 0x04924924
+ew 0xEC000250:P = 0x05B6DB6D
+ew 0xEC000254:P = 0x06DB6DB6
+ew 0xEC000258:P = 0x00000108
+ew 0xEC00025C:P = 0x00000108
+ew 0xEC000260:P = 0x00000108
+ew 0xEC000264:P = 0x00000210
+ew 0xEC000268:P = 0x00000000
+ew 0xEC00026C:P = 0x24954249
+ew 0xEC000270:P = 0x24954249
+ew 0xEC000274:P = 0x24954249
+ew 0xEC000278:P = 0x26A5426A
+ew 0xEC00027C:P = 0x2494A249
+ew 0xEC000280:P = 0x05403219
+ew 0xEC000284:P = 0x05403219
+ew 0xEC000288:P = 0x05403219
+ew 0xEC00028C:P = 0x05403219
+ew 0xEC000290:P = 0x04803219
+ew 0xEC000294:P = 0x00000000
+ew 0xEC000298:P = 0x00000000
+ew 0xEC00029C:P = 0x00000000
+ew 0xEC0002A0:P = 0x00000000
+ew 0xEC0002A4:P = 0x00000000
+ew 0xEC0002D8:P = 0x00000000
+ew 0xEC0002DC:P = 0x00000000
+ew 0xEC0002E0:P = 0x00000000
+ew 0xEC0002E4:P = 0x00000000
+ew 0xEC0002E8:P = 0x00019F8F
+ew 0xEC00030C:P = 0x00000000
+ew 0xEC000310:P = 0x00000000
+ew 0xEC000314:P = 0x00000000
+ew 0xEC000318:P = 0x07000000
+ew 0xEC00031C:P = 0x00000007
+ew 0xEC000320:P = 0x00000000
+ew 0xEC000064:P = 0x03070700	
+ew 0xEC00002C:P = 0x01000101	//start active mode for the memory controller
+
+w 100							//Wait for MPMC controller and DRAM initialization to complete.
+
+    //        ____User Supplied Target Init Commands Go Here____
+
+    dv "Initializing target done.\n"
+    return
+
+//___________________________________________________________________
+
+// <eof>

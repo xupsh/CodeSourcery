@@ -1,0 +1,233 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:23:56 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>DB, DD, DH, DQ, DW, Display/Find Data</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("MON Command Language ","moncommand01","MON Command Details","moncommand04","DB, DD, DH, DQ, DW, Display/Find Data","moncommand12","34");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="EW23"></a>
+
+
+
+
+
+
+
+
+<a name="wp5716"></a><h1 class="pzCmdFunc WarninG FontLevel1" id="MGC5716">
+
+
+DB, DD, DH, DQ, DW, <a name="CRefID27897"></a>Display/Find Data
+</h1>
+
+
+
+<a name="wp5717"></a><p class="pzHeading">
+
+Availability: ALL
+</p>
+
+<a name="wp20317"></a><p class="pzHeading">
+
+Syntax
+</p>
+
+<a name="wp5718"></a><p class="pzUsage">
+
+D[<span class=" cItalic">type</span>]
+</p>
+
+<a name="wp5719"></a><p class="pzUsage">
+
+D[<span class=" cItalic">type</span>] <span class="cOptRpl">range</span> [, <span class="cOptRpl">fmt</span>]
+</p>
+
+<a name="wp5720"></a><p class="pzUsage">
+
+D[<span class=" cItalic">type</span>][R] <span class="cOptRpl">range</span> [, <span class="cOptRpl">fmt</span>][= <span class="cOptRpl">value</span> [# <span class="cOptRpl">mask</span>][, <span class="cOptRpl">value</span> [# <span class="cOptRpl">mask</span>]] ... ]
+</p>
+
+<a name="wp5721"></a><p class="pzHeading">
+
+Description
+</p>
+
+<a name="wp5722"></a><p class="pzShortDesc">
+
+This command displays the contents of the specified registers or memory locations in a variety of formats, or searches a memory range for the specified <span class=" cItalic">value</span> list. The Find version of this command only supports target memory spaces. Registers and &ldquo;MON local&rdquo; address space might not be searched.
+</p>
+
+
+<a name="wp5723"></a><p class="pzShortDesc">
+
+When a Display/Find command is entered, it can be repeated for successive addresses by pressing the Enter key, until some other command is entered. The <span class=" cItalic">= value</span> option causes successive Enter keys to repeat the search from where the last match left off. If no more matches are found, a message indicating that fact is displayed.
+</p>
+
+
+<a name="wp5724"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class="cOptRpl">type</span> - {B|H|W|D|Q} specifies the object size, where B is for Byte, H is for 16-bit Half-word, W is for 32-bit Word, and D is for 64-bit Double word. The default is the type specified in the previous Display command or W, if this is the first Display command.</li></ul>
+
+<a name="wp5725"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class="cOptRpl">R</span> - the Reverse option causes the searching to start at the end of the range and scan backwards. (Note that type is then required if the DR &ldquo;display registers&rdquo; alias is active.)</li></ul>
+
+<a name="wp5726"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class="cOptRpl">range</span> - can indicate the location and number of objects to display or search. If range does not specify a start address, Display will continue where the previous Display left off, or begin at virtual address 0 if it is the first Display command. See <a href="moncommand57.html"  onclick='oT("CRF","moncommand57.html");return false;'>range Address Range</a>.</li></ul>
+
+<a name="wp5730"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class="cOptRpl">fmt</span> - {d|u|o|x|X|f|e|E|g|G|c|s|i|I}<br />the display and search value format; default is &ldquo;X&rdquo; (hex). For more information and to see a list of valid formats for each type, see <a href="moncommand54.html"  onclick='oT("CRF","moncommand54.html");return false;'><span class=" cLinkOverride">fmt Data Format</span></a>.</li></ul>
+
+<a name="wp5734"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class="cOptRpl">value</span> - is the data to match against and must be given in fmt type. For integer fmt types, value can be an expr. If fmt is &ldquo;s&rdquo;, value is a string literal (string syntax is shown in <a href="moncommand60.html"  onclick='oT("CRF","moncommand60.html");return false;'>string String Literal</a>.). If fmt is &ldquo;i&rdquo; or &quot;I&quot; then the MIPS mini-assembler is invoked to assemble the search value (see <a href="moncommand22.html"  onclick='oT("CRF","moncommand22.html");return false;'>EB, ED, EH, EQ, EW Enter or Fill Data</a>.)</li></ul>
+
+<a name="wp5741"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class="cOptRpl">mask</span> - is a hex value that specifies which bits of value should be compared with memory. If mask is supplied only for the last value in the list, it will apply to all values in the list. Find/Search on quad word objects (DQ command) is not supported.</li></ul>
+
+<a name="wp5742"></a><p class="pzHeading">
+
+Examples
+</p>
+
+<a name="wp5743"></a><pre class="pCode">
+DW R0 R7                   // Display the first eight general registers.
+</pre>
+
+<a name="wp5744"></a><pre class="pCode">
+DB @my_str_ptr,s             // Display null-terminated string pointed
+                     // to be my_str_ptr.
+</pre>
+
+<a name="wp5745"></a><pre class="pCode">
+DW 2000:0 l 100,i = lui r0,0 #fc000000
+                     // Find first MIPS LUI instruction in range. 
+                     // (Press &lt;enter&gt; to find successive LUIs)
+</pre>
+
+<a name="wp5746"></a><pre class="pCode">
+DW 2000:1 l 6,i
+</pre>
+
+<a name="wp5747"></a><pre class="pCode">
+a0002000:      08000803   j       0xa000200c
+</pre>
+
+<a name="wp5748"></a><pre class="pCode">
+a0002004:      3c05bfc0   lui     a1,0xbfc0
+</pre>
+
+<a name="wp5749"></a><pre class="pCode">
+a0002008:      00a00008   jr      a1
+</pre>
+
+<a name="wp5750"></a><pre class="pCode">
+a000200c:      00000000   nop
+</pre>
+
+<a name="wp5751"></a><pre class="pCode">
+a0002010:      010a0002   srl     zero,t2,0
+</pre>
+
+<a name="wp5752"></a><pre class="pCode">
+a0002014:      014a0002   srl     zero,t2,0
+</pre>
+
+<a name="wp5753"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp5754"></a><pre class="pCode">
+DB _fdata _edata,s = &ldquo;ERROR&rdquo; #DF
+                     // Search the specified range for &ldquo;ERROR&rdquo;, case 
+                     // insensitive (due to 0xDF mask value)
+</pre>
+
+<a name="wp26090"></a><pre class="pCode">
+
+</pre>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "DB, DD, DH, DQ, DW, Display/Find Data";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "DB.DD.DH.DQ.DW.DisplayFind.Data"
+   ThisTopic = "UserDefinedAccessLists";
+   CurrentFile = "moncommand12.html";
+   CurrentFileID = "34";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    <br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    <br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

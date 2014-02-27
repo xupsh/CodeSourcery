@@ -1,0 +1,204 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:23:56 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>MON Local Variables and Option References</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("MON Command Language ","moncommand01","MON Local Variables and Option References","moncommand63","naV","naV","85");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp7612"></a><h1 class="pHeading2 FontLevel1" id="MGC7612">
+
+<a name="CRefID64155"></a>
+MON Local Variables and Option References
+</h1>
+<a name="wp24952"></a><p class="pBody">
+
+MON local variables provide temporary storage which does not impact the target memory. MON local variables are referenced by a symbolic name that starts with a dollar sign (for example, $temp_var).
+</p>
+
+<a name="wp24953"></a><p class="pBody">
+
+Configuration options (see <a name="EW43"></a><a href="majicconfig12.html#CRefID95806" onclick='oT("CRF","majicconfig12.html#CRefID95806");'><span class=" cLinkOverride">Table&#160;3&#8209;9</span></a>) are also referenced via $option_name. Thus, you cannot have a debugger local variable with the same name as an option name. Note that both short form and long form option names can be used.
+</p>
+
+<a name="wp24954"></a><p class="pBody">
+
+These local variable symbols can be used anywhere a normal target address can be used. They are useful in command files for holding expression results or loop counts and the like without intruding on target memory or registers, as in the following sample command file:
+</p>
+
+<a name="wp24961"></a><pre class="pCode">
+ew $addr = 0xA0000000/* Create and initialize $addr variable */
+</pre>
+
+<a name="wp24962"></a><pre class="pCode">
+ew $write = 0x55555555 /* Create and initialize $write variable */
+</pre>
+
+<a name="wp24963"></a><pre class="pCode">
+:LOOP
+</pre>
+
+<a name="wp24964"></a><pre class="pCode">
+ew @$addr = @$write /* Dereference $addr and write $write
+</pre>
+
+<a name="wp24965"></a><pre class="pCode">
+value there */
+</pre>
+
+<a name="wp24966"></a><pre class="pCode">
+mw @$addr, $read /* Dereference $addr and move value to
+</pre>
+
+<a name="wp24967"></a><pre class="pCode">
+$read variable */
+</pre>
+
+<a name="wp24968"></a><pre class="pCode">
+if (@$read == @$write) { ew $write = ~@$write; goto LOOP }
+</pre>
+
+<a name="wp24969"></a><pre class="pCode">
+    // Toggle and loop if value read matched written
+</pre>
+
+<a name="wp24970"></a><pre class="pCode">
+dv &quot;ERROR: wrote %X to %X, read %X\n&quot;, @$write, @$addr, @$read
+</pre>
+
+<a name="wp24971"></a><pre class="pCode">
+   /* display error message */
+</pre>
+
+<a name="wp24984"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp24979"></a><p class="pBody">
+
+Option variable references can include enum references. The enum reference must include the option name ($&lt;option_name&gt;.&lt;enum&gt; to be valid. Example:
+</p>
+
+<a name="wp24980"></a><pre class="pCode">
+if (@$lep == $lep.on) { dv &quot;PC is set at load time\n&quot;}
+</pre>
+
+<a name="wp24990"></a><pre class="pCode">
+
+</pre>
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp7634"></a><p class="pnoteNote">
+
+        	Memory is allocated for MON local variables on an as-needed basis. The first time a MON local symbol name is used, the next available address in the local address space is assigned, the name and address are added to the symbol table, and its size is set. Once referenced, the MON local symbol&#8217;s address and size are fixed. Therefore, the first usage should allocate the maximum space needed with an <span class=" cBold">Enter</span> command.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp7637"></a><p class="pzHeading">
+
+Example
+</p>
+
+<a name="wp7638"></a><pre class="pCode">
+eb $buffer64 L 64 = 0         <span class=" cBold">// Create and clear a 64-byte buffer
+</span></pre>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "MON Local Variables and Option References";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "MON.Local.Variables.and.Option.References"
+   ThisTopic = "UserDefinedAccessLists";
+   CurrentFile = "moncommand63.html";
+   CurrentFileID = "85";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    
+<br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    
+<br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

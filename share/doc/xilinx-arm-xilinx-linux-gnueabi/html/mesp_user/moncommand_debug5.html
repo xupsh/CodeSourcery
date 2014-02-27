@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:25:37 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>Command Line Editor</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("MON Command Line Debugger","moncommand_debug1","Command Line Editor","moncommand_debug5","naV","naV","98");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp5674"></a><h1 class="pHeading2 FontLevel1" id="MGC5674">
+
+<a name="CRefID23155"></a>
+Command Line Editor
+</h1>
+<a name="wp5675"></a><p class="pBody">
+
+This section describes the keys used to perform command line editing in MONICE, and the MON console window provided by most of the EDT debugger interface libraries. These special keys provide a convenient way to edit command lines and recall recently entered command lines.
+</p>
+
+<a name="wp5680"></a>
+<ul><li class="LL1BulSolid">&lt;Ins&gt;&#151;(Insert) Toggles between Insert and Over-type modes. In Insert mode, normal characters are inserted at the current cursor position. In Over-type mode, normal characters replace the character at the current cursor position. On MS-DOS systems the cursor size reflects the mode. Insert mode is a half field block, Over-type mode is an underline. UNIX systems do not support cursor size changes.</li></ul>
+
+<a name="wp5685"></a>
+<ul><li class="LL1BulSolid">&lt;BS&gt; &#151; (Backspace) Deletes the character to the left of the current cursor position.</li></ul>
+
+<a name="wp5686"></a>
+<ul><li class="LL1BulSolid">&lt;Del&gt; &#151; (Delete) Deletes the character at the current cursor position.</li></ul>
+
+<a name="wp5687"></a>
+<ul><li class="LL1BulSolid">&lt;Up&gt; &#151; (Up Arrow) Replaces the current line (if any) with the previous line in the circular buffer.</li></ul>
+
+<a name="wp5689"></a>
+<ul><li class="LL1BulSolid">&lt;Down&gt; &#151; (Down Arrow) Replaces the current line (if any) with the next line in the circular buffer.</li></ul>
+
+<a name="wp5691"></a>
+<ul><li class="LL1BulSolid">&lt;Left&gt; &#151; (Left Arrow) Moves the cursor to the left one character.</li></ul>
+
+<a name="wp5692"></a>
+<ul><li class="LL1BulSolid">&lt;Right&gt; &#151; (Right Arrow) Moves the cursor to the right one character.</li></ul>
+
+<a name="wp5693"></a>
+<ul><li class="LL1BulSolid">&lt;Home&gt; &#151; Moves the cursor to the beginning of the current line.</li></ul>
+
+<a name="wp5694"></a>
+<ul><li class="LL1BulSolid">&lt;End&gt; &#151; Moves the cursor to the end of the current line.</li></ul>
+
+<a name="wp5695"></a>
+<ul><li class="LL1BulSolid">&lt;PgUp&gt;&#151;(Page Up) Replaces the current line (if any) with the first (oldest) line in the circular buffer.</li></ul>
+
+<a name="wp5697"></a>
+<ul><li class="LL1BulSolid">&lt;PgDn&gt; &#151; (Page Down) Replaces the current line (if any) with the last (most recent) line in the circular buffer.</li></ul>
+
+<a name="wp5699"></a>
+<ul><li class="LL1BulSolid">&lt;C-PgUp&gt; &#151; (Control-Page Up) Deletes the entire contents of the circular buffer.</li></ul>
+
+<a name="wp5704"></a>
+<ul><li class="LL1BulSolid">&lt;C-PgDn&gt; &#151; (Control-Page Down) Deletes the currently selected line (if any) from the circular buffer.</li></ul>
+
+<a name="wp5706"></a>
+<ul><li class="LL1BulSolid">&lt;Esc&gt; &#151; (Escape) Deletes all text from the current line. The circular buffer is not affected.</li></ul>
+
+<a name="wp5708"></a>
+<ul><li class="LL1BulSolid">&lt;Enter&gt; &#151; (Return) Enters the current line as input to MON. The cursor does not have to be at the end of the line.</li></ul>
+
+<a name="wp5710"></a>
+<ul><li class="LL1BulSolid">&lt;F1&gt; &#151; (Function key F1) Entered once, searches the circular buffer for a line whose beginning matches the text typed so far. The search starts from the last (most recent) entry in the buffer. If a match is found, the matching line replaces the current line. If a match is found, &lt;F1&gt; can be hit again to find the next match for the original text.</li></ul>
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp5715"></a><p class="pnoteNote">
+
+        	Many Unix consoles have different shell modes which can alter or filter out the keyboard codes used for command line editing and history recall. If these keys seem not to perform their function, try switching to a different mode. Specifically on Sun machines be sure to use a &ldquo;shell tool&rdquo; rather than a &ldquo;cmd tool.&rdquo; &ldquo;Cmd tool&rdquo; does not work properly, even with scrolling disabled.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "Command Line Editor";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "Command.Line.Editor"
+   ThisTopic = "CreatingaMONConnection";
+   CurrentFile = "moncommand_debug5.html";
+   CurrentFileID = "98";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    <br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    <br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

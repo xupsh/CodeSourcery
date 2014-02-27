@@ -1,0 +1,478 @@
++q  // Enter quiet mode
+//___________________________________________________________________
+//
+//               Copyright (c) 2011 Mentor Graphics Corporation
+//                           All rights reserved
+//
+//   THIS WORK CONTAINS TRADE SECRETS AND PROPRIETARY INFORMATION WHICH IS
+//    THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS LICENSORS AND IS
+//                        SUBJECT TO LICENSE TERMS.
+//
+//___________________________________________________________________
+//
+// Mentor Embedded Sourcery Probe target initialization file for the
+// AT91SAM9M10-EKES Rev 2 reference platform.  It supports this platform as-is,
+// and can be adapted to a new target based on this reference board,
+// as detailed below.  For a brand new custom board not related to
+// this reference board, it may be better to start from the template
+// rather than trying to adapt this file.
+//
+// Target Description:
+//
+//     Board:   Atmel AT91SAM9M10-EKES Rev 2 Reference Platform
+//     Device:  Atmel AT91SAM9M10
+//     CPU ID:  ARM926EJS
+//     Endian:  Little
+//     Cores:   1
+//
+// Porting Guide:
+//
+// The user should make the following adaptations to port this file
+// to a new target board based on the associated reference platform:
+//
+//        0. Review the MEP Probe Initialization section at
+//           "TO DO #0" below to make sure the settings are
+//           right for your board.
+//        1. Update the memory configuration table for changes
+//           in the new board's  *Physical*  memory map.  See
+//           'TO DO #1' below.
+//        2. If your target board requires any special MEP
+//           settings, they should be added to the end of the
+//           ONE_TIME_SETUP section.  See 'TO DO #2' below.
+//        3. Decide whether the target should be automatically
+//           reset and/or initialized upon start-up by choosing
+//           the desired command at 'TO DO #3' below.  This
+//           really depends on your use case.
+//        4. If the board has no boot code (or bad boot code),
+//           and you want to download into RAM, then you may
+//           have to adapt the memory controller initialization
+//           script at 'TO DO #4' below to account for changes
+//           relative to the reference platform.
+//
+// NOTE:  Additional information on MON commands and the configuration
+//        options used here is available in the online help system.
+//___________________________________________________________________
+dv "Reading $$# ...\n"
+
+
+// Initialization script preparation
+// =================================
+
+// The RTI, RTNI, and TI command aliases call script functions in this file.
+// These command aliases should never be changed.
+
+ea RTI   $$#.DO_RTI  // RTI  call DO_RTI script function  (Reset Target and Initialize)
+ea RTNI  $$#.DO_RTNI // RTNI call DO_RTNI script function (Reset Target with No Initialization)
+ea TI    $$#.DO_TI   // TI   call DO_TI script function   (Target Initialize without resetting)
+
+
+// MEP Probe Initialization
+// ==========================
+
+// TO DO #0 -- Review the following MEP configuration options to make
+//             sure they are right for your target board hardware and
+//             processor device design.
+
+// The  Trgt_Resets_JTAG  option informs the MEP probe whether the target
+// board will forward a system reset (nSRST) to the JTAG interface (nTRST),
+// or reset the system only without resetting the JTAG interface.  When in
+// doubt, a YES setting is safer.  When the two reset circuits are known
+// to be independent, which is strongly recommended, then a NO setting is
+// recommended.
+
+eo Trgt_Resets_JTAG  = yes
+
+// The  Ice_JTAG_Use_RTCLK  and  Ice_JTAG_Clock_Freq  options are related
+// and must be considered together.  An  Ice_JTAG_Use_RTCLK  setting of
+// ON  selects adaptive clocking mode, where the JTAG clock is dynamically
+// controlled by the target processor.  When  Ice_JTAG_Use_RTCLK  is set
+// OFF  then normal (unthrottled) clocking is selected.
+//
+// When adaptive clocking is disabled, the  Ice_JTAG_Clock_Freq  option
+// specifies the the JTAG clock (TCK) frequency in Megahertz, from
+// 0.002 to 100 (depending on probe hardware capability).  A lower setting
+// is safer, a higher setting yields higher performance.  Note that the
+// requested frequency will be adjusted down to the closest frequency
+// supported by the probe hardware (displaying this option will show the
+// actual TCK frequency).
+//
+//     IJUR  Clock mode
+//     ====  ========================
+//     OFF   Free running TCK at specified frequency (RTCK is ignored)
+//     ON    Adaptive clocking with frequency controlled by RTCK
+//           (Ice_JTAG_Clock_Freq is ignored)
+//
+// Note that enabling  Ice_JTAG_Use_RTCLK  on target boards that do not
+// drive the RTCK signal will lock up the JTAG interface.
+
+eo Ice_JTAG_Use_RTCLK  = on
+eo Ice_JTAG_Clock_Freq = 10
+if (@$Ice_JTAG_Use_RTCLK) {doq Ice_JTAG_Use_RTCLK} {doq Ice_JTAG_Clock_Freq}
+
+// The following command can be used to define the details of the JTAG
+// daisy chain.  It is only required for targets on which the MEP
+// auto-detection algorithm cannot correctly determine the JTAG connection
+// details.  On most boards this command can be omitted.
+//
+//    ew MEP_JTAG_DIMENSION = TAP_CNT, IR1_CNT [ , IR2_CNT ]  ...
+
+// The following commands can be used to define special JTAG initialization
+// operations required by certain processors.  The first one, if defined,
+// is scanned in right after the JTAG reset cycle completes, but before the
+// standard JTAG initialization performed by the MEP.  The second, if
+// defined, is scanned in right after the standard JTAG initialization
+// performed by the MEP.  On most boards these can both be omitted.
+//
+//    ew MEP_JTAG_INIT0 = <scan-op> [ , <scan-op> ]  ...
+//    ew MEP_JTAG_INIT1 = <scan-op> [ , <scan-op> ]  ...
+
+// The  Ice_Power_Sense  option enables the target power monitor.  When
+// target power is detected, the debug interface is enabled.
+
+eo Ice_Power_Sense = VREF
+
+// The  Ice_JTAG_TAP_Select  option controls which TAP on a multi-TAP
+// daisy chain is associated with this debug connection.  This option
+// can be omitted on targets which have one TAP.  Note that TAPs are
+// numbered from 1-N, with TAP 1 being the one whose TDO is connected
+// to the MEP probe.
+//
+//    eo Ice_JTAG_TAP_Select = <num>
+
+// Physical Memory Configuration
+// =============================
+
+mc *:P, inv     // start with all *physical* memory (*:P) marked as invalid
+
+// TO DO #1 -- Change the address range(s) below to match the  *physical*
+//             address ranges of your ROM/flash and RAM areas.  Add more
+//             MC commands as necessary for each memory mapped area.
+//
+// WARNING:  DO NOT confuse virtual (MVA) addresses with physical space.
+//           Make sure to use physical addresses in the MC table.
+//
+// EXAMPLE:
+//
+//     mc  ________:P  ________:P,  PWE, JAM, RW    // DRAM
+//     mc  ________:P  ________:P,  PWD, JAM, RO    // Flash or ROM
+//     mc  ________:P  ________:P,  PWD, JAM, RW    // Peripheral registers
+//
+// Note that if your boot code remaps physical memory, then the MC table
+// should reflect the mapping that is in effect for the code you are trying
+// to debug.  When debugging boot code in flash, MC should match the mapping
+// in effect when booting.  When debugging code in RAM, MC should match the
+// mapping in effect when running code from RAM.
+//
+// Address Range          PWE  Access
+// ---------------------- ---- -------
+mc 0x00000000:P 0x000FFFFF:P, PWD, JAM, RW	// Internal Boot Memory
+mc 0x00100000:P 0x001FFFFF:P, PWD, JAM, RW	// Internal ITCM
+mc 0x00200000:P 0x002FFFFF:P, PWD, JAM, RW	// Internal DTCM
+mc 0x00300000:P 0x003FFFFF:P, PWE, JAM, RW	// Internal SRAM
+mc 0x00400000:P 0x004FFFFF:P, PWD, JAM, RO	// Internal ROM
+mc 0x00500000:P 0x005FFFFF:P, PWD, JAM, RW	// Internal LCD User Interface
+mc 0x00600000:P 0x006FFFFF:P, PWD, JAM, RW	// Internal UDPHS RAM
+mc 0x00700000:P 0x007FFFFF:P, PWD, JAM, RW	// Internal UHP OHCI
+mc 0x00800000:P 0x008FFFFF:P, PWD, JAM, RW	// Internal UHP EHCI
+mc 0x00900000:P 0x009FFFFF:P, PWD, JAM, RW	// Internal VDEC
+mc 0x10000000:P 0x1FFFFFFF:P, PWD, JAM, RW	// EBI Chip Select 0
+mc 0x20000000:P 0x2FFFFFFF:P, PWE, JAM, RW	// DDR2/LPDDR/SDRAM - EBI Chip Select 1
+mc 0x30000000:P 0x3FFFFFFF:P, PWD, JAM, RW	// EBI Chip Select 2
+mc 0x40000000:P 0x4FFFFFFF:P, PWD, JAM, RW	// NAND Flash - EBI Chip Select 3
+mc 0x50000000:P 0x5FFFFFFF:P, PWD, JAM, RW	// Compact Flash Slot 0 - EBI Chip Select 4
+mc 0x60000000:P 0x6FFFFFFF:P, PWD, JAM, RW	// Compact Flash Slot 1 - EBI Chip Select 5
+mc 0x70000000:P 0x7FFFFFFF:P, PWD, JAM, RW	// DDR2LPDDR Chip Select
+mc 0xFFF78000:P 0xFFF7BFFF:P, PWD, JAM, RW	// UDPHS
+mc 0xFFF7C000:P 0xFFF7FFFF:P, PWD, JAM, RW	// TC0, TC1, TC2
+mc 0xFFF80000:P 0xFFF83FFF:P, PWD, JAM, RW	// MCI0
+mc 0xFFF84000:P 0xFFF87FFF:P, PWD, JAM, RW	// TWI0
+mc 0xFFF88000:P 0xFFF8BFFF:P, PWD, JAM, RW	// TWI1
+mc 0xFFF8C000:P 0xFFF8FFFF:P, PWD, JAM, RW	// USART0
+mc 0xFFF90000:P 0xFFF93FFF:P, PWD, JAM, RW	// USART1
+mc 0xFFF94000:P 0xFFF97FFF:P, PWD, JAM, RW	// USART2
+mc 0xFFF98000:P 0xFFF9BFFF:P, PWD, JAM, RW	// USART3
+mc 0xFFF9C000:P 0xFFF9FFFF:P, PWD, JAM, RW	// SSC0
+mc 0xFFFA0000:P 0xFFFA3FFF:P, PWD, JAM, RW	// SSC1
+mc 0xFFFA4000:P 0xFFFA7FFF:P, PWD, JAM, RW	// SPI0
+mc 0xFFFA8000:P 0xFFFABFFF:P, PWD, JAM, RW	// SPI1
+mc 0xFFFAC000:P 0xFFFAFFFF:P, PWD, JAM, RW	// AC97
+mc 0xFFFB0000:P 0xFFFB3FFF:P, PWD, JAM, RW	// TSADC
+mc 0xFFFB4000:P 0xFFFB7FFF:P, PWD, JAM, RW	// ISI
+mc 0xFFFB8000:P 0xFFFBBFFF:P, PWD, JAM, RW	// PWMC
+mc 0xFFFBC000:P 0xFFFBFFFF:P, PWD, JAM, RW	// EMAC
+mc 0xFFFCC000:P 0xFFFCFFFF:P, PWD, JAM, RW	// RNG
+mc 0xFFFD0000:P 0xFFFD3FFF:P, PWD, JAM, RW	// MCI
+mc 0xFFFD4000:P 0xFFFD7FFF:P, PWD, JAM, RW	// TC3, TC4, TC5
+mc 0xFFFFE200:P 0xFFFFE3FF:P, PWD, JAM, RW	// ECC
+mc 0xFFFFE400:P 0xFFFFE5FF:P, PWD, JAM, RW	// DDR2/LPDDR/SDRAM
+mc 0xFFFFE600:P 0xFFFFE7FF:P, PWD, JAM, RW	// DDR2LPDDR
+mc 0xFFFFE800:P 0xFFFFE9FF:P, PWD, JAM, RW	// SMC
+mc 0xFFFFEA00:P 0xFFFFEBFF:P, PWD, JAM, RW	// MARTIX
+mc 0xFFFFEC00:P 0xFFFFEDFF:P, PWD, JAM, RW	// DMAC
+mc 0xFFFFEE00:P 0xFFFFEFFF:P, PWD, JAM, RW	// DBGU
+mc 0xFFFFF000:P 0xFFFFF1FF:P, PWD, JAM, RW	// AIC
+mc 0xFFFFF200:P 0xFFFFF3FF:P, PWD, JAM, RW	// PIOA
+mc 0xFFFFF400:P 0xFFFFF5FF:P, PWD, JAM, RW	// PIOB
+mc 0xFFFFF600:P 0xFFFFF7FF:P, PWD, JAM, RW	// PIOC
+mc 0xFFFFF800:P 0xFFFFF9FF:P, PWD, JAM, RW	// PIOD
+mc 0xFFFFFA00:P 0xFFFFFBFF:P, PWD, JAM, RW	// PIOE
+mc 0xFFFFFC00:P 0xFFFFFCFF:P, PWD, JAM, RW	// PMC
+mc 0xFFFFFD00:P 0xFFFFFD0F:P, PWD, JAM, RW	// RSTC
+mc 0xFFFFFD10:P 0xFFFFFD1F:P, PWD, JAM, RW	// SHDC
+mc 0xFFFFFD20:P 0xFFFFFD2F:P, PWD, JAM, RW	// RTTC
+mc 0xFFFFFD30:P 0xFFFFFD3F:P, PWD, JAM, RW	// PITC
+mc 0xFFFFFD40:P 0xFFFFFD4F:P, PWD, JAM, RW	// WDTC
+mc 0xFFFFFD50:P 0xFFFFFD5F:P, PWD, JAM, RW	// SCKCR
+mc 0xFFFFFD60:P 0xFFFFFD6F:P, PWD, JAM, RW	// GPBR
+mc 0xFFFFFDB0:P 0xFFFFFDBF:P, PWD, JAM, RW	// RTCC
+
+//        ____User Supplied Setup Commands Go Here____
+
+// TO DO #2 -- If your target board requires any special MEP settings
+//             (e.g. special JTAG initialization), add the commands to
+//             make those settings here.
+
+
+// End of initial one-time only setup script.  If this is a non-intrusive
+// attach connection, or if a normal debug connection fails to connect
+// properly, then exit at this point.  Otherwise continue on with optional
+// additional initialization.
+
+if (@.4$INIT_TYPE != 0) {dv "Non-intrusive attach connection\n"; goto EXIT}
+if (@$trgt_cpu_state != $tcs.halt) {dv "Debug connection failed, "; doq TCS; goto EXIT}
+
+// TO DO #3 -- Comment out all but one of the next three commands to
+//             control IF and HOW the target is initialized when the
+//             debugger is launched.  If no reset or target initialization
+//             is needed then all these can be left commented out.
+
+//   TI
+RTI
+//   RTNI
+
+:EXIT
+dv "Finished reading $$#.\n"
+return
+
+//___________________________________________________________________
+::DO_RTNI  // Reset Target with No Initialization.
+
+    // Normally an  rt  command is sufficient, but it may be necessary
+    // to slow down the JTAG clock first, depending on the affect of
+    // reset on the processor.
+
+    dv "Executing RTNI script function\n"
+    rt
+    return
+
+//___________________________________________________________________
+::DO_RTI   // Reset Target and Initialize.
+
+    // Note that it may be necessary to slow down the JTAG clock first, 
+    // depending on the affect of reset on the processor.
+
+    dv "Executing RTI script function\n"
+    rt
+    TI	// call script DO_TI function
+    return
+
+//___________________________________________________________________
+::DO_TI  // Target Initialize.
+
+    if (@$trgt_cpu_state != $tcs.halt) { dv "Target Initialization commands skipped due to CPU state\n"; doq TCS; return }
+    dv "Initializing target...\n"
+
+    //  Memory Controller Setup
+    //
+    // TO DO #4 -- If your board has a different memory configuration than
+    //             the reference board, then you may need to adapt the
+    //             memory controller initialization script accordingly.
+    //             These settings should match the settings used by your
+    //             boot code during its hardware initialization phase.
+
+    ew 0xFFFFFC20:P = 0x00040001    // Write PMC Clock Generator Main Oscillator Register
+                                    // and specify startup time
+    w 10
+    ew 0xFFFFFC28:P = 0x20C73F03    // Setup PLLA
+    w 10
+    ew 0xFFFFFC30:P = 0x00001302    // Enable main oscillator
+    w 10
+    ew 0xFFFFFD44:P = 0x00008000    // Disable watchdog timer
+    w 10
+
+    eo Ice_JTAG_Clock_Freq = 20     // Speed up JTAG now that PLL is enabled
+    if (@$Ice_JTAG_Use_RTCLK) {doq Ice_JTAG_Use_RTCLK} {doq Ice_JTAG_Clock_Freq}
+
+    ew 0xFFFFFC10:P = 0x00000000    // Clear PMC Peripheral Clock Enable register
+    w 10
+
+    ew 0xFFFFEB28:P = 0x0007000A    // Enable EBI Chip Select 1 (EBI_CS1A), EPI Chip Select 3 (EBI_CS3A),
+                                    // EPI I/O Slow Rate (EPI_IOSR) and DDR2 Dedicated Port I/O Slow 
+                                    // Rate (DDR_IOSR) in EBI Chip Select Assignment register (CCFG_EBICSA)
+
+    ew 0xFFFFEB00:P = 0x00000003    // Changes the mapping of the chip to remap area RAM (MATRIX_MRCR)
+
+    // *** Init DDR2 ***
+
+    // Enable DDR2 clock x2 in PMC Module
+    ew 0xFFFFFC00:P = 0x4
+
+    // Configure the DDR controller as
+    // Low-power SDR-SDRAM (MD) and Data bus width is 16-bit (DBW)
+    ew 0xFFFFE420:P = 0x16
+    ew 0xFFFFE620:P = 0x16
+
+    // Program the DDR Controller
+    ew 0xFFFFE408:P = 0x3D
+    ew 0xFFFFE608:P = 0x3D
+
+    // Program DDRSDRC Timing0 Register by assuming timings for 7.5ns min clock period
+    ew 0xFFFFE40C:P = 0x2123A236
+    ew 0xFFFFE60C:P = 0x2123A236
+
+    // Program DDRSDRC Timing1
+    ew 0xFFFFE410:P = 0x2C81B13
+    ew 0xFFFFE610:P = 0x2C81B13
+
+    // Program DDRSDRC Timing2
+    ew 0xFFFFE414:P = 0x2020702
+    ew 0xFFFFE614:P = 0x2020702
+
+    // Step 1 & 2: NOP command -- Allow to enable clk
+    ew 0xFFFFE400:P = 0x1
+    ew 0xFFFFE600:P = 0x1
+
+    // Perform a write access to any SDR-SDRAM address
+    ew 0x20000000:P = 0x00
+    ew 0x70000000:P = 0x00
+
+    w 20
+
+    // NOP command -- Allow to enable cke
+    ew 0xFFFFE400:P = 0x1
+    ew 0xFFFFE600:P = 0x1
+
+    // Perform a write access to any SDR-SDRAM address
+    ew 0x20000000:P = 0x00
+    ew 0x70000000:P = 0x00
+
+    w 10
+
+    // Step # 4: Set All Bank Precharge
+    ew 0xFFFFE400:P = 0x2
+    ew 0xFFFFE600:P = 0x2
+
+    // Perform a write access to any SDR-SDRAM address
+    ew 0x20000000:P = 0x00
+    ew 0x70000000:P = 0x00
+
+    w 10
+
+    // Step # 5: Set EMR operation (EMRS2)
+    ew 0xFFFFE400:P = 0x5
+    ew 0xFFFFE600:P = 0x5
+
+    // Perform a write access to any SDR-SDRAM address
+    ew 0x24000000:P = 0x00
+    ew 0x74000000:P = 0x00
+
+    w 10
+
+    // Step # 6: Set EMR operation (EMRS3)
+    ew 0xFFFFE400:P = 0x5
+    ew 0xFFFFE600:P = 0x5
+
+    // Perform a write access to any SDR-SDRAM address
+    ew 0x26000000:P = 0x00
+    ew 0x76000000:P = 0x00
+
+    w 10
+
+    // Step # 7: Set EMR operation (EMRS1)
+    ew 0xFFFFE400:P = 0x5
+    ew 0xFFFFE600:P = 0x5
+
+    // Perform a write access to any SDR-SDRAM address
+    ew 0x22000000:P = 0x00
+    ew 0x72000000:P = 0x00
+
+    w 10
+
+    // Step # 8a: Enable DLL reset
+    ew 0xFFFFE408:P = 0xBD
+    ew 0xFFFFE608:P = 0xBD
+
+    // Step # 8b: Reset DLL
+    ew 0xFFFFE400:P = 0x05
+    ew 0xFFFFE600:P = 0x05
+
+    // Perform a write access to any SDR-SDRAM address
+    ew 0x20000000:P = 0x00
+    ew 0x70000000:P = 0x00
+
+    w 10
+
+    // Step # 9: Set All Bank Precharge
+    ew 0xFFFFE400:P = 0x02
+    ew 0xFFFFE600:P = 0x02
+
+    // Perform a write access to any SDR-SDRAM address
+    ew 0x20000000:P = 0x00
+    ew 0x70000000:P = 0x00
+
+    w 10
+
+    // Step # 11: Set 1st CBR
+    ew 0xFFFFE400:P = 0x04
+    ew 0xFFFFE600:P = 0x04
+
+    // Perform a write access to any SDR-SDRAM address
+    ew 0x20000000:P = 0x00
+    ew 0x70000000:P = 0x00
+
+    w 10
+
+    // Set 2nd CBR
+    ew 0xFFFFE400:P = 0x04
+    ew 0xFFFFE600:P = 0x04
+
+    // Perform a write access to any SDR-SDRAM address
+    ew 0x20000000:P = 0x00
+    ew 0x70000000:P = 0x00
+
+    w 10
+
+    // Step # 12: Disable DLL reset
+    ew 0xFFFFE408:P = 0x3D        /* 0x3D = 0xBD & (~(0x1 <<  7)) */
+    ew 0xFFFFE608:P = 0x3D        /* 0x3D = 0xBD & (~(0x1 <<  7)) */
+
+    // Step # 13: Set LMR operation
+    ew 0xFFFFE400:P = 0x03
+    ew 0xFFFFE600:P = 0x03
+
+    // Perform a write access to any SDR-SDRAM address
+    ew 0x20000000:P = 0x00
+    ew 0x70000000:P = 0x00
+
+    // As per Atmel, Skip Step 14 to 17 (not supported by the DDR2 model)
+
+    // Step # 18: Set Normal mode
+    ew 0xFFFFE400:P = 0x00
+    ew 0xFFFFE600:P = 0x00
+
+    // Perform a write access to any SDR-SDRAM address
+    ew 0x20000000:P = 0x00
+    ew 0x70000000:P = 0x00
+
+    // Set Refresh timer
+    ew 0xFFFFE404:P = 0x410
+    ew 0xFFFFE604:P = 0x410
+
+    w 100
+
+    dv "Initializing target done.\n"
+    return
+
+//___________________________________________________________________
+
+// <eof>

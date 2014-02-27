@@ -1,0 +1,595 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:22:23 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>Configuration Options</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("Sourcery Probe Configuration ","majicconfig01","Sourcery Probe Target Initialization Scripts","majicconfig04","Configuration Options","majicconfig08","15");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp26638"></a><h1 class="pHeading3 FontLevel1" id="MGC26638">
+
+
+<a name="CRefID77132"></a>
+Configuration Options
+</h1>
+
+<a name="wp26639"></a><p class="pBody">
+
+Many operating parameters of the debug environment are set through configuration options. Some of the configuration options control the behavior of the Mentor Embedded Sourcery Probe, some describe aspects of the target system.
+</p>
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp26654"></a><p class="pnoteNote">
+
+        	Refer to <a href="majicconfig12.html"  onclick='oT("CRF","majicconfig12.html");return false;'>Configuration Option Table</a> for a comprehensive list of all the configuration options.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp26659"></a><h2 class="pHeading4 FontLevel2" id="MGC26659">
+
+<a name="CRefID41336"></a>
+Setting Configuration Options
+</h2>
+<a name="wp26660"></a><p class="pBody">
+
+Configuration options can be referred to by their full name, or an abbreviation consisting of the first character from each part of its name. For example, Reset_Address and Ice_Jtag_Clock_Freq<span class=" cItalic"> </span>can be referred to as <span class=" cBold">RA</span> and <span class=" cBold">IJCF</span>, respectively.
+</p>
+
+<a name="wp26662"></a><p class="pBody">
+
+Some examples are listed here:
+</p>
+
+<a name="wp26663"></a><pre class="pCode">
+eo Trgt_Resets_JTAG  = yes             /*Informs the probe if the
+</pre>
+
+<a name="wp26664"></a><pre class="pCode">
+                                 target board will forward a system
+</pre>
+
+<a name="wp26665"></a><pre class="pCode">
+                                 reset (nSRST) to the JTAG interface
+</pre>
+
+<a name="wp26666"></a><pre class="pCode">
+                                 (nTRST),or reset the system only
+</pre>
+
+<a name="wp26667"></a><pre class="pCode">
+                                 without resetting the JTAG interface
+</pre>
+
+<a name="wp26668"></a><pre class="pCode">
+                                 */
+</pre>
+
+<a name="wp26669"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp28186"></a><pre class="pCode">
+eo Ice_JTAG_Use_RTCLK  = on            /*Selects adaptive clocking mode*/
+</pre>
+
+<a name="wp26670"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp28187"></a><pre class="pCode">
+eo Ice_JTAG_Clock_Freq = 10             /*Specifies the the JTAG clock (TCK)
+</pre>
+
+<a name="wp26671"></a><pre class="pCode">
+                                 frequency (if IJUR=OFF)*/
+</pre>
+
+<a name="wp26672"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp28188"></a><pre class="pCode">
+eo ice_power_sense = VREF               /*Enables the target power monitor*/
+</pre>
+
+<a name="wp26673"></a><pre class="pCode">
+                                 
+</pre>
+
+<a name="wp26674"></a><pre class="pCode">
+                                 
+</pre>
+
+<a name="wp28413"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp28189"></a><pre class="pCode">
+eo Ice_JTAG_TAP_Select = &lt;num&gt;         /*Controls which TAP on a multi-TAP
+</pre>
+
+<a name="wp26676"></a><pre class="pCode">
+                                 daisy chain is associated with this debug 
+                                 connection */
+</pre>
+
+<a name="wp26677"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp26679"></a><p class="pBody">
+
+To display a table of all the configuration options and their current settings, enter the <span class=" cCourier cP10">DO</span> command with no parameters.
+</p>
+
+<a name="wp26680"></a><p class="pBody">
+
+To display a particular option, enter a <span class=" cCourier cP10">DO</span><span class=" cBold"> </span>command and specify the option name (or abbreviation).
+</p>
+
+<a name="wp26682"></a><p class="pBody">
+
+For a verbose description of an option, use the <span class=" cCourier cP10">DOV</span><span class=" cBold"> </span>command.
+</p>
+
+<a name="wp26683"></a><p class="pBody">
+
+To display only the option name and value with no commentary, use the <span class=" cCourier cP10">DOQ</span> version of the command.
+</p>
+
+<a name="wp26684"></a><p class="pBody">
+
+An asterix (*) can be used as a wild card to display all configuration options that exactly match up to the<span class=" cBold"> </span>*. For example, the following command displays all configuration options beginning with ice.
+</p>
+
+<a name="wp26685"></a><pre class="pCode">
+MON&gt; DO                       // List ALL configuration option settings
+</pre>
+
+<a name="wp26687"></a><pre class="pCode">
+<a name="CRefID43444"></a>MON&gt; DO ice*                    // List ALL options startice with &ldquo;ice&rdquo;
+</pre>
+
+<a name="wp26688"></a><pre class="pCode">
+MON&gt; DOV Ice_Jtag_Tap_Select           // Show details on this one
+</pre>
+
+<a name="wp26689"></a><pre class="pCode">
+MON&gt; DOV IJTS                 // Show details on Ice_Jtag_Tap_Select
+</pre>
+
+<a name="wp26690"></a><pre class="pCode">
+MON&gt; DOQ t*   // Show the names and values of all options starting with T
+</pre>
+
+<a name="wp26695"></a><h2 class="pHeading4 FontLevel2" id="MGC26695">
+
+<a name="CRefID99825"></a>
+Memory Configuration (ARM and MIPS Only)
+</h2>
+<a name="wp26699"></a><p class="pBody">
+
+The memory configuration (MC) table provides the Mentor Embedded Sourcery Probe with details about your memory system. It defines a memory map describing the characteristics of each range in the <span class=" cItalic">physical</span> address space of the target system.
+</p>
+
+<a name="wp26704"></a><h2 class="pHeading4 FontLevel2" id="MGC26704">
+
+<a name="CRefID13026"></a>
+MC Display (ARM and MIPS only)
+</h2>
+<a name="wp26706"></a><p class="pBody">
+
+Display the MC table with the <span class=" cCourier cP10">MC</span> command. Issue the <span class=" cCourier cP10">MC</span><span class=" cBold"> </span>command with no parameters to display the entire memory configuration table. Use an <span class=" cCourier cP10">MC</span> command with an address range, but no attribute specifiers to display that part of the table.
+</p>
+
+<a name="wp26798"></a><h2 class="pHeading4 FontLevel2" id="MGC26798">
+
+
+
+MC Attributes Table (ARM and MIPS Only)
+
+</h2>
+
+<div id="TableDivQz"></div>
+
+<div align="center">
+
+
+
+
+
+<a name="wp26716"></a><p class="pTableTitle" id="MGC26716">
+
+
+
+Table 3&#8209;3. 
+
+MC Attributes&#160;
+
+</p>
+
+
+
+
+
+<table border="1" cellpadding="5" cellspacing="0" id="wp26716table26709">
+
+  <tr bgcolor="#CCCCCC"  align="center" valign="middle">
+
+    <th>
+
+
+
+<a name="wp26722"></a><p class="pTableHeading" id="MGC26716">
+
+Attribute
+
+</p>
+
+</th>
+
+
+
+    <th>
+
+
+
+<a name="wp26724"></a><p class="pTableHeading">
+
+
+
+Settings
+
+</p>
+
+
+
+</th>
+
+
+
+    <th>
+
+
+
+<a name="wp26726"></a><p class="pTableHeading">
+
+
+
+Description
+
+</p>
+
+
+
+</th>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row2Column1'  style='width:1.48611in'>
+
+
+
+
+
+<a name="wp26729"></a><p class="pTableCell">
+
+Access Method</p></td>
+
+
+
+    <td id='Row2Column2'  style='width:1.30556in'>
+
+
+
+
+
+<a name="wp26734"></a><p class="pTableCell">
+
+JAM, DMA, INV</p></td>
+
+
+
+    <td id='Row2Column3'  style='width:3.54861in'>
+
+
+
+
+
+<a name="wp26739"></a><p class="pTableCell">
+
+The Sourcery Probe accesses memory either by jamming instructions or using debugger DMA, although not all processors support both modes.</p>
+
+<a name="wp28434"></a><p class="pTableCell">
+
+  &#160;</p>
+
+<a name="wp26740"></a><p class="pTableCell">
+
+Memory regions can also be flagged as invalid in the MC table; the Sourcery Probe will never attempt to access an address flagged as invalid, although it cannot prevent your code from attempting to do so.</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row3Column1' >
+
+
+
+
+
+<a name="wp26747"></a><p class="pTableCell">
+
+Partial Word Access</p></td>
+
+
+
+    <td id='Row3Column2' >
+
+
+
+
+
+<a name="wp26751"></a><p class="pTableCell">
+
+PWD, PWE</p></td>
+
+
+
+    <td id='Row3Column3' >
+
+
+
+
+
+<a name="wp26756"></a><p class="pTableCell">
+
+The Sourcery Probe can be set to enable (<span class=" cBold">PWE</span>) or disable (<span class=" cBold">PWD</span>) partial word accesses at particular address regions. This specifies whether the Mentor Embedded Sourcery Probe can perform accesses that are narrower than the actual bus width, as specified with the <span class=" cBold">DW=</span><span class=" cItalic">n</span> setting for that range.</p>
+
+<a name="wp28431"></a><p class="pTableCell">
+
+  &#160;</p>
+
+<a name="wp26763"></a><p class="pTableCell">
+
+When the Mentor Embedded Sourcery Probe attempts to read a partial word from an address where partial word access is disabled, it will first read a data-width-sized word, then extract the desired part. For writes, it will perform a read-modify-write operation. This is optimized so that one command to read several bytes in the same word only accesses the target once, and writing several bytes to the same word performs one read and one write.</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row4Column1' >
+
+
+
+
+
+<a name="wp26766"></a><p class="pTableCell">
+
+Read-Only</p></td>
+
+
+
+    <td id='Row4Column2' >
+
+
+
+
+
+<a name="wp26770"></a><p class="pTableCell">
+
+RO, RW</p></td>
+
+
+
+    <td id='Row4Column3' >
+
+
+
+
+
+<a name="wp26774"></a><p class="pTableCell">
+
+This flag controls whether the Mentor Embedded Sourcery Probe is allowed to write to the memory range. When set to <span class=" cBold">RO</span> mode, the Mentor Embedded Sourcery Probe can read from memory within the range, but will never write within the range. In <span class=" cBold">RW</span> mode, the Mentor Embedded Sourcery Probe can read or write within the range.</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row5Column1' >
+
+
+
+
+
+<a name="wp26784"></a><p class="pTableCell">
+
+Data Width</p></td>
+
+
+
+    <td id='Row5Column2' >
+
+
+
+
+
+<a name="wp26787"></a><p class="pTableCell">
+
+DW=8, DW=16, </p>
+
+<a name="wp26788"></a><p class="pTableCell">
+
+DW=32, DW=64</p></td>
+
+
+
+    <td id='Row5Column3' >
+
+
+
+
+
+<a name="wp26790"></a><p class="pTableCell">
+
+This option defines the maximum size data transfer the Mentor Embedded Sourcery Probe can perform in the given range. Access requests that are wider than this setting are performed by reading or writing a block of data-width-sized objects. This option also controls the transfer size used by the Mentor Embedded Sourcery Probe in <span class=" cBold">PWD</span> mode transfers.</p>
+
+<a name="wp28428"></a><p class="pTableCell">
+
+  &#160;</p>
+
+<a name="wp26797"></a><p class="pTableCell">
+
+This should normally be set to the natural bus width of your processor. It should only be reduced if your memory controller has trouble with wide accesses.</p></td>
+
+
+
+
+
+</tr>
+
+
+
+
+
+</table>
+
+
+
+</div>
+
+<div id='EndTable'> </div>
+
+<h2 class="pHeading4 FontLevel2" id="MGC26798">
+
+<br clear='left' class='Blank4Table' />
+
+
+
+
+
+</h2>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "Configuration Options";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "Configuration.Options"
+   ThisTopic = "ConfigurationOptions";
+   CurrentFile = "majicconfig08.html";
+   CurrentFileID = "15";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    <br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    <br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

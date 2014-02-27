@@ -1,0 +1,1017 @@
++q  // Enter quiet mode
+//___________________________________________________________________
+//
+//               Copyright (c) 2012 Mentor Graphics Corporation
+//                           All rights reserved
+//
+//   THIS WORK CONTAINS TRADE SECRETS AND PROPRIETARY INFORMATION WHICH IS
+//    THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS LICENSORS AND IS
+//                        SUBJECT TO LICENSE TERMS.
+//
+//___________________________________________________________________
+//
+// Mentor Embedded Sourcery Probe target initialization file for the
+// TI DM814XEVM platform.  It supports this platform as-is,
+// and can be adapted to a new target based on this reference board,
+// as detailed below.  For a brand new custom board not related to
+// this reference board, it may be better to start from the template
+// rather than trying to adapt this file.
+//
+// Target Description:
+//
+//     Board:   TI DM814XEVM
+//     Device:  TI DM8148
+//     CPU ID:  CORTEX-A8
+//     Endian:  Little
+//     Cores:   1
+//
+// Porting Guide:
+//
+// The user should make the following adaptations to port this file
+// to a new target board based on the associated reference platform:
+//
+//        0. Review the MEP Probe Initialization section at
+//           "TO DO #0" below to make sure the settings are
+//           right for your board.
+//        1. Update the memory configuration table for changes
+//           in the new board's  *Physical*  memory map.  See
+//           'TO DO #1' below.
+//        2. If your target board requires any special MEP
+//           settings, they should be added to the end of the
+//           ONE_TIME_SETUP section.  See 'TO DO #2' below.
+//        3. Decide whether the target should be automatically
+//           reset and/or initialized upon start-up by choosing
+//           the desired command at 'TO DO #3' below.  This
+//           really depends on your use case.
+//        4. If the board has no boot code (or bad boot code),
+//           and you want to download into RAM, then you may
+//           have to adapt the memory controller initialization
+//           script at 'TO DO #4' below to account for changes
+//           relative to the reference platform.
+//
+// NOTE:  Additional information on MON commands and the configuration
+//        options used here is available in the online help system.
+//___________________________________________________________________
+dv "Reading $$# ...\n"
+
+
+// Initialization script preparation
+// =================================
+
+// The RTI, RTNI, and TI command aliases call script functions in this file.
+// These command aliases should never be changed.
+
+ea RTI   $$#.DO_RTI  // RTI  call DO_RTI script function  (Reset Target and Initialize)
+ea RTNI  $$#.DO_RTNI // RTNI call DO_RTNI script function (Reset Target with No Initialization)
+ea TI    $$#.DO_TI   // TI   call DO_TI script function   (Target Initialize without resetting)
+
+// Some SoC specific registers are defined in the register definition file below.
+
+fr rd dm814xevm.rd
+
+// MEP Probe Initialization
+// ==========================
+
+// TO DO #0 -- Review the following MEP configuration options to make
+//             sure they are right for your target board hardware and
+//             processor device design.
+
+// The  Trgt_Resets_JTAG  option informs the MEP probe whether the target
+// board will forward a system reset (nSRST) to the JTAG interface (nTRST),
+// or reset the system only without resetting the JTAG interface.  When in
+// doubt, a YES setting is safer.  When the two reset circuits are known
+// to be independent, which is strongly recommended, then a NO setting is
+// recommended.
+
+eo Trgt_Resets_JTAG  = yes
+
+// The  Ice_JTAG_Use_RTCLK  and  Ice_JTAG_Clock_Freq  options are related
+// and must be considered together.  An  Ice_JTAG_Use_RTCLK  setting of
+// ON  selects adaptive clocking mode, where the JTAG clock is dynamically
+// controlled by the target processor.  When  Ice_JTAG_Use_RTCLK  is set
+// OFF  then normal (unthrottled) clocking is selected.
+//
+// When adaptive clocking is disabled, the  Ice_JTAG_Clock_Freq  option
+// specifies the the JTAG clock (TCK) frequency in Megahertz, from
+// 0.002 to 100 (depending on probe hardware capability).  A lower setting
+// is safer, a higher setting yields higher performance.  Note that the
+// requested frequency will be adjusted down to the closest frequency
+// supported by the probe hardware (displaying this option will show the
+// actual TCK frequency).
+//
+//     IJUR  Clock mode
+//     ====  ========================
+//     OFF   Free running TCK at specified frequency (RTCK is ignored)
+//     ON    Adaptive clocking with frequency controlled by RTCK
+//           (Ice_JTAG_Clock_Freq is ignored)
+//
+// For Virtual MESP, the  Ice_Jtag_Clock_Freq  option should be removed.
+//
+// Note that enabling  Ice_JTAG_Use_RTCLK  on target boards that do not
+// drive the RTCK signal will lock up the JTAG interface.
+
+eo Ice_JTAG_Use_RTCLK  = off
+eo Ice_JTAG_Clock_Freq = 12.5
+if (@$Ice_JTAG_Use_RTCLK) {doq Ice_JTAG_Use_RTCLK} {doq Ice_JTAG_Clock_Freq}
+
+// The following command can be used to define the details of the JTAG
+// daisy chain.  It is only required for targets on which the MEP
+// auto-detection algorithm cannot correctly determine the JTAG connection
+// details.  On most boards this command can be omitted.
+//
+//    ew MEP_JTAG_DIMENSION = TAP_CNT, IR1_CNT [ , IR2_CNT ]  ...
+ew MEP_JTAG_DIMENSION = 2,4,6
+
+// The following commands can be used to define special JTAG initialization
+// operations required by certain processors.  The first one, if defined,
+// is scanned in right after the JTAG reset cycle completes, but before the
+// standard JTAG initialization performed by the MEP.  The second, if
+// defined, is scanned in right after the standard JTAG initialization
+// performed by the MEP.  On most boards these can both be omitted.
+//
+//    ew MEP_JTAG_INIT0 = <scan-op> [ , <scan-op> ]  ...
+//    ew MEP_JTAG_INIT1 = <scan-op> [ , <scan-op> ]  ...
+
+//                  IR P 6,   IR=7,     DR P 8,   DR = 8.   IR P 6,   IR = 2,   DR P 32,  aP002108  IR P 6,   IR = 2,   DR P 32,  eQ002008, IR 6,     IR = 3f,  extra TCK files
+ew MEP_JTAG_INIT0 = 89000006, 00000007, 09000008, 00000089, 89000006, 00000002, 09000020, ac002108, 89000006, 00000002, 09000020, e0002008, 81000006, 0000003f, 81000020, ffffffff
+
+
+// The  Ice_Power_Sense  option enables the target power monitor.  When
+// target power is detected, the debug interface is enabled.
+
+ew CORE_DBG_BASE_ADR = 0xcb141000
+eo Ice_Power_Sense = VREF
+
+// The  Ice_JTAG_TAP_Select  option controls which TAP on a multi-TAP
+// daisy chain is associated with this debug connection.  This option
+// can be omitted on targets which have one TAP.  Note that TAPs are
+// numbered from 1-N, with TAP 1 being the one whose TDO is connected
+// to the MEP probe.
+//
+//    eo Ice_JTAG_TAP_Select = <num>
+eo Ice_JTAG_TAP_Select = 1
+
+// The  Ice_Multi_Session  option specifies whether the probe should accept
+// multiple simultaneous debugger connections. This options needs to be set
+// on target boards which have multiple cores that you wish to debug at the
+// same time.  If multi-core debugging is not required, this option can be
+// safely omitted. 
+//
+// eo Ice_Multi_Session = on
+
+// Physical Memory Configuration
+// =============================
+
+mc *:P, inv     // start with all *physical* memory (*:P) marked as invalid
+
+// TO DO #1 -- Change the address range(s) below to match the  *physical*
+//             address ranges of your ROM/flash and RAM areas.  Add more
+//             MC commands as necessary for each memory mapped area.
+//
+// WARNING:  DO NOT confuse virtual (MVA) addresses with physical space.
+//           Make sure to use physical addresses in the MC table.
+//
+// EXAMPLE:
+//
+//     mc  ________:P  ________:P,  PWE, JAM, RW    // DRAM
+//     mc  ________:P  ________:P,  PWD, JAM, RO    // Flash or ROM
+//     mc  ________:P  ________:P,  PWD, JAM, RW    // Peripheral registers
+//
+// Note that if your boot code remaps physical memory, then the MC table
+// should reflect the mapping that is in effect for the code you are trying
+// to debug.  When debugging boot code in flash, MC should match the mapping
+// in effect when booting.  When debugging code in RAM, MC should match the
+// mapping in effect when running code from RAM.
+//
+// Address Range          PWE  Access
+// ---------------------- ---- -------
+
+mc 0x00000000:P 0x00FFFFFF:P, PWD, JAM, RO      // BOOTROM
+mc 0x01000000:P 0x1FFFFFFF:P, PWD, JAM, RW      // GPMC
+mc 0x20000000:P 0x2FFFFFFF:P, PWD, JAM, RW      // PCIe
+mc 0x40020000:P 0x4002BFFF:P, PWD, JAM, RO      // ARM Cortex-A8 ROM
+mc 0x402F0400:P 0x402FFFFF:P, PWE, JAM, RW      // ARM Cortex-A8 RAM
+mc 0x40300000:P 0x4031FFFF:P, PWE, JAM, RW      // OCMC RAM
+mc 0x44000000:P 0x443FFFFF:P, PWD, JAM, RW      // L3 Fast Configuration Registers
+mc 0x44400000:P 0x447FFFFF:P, PWD, JAM, RW      // L3 Mid Configuration Registers
+mc 0x44800000:P 0x44BFFFFF:P, PWD, JAM, RW      // L3 Slow Configuration Registers
+mc 0x46000000:P 0x463FFFFF:P, PWD, JAM, RW      // McASP0
+mc 0x46400000:P 0x467FFFFF:P, PWD, JAM, RW      // McASP1
+mc 0x46800000:P 0x46BFFFFF:P, PWD, JAM, RW      // McASP2
+mc 0x46C00000:P 0x46FFFFFF:P, PWD, JAM, RW      // HDMI
+mc 0x47000000:P 0x473FFFFF:P, PWD, JAM, RW      // McBSP
+mc 0x47400000:P 0x477FFFFF:P, PWE, JAM, RW      // USB
+mc 0x47810000:P 0x47811FFF:P, PWD, JAM, RW      // MMC/SD/SDIO2 Peripheral Registers
+mc 0x47C0C400:P 0x47C0C7FF:P, PWD, JAM, RW      // DDR0 PHY Registers
+mc 0x47C0C800:P 0x47C0CBFF:P, PWD, JAM, RW      // DDR1 PHY Registers
+mc 0x48000000:P 0x48FFFFFF:P, PWD, JAM, RW      // L4 Slow Peripheral Domain Registers
+mc 0x49000000:P 0x490FFFFF:P, PWD, JAM, RW      // EDMA TPCC Registers
+mc 0x49800000:P 0x498FFFFF:P, PWD, JAM, RW      // EDMA TPTC0 Registers
+mc 0x49900000:P 0x499FFFFF:P, PWD, JAM, RW      // EDMA TPTC1 Registers
+mc 0x49A00000:P 0x49AFFFFF:P, PWD, JAM, RW      // EDMA TPTC2 Registers
+mc 0x49B00000:P 0x49BFFFFF:P, PWD, JAM, RW      // EDMA TPTC3 Registers
+mc 0x4A000000:P 0x4AFFFFFF:P, PWD, JAM, RW      // L4 Fast Peripheral Domain
+mc 0x4B000000:P 0x4BFFFFFF:P, PWD, JAM, RW      // Emulation Subsystem
+mc 0x4C000000:P 0x4CFFFFFF:P, PWD, JAM, RW      // DDR0 Registers
+mc 0x4D000000:P 0x4DFFFFFF:P, PWD, JAM, RW      // DDR1 Registers
+mc 0x4E000000:P 0x4FFFFFFF:P, PWD, JAM, RW      // DDR DMM Registers
+mc 0x50000000:P 0x50FFFFFF:P, PWD, JAM, RW      // GPMC Registers
+mc 0x51000000:P 0x51FFFFFF:P, PWD, JAM, RW      // PCIE Registers
+mc 0x55000000:P 0x55FFFFFF:P, PWD, JAM, RW      // Media Controller
+mc 0x56000000:P 0x56FFFFFF:P, PWD, JAM, RW      // SGX530
+mc 0x58000000:P 0x58FFFFFF:P, PWD, JAM, RW      // HDVICP2 Configuration
+mc 0x59000000:P 0x59FFFFFF:P, PWD, JAM, RW      // HDVICP2 SL2
+mc 0x5C000000:P 0x5DFFFFFF:P, PWD, JAM, RW      // ISS
+mc 0x60000000:P 0x7FFFFFFF:P, PWD, JAM, RW      // DDR DMM Tiler Window 
+mc 0x80000000:P 0xFFFFFFFF:P, PWE, DMA, RW      // DDR RAM
+
+//        ____User Supplied Setup Commands Go Here____
+
+// TO DO #2 -- If your target board requires any special MEP settings
+//             (e.g. special JTAG initialization), add the commands to
+//             make those settings here.
+
+
+// End of initial one-time only setup script.  If this is a non-intrusive
+// attach connection, or if a normal debug connection fails to connect
+// properly, then exit at this point.  Otherwise continue on with optional
+// additional initialization.
+
+if (@.4$INIT_TYPE != 0) {dv "Non-intrusive attach connection\n"; goto EXIT}
+if (@$trgt_cpu_state != $tcs.halt) {dv "Debug connection failed, "; doq TCS; goto EXIT}
+
+// TO DO #3 -- Comment out all but one of the next three commands to
+//             control IF and HOW the target is initialized when the
+//             debugger is launched.  If no reset or target initialization
+//             is needed then all these can be left commented out.
+
+TI
+//   RTI
+//   RTNI
+// The semihosting vector is +8 from the vector area base address, which
+// on Cortex-A8 is configurable via the system coprocessor.  This option
+// is required for hosted mode applications, and ignored for unhosted
+// mode.
+
+ew $semi_hosting_vector = @cp15_snvba + 8
+:EXIT
+dv "Finished reading $$#.\n"
+return
+
+//___________________________________________________________________
+::DO_RTNI  // Reset Target with No Initialization.
+
+    // Normally an  rt  command is sufficient, but it may be necessary
+    // to slow down the JTAG clock first, depending on the affect of
+    // reset on the processor.
+
+    dv "Executing RTNI script function\n"
+    rt
+    return
+
+//___________________________________________________________________
+::DO_RTI   // Reset Target and Initialize.
+
+    // Note that it may be necessary to slow down the JTAG clock first, 
+    // depending on the affect of reset on the processor.
+
+    dv "Executing RTI script function\n"
+    rt
+    TI  // call script DO_TI function
+    return
+
+//___________________________________________________________________
+::DO_TI  // Target Initialize.
+
+    if (@$trgt_cpu_state != $tcs.halt) { dv "Target Initialization commands skipped due to CPU state\n"; doq TCS; return }
+    dv "Initializing target...\n"
+
+
+    //  "Starting Initialization for DM8148\n"
+    
+    //  "BEGIN: PLL and Control MMR unlock\n"
+
+    ew  0x481C5040:P = 0x1EDA4C3D
+    ew  0x48140060:P = 0x2FF1AC2B
+    ew  0x48140064:P = 0xF757FDC0
+    ew  0x48140068:P = 0xE2BC3A6D
+    ew  0x4814006c:P = 0x1EBF131D
+    ew  0x48140070:P = 0x6F361E05
+
+    //  "END: PLL and Control MMR unlock\n"
+    
+    //  "BEGIN: All ADPLL Enable\n"
+    
+    //  "---MODENA ADPLLJ---\n"
+
+    /* MODENA ADPLLJ at 600 */
+    ew  0x481C5058:P = ((0n1<<0n16)|0x1)       
+    ew  0x481C505C:P = 0n60        
+    ew  0x481C5054:P = 0x1
+    w   3
+    ew  0x481C5054:P = 0x0
+    w   3
+    ew  0x481C5050:P = 0x1
+    w   3
+    ew  0x481C5050:P = 0x0
+    w   3
+    ew  0x481C504C:P = (((@0x481C504C) & 0xFF7FFFFF)|0x1)
+:label_1
+    if  (((@0x481C506C) & 0x00000600) != 0x00000600 ){goto label_1}
+    w   10
+
+
+
+
+    //  "---L3  ADPLLJ---\n"
+
+    /* L3 ADPLLJ at 200 */
+    ew 0x481C5114:P = ((@(0x481C5110 + 0x4)) | 0x00800000) 
+    :label_2
+    if (((@(0x481C5110 + 0x24)) & 0x00000101) != 0x00000101){goto label_2} 
+    ew  (0x481C5110 + 0x4):P = ((@(0x481C5110 + 0x4)) & 0xFFFFFFFE)
+    w   3
+    ew  (0x481C5110 + 0x10):P = ((0n4<<0n16) | 0n19) 
+    ew  (0x481C5110 + 0x14):P = 0n800 
+    w   3
+    ew  (0x481C5110 + 0xC):P = 0x1 
+    w   3
+    ew  (0x481C5110 + 0xC):P = 0x0
+    w   3
+    ew  (0x481C5110 + 0x8):P = 0x1 
+    w   3
+    ew  (0x481C5110 + 0x8):P = 0x0
+    w   3
+    /* TINITZ and CLKDCO configuration */
+    ew  (0x481C5110 + 0x4):P = (((@(0x481C5110 + 0x4)) & 0xFF7FE3FF) | 0x801) 
+    /* Wait for phase lock */
+:label_3
+    if  (((@(0x481C5110 + 0x24)) & 0x00000600) != 0x00000600){goto label_3}
+    /* Wait for clock stabilization */
+    w   10
+
+
+
+
+    //  "---DSP ADPLLJ---\n"
+
+    /* DSP ADPLLJ at 500 */
+    ew  (0x481C5080 + 0x4):P = ((@(0x481C5080 + 0x4)) | 0x00800000)
+:label_4
+    if  (((@(0x481C5080 + 0x24)) & 0x00000101) != 0x00000101){goto label_4}
+    ew  (0x481C5080 + 0x4):P = ((@(0x481C5080 + 0x4)) & 0xFFFFFFFE)
+    w   3
+    ew  (0x481C5080 + 0x10):P = ((0n1<<0n16) | 0n19)
+    ew  (0x481C5080 + 0x14):P = 0n500
+    w   3
+    ew  (0x481C5080 + 0xC):P = 0x1
+    w   3
+    ew  (0x481C5080 + 0xC):P = 0x0
+    w   3
+    ew  (0x481C5080 + 0x8):P = 0x1
+    w   3
+    ew  (0x481C5080 + 0x8):P = 0x0
+    w   3
+    /* TINITZ and CLKDCO configuration */
+    ew  (0x481C5080 + 0x4):P = (((@(0x481C5080 + 0x4)) & 0xFF7FE3FF) | 0x801) 
+    /* Wait for phase lock */
+:label_5
+    if  (((@(0x481C5080 + 0x24)) & 0x00000600) != 0x00000600){goto label_5}
+    /* Wait for clock stabilization */
+    w   10
+
+
+
+
+    //  "---DSS ADPLLJ---\n"
+
+    /* DSS ADPLLJ at 200 */
+    ew  (0x481C5170 + 0x4):P = ((@(0x481C5170 + 0x4)) | 0x00800000)
+:label_6
+    if  (((@(0x481C5170 + 0x24)) & 0x00000101) != 0x00000101){goto label_6}
+    ew  (0x481C5170 + 0x4):P = ((@(0x481C5170 + 0x4)) & 0xFFFFFFFE)
+    w   3
+    ew  (0x481C5170 + 0x10):P = ((0n4<<0n16) | 0n19)
+    ew  (0x481C5170 + 0x14):P = 0n800
+    w   3
+    ew  (0x481C5170 + 0xC):P = 0x1
+    w   3
+    ew  (0x481C5170 + 0xC):P = 0x0
+    w   3
+    ew  (0x481C5170 + 0x8):P = 0x1
+    w   3
+    ew  (0x481C5170 + 0x8):P = 0x0
+    w   3
+    /* TINITZ and CLKDCO configuration */
+    ew  (0x481C5170 + 0x4):P = (((@(0x481C5170 + 0x4)) & 0xFF7FE3FF) | 0x801) 
+    /* Wait for phase lock */
+:label_7
+    if  (((@(0x481C5170 + 0x24)) & 0x00000600) != 0x00000600){goto label_7}
+    /* Wait for clock stabilization */
+    w   10
+
+
+
+
+    //  "---ISS ADPLLJ---\n"
+
+    /* ISS ADPLLJ at 200 */
+    ew  (0x481C5140 + 0x4):P = ((@(0x481C5140 + 0x4)) | 0x00800000)
+:label_8
+    if  (((@(0x481C5140 + 0x24)) & 0x00000101) != 0x00000101){goto label_8}
+    ew  (0x481C5140 + 0x4):P = ((@(0x481C5140 + 0x4)) & 0xFFFFFFFE)
+    w   3
+    ew  (0x481C5140 + 0x10):P = ((0n4<<0n16) | 0n19)
+    ew  (0x481C5140 + 0x14):P = 0n800
+    w   3
+    ew  (0x481C5140 + 0xC):P = 0x1
+    w   3
+    ew  (0x481C5140 + 0xC):P = 0x0
+    w   3
+    ew  (0x481C5140 + 0x8):P = 0x1
+    w   3
+    ew  (0x481C5140 + 0x8):P = 0x0
+    w   3
+    /* TINITZ and CLKDCO configuration */
+    ew  (0x481C5140 + 0x4):P = (((@(0x481C5140 + 0x4)) & 0xFF7FE3FF) | 0x801) 
+    /* Wait for phase lock */
+:label_9
+    if  (((@(0x481C5140 + 0x24)) & 0x00000600) != 0x00000600){goto label_9}
+    /* Wait for clock stabilization */
+    w   10
+
+
+
+
+    // "---IVA ADPLLJ---\n"
+
+    /* IVA ADPLLJ */
+    ew  (0x481C50E0 + 0x4):P = ((@(0x481C50E0 + 0x4)) | 0x00800000)
+:label_10
+    if  (((@(0x481C50E0 + 0x24)) & 0x00000101) != 0x00000101){goto label_10}
+    ew  (0x481C50E0 + 0x4):P = ((@(0x481C50E0 + 0x4)) & 0xFFFFFFFE)
+    w   3
+    ew  (0x481C50E0 + 0x10):P = ((0n2<<0n16) | 0n19)
+    ew  (0x481C50E0 + 0x14):P = 0n532
+    w   3
+    ew  (0x481C50E0 + 0xC):P = 0x1
+    w   3
+    ew  (0x481C50E0 + 0xC):P = 0x0
+    w   3
+    ew  (0x481C50E0 + 0x8):P = 0x1
+    w   3
+    ew  (0x481C50E0 + 0x8):P = 0x0
+    w   3
+    /* TINITZ and CLKDCO configuration */
+    ew  (0x481C50E0 + 0x4):P = (((@(0x481C50E0 + 0x4)) & 0xFF7FE3FF) | 0x801) 
+    /* Wait for phase lock */
+:label_11
+    if  (((@(0x481C50E0 + 0x24)) & 0x00000600) != 0x00000600){goto label_11}
+    /* Wait for clock stabilization */
+    w   10
+
+
+
+
+    //.."---SGX ADPLLJ___\n"
+
+    /* SGX ADPLLJ at 200 */
+    ew  (0x481C50B0 + 0x4):P = ((@(0x481C50B0 + 0x4)) | 0x00800000)
+:label_12
+    if  (((@(0x481C50B0 + 0x24)) & 0x00000101) != 0x00000101){goto label_12}
+    ew  (0x481C50B0 + 0x4):P = ((@(0x481C50B0 + 0x4)) & 0xFFFFFFFE)
+    w   3
+    ew  (0x481C50B0 + 0x10):P = ((0n4<<0n16) | 0n19)
+    ew  (0x481C50B0 + 0x14):P = 0n800
+    w   3
+    ew  (0x481C50B0 + 0xC):P = 0x1
+    w   3
+    ew  (0x481C50B0 + 0xC):P = 0x0
+    w   3
+    ew  (0x481C50B0 + 0x8):P = 0x1
+    w   3
+    ew  (0x481C50B0 + 0x8):P = 0x0
+    w   3
+    /* TINITZ and CLKDCO configuration */
+    ew  (0x481C50B0 + 0x4):P = (((@(0x481C50B0 + 0x4)) & 0xFF7FE3FF) | 0x801) 
+    /* Wait for phase lock */
+:label_13
+    if  (((@(0x481C50B0 + 0x24)) & 0x00000600) != 0x00000600){goto label_13}
+    /* Wait for clock stabilization */
+    w   10
+
+
+
+
+    //.."--- USB ADPLLJ---\n"
+
+    /* USB ADPLLJ at 192 */
+    ew  (0x481C5260 + 0x4):P = ((@(0x481C5260 + 0x4)) | 0x00800000)
+:label_14
+    if  (((@(0x481C5260 + 0x24)) & 0x00000101) != 0x00000101){goto label_14}
+    ew  (0x481C5260 + 0x4):P = ((@(0x481C5260 + 0x4)) & 0xFFFFFFFE)
+    w   3
+    ew  (0x481C5260 + 0x10):P = ((0n5<<0n16) | 0n19)
+    ew  (0x481C5260 + 0x14):P = 0n960
+    w   3
+    ew  (0x481C5260 + 0xC):P = 0x1
+    w   3
+    ew  (0x481C5260 + 0xC):P = 0x0
+    w   3
+    ew  (0x481C5260 + 0x8):P = 0x1
+    w   3
+    ew  (0x481C5260 + 0x8):P = 0x0
+    w   3
+    /* TINITZ, CLKCOLDO and CLKDCO configuration */
+    ew  (0x481C5260 + 0x4):P = (((@(0x481C5260 + 0x4)) & 0xFF7FE3FF) | 0x200a0801) 
+    /* Wait for phase lock */
+:label_15
+    if  (((@(0x481C5260 + 0x24)) & 0x00000600) != 0x00000600){goto label_15}
+    /* Wait for clock stabilization */
+    w   10
+
+
+
+
+    //.."---VIDEO 0 ADPLLJ---\n"
+
+    /* VIDEO 0 ADPLLJ at 54 */
+    ew  (0x481C51A0 + 0x4):P = ((@(0x481C51A0 + 0x4)) | 0x00800000)
+:label_16
+    if  (((@(0x481C51A0 + 0x24)) & 0x00000101) != 0x00000101){goto label_16}
+    ew  (0x481C51A0 + 0x4):P = ((@(0x481C51A0 + 0x4)) & 0xFFFFFFFE)
+    w   3
+    ew  (0x481C51A0 + 0x10):P = ((0n10<<0n16) | 0n19)
+    ew  (0x481C51A0 + 0x14):P = 0n540
+    w   3
+    ew  (0x481C51A0 + 0xC):P = 0x1
+    w   3
+    ew  (0x481C51A0 + 0xC):P = 0x0
+    w   3
+    ew  (0x481C51A0 + 0x8):P = 0x1
+    w   3
+    ew  (0x481C51A0 + 0x8):P = 0x0
+    w   3
+    /* TINITZ, CLKCOLDO and CLKDCO configuration */
+    ew  (0x481C51A0 + 0x4):P = (((@(0x481C51A0 + 0x4)) & 0xFF7FE3FF) | 0x801) 
+    /* Wait for phase lock */
+:label_17
+    if  (((@(0x481C51A0 + 0x24)) & 0x00000600) != 0x00000600){goto label_17}
+    /* Wait for clock stabilization */
+    w   10
+
+
+
+
+    //.."---VIDEO 1 ADPLLJ---\n"
+
+    /* VIDEO 1 ADPLLJ at 148 */
+    ew  (0x481C51D0 + 0x4):P = ((@(0x481C51D0 + 0x4)) | 0x00800000)
+:label_18
+    if  (((@(0x481C51D0 + 0x24)) & 0x00000101) != 0x00000101){goto label_18}
+    ew  (0x481C51D0 + 0x4):P = ((@(0x481C51D0 + 0x4)) & 0xFFFFFFFE)
+    w   3
+    ew  (0x481C51D0 + 0x10):P = ((0n4<<0n16) | 0n19)
+    ew  (0x481C51D0 + 0x14):P = 0n594
+    w   3
+    ew  (0x481C51D0 + 0xC):P = 0x1
+    w   3
+    ew  (0x481C51D0 + 0xC):P = 0x0
+    w   3
+    ew  (0x481C51D0 + 0x8):P = 0x1
+    w   3
+    ew  (0x481C51D0 + 0x8):P = 0x0
+    w   3
+    /* TINITZ, CLKCOLDO and CLKDCO configuration */
+    ew  (0x481C51D0 + 0x4):P = (((@(0x481C51D0 + 0x4)) & 0xFF7FE3FF) | 0x801) 
+    /* Wait for phase lock */
+:label_19
+    if  (((@(0x481C51D0 + 0x24)) & 0x00000600) != 0x00000600){goto label_19}
+    /* Wait for clock stabilization */
+    w   10
+
+
+
+
+    //.."---VIDEO 2/HDMI ADPLLJ---\n"
+
+    /* VIDEO 2 /HDMI ADPLLJ at 148 */
+    ew  (0x481C5200 + 0x4):P = ((@(0x481C5200 + 0x4)) | 0x00800000)
+:label_20
+    if  (((@(0x481C5200 + 0x24)) & 0x00000101) != 0x00000101){goto label_20}
+    ew  (0x481C5200 + 0x4):P = ((@(0x481C5200 + 0x4)) & 0xFFFFFFFE)
+    w   3
+    ew  (0x481C5200 + 0x10):P = ((0n10<<0n16) | 0n19)
+    ew  (0x481C5200 + 0x14):P = 0n1485
+    w   3
+    ew  (0x481C5200 + 0xC):P = 0x1
+    w   3
+    ew  (0x481C5200 + 0xC):P = 0x0
+    w   3
+    ew  (0x481C5200 + 0x8):P = 0x1
+    w   3
+    ew  (0x481C5200 + 0x8):P = 0x0
+    w   3
+    /* TINITZ, CLKCOLDO and CLKDCO configuration */
+    ew  (0x481C5200 + 0x4):P = (((@(0x481C5200 + 0x4)) & 0xFF7FE3FF) | 0x1001) 
+    /* Wait for phase lock */
+:label_21
+    if  (((@(0x481C5200 + 0x24)) & 0x00000600) != 0x00000600){goto label_21}
+    /* Wait for clock stabilization */
+    w   10
+
+
+
+
+    //.."---DDR ADPLLJ---\n"
+
+    /* DDR ADPLLJ at 333 */
+    ew  (0x481C5290 + 0x4):P = ((@(0x481C5290 + 0x4)) | 0x00800000)
+:label_22
+    if  (((@(0x481C5290 + 0x24)) & 0x00000101) != 0x00000101){goto label_22}
+    ew  (0x481C5290 + 0x4):P = ((@(0x481C5290 + 0x4)) & 0xFFFFFFFE)
+    w   3
+    ew  (0x481C5290 + 0x10):P = ((0n2<<0n16) | 0n19)
+    ew  (0x481C5290 + 0x14):P = 0n666
+    w   3
+    ew  (0x481C5290 + 0xC):P = 0x1
+    w   3
+    ew  (0x481C5290 + 0xC):P = 0x0
+    w   3
+    ew  (0x481C5290 + 0x8):P = 0x1
+    w   3
+    ew  (0x481C5290 + 0x8):P = 0x0
+    w   3
+    /* TINITZ, CLKCOLDO and CLKDCO configuration */
+    ew  (0x481C5290 + 0x4):P = (((@(0x481C5290 + 0x4)) & 0xFF7FE3FF) | 0x801) 
+    /* Wait for phase lock */
+:label_23
+    if  (((@(0x481C5290 + 0x24)) & 0x00000600) != 0x00000600){goto label_23}
+    /* Wait for clock stabilization */
+    w   10
+
+
+
+
+    //.."---AUDIO ADPLLJ---\n"
+
+    /* AUDIO ADPLLJ at 200 */
+    ew  (0x481C5230 + 0x4):P = ((@(0x481C5230 + 0x4)) | 0x00800000)
+:label_24
+    if  (((@(0x481C5230 + 0x24)) & 0x00000101) != 0x00000101){goto label_24}
+    ew  (0x481C5230 + 0x4):P = ((@(0x481C5230 + 0x4)) & 0xFFFFFFFE)
+    w   3
+    ew  (0x481C5230 + 0x10):P = ((0n4<<0n16) | 0n19)
+    ew  (0x481C5230 + 0x14):P = 0n800
+    w   3
+    ew  (0x481C5230 + 0xC):P = 0x1
+    w   3
+    ew  (0x481C5230 + 0xC):P = 0x0
+    w   3
+    ew  (0x481C5230 + 0x8):P = 0x1
+    w   3
+    ew  (0x481C5230 + 0x8):P = 0x0
+    w   3
+    /* TINITZ, CLKCOLDO and CLKDCO configuration */
+    ew  (0x481C5230 + 0x4):P = (((@(0x481C5230 + 0x4)) & 0xFF7FE3FF) | 0x801) 
+    /* Wait for phase lock */
+:label_25
+    if  (((@(0x481C5230 + 0x24)) & 0x00000600) != 0x00000600){goto label_25}
+    /* Wait for clock stabilization */
+    w   10
+
+
+
+
+    //.."---SATA PLL---\n"
+
+    ew  0x48140720:P = 0x4
+    w   3
+    ew  0x48140724:P = 0xC12C003C
+    ew  0x4814072C:P = 0x004008E0
+    /* Wait for the stabilization of the bias */
+    w   3
+    ew  0x48140720:P = 0x14
+    w   3
+    ew  0x48140720:P = 0x16
+    w   3
+    ew  0x48140720:P = 0xC0000016
+    w   3
+    ew  0x48140720:P = 0xC0000017
+    /* Wait for PLL lock */
+:label_26
+    if  (((@0x48140734) & 0x1) != 0x1){goto label_26}
+
+
+
+
+    //.."---PCIE PLL---\n"
+
+    ew  0x48140E24:P = 0x00000002
+    ew  0x481406D8:P = 0x00000000
+    ew  0x481406DC:P = 0x00640000
+    ew  0x481406E0:P = 0x00000000
+    ew  0x481406E4:P = 0x004008E0
+    ew  0x481406E8:P = 0x0000609C
+    w   3
+    ew  0x481406D8:P = 0x00000004
+    w   3
+    ew  0x481406D8:P = 0x00000014
+    w   3
+    ew  0x481406D8:P = 0x00000016
+    w   3
+    ew  0x481406D8:P = 0x30000016
+    w   3
+    ew  0x481406D8:P = 0x70007016
+    w   3
+    ew  0x481406D8:P = 0x70007017
+    w   3
+    /* Wait for pll lock */
+:label_27
+    if  (((@0x481406EC) & 0x1) != 0x1){goto label_27} 
+
+
+    //.."END: All ADPLL Enable \n"
+
+    //.."START: Initialize PRCM-OCMCRAM\n"
+
+    /* Enable Clocks for OCMC0RAM */
+    ew  0x48181414:P = 0x2
+    ew  0x481815B4:P = 0x2
+:label_28
+    if  ((((@0x48181414) & 0x100)>>0n8) != 0x1){goto label_28}
+:label_29
+    if  ((((@0x481815B4) & 0x30000)>>0n17) != 0x0){goto label_29}
+
+    //.."END: Initialize PRCM-OCMCRAM\n"
+
+
+    //.."START: Initialize PRCM-DucatiSS\n"
+
+    /* Enable Ducati, power domain and clocks */
+    ew  0x48180B10:P = 0xEF
+    ew  0x48180518:P = 0x2
+    ew  0x48180574:P = 0x2
+:label_30
+    if  ((((@0x48180518) & 0x300)>>0n8) != 0x3){goto label_30}
+    ew  0x55020000:P = 0x10000
+    ew  0x55020004:P = 0x9
+    ew  0x55020008:P = 0xE7FEE7FE
+
+    /* Page Translations settings */
+
+    /* Large page translation settings */
+    ew  0x55080800:P = 0x40000000
+    ew  0x55080804:P = 0x80000000
+    ew  0x55080808:P = 0xC0000000
+    ew  0x5508080C:P = 0x60000000
+
+    ew  0x55080820:P = 0x40000000
+    ew  0x55080824:P = 0x80000000
+    ew  0x55080828:P = 0xC0000000
+    ew  0x5508082C:P = 0x60000000
+
+    ew  0x55080840:P = 0x00000007
+    ew  0x55080844:P = 0x00030007
+    ew  0x55080848:P = 0x00000007
+    ew  0x5508084C:P = 0x00020007
+
+    /* Medium Page Translation settings */
+    ew  0x55080860:P = 0x00300000
+    ew  0x55080864:P = 0x00400000
+
+    ew  0x550808A0:P = 0x40300000
+    ew  0x550808A4:P = 0x40400000
+
+    ew  0x550808E0:P = 0x00000007
+    ew  0x550808E4:P = 0x00020007
+
+    /* Small page translation settings */
+    ew  0x55080920:P = 0x00000000
+    ew  0x55080924:P = 0x40000000
+    ew  0x55080928:P = 0x00004000
+    ew  0x5508092C:P = 0x00008000
+    ew  0x55080930:P = 0x0000C000
+
+    ew  0x550809A0:P = 0x55020000
+    ew  0x550809A4:P = 0x55080000
+    ew  0x550809A8:P = 0x55024000
+    ew  0x550809AC:P = 0x55028000
+    ew  0x550809B0:P = 0x5502C000
+
+    ew  0x55080A20:P = 0x0001000B
+    ew  0x55080A24:P = 0x0000000B
+    ew  0x55080A28:P = 0x00010007
+    ew  0x55080A2C:P = 0x00000007
+    ew  0x55080A30:P = 0x00000007
+
+    ew  0x48180B10:P = 0xE3
+    /* Wait for Ducati Reset finished */
+:label_31
+    if  (((@0x48180B14) & 0x1C) != 0x1C){goto label_31}
+    /* Wait for the module to be functional */
+:label_32
+    if  ((((@0x48180574) & 0x30000)>>0n16) != 0x0){goto label_32}
+
+    //.."END: Initialize PRCM-DucatiSS\n"
+
+
+    //.."START: Initialize PRCM-IVHD0"
+
+    /* Enable power domain and clocks */
+    ew  0x48180600:P = 0n2
+:label_33
+    if  ((@0x48180C04) != 0x37){goto label_33}
+    ew  0x48180620:P = 0n2
+    ew  0x48180624:P = 0n2
+    /* Wait for GCLK to be active */
+:label_34
+    if  (((@0x48180600) & 0x100) != 0x100){goto label_34}
+    ew  0x48180C10:P = 0n3
+:label_35
+    if  ((@0x48180C14)!= 0x4){goto label_35}
+    /* Write self branch settings for ICONT1 and ICONT2 */
+    ew  0x58088000:P = 0xEAFFFFFE
+    ew  0x58098000:P = 0xEAFFFFFE
+    ew  0x48180C10:P = 0x0
+    /* Wait for ICONT1 and ICONT2 reset to be finished */
+:label_36
+    if  ((@0x48180C14) != 0x7){goto lablel_36}
+
+    //.."END:Initialize PRCM-IVHD0\n"
+
+
+    //.."START:Initialize DDR3 EMIF0 and EMIF\n"
+
+    /* Enable PRCM clocks for EMF */
+    ew  0x4818052C:P = 0x2
+    ew  0x48180508:P = 0x2
+    ew  0x48180520:P = 0x2
+    ew  0x48180524:P = 0x2
+    ew  0x48180528:P = 0x2
+    /* Wait for the clock to be active */
+:label_37
+    if  (((@0x48180508) & 0x300) != 0x300){goto label_37}
+:label_38
+    if  ((@0x48180520) != 0x2){goto lablel_38}
+:label_39
+    if  ((@0x48180524) != 0x2){goto lablel_39}
+:label_40
+    if  ((@0x48180528) != 0x2){goto lablel_40}
+
+    /* CMD Macro settings */
+    ew  0x47C0C42C:P = 0x0
+    ew  0x47C0C460:P = 0x0
+    ew  0x47C0C494:P = 0x0
+
+    ew  0x47C0C41C:P = ((0x80 << 0n10) | 0x80)
+    ew  0x47C0C450:P = ((0x80 << 0n10) | 0x80)
+    ew  0x47C0C484:P = ((0x80 << 0n10) | 0x80)
+
+    ew  0x47C0C428:P = 0x4
+    ew  0x47C0C45C:P = 0x4
+    ew  0x47C0C490:P = 0x4
+
+    /* Data Macro Configs */
+
+    /* Data Macro Config-0 */
+    ew  (0x47C0C400 + 0x0C8) :P = ((0x30 << 0n10) | 0x30) 
+    ew  (0x47C0C400 + 0x0DC) :P = ((0x21 << 0n10) | 0x21)
+    ew  (0x47C0C400 + 0x0F0) :P = ((0x0 << 0n10) | 0x0)
+    ew  (0x47C0C400 + 0x0FC) :P = ((0x0 << 0n10) | 0x0)
+    ew  (0x47C0C400 + 0x108) :P = ((0xC0 << 0n10) | 0xC0)
+    ew  (0x47C0C400 + 0x120) :P = ((0x44 << 0n10) | 0x44)
+    ew  (0x47C0C400 + 0X138) :P = 0x4
+
+    /* Data Macro Config-1 */
+    ew  (0x47C0C4A4 + 0x0C8) :P = ((0x30 << 0n10) | 0x30) 
+    ew  (0x47C0C4A4 + 0x0DC) :P = ((0x21 << 0n10) | 0x21)
+    ew  (0x47C0C4A4 + 0x0F0) :P = ((0x0 << 0n10) | 0x0)
+    ew  (0x47C0C4A4 + 0x0FC) :P = ((0x0 << 0n10) | 0x0)
+    ew  (0x47C0C4A4 + 0x108) :P = ((0xC0 << 0n10) | 0xC0)
+    ew  (0x47C0C4A4 + 0x120) :P = ((0x44 << 0n10) | 0x44)
+    ew  (0x47C0C4A4 + 0X138) :P = 0x4
+
+    /* Data Macro Config-2 */
+    ew  (0x47C0C548 + 0x0C8) :P = ((0x30 << 0n10) | 0x30) 
+    ew  (0x47C0C548 + 0x0DC) :P = ((0x21 << 0n10) | 0x21)
+    ew  (0x47C0C548 + 0x0F0) :P = ((0x0 << 0n10) | 0x0)
+    ew  (0x47C0C548 + 0x0FC) :P = ((0x0 << 0n10) | 0x0)
+    ew  (0x47C0C548 + 0x108) :P = ((0xC0 << 0n10) | 0xC0)
+    ew  (0x47C0C548 + 0x120) :P = ((0x44 << 0n10) | 0x44)
+    ew  (0x47C0C548 + 0x138) :P = 0x4
+
+    /* Data Macro Config-3 */
+    ew  (0x47C0C5EC + 0x0C8) :P = ((0x30 << 0n10) | 0x30) 
+    ew  (0x47C0C5EC + 0x0DC) :P = ((0x21 << 0n10) | 0x21)
+    ew  (0x47C0C5EC + 0x0F0) :P = ((0x0 << 0n10) | 0x0)
+    ew  (0x47C0C5EC + 0x0FC) :P = ((0x0 << 0n10) | 0x0)
+    ew  (0x47C0C5EC + 0x108) :P = ((0xC0 << 0n10) | 0xC0)
+    ew  (0x47C0C5EC + 0x120) :P = ((0x44 << 0n10) | 0x44)
+    ew  (0x47C0C5EC + 0x138) :P = 0x4
+
+    /* Data Macro Config-4 */
+    ew  (0x47C0C800 + 0x0C8) :P = ((0x30 << 0n10) | 0x30) 
+    ew  (0x47C0C800 + 0x0DC) :P = ((0x21 << 0n10) | 0x21)
+    ew  (0x47C0C800 + 0x0F0) :P = ((0x0 << 0n10) | 0x0)
+    ew  (0x47C0C800 + 0x0FC) :P = ((0x0 << 0n10) | 0x0)
+    ew  (0x47C0C800 + 0x108) :P = ((0xC0 << 0n10) | 0xC0)
+    ew  (0x47C0C800 + 0x120) :P = ((0x44 << 0n10) | 0x44)
+    ew  (0x47C0C800 + 0x138) :P = 0x4
+
+    /* Data Macro Config-5 */
+    ew  (0x47C0C8A4 + 0x0C8) :P = ((0x30 << 0n10) | 0x30) 
+    ew  (0x47C0C8A4 + 0x0DC) :P = ((0x21 << 0n10) | 0x21)
+    ew  (0x47C0C8A4 + 0x0F0) :P = ((0x0 << 0n10) | 0x0)
+    ew  (0x47C0C8A4 + 0x0FC) :P = ((0x0 << 0n10) | 0x0)
+    ew  (0x47C0C8A4 + 0x108) :P = ((0xC0 << 0n10) | 0xC0)
+    ew  (0x47C0C8A4 + 0x120) :P = ((0x44 << 0n10) | 0x44)
+    ew  (0x47C0C8A4 + 0x138) :P = 0x4
+
+    /* Data Macro Config-6 */
+    ew  (0x47C0C948 + 0x0C8) :P = ((0x30 << 0n10) | 0x30) 
+    ew  (0x47C0C948 + 0x0DC) :P = ((0x21 << 0n10) | 0x21)
+    ew  (0x47C0C948 + 0x0F0) :P = ((0x0 << 0n10) | 0x0)
+    ew  (0x47C0C948 + 0x0FC) :P = ((0x0 << 0n10) | 0x0)
+    ew  (0x47C0C948 + 0x108) :P = ((0xC0 << 0n10) | 0xC0)
+    ew  (0x47C0C948 + 0x120) :P = ((0x44 << 0n10) | 0x44)
+    ew  (0x47C0C948 + 0x138) :P = 0x4
+
+    /* Data Macro Config-7 */
+    ew  (0x47C0C9EC + 0x0C8) :P = ((0x30 << 0n10) | 0x30) 
+    ew  (0x47C0C9EC + 0x0DC) :P = ((0x21 << 0n10) | 0x21)
+    ew  (0x47C0C9EC + 0x0F0) :P = ((0x0 << 0n10) | 0x0)
+    ew  (0x47C0C9EC + 0x0FC) :P = ((0x0 << 0n10) | 0x0)
+    ew  (0x47C0C9EC + 0x108) :P = ((0xC0 << 0n10) | 0xC0)
+    ew  (0x47C0C9EC + 0x120) :P = ((0x44 << 0n10) | 0x44)
+    ew  (0x47C0C9EC + 0x138) :P = 0x4
+
+    /* Enable the Vtp */
+    /* Enable Bit */
+    ew  0x48140E0C :P = ((@0x48140E0C) | 0x40)
+    ew  0x48140E10 :P = ((@0x48140E10) | 0x40)
+
+    /* CLRZ bit */
+    ew  0x48140E0C :P = ((@0x48140E0C) & 0xFFFFFFFE)
+    ew  0x48140E10 :P = ((@0x48140E10) & 0xFFFFFFFE)
+
+    /* CLRZ bit */
+    ew  0x48140E0C :P = ((@0x48140E0C) | 0x1)
+    ew  0x48140E10 :P = ((@0x48140E10) | 0x1)
+
+    /* Wait for ready bits */
+:label_41
+    if  (((@0x48140E0C) & 0x20) != 0x20){goto label_41}
+:label_42
+    if  (((@0x48140E10) & 0x20) != 0x20){goto label_42}
+
+    /* DMM settings for EMIF0 and EMIF1 */
+    ew  0x4E000040:P = 0x80600100
+    ew  0x4E000044:P = 0x80600100
+    ew  0x4E000048:P = 0xC0600200
+    ew  0x4E00004C:P = 0xC0600200
+
+:label_43
+    if  ((@0x4E000040) != 0x80600100){goto label_43}
+:label_44
+    if  ((@0x4E000044) != 0x80600100){goto label_44}
+:label_45
+    if  ((@0x4E000048) != 0xC0600200){goto label_45}
+:label_46
+    if  ((@0x4E00004C) != 0xC0600200){goto label_46}
+
+    ew  0x4E000460:P = 0x80000000
+
+    /* Configuration for EMIF0 */
+    ew  0x4C0000E4:P = 0xC
+    ew  0x4C0000E8:P = 0xC
+    ew  0x4C000018:P = 0x1557B9A5
+    ew  0x4C00001C:P = 0x1557B9A5
+    ew  0x4C000020:P = 0x4C5F7FEB
+    ew  0x4C000024:P = 0x4C5F7FEB
+    ew  0x4C000028:P = 0x00000578
+    ew  0x4C00002C:P = 0x00000578
+    ew  0x4C000008:P = 0x62833AB2
+    ew  0x4C000010:P = 0x10001860
+    ew  0x4C000014:P = 0x10001860
+
+    /* Configuration for EMIF1 */
+    ew  0x4D0000E4:P = 0xC
+    ew  0x4D0000E8:P = 0xC
+    ew  0x4D000018:P = 0x1557B9A5
+    ew  0x4D00001C:P = 0x1557B9A5
+    ew  0x4D000020:P = 0x4C5F7FEB
+    ew  0x4D000024:P = 0x4C5F7FEB
+    ew  0x4D000028:P = 0x00000578
+    ew  0x4D00002C:P = 0x00000578
+    ew  0x4D000008:P = 0x62833AB2
+    ew  0x4D000010:P = 0x10001860
+    ew  0x4D000014:P = 0x10001860
+
+    //.."END: Initialize DDR3 EMIF0 AND EMIF1\n"
+
+    dv "Initializing target done.\n"
+    return
+//___________________________________________________________________
+
+// <eof>

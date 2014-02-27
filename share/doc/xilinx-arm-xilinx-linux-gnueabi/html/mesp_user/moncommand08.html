@@ -1,0 +1,204 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:23:56 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>BS Breakpoint Set</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("MON Command Language ","moncommand01","MON Command Details","moncommand04","BS Breakpoint Set","moncommand08","30");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp15750"></a><h1 class="pzCmdFunc FontLevel1" id="MGC15750">
+
+<a name="CRefID45699"></a>
+BS Breakpoint Set
+</h1>
+
+
+
+<a name="wp15859"></a><p class="pzShortDesc">
+
+Availability: ALL, but usage in a MDI environment can be problematic as the higher level debugger is not aware of breakpoints set here.
+</p>
+
+
+<a name="wp15860"></a><p class="pzHeading">
+
+Syntax
+</p>
+
+<a name="wp15861"></a><p class="pzMiscInfo">
+
+BS[2] [ <span class=" cItalic">addr</span> [ , [-]<span class=" cItalic">number</span> ] ] ... [ &quot;{&quot; <span class=" cItalic">cmd_list</span> &quot;}&quot; ]
+</p>
+
+<a name="wp15862"></a><p class="pzHeading">
+
+Description
+</p>
+
+<a name="wp15863"></a><p class="pzShortDesc">
+
+The Breakpoint Set command sets one or more software breakpoints with optional pass counts and an optional command list. BS sets normal breakpoints and BS2 sets MIPS16/Thumb mode breakpoints. If no pass count is specified, a value of one is assumed. If a negative pass count is specified, the breakpoint is temporary: it will be removed automatically when it is taken. The program will be interrupted each time the break address is reached &lt;number&gt; times. At that time, the command list will be executed. There is no limit on the number of active breakpoints.
+</p>
+
+
+<a name="wp15864"></a>
+<ul><li class="LL1BulSolid"> addr&#151;Specifies the address where execution will break. This must be an address in a valid code address space. Note that if addr is not specified, the software breakpoint will be set at the current execute location.</li></ul>
+
+<a name="wp15921"></a>
+<ul><li class="LL1BulSolid"> - &#151; The minus sign indicates the software breakpoint is temporary and will be removed when it is hit pass_count number of times. A temporary breakpoint is different from the non-sticky breaks that can be specified with the Go command which all disappear when the program stops for any reason.</li></ul>
+
+<a name="wp15924"></a>
+<ul><li class="LL1BulSolid"> number &#151; This is by default decimal. See <a href="moncommand56.html"  onclick='oT("CRF","moncommand56.html");return false;'>number</a> for available number forms.</li></ul>
+
+<a name="wp15927"></a>
+<ul><li class="LL1BulSolid"> pass_count&#151;Decimal number specifying the number of times the breakpoint location must be reached before the breakpoint is taken. At that time the command list is executed, and the pass counter is reloaded. If no pass_count is given, the breakpoint is taken every time the address is reached.</li></ul>
+
+<a name="wp15930"></a>
+<ul><li class="LL1BulSolid"> cmd_list &#151; This is any valid command list. Specifies one or more debugger commands to be executed when program execution is stopped by this breakpoint. Curly braces surrounding cmd_list are required. The command list may contain a Go or Step command, in which case the program will be resumed automatically. If present, the Go or Step command must be last. Combining IF and G commands in a breakpoint command list allows complex conditional breakpoints to be created. If no cmd_list is provided, execution simply stops.</li></ul>
+
+<a name="wp15869"></a><p class="pzHeading">
+
+Examples
+</p>
+
+<a name="wp15870"></a><pre class="pCode">
+BS // set breakpoint at current PC.
+</pre>
+
+<a name="wp15871"></a><pre class="pCode">
+BS 400:r // set breakpoint 400 (hex) bytes above reset vector
+</pre>
+
+<a name="wp15872"></a><pre class="pCode">
+BS my_label // set breakpoint at my_label
+</pre>
+
+<a name="wp15873"></a><pre class="pCode">
+BS @RA // set breakpoint at address in register RA.
+</pre>
+
+<a name="wp15874"></a><pre class="pCode">
+BS my_label your_label
+</pre>
+
+<a name="wp15875"></a><pre class="pCode">
+BS my_label {dv &quot;\n executed my_label\n&quot;; g}
+</pre>
+
+<a name="wp15876"></a><pre class="pCode">
+BS 5020:0, 20 {dv &quot;\nat 80005020 20 more times\n&quot;}
+</pre>
+
+<a name="wp15877"></a><pre class="pCode">
+BS my_label,-3 your_label, 2
+</pre>
+
+<a name="wp15882"></a><pre class="pCode">
+BS func1, -5 {dv &quot;\n at func1 fifth time\n&quot;; dw var; dw (@ptr):d; g }
+</pre>
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp15721"></a><p class="pnoteNote">
+
+        	The last example, like all debugger commands, must be entered on one line.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "BS Breakpoint Set";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "BS.Breakpoint.Set"
+   ThisTopic = "UserDefinedAccessLists";
+   CurrentFile = "moncommand08.html";
+   CurrentFileID = "30";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    <br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    <br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

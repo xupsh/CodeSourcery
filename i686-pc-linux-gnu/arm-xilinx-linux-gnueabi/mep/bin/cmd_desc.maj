@@ -1,0 +1,95 @@
+//  This command file initializes the debugger local variables that are
+//  used by the user defined On-Stop, On-Go, On-Reset, and Idle-Mode
+//  command descriptors.
+//
+//  NOTE:  DO NOT CHANGE THIS FILE.
+//
+//         This file configures the resources needed to use this feature.
+//         To specify On-Stop, On-Go, On-Reset, and/or Idle-Mode command(s)
+//         for your target, add EW command(s) to your board initialization
+//         file using the syntax shown below to define the sequence of
+//         operations, enable or disable them, and set the Idle-Mode timer
+//         interval.
+//
+//  ......................................................................
+//
+//  The On-Stop, On-Go, and On-Reset command descriptors perform user
+//  defined sequences of memory operations whenever program execution
+//  stops, starts, or when the target is reset. This may be used, for
+//  example, to disable a timer or other peripheral when execution stops,
+//  and restart the timer or peripheral when program execution resumes.
+//  Each command descriptor is a 16 word (max) buffer in the following
+//  format:
+//
+//    ew MEP_ON_STOP_CMD  = en, { @op, addr [ , data [ , mask ] ] }...
+//    ew MEP_ON_GO_CMD    = en, { @op, addr [ , data [ , mask ] ] }...
+//    ew MEP_ON_RESET_CMD = en, { @op, addr [ , data [ , mask ] ] }...
+//
+//  The Idle-Mode command descriptor performs a user defined sequence of
+//  memory operations periodically while program execution is stopped.
+//  This may be used, for example, to periodically reset a watchdog timer.
+//  The Idle-Mode command descriptor is a 16 word (max) buffer in the
+//  following format:
+//
+//    ew MEP_IDLE_MODE_CMD = int, { @op, addr [ , data [ , mask ] ] }...
+//
+//  Parameters:
+//
+//      en    enable:    0 to disable, 1 to enable
+//      int   interval:  0 to disable, non-0 for interval in milliseconds
+//      op    opcode:    Any of the $ucd_xxxx codes defined below
+//      addr  Address of the access (must be properly aligned for op size)
+//      data  Data value for $ucd_wr and $ucd_rmw (omit for $ucd_rd)
+//      mask  Data mask  for $ucd_rmw (1's are bits to replace with data)
+//
+//  Notes:
+//
+//  If you are using an MMU, the address should be specified as a virtual
+//  address that is always accessible.
+//
+//  The address is always 32-bits.  On MIPS64 targets, the address is sign
+//  extended for kseg0/1 addresses.
+//  ......................................................................
+//
+//  Examples:
+//
+//      ew MEP_ON_RESET_CMD = 1, @$ucd_rd8, FFF00003
+//
+//  Defines an On-Reset command that reads the byte at 0xFFF00003 upon
+//  stopping.
+//
+//      ew MEP_ON_STOP_CMD = 1, @$ucd_rmw16, 80000000, C00, F00
+//      ew MEP_ON_GO_CMD   = 1, @$ucd_rmw16, 80000000, 300, F00
+//
+//  Defines On-Stop and On-Go commands that read a 16-bit value from
+//  80000000, masks off bits 11..8, sets those bits to 1100 (On-Stop)
+//  or 0011 (On-Go), then writes the result back to 80000000.  Other
+//  bits in that register are not changed by these commands.
+//
+//      ew MEP_IDLE_MODE_CMD = 0n250, @$ucd_wr32, 0x40000000, 0n5000
+//
+//  Defines an Idle-Mode command that writes the 32-bit value 5000 (decimal)
+//  to the register at 0x40000000 every 250 milliseconds.
+//
+//      ew MEP_ON_RESET_CMD  = 0
+//      ew MEP_ON_STOP_CMD   = 0
+//      ew MEP_ON_GO_CMD     = 0
+//      ew MEP_IDLE_MODE_CMD = 0
+//
+//  Disables the On-Reset, On-Stop, On-Go, and Idle-Mode command descriptors.
+//
+//  ......................................................................
+//
++MON
+ew $ucd_rd8   = 101  //  8-bit read operation
+ew $ucd_rd16  = 102  // 16-bit read operation
+ew $ucd_rd32  = 104  // 32-bit read operation
+ew $ucd_wr8   = 201  //  8-bit write operation
+ew $ucd_wr16  = 202  // 16-bit write operation
+ew $ucd_wr32  = 204  // 32-bit write operation
+ew $ucd_rmw8  = 301  //  8-bit RdModWr operation
+ew $ucd_rmw16 = 302  // 16-bit RdModWr operation
+ew $ucd_rmw32 = 304  // 32-bit RdModWr operation
+-MON
+//
+// <eof>

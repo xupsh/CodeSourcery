@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:23:56 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>IF Command</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("MON Command Language ","moncommand01","Command Script Files","moncommand66","IF Command","moncommand70","92");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp7771"></a><h1 class="pHeading3 FontLevel1" id="MGC7771">
+
+<a name="CRefID12412"></a>
+IF Command
+</h1>
+
+<a name="wp7772"></a><p class="pBody">
+
+The <span class=" cBold">IF</span> command supports conditional execution of MON commands. This is extremely useful in breakpoint command lists, where the <span class=" cBold">Go</span> command can be used to automatically continue execution if some condition is not met. It is also useful in command files, where the <span class=" cBold">GOTO </span>command can be used to conditionally alter the flow of control.
+</p>
+
+<a name="wp7781"></a><p class="pzHeading">
+
+Example
+</p>
+
+<a name="wp32275"></a><pre class="pCodeIndent">
+ew $count = 0
+</pre>
+
+<a name="wp32267"></a><pre class="pCodeIndent">
+bs foo,10 {dv &quot;entered foo 10 times\n&quot;; if (@.4$count &lt; 0n10) {ew 
+$count = @.4$count + 1;g@.4$count + 1; g} }
+</pre>
+
+<a name="wp32290"></a><pre class="pCodeIndent">
+
+</pre>
+
+<a name="wp7782"></a><p class="pBody">
+
+The example uses a combination of breakpoint pass counts, the <span class=" cBold">IF</span> command, and a MON local variable to implement a breakpoint that will display a message every ten times it is reached, but will not actually stop executing the program until the breakpoint has been reached 100 times.
+</p>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "IF Command";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "IF.Command"
+   ThisTopic = "IFCommand";
+   CurrentFile = "moncommand70.html";
+   CurrentFileID = "92";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    <br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    <br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

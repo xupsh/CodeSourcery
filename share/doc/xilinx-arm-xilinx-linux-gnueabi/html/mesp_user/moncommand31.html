@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:23:56 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>IF </title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("MON Command Language ","moncommand01","MON Command Details","moncommand04","IF ","moncommand31","53");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp6072"></a><h1 class="pzCmdFunc FontLevel1" id="MGC6072">
+
+<a name="CRefID89968"></a>
+IF 
+</h1>
+
+
+
+<a name="wp29124"></a><p class="pzMiscInfo">
+
+Availability: ALL
+</p>
+
+<a name="wp6073"></a><p class="pzHeading">
+
+Syntax
+</p>
+
+<a name="wp6074"></a><p class="pBody">
+
+<span class=" cBold">IF</span> <span class=" cItalic">expr</span><span class=" cNoBold cNoItalic cBlack"> </span><span class=" cBold">{</span><span class=" cItalic">then_cmds</span><span class=" cBold">}</span><span class=" cNoBold cNoItalic cBlack"> </span><span class=" cBold">[{</span><span class=" cItalic">else_cmds</span><span class=" cBold">}]</span>
+</p>
+
+<a name="wp6075"></a><p class="pzHeading">
+
+Description
+</p>
+
+<a name="wp6076"></a><p class="pzShortDesc">
+
+The <span class=" cBold">IF</span> command supports conditional execution of MON commands. It is useful in command files, where the GOTO command can be used to conditionally alter the flow of control.
+</p>
+
+
+<a name="wp6077"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cItalic">expr</span><span class=" cNoBold cNoItalic cBlack"> </span>- is an address expression. It is evaluated and if the resulting value is non-zero, the commands in the<span class=" cItalic"> then_cmds</span> are executed. If the value is zero and the <span class=" cItalic">else_cmds</span> is specified, those commands are executed. Remember that a symbol evaluates to its address unless preceded by an @ operator.</li></ul>
+
+<a name="wp6078"></a><pre class="pCode">
+then_cmds - cmd_list 
+</pre>
+
+<a name="wp6079"></a><pre class="pCode">
+else_cmds - cmd_list
+
+</pre>
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp6088"></a><p class="pnoteNote">
+
+        	Curly braces must surround the<span class=" cItalic"> cmd_list</span>, and the entire <span class=" cBold">IF</span> command must be entered on one line.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp6089"></a><p class="pzHeading">
+
+Example
+</p>
+
+<a name="wp6090"></a><pre class="pCode">
+ew $count = 0
+</pre>
+
+<a name="wp6091"></a><pre class="pCode">
+:LOOP
+</pre>
+
+<a name="wp6092"></a><pre class="pCode">
+if (@$count &lt; 10) {/*then*/ ew $count = @$count+1} {/*else*/ goto DONE}
+</pre>
+
+<a name="wp6093"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp6094"></a><pre class="pCode">
+if (@uart_creg &amp; 0x80) == 0) {goto LOOP}
+</pre>
+
+<a name="wp6095"></a><pre class="pCode">
+:DONE
+
+</pre>
+
+<a name="wp6096"></a><p class="pBody">
+
+The example uses the MON variable $count to control the iterations through a loop that is waiting for a certain UART control register to be cleared.
+</p>
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp6105"></a><p class="pnoteNote">
+
+        	Like all MON commands, the entire IF command must be entered on one line.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "IF ";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "IF."
+   ThisTopic = "UserDefinedAccessLists";
+   CurrentFile = "moncommand31.html";
+   CurrentFileID = "53";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    <br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    <br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

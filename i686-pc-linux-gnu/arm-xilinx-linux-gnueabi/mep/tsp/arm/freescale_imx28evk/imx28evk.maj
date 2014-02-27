@@ -1,0 +1,530 @@
++q  // Enter quiet mode
+//___________________________________________________________________
+//
+//               Copyright (c) 2011 Mentor Graphics Corporation
+//                           All rights reserved
+//
+//   THIS WORK CONTAINS TRADE SECRETS AND PROPRIETARY INFORMATION WHICH IS
+//    THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS LICENSORS AND IS
+//                        SUBJECT TO LICENSE TERMS.
+//
+//___________________________________________________________________
+//
+// Mentor Embedded Sourcery Probe target initialization file for the
+// Freescale i.MX28EVK Revision B reference platform.  It supports this platform as-is,
+// and can be adapted to a new target based on this reference board,
+// as detailed below.  For a brand new custom board not related to
+// this reference board, it may be better to start from the template
+// rather than trying to adapt this file.
+//
+// Target Description:
+//
+//     Board:   Freescale i.MX28EVK Revision B platform
+//     Device:  Freescale i.MX28
+//     CPU ID:  ARM926EJS
+//     Endian:  Little
+//     Cores:   1
+//
+// Porting Guide:
+//
+// The user should make the following adaptations to port this file
+// to a new target board based on the associated reference platform:
+//
+//        0. Review the MEP Probe Initialization section at
+//           "TO DO #0" below to make sure the settings are
+//           right for your board.
+//        1. Update the memory configuration table for changes
+//           in the new board's  *Physical*  memory map.  See
+//           'TO DO #1' below.
+//        2. If your target board requires any special MEP
+//           settings, they should be added to the end of the
+//           ONE_TIME_SETUP section.  See 'TO DO #2' below.
+//        3. Decide whether the target should be automatically
+//           reset and/or initialized upon start-up by choosing
+//           the desired command at 'TO DO #3' below.  This
+//           really depends on your use case.
+//        4. If the board has no boot code (or bad boot code),
+//           and you want to download into RAM, then you may
+//           have to adapt the memory controller initialization
+//           script at 'TO DO #4' below to account for changes
+//           relative to the reference platform.
+//
+// NOTE:  Additional information on MON commands and the configuration
+//        options used here is available in the online help system.
+//___________________________________________________________________
+dv "Reading $$# ...\n"
+
+
+// Initialization script preparation
+// =================================
+
+// The RTI, RTNI, and TI command aliases call script functions in this file.
+// These command aliases should never be changed.
+
+ea RTI   $$#.DO_RTI  // RTI  call DO_RTI script function  (Reset Target and Initialize)
+ea RTNI  $$#.DO_RTNI // RTNI call DO_RTNI script function (Reset Target with No Initialization)
+ea TI    $$#.DO_TI   // TI   call DO_TI script function   (Target Initialize without resetting)
+
+
+// MEP Probe Initialization
+// ==========================
+
+// TO DO #0 -- Review the following MEP configuration options to make
+//             sure they are right for your target board hardware and
+//             processor device design.
+
+// The  Trgt_Resets_JTAG  option informs the MEP probe whether the target
+// board will forward a system reset (nSRST) to the JTAG interface (nTRST),
+// or reset the system only without resetting the JTAG interface.  When in
+// doubt, a YES setting is safer.  When the two reset circuits are known
+// to be independent, which is strongly recommended, then a NO setting is
+// recommended.
+
+eo Trgt_Resets_JTAG  = no
+
+// The  Ice_JTAG_Use_RTCLK  and  Ice_JTAG_Clock_Freq  options are related
+// and must be considered together.  An  Ice_JTAG_Use_RTCLK  setting of
+// ON  selects adaptive clocking mode, where the JTAG clock is dynamically
+// controlled by the target processor.  When  Ice_JTAG_Use_RTCLK  is set
+// OFF  then normal (unthrottled) clocking is selected.
+//
+// When adaptive clocking is disabled, the  Ice_JTAG_Clock_Freq  option
+// specifies the the JTAG clock (TCK) frequency in Megahertz, from
+// 0.002 to 100 (depending on probe hardware capability).  A lower setting
+// is safer, a higher setting yields higher performance.  Note that the
+// requested frequency will be adjusted down to the closest frequency
+// supported by the probe hardware (displaying this option will show the
+// actual TCK frequency).
+//
+//     IJUR  Clock mode
+//     ====  ========================
+//     OFF   Free running TCK at specified frequency (RTCK is ignored)
+//     ON    Adaptive clocking with frequency controlled by RTCK
+//           (Ice_JTAG_Clock_Freq is ignored)
+//
+// Note that enabling  Ice_JTAG_Use_RTCLK  on target boards that do not
+// drive the RTCK signal will lock up the JTAG interface.
+
+eo Ice_JTAG_Use_RTCLK  = on
+eo Ice_JTAG_Clock_Freq = 10
+if (@$Ice_JTAG_Use_RTCLK) {doq Ice_JTAG_Use_RTCLK} {doq Ice_JTAG_Clock_Freq}
+
+// The following command can be used to define the details of the JTAG
+// daisy chain.  It is only required for targets on which the MEP
+// auto-detection algorithm cannot correctly determine the JTAG connection
+// details.  On most boards this command can be omitted.
+//
+//    ew MEP_JTAG_DIMENSION = TAP_CNT, IR1_CNT [ , IR2_CNT ]  ...
+
+// The following commands can be used to define special JTAG initialization
+// operations required by certain processors.  The first one, if defined,
+// is scanned in right after the JTAG reset cycle completes, but before the
+// standard JTAG initialization performed by the MEP.  The second, if
+// defined, is scanned in right after the standard JTAG initialization
+// performed by the MEP.  On most boards these can both be omitted.
+//
+//    ew MEP_JTAG_INIT0 = <scan-op> [ , <scan-op> ]  ...
+//    ew MEP_JTAG_INIT1 = <scan-op> [ , <scan-op> ]  ...
+
+// The  Ice_Power_Sense  option enables the target power monitor.  When
+// target power is detected, the debug interface is enabled.
+
+eo Ice_Power_Sense = VREF
+
+// The  Ice_JTAG_TAP_Select  option controls which TAP on a multi-TAP
+// daisy chain is associated with this debug connection.  This option
+// can be omitted on targets which have one TAP.  Note that TAPs are
+// numbered from 1-N, with TAP 1 being the one whose TDO is connected
+// to the MEP probe.
+//
+//    eo Ice_JTAG_TAP_Select = <num>
+
+// Physical Memory Configuration
+// =============================
+
+mc *:P, inv     // start with all *physical* memory (*:P) marked as invalid
+
+// TO DO #1 -- Change the address range(s) below to match the  *physical*
+//             address ranges of your ROM/flash and RAM areas.  Add more
+//             MC commands as necessary for each memory mapped area.
+//
+// WARNING:  DO NOT confuse virtual (MVA) addresses with physical space.
+//           Make sure to use physical addresses in the MC table.
+//
+// EXAMPLE:
+//
+//     mc  ________:P  ________:P,  PWE, JAM, RW    // DRAM
+//     mc  ________:P  ________:P,  PWD, JAM, RO    // Flash or ROM
+//     mc  ________:P  ________:P,  PWD, JAM, RW    // Peripheral registers
+//
+// Note that if your boot code remaps physical memory, then the MC table
+// should reflect the mapping that is in effect for the code you are trying
+// to debug.  When debugging boot code in flash, MC should match the mapping
+// in effect when booting.  When debugging code in RAM, MC should match the
+// mapping in effect when running code from RAM.
+//
+// Address Range          PWE  Access
+// ---------------------- ---- -------
+mc 00000000:P 0003FFFF:P, PWD, JAM, RW  // On-Chip RAM
+mc 40000000:P 43FFFFFF:P, PWD, JAM, RW  // External Memory
+mc 80000000:P 800FFFFF:P, PWD, JAM, RW  // Peripheral Memory
+mc C0000000:P FFFFFFFF:P, PWD, JAM, RO  // On-Chip ROM
+
+//        ____User Supplied Setup Commands Go Here____
+
+// TO DO #2 -- If your target board requires any special MEP settings
+//             (e.g. special JTAG initialization), add the commands to
+//             make those settings here.
+
+
+// End of initial one-time only setup script.  If this is a non-intrusive
+// attach connection, or if a normal debug connection fails to connect
+// properly, then exit at this point.  Otherwise continue on with optional
+// additional initialization.
+
+if (@.4$INIT_TYPE != 0) {dv "Non-intrusive attach connection\n"; goto EXIT}
+if (@$trgt_cpu_state != $tcs.halt) {dv "Debug connection failed, "; doq TCS; goto EXIT}
+
+// TO DO #3 -- Comment out all but one of the next three commands to
+//             control IF and HOW the target is initialized when the
+//             debugger is launched.  If no reset or target initialization
+//             is needed then all these can be left commented out.
+
+TI
+//   RTI
+//   RTNI
+
+:EXIT
+dv "Finished reading $$#.\n"
+return
+
+//___________________________________________________________________
+::DO_RTNI  // Reset Target with No Initialization.
+
+    // Normally an  rt  command is sufficient, but it may be necessary
+    // to slow down the JTAG clock first, depending on the affect of
+    // reset on the processor.
+
+    dv "Executing RTNI script function\n"
+    rt
+    return
+
+//___________________________________________________________________
+::DO_RTI   // Reset Target and Initialize.
+
+    // Note that it may be necessary to slow down the JTAG clock first, 
+    // depending on the affect of reset on the processor.
+
+    dv "Executing RTI script function\n"
+    rt
+    TI	// call script DO_TI function
+    return
+
+//___________________________________________________________________
+::DO_TI  // Target Initialize.
+
+    if (@$trgt_cpu_state != $tcs.halt) { dv "Target Initialization commands skipped due to CPU state\n"; doq TCS; return }
+    dv "Initializing target...\n"
+
+    //  Memory Controller Setup
+    //
+    // TO DO #4 -- If your board has a different memory configuration than
+    //             the reference board, then you may need to adapt the
+    //             memory controller initialization script accordingly.
+    //             These settings should match the settings used by your
+    //             boot code during its hardware initialization phase.
+
+    // Enables the switching DC-DC converter when 5V is present.
+    ew 0x80044010:P = 0x3f503
+
+    // Enable analog circuit of DC-DC converter to respond faster
+    ew 0x800440b4:P = 0x00007000
+
+    // set to ddr2 mode
+    ew 0x80019B84:P = 0x00030000
+
+    // Turn ON PLL power
+    ew 0x80040004:P = 0x00020000
+
+    // HW_PINCTRL_MUXSEL 10
+    ew 0x800181A8:P = 0xffffffff
+
+    // HW_PINCTRL_MUXSEL 11
+    ew 0x800181B8:P = 0x0030ffff
+
+    // HW_PINCTRL_MUXSEL 12
+    ew 0x800181C8:P = 0x3fffffff
+
+    // HW_PINCTRL_MUXSEL 13
+    ew 0x800181D8:P = 0x0003ffff
+
+    // delay
+    w 100
+
+    // Fractional Clock Control Register 0, EMI fractional divider clock = disabled
+    ew 0x800401b4:P = 0x00008000
+
+    // HW_CLKCTRL_FRAC0, EMIFRAC = 22
+    ew 0x800401b8:P = 0x00003F00
+    ew 0x800401b4:P = 0x00001600
+
+    // Fractional Clock Control Register 0, EMI fractional divider clock = enabled
+    ew 0x800401b8:P = 0x00008000
+
+    // delay
+    w 100
+
+    // EMI Clock Control Register, DIV_EMI = 2, DIV_XTAL = 1
+    ew 0x800400F0:P = 0x00000102
+
+    // HW_CLKCTRL_CLKSEQ, BYPASS_EMI = 0,  Select ref_emi path to generate the EMI clock domain
+    ew 0x800401D8:P = 0x00000080
+
+    // delay
+    w 100
+
+    // Power On VDDA,    TRG = 12 => 1.8 V, BO_OFFSET = 7, LINREG_OFFSET = 2
+    ew 0x80044050:P = 0x0000270C
+
+    // HW_DRAM_CTL16, START = 0
+    ew 0x800E0040:P = (@.40x800E0040 & 0xFFFFFFFE)
+
+    // SDRAM initialization
+    ew (0x800e0000 + (4 * 0x000)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x001)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x002)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x003)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x004)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x005)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x006)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x007)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x008)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x009)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x00A)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x00B)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x00C)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x00D)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x00E)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x00F)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x010)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x011)):P = 0x00000100
+    ew (0x800e0000 + (4 * 0x012)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x013)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x014)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x015)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x016)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x017)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x018)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x019)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x01A)):P = 0x00010101
+    ew (0x800e0000 + (4 * 0x01B)):P = 0x01010101
+    ew (0x800e0000 + (4 * 0x01C)):P = 0x000f0f01
+    ew (0x800e0000 + (4 * 0x01D)):P = 0x0f02020a
+    ew (0x800e0000 + (4 * 0x01E)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x01F)):P = 0x00010101
+    ew (0x800e0000 + (4 * 0x020)):P = 0x00000100
+    ew (0x800e0000 + (4 * 0x021)):P = 0x00000100
+    ew (0x800e0000 + (4 * 0x022)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x023)):P = 0x00000002
+    ew (0x800e0000 + (4 * 0x024)):P = 0x01010000
+    ew (0x800e0000 + (4 * 0x025)):P = 0x07080403
+    ew (0x800e0000 + (4 * 0x026)):P = 0x06004303
+    ew (0x800e0000 + (4 * 0x027)):P = 0x090000c8
+    ew (0x800e0000 + (4 * 0x028)):P = 0x02008236
+    ew (0x800e0000 + (4 * 0x029)):P = 0x0002030a
+    ew (0x800e0000 + (4 * 0x02A)):P = 0x002d8908
+    ew (0x800e0000 + (4 * 0x02B)):P = 0x0316050e
+    ew (0x800e0000 + (4 * 0x02C)):P = 0x02030202
+    ew (0x800e0000 + (4 * 0x02D)):P = 0x00c80017
+    ew (0x800e0000 + (4 * 0x02E)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x02F)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x030)):P = 0x00012100
+    ew (0x800e0000 + (4 * 0x031)):P = 0xffff0303
+    ew (0x800e0000 + (4 * 0x032)):P = 0x00012100
+    ew (0x800e0000 + (4 * 0x033)):P = 0xff000303
+    ew (0x800e0000 + (4 * 0x034)):P = 0x00012100
+    ew (0x800e0000 + (4 * 0x035)):P = 0xffff0303
+    ew (0x800e0000 + (4 * 0x036)):P = 0x00012100
+    ew (0x800e0000 + (4 * 0x037)):P = 0xffff0303
+    ew (0x800e0000 + (4 * 0x038)):P = 0x00000003
+    ew (0x800e0000 + (4 * 0x039)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x03A)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x03B)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x03C)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x03D)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x03E)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x03F)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x040)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x041)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x042)):P = 0x0000050e
+    ew (0x800e0000 + (4 * 0x043)):P = 0x01000f02
+    ew (0x800e0000 + (4 * 0x044)):P = 0x050e050e
+    ew (0x800e0000 + (4 * 0x045)):P = 0x00000200
+    ew (0x800e0000 + (4 * 0x046)):P = 0x00020007
+    ew (0x800e0000 + (4 * 0x047)):P = 0xf5004a27
+    ew (0x800e0000 + (4 * 0x048)):P = 0xf5004a27
+    ew (0x800e0000 + (4 * 0x049)):P = 0xf5004a27
+    ew (0x800e0000 + (4 * 0x04A)):P = 0xf5004a27
+    ew (0x800e0000 + (4 * 0x04B)):P = 0x07400300
+    ew (0x800e0000 + (4 * 0x04C)):P = 0x07400300
+    ew (0x800e0000 + (4 * 0x04D)):P = 0x07400300
+    ew (0x800e0000 + (4 * 0x04E)):P = 0x07400300
+    ew (0x800e0000 + (4 * 0x04F)):P = 0x00000006
+    ew (0x800e0000 + (4 * 0x050)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x051)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x052)):P = 0x01000000
+    ew (0x800e0000 + (4 * 0x053)):P = 0x01020408
+    ew (0x800e0000 + (4 * 0x054)):P = 0x08040201
+    ew (0x800e0000 + (4 * 0x055)):P = 0x000f1133
+    ew (0x800e0000 + (4 * 0x056)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x057)):P = 0x00001f04
+    ew (0x800e0000 + (4 * 0x058)):P = 0x00001f04
+    ew (0x800e0000 + (4 * 0x059)):P = 0x00001f04
+    ew (0x800e0000 + (4 * 0x05A)):P = 0x00001f04
+    ew (0x800e0000 + (4 * 0x05B)):P = 0x00001f04
+    ew (0x800e0000 + (4 * 0x05C)):P = 0x00001f04
+    ew (0x800e0000 + (4 * 0x05D)):P = 0x00001f04
+    ew (0x800e0000 + (4 * 0x05E)):P = 0x00001f04
+    ew (0x800e0000 + (4 * 0x05F)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x060)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x061)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x062)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x063)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x064)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x065)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x066)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x067)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x068)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x069)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x06A)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x06B)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x06C)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x06D)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x06E)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x06F)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x070)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x071)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x072)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x073)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x074)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x075)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x076)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x077)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x078)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x079)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x07A)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x07B)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x07C)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x07D)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x07E)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x07F)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x080)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x081)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x082)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x083)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x084)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x085)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x086)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x087)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x088)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x089)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x08A)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x08B)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x08C)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x08D)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x08E)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x08F)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x090)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x091)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x092)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x093)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x094)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x095)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x096)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x097)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x098)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x099)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x09A)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x09B)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x09C)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x09D)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x09E)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x09F)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x0A0)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x0A1)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x0A2)):P = 0x00010000
+    ew (0x800e0000 + (4 * 0x0A3)):P = 0x00030404
+    ew (0x800e0000 + (4 * 0x0A4)):P = 0x00000002
+    ew (0x800e0000 + (4 * 0x0A5)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x0A6)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x0A7)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x0A8)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x0A9)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x0AA)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x0AB)):P = 0x01010000
+    ew (0x800e0000 + (4 * 0x0AC)):P = 0x01000000
+    ew (0x800e0000 + (4 * 0x0AD)):P = 0x03030000
+    ew (0x800e0000 + (4 * 0x0AE)):P = 0x00010303
+    ew (0x800e0000 + (4 * 0x0AF)):P = 0x01020202
+    ew (0x800e0000 + (4 * 0x0B0)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x0B1)):P = 0x02040303
+    ew (0x800e0000 + (4 * 0x0B2)):P = 0x21002103
+    ew (0x800e0000 + (4 * 0x0B3)):P = 0x00050e00
+    ew (0x800e0000 + (4 * 0x0B4)):P = 0x050e050e
+    ew (0x800e0000 + (4 * 0x0B5)):P = 0x04420442
+    ew (0x800e0000 + (4 * 0x0B6)):P = 0x04420442
+    ew (0x800e0000 + (4 * 0x0B7)):P = 0x00040004
+    ew (0x800e0000 + (4 * 0x0B8)):P = 0x00040004
+    ew (0x800e0000 + (4 * 0x0B9)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x0BA)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x0BB)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x0BC)):P = 0x00000000
+    ew (0x800e0000 + (4 * 0x0BD)):P = 0xffffffff
+
+    //delay
+    w 1
+
+    //HW_DRAM_CTL17, Disable self-refresh mode, SREFRESH = 0
+    ew 0x800E0044:P =(@.40x800E0044 & 0xFFFFFFFE)
+
+    // HW_DRAM_CTL16, START = 1
+    ew 0x800E0040:P =(@.40x800E0040 | 1)
+
+    // Wait for DDR ready
+    w 100
+
+    // HW_POWER_VDDDCTRL, TRG = 28,BO_OFFSET=7,LINREG_OFFSET=1, ENABLE_LINREG=1,DISABLE_STEPPING=1,VDDD= 1.50v
+    ew 0x80044040:P = 0x0061071c
+
+    //delay
+    w 100
+
+    // HW_CLKCTRL_FRAC0, CPUFRAC=19, cpu frequency = 480 * (18/CPUFRAC) => cpu at 454Mhz
+    //      CLKGATECPU =0 => CPU fractional divider clock is enabled.
+    ew 0x800401b0:P = ((@.40x800401b0 & 0xFFFFFF40) | 0x13)
+
+    //HW_CLKCTRL_HBUS, DIV = 3, CLK_P-to-CLK_H divide ratio
+    ew 0x80040064:P = 0x0000001F
+    ew 0x80040068:P = 0x0000001C
+
+    //delay
+    w 100
+
+    // HW_CLKCTRL_CPU_RD, DIV_CPU = 1
+    ew 0x80040050:P = ((@.40x80040050 & 0xFFFFFFC0) | 0x1)
+
+    // HW_CLKCTRL_CLKSEQ, BYPASS_CPU=0 => Select ref_cpu path to generate the CPU clock domain.
+    ew 0x800401d8:P = 0x00040000
+
+    // SET APBX clock. (CLK_X at 24 Mhz)
+    ew 0x80040070:P = 0x00000001
+
+    //delay
+    w 10
+
+    dv "Initializing target done.\n"
+    return
+
+//___________________________________________________________________
+
+// <eof>

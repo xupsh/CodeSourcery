@@ -1,0 +1,121 @@
+#   LaunchAnywhere (tm) Executable Properties File - Flexera Software, Inc. and/or InstallShield Co. Inc.
+
+#   LAX.APPLICATION.NAME
+#   --------------------
+#   the default name of this executable -- do not edit
+
+lax.application.name=Uninstall_Sourcery_Gxx_JVM
+
+
+#   LAX.CLASS.PATH
+#   --------------
+#   the Java classpath necessary to run this application
+#   Can be separated by colons (Mac OS/Unix) or semicolons (Windows)
+
+lax.class.path=uninstaller.jar:.:uninstallerResources.zip
+
+
+#   LAX.COMMAND.LINE.ARGS
+#   ---------------------
+
+lax.command.line.args=$CMD_LINE_ARGUMENTS$ -u
+
+
+#   LAX.DIR
+#   -------
+#   path to directory holding LaunchAnywhere's native launcher
+
+lax.dir=/root/CodeSourcery/uninstall/Uninstall_Sourcery_Gxx_JVM/
+
+
+#   LAX.MAIN.CLASS
+#   --------------
+#   the class that contains the main method for the application
+
+lax.main.class=com.zerog.ia.installer.Main
+
+
+
+lax.main.method=main
+
+
+#   LAX.NL.CURRENT.VM
+#   -----------------
+#   the VM to use for the next launch
+
+lax.nl.current.vm=/root/CodeSourcery/jre/bin/java
+
+
+#   LAX.NL.JAVA.COMPILER
+#   --------------------
+
+lax.nl.java.compiler=off
+
+
+#   LAX.NL.JAVA.LAUNCHER.MAIN.CLASS
+#   -------------------------------
+#   main class of LaunchAnywhere's java launcher -- do not adjust
+
+lax.nl.java.launcher.main.class=com.zerog.lax.LAX
+
+
+#   LAX.NL.JAVA.LAUNCHER.MAIN.METHOD
+#   --------------------------------
+#   main method of LaunchAnywhere's java launcher -- do not adjust
+
+lax.nl.java.launcher.main.method=main
+
+
+#   LAX.NL.JAVA.OPTION.CHECK.SOURCE
+#   -------------------------------
+
+lax.nl.java.option.check.source=off
+
+
+#   LAX.NL.JAVA.OPTION.JAVA.HEAP.SIZE.INITIAL
+#   -----------------------------------------
+
+lax.nl.java.option.java.heap.size.initial=16777216
+
+
+
+lax.nl.java.option.java.heap.size.max=536870912
+
+
+
+lax.nl.valid.vm.list=1.4+
+
+
+
+lax.nl.win32.microsoftvm.min.version=2750
+
+
+
+lax.root.install.dir=/root/CodeSourcery
+
+
+
+lax.stderr.redirect=
+
+
+
+lax.stdin.redirect=
+
+
+
+lax.stdout.redirect=
+
+
+#   LAX.USER.DIR
+#   ------------
+
+lax.user.dir=/tmp
+
+
+#   LAX.VERSION
+#   -----------
+#   version of LaunchAnywhere that created this properties file
+
+lax.version=11.0
+
+

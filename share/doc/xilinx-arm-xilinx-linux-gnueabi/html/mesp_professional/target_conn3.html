@@ -1,0 +1,444 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:22:19 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe Professional Hardware Manual" />
+    <title>Connecting to the Target System Serial Port</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("Connecting to the Target System","target_conn1","Connecting to the Target System Serial Port","target_conn3","Restoring the Target Serial Port to the Default Settings","target_conn3","19");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp7812"></a><h1 class="pHeading2 FontLevel1" id="MGC7812">
+
+<a name="CRefID88736"></a>
+Connecting to the Target System Serial Port
+</h1>
+<a name="wp5485"></a><p class="pBody">
+
+Many target system boards have a built-in serial port. A console interface connection to the serial port of the target system lets you query and configure the state of your target system.
+</p>
+
+<a name="wp5488"></a><p class="pBody">
+
+The probe provides a serial port that can be configured to access the serial port of the target system. This is useful if you need to access the serial port of a remotely located target system over Ethernet from the host system. An RJ-25 cable (P/N 600-76822) is also provided with the probe to connect to the serial port of your target system.
+</p>
+
+<a name="wp6485"></a><p class="pBody">
+
+To connect the probe to the target system serial port, perform the following steps.
+</p>
+
+<a name="wp6455"></a><p class="pHTaskSubhead">
+
+Procedure
+</p>
+
+<a name="wp6456"></a>
+<ol start="1"><li class="LL1Seq">Connect one end of the RJ-25 cable, and the appropriate adapter, to the serial port on your target system board.</li></ol>
+<a name="wp6457"></a>
+<ol start="2"><li class="LL1Seq">Connect the other end of the RJ-25 cable to the probe RJ-25 serial connector, labeled TARGET SERIAL.</li></ol>
+<a name="wp6531"></a><h2 class="pHeading3NoSplit FontLevel2" id="MGC6531">
+
+<a name="CRefID37707"></a>
+Configuring the Target Serial Port
+</h2>
+<a name="wp6532"></a><p class="pBody">
+
+<a href="target_conn3.html#wp6570"  onclick='oT("CRF","target_conn3.html#wp6570");return false;'>Table&#160;3&#8209;2</a> shows the default settings of the Sourcery Probe Professional target serial port.
+</p>
+
+<a name="wp6567"></a><p class="pBody">
+
+
+</p>
+<div id="TableDivQz"></div>
+<div align="center">
+
+
+<a name="wp6570"></a><p class="pTableTitle" id="MGC6570">
+
+Table 3&#8209;2. <a name="CRefID21555"></a>Sourcery Probe Professional Target Serial Port Default Settings
+</p>
+
+
+<table border="1" cellpadding="5" cellspacing="0" id="wp6570table6568">
+  <tr bgcolor="#CCCCCC"  align="center" valign="middle">
+    <th>
+
+<a name="wp6574"></a><p class="pTableHeading" id="MGC6570">
+For this option
+</p>
+</th>
+
+    <th>
+
+<a name="wp6576"></a><p class="pTableHeading">
+
+Select
+</p>
+
+</th>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row2Column1'  style='width:1.80556in'>
+
+
+<a name="wp6578"></a><p class="pTableCell">
+Baud rate</p></td>
+
+    <td id='Row2Column2'  style='width:0.70833in'>
+
+
+<a name="wp6580"></a><p class="pTableCell">
+9600</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row3Column1' >
+
+
+<a name="wp6582"></a><p class="pTableCell">
+Data bits</p></td>
+
+    <td id='Row3Column2' >
+
+
+<a name="wp6584"></a><p class="pTableCell">
+data8</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row4Column1' >
+
+
+<a name="wp6586"></a><p class="pTableCell">
+Stop bits</p></td>
+
+    <td id='Row4Column2' >
+
+
+<a name="wp6588"></a><p class="pTableCell">
+stop1</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row5Column1' >
+
+
+<a name="wp6590"></a><p class="pTableCell">
+Parity</p></td>
+
+    <td id='Row5Column2' >
+
+
+<a name="wp6592"></a><p class="pTableCell">
+no parity</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row6Column1' >
+
+
+<a name="wp6594"></a><p class="pTableCell">
+Hardware flow control</p></td>
+
+    <td id='Row6Column2' >
+
+
+<a name="wp6596"></a><p class="pTableCell">
+nortscts</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row7Column1' >
+
+
+<a name="wp6598"></a><p class="pTableCell">
+XON/XOFF flow control</p></td>
+
+    <td id='Row7Column2' >
+
+
+<a name="wp6600"></a><p class="pTableCell">
+noxon</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row8Column1' >
+
+
+<a name="wp6602"></a><p class="pTableCell">
+Target echo feature</p></td>
+
+    <td id='Row8Column2' >
+
+
+<a name="wp6604"></a><p class="pTableCell">
+echo</p></td>
+
+
+</tr>
+
+
+</table>
+
+</div>
+<div id='EndTable'> </div>
+<p class="pBody">
+
+
+<br clear='left' class='Blank4Table' />
+
+
+</p>
+
+<a name="wp6631"></a><p class="pBody">
+
+If the probe target serial port settings do not match the serial port settings of your target system, perform the following steps.
+</p>
+
+<a name="wp6535"></a><p class="pHTaskSubhead">
+
+Procedure
+</p>
+
+<a name="wp9086"></a>
+<ol start="1"><li class="LL1Seq">Make sure network communications have already been configured correctly. For more information, see <a name="EW17"></a><a href="network_conn2.html#CRefID88883" onclick='oT("CRF","network_conn2.html#CRefID88883");'><span class=" cLinkOverride">Connecting the Probe to the Network</span></a>.</li></ol>
+<a name="wp9090"></a>
+<ol start="2"><li class="LL1Seq">Connect to the probe internal setup utility. For example, from a command shell, type <span class=" cCourier cP10">telnet </span><span class=" cCourier cP10 cItalic">probe_ip_address </span>1082.<span class=" cCourier cP10"> </span>For more information, see <a name="EW18"></a><a href="professional_probe2.html#CRefID21027" onclick='oT("CRF","professional_probe2.html#CRefID21027");'><span class=" cLinkOverride">Accessing the Sourcery Probe Console Using Telnet</span></a>.</li></ol>
+<a name="wp6684"></a>
+<ol start="3"><li class="LL1Seq">When the <span class=" cCourier cP10">core&gt;</span> prompt appears on the terminal, use the <span class=" cCourier cP10 cBold">tgtty</span> command to configure the probe target serial port. To get a listing of options, type <span class=" cCourier cP10 cBold">help tgtty</span>:</li></ol>
+<a name="wp6704"></a><pre class="pCodeIndent">
+core&gt; tgtty <span class=" cItalic">baud_rate data_bits stop_bits parity 
+hardware_flow_control xon_off_flow_control echo_state
+</span></pre>
+
+<a name="wp9051"></a><pre class="pCodeIndent">
+
+</pre>
+
+<a name="wp9039"></a><p class="pL1Body">
+For example:</p>
+<a name="wp6726"></a><pre class="pCodeIndent">
+core&gt; tgtty 19200 data8 stop2 noparity nortscts noxon echo
+</pre>
+
+<a name="wp6748"></a><pre class="pCodeIndent">
+
+</pre>
+
+<a name="wp6720"></a>
+<ol start="4"><li class="LL1Seq">Verify the target serial port configuration:</li></ol>
+<a name="wp6749"></a><pre class="pCodeIndent">
+core&gt; tgtty
+</pre>
+
+<a name="wp9119"></a><p class="pHTaskSubhead">
+
+Related Topics
+</p>
+<div id="TableDivQz"></div>
+<div align="left">
+
+
+<table border="0" cellpadding="2" cellspacing="0" width="96%" id="wp9116table9111">
+  <tr align="left" valign="top">
+    <td id='Row1Column1'  style='width:3.25in'>
+
+
+<a name="wp9116"></a><p class="pTableCell">
+<a name="EW13"></a><a href="professional_probe2.html#CRefID21027" onclick='oT("CRF","professional_probe2.html#CRefID21027");'><span class=" cLinkOverride">Accessing the Sourcery Probe Console Using Telnet</span></a></p></td>
+    <td id='Row1Column2'  style='width:3.25in'>
+
+
+<a name="wp9118"></a><p class="pTableCell">
+  &#160;</p></td>
+
+</tr>
+  <tr align="left" valign="top">
+    <td id='Row2Column1'  style='width:3.25in'>
+
+
+<a name="wp9720"></a><p class="pTableCell">
+<a name="EW14"></a><a href="network_conn2.html#CRefID88883" onclick='oT("CRF","network_conn2.html#CRefID88883");'><span class=" cLinkOverride">Connecting the Probe to the Network</span></a></p></td>
+    <td id='Row2Column2'  style='width:3.25in'>
+
+
+<a name="wp9722"></a><p class="pTableCell">
+  &#160;</p></td>
+
+</tr>
+
+</table>
+
+</div>
+<div id='EndTable'> </div>
+<p class="pHTaskSubhead">
+
+
+<br clear='left' class='Blank4Table' />
+
+</p>
+
+<a name="wp6771"></a><h2 class="pHeading3NoSplit FontLevel2" id="MGC6771">
+
+
+Restoring the Target Serial Port to the Default Settings
+</h2>
+<a name="wp6772"></a><p class="pBody">
+
+To restore the default settings for the target serial port, perform the steps provided in this section.
+</p>
+
+<a name="wp6775"></a><p class="pHTaskSubhead">
+
+Procedure
+</p>
+
+<a name="wp6776"></a>
+<ol start="1"><li class="LL1Seq">Make sure network communications have already been configured correctly. For more information, see <a name="EW19"></a><a href="network_conn2.html#CRefID88883" onclick='oT("CRF","network_conn2.html#CRefID88883");'><span class=" cLinkOverride">Connecting the Probe to the Network</span></a>.</li></ol>
+<a name="wp6777"></a>
+<ol start="2"><li class="LL1Seq">Connect to the Ethernet TAP probe internal setup utility. For example, from a command shell, type <span class=" cCourier cP10">telnet </span><span class=" cCourier cP10 cItalic">probe_ip_address 1082</span>. For more information, see <a name="EW20"></a><a href="professional_probe2.html#CRefID21027" onclick='oT("CRF","professional_probe2.html#CRefID21027");'><span class=" cLinkOverride">Accessing the Sourcery Probe Console Using Telnet</span></a>.</li></ol>
+<a name="wp6842"></a>
+<ol start="3"><li class="LL1Seq">When the <span class=" cCourier cP10">core&gt;</span> prompt appears on the terminal, use the <span class=" cCourier cP10 cBold">tgtty</span> command to reset the target serial port to the default settings:</li></ol>
+<a name="wp5553"></a><pre class="pCodeIndent">
+tgtty default
+</pre>
+
+<a name="wp9133"></a><p class="pHTaskSubhead">
+
+Related Topics
+</p>
+<div id="TableDivQz"></div>
+<div align="left">
+
+
+<table border="0" cellpadding="2" cellspacing="0" width="96%" id="wp9130table9125">
+  <tr align="left" valign="top">
+    <td id='Row1Column1'  style='width:3.25in'>
+
+
+<a name="wp9130"></a><p class="pTableCell">
+<a name="EW15"></a><a href="professional_probe2.html#CRefID21027" onclick='oT("CRF","professional_probe2.html#CRefID21027");'><span class=" cLinkOverride">Accessing the Sourcery Probe Console Using Telnet</span></a></p></td>
+    <td id='Row1Column2'  style='width:3.25in'>
+
+
+<a name="wp9132"></a><p class="pTableCell">
+  &#160;</p></td>
+
+</tr>
+
+</table>
+
+</div>
+<div id='EndTable'> </div>
+<p class="pHTaskSubhead">
+
+
+<br clear='left' class='Blank4Table' />
+
+</p>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_professional";
+   DocTitle = "Mentor Embedded Sourcery Probe Professional Hardware Manual";
+   PageTitle = "Connecting to the Target System Serial Port";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "Connecting.to.the.Target.System.Serial.Port"
+   ThisTopic = "ProductDisposal";
+   CurrentFile = "target_conn3.html";
+   CurrentFileID = "19";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe Professional Hardware Manual&nbsp;2.3.4
+    
+
+<br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    
+
+<br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

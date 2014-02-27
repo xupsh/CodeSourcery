@@ -1,0 +1,467 @@
++q  // Enter quiet mode
+//___________________________________________________________________
+//
+//               Copyright (c) 2012 Mentor Graphics Corporation
+//                           All rights reserved
+//
+//   THIS WORK CONTAINS TRADE SECRETS AND PROPRIETARY INFORMATION WHICH IS
+//    THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS LICENSORS AND IS
+//                        SUBJECT TO LICENSE TERMS.
+//
+//___________________________________________________________________
+//
+// Mentor Embedded Sourcery Probe target initialization file for the
+// Freescale i.MX53 Quick Start Board reference platform.  It supports this platform as-is,
+// and can be adapted to a new target based on this reference board,
+// as detailed below.  For a brand new custom board not related to
+// this reference board, it may be better to start from the template
+// rather than trying to adapt this file.
+//
+// Target Description :
+//
+//     Board:   Freescale i.MX53 Quick Start Board
+//     Device:  Freescale i.MX53
+//     CPU ID:  Cortex-A8
+//     Endian:  Little
+//     Cores:   1
+//
+// Porting Guide:
+//
+// The user should make the following adaptations to port this file
+// to a new target board based on the associated reference platform:
+//
+//        0. Review the MEP Probe Initialization section at
+//           "TO DO #0" below to make sure the settings are
+//           right for your board.
+//        1. Update the memory configuration table for changes
+//           in the new board's  *Physical*  memory map.  See
+//           'TO DO #1' below.
+//        2. If your target board requires any special MEP
+//           settings, they should be added to the end of the
+//           ONE_TIME_SETUP section.  See 'TO DO #2' below.
+//        3. Decide whether the target should be automatically
+//           reset and/or initialized upon start-up by choosing
+//           the desired command at 'TO DO #3' below.  This
+//           really depends on your use case.
+//        4. If the board has no boot code (or bad boot code),
+//           and you want to download into RAM, then you may
+//           have to adapt the memory controller initialization
+//           script at 'TO DO #4' below to account for changes
+//           relative to the reference platform.
+//
+// NOTE:  Additional information on MON commands and the configuration
+//        options used here is available in the online help system.
+//___________________________________________________________________
+dv "Reading $$# ...\n"
+
+fr rd cortex-a8_debug.rd
+
+// Initialization script preparation
+// =================================
+
+// The RTI, RTNI, and TI command aliases call script functions in this file.
+// These command aliases should never be changed.
+
+ea RTI   $$#.DO_RTI  // RTI  call DO_RTI script function  (Reset Target and Initialize)
+ea RTNI  $$#.DO_RTNI // RTNI call DO_RTNI script function (Reset Target with No Initialization)
+ea TI    $$#.DO_TI   // TI   call DO_TI script function   (Target Initialize without resetting)
+
+
+// MEP Probe Initialization
+// ==========================
+
+// TO DO #0 -- Review the following MEP configuration options to make
+//             sure they are right for your target board hardware and
+//             processor device design.
+
+// The  Trgt_Resets_JTAG  option informs the MEP probe whether the target
+// board will forward a system reset (nSRST) to the JTAG interface (nTRST),
+// or reset the system only without resetting the JTAG interface.  When in
+// doubt, a YES setting is safer.  When the two reset circuits are known
+// to be independent, which is strongly recommended, then a NO setting is
+// recommended.
+
+eo Trgt_Resets_JTAG  = yes
+
+// The  Ice_JTAG_Use_RTCLK  and  Ice_JTAG_Clock_Freq  options are related
+// and must be considered together.  An  Ice_JTAG_Use_RTCLK  setting of
+// ON  selects adaptive clocking mode, where the JTAG clock is dynamically
+// controlled by the target processor.  When  Ice_JTAG_Use_RTCLK  is set
+// OFF  then normal (unthrottled) clocking is selected.
+//
+// When adaptive clocking is disabled, the  Ice_JTAG_Clock_Freq  option
+// specifies the the JTAG clock (TCK) frequency in Megahertz, from
+// 0.002 to 100 (depending on probe hardware capability).  A lower setting
+// is safer, a higher setting yields higher performance.  Note that the
+// requested frequency will be adjusted down to the closest frequency
+// supported by the probe hardware (displaying this option will show the
+// actual TCK frequency).
+//
+//     IJUR  Clock mode
+//     ====  ========================
+//     OFF   Free running TCK at specified frequency (RTCK is ignored)
+//     ON    Adaptive clocking with frequency controlled by RTCK
+//           (Ice_JTAG_Clock_Freq is ignored)
+//
+// Note that enabling  Ice_JTAG_Use_RTCLK  on target boards that do not
+// drive the RTCK signal will lock up the JTAG interface.
+
+eo Ice_JTAG_Use_RTCLK  = off
+eo Ice_JTAG_Clock_Freq = 10
+if (@$Ice_JTAG_Use_RTCLK) {doq Ice_JTAG_Use_RTCLK} {doq Ice_JTAG_Clock_Freq}
+
+// The following command can be used to define the details of the JTAG
+// daisy chain.  It is only required for targets on which the MEP
+// auto-detection algorithm cannot correctly determine the JTAG connection
+// details.  On most boards this command can be omitted.
+//
+//    ew MEP_JTAG_DIMENSION = TAP_CNT, IR1_CNT [ , IR2_CNT ]  ...
+
+ew MEP_JTAG_DIMENSION = 3,4,4,5 
+
+// The ice_jtag_scan_freeze option controls how the JTAG state machine
+// waits when a scan operation suspends upon completion instead of
+// returning to RT/Idle.  When ice_jtag_scan_freeze is on, it waits by
+// remaining in IR/Scan or DR/Scan state while freezing TCK instead of
+// visiting IR/Pause and DR/Pause states.
+
+eo ice_jtag_scan_freeze = on
+
+// The following commands can be used to define special JTAG initialization
+// operations required by certain processors.  The first one, if defined,
+// is scanned in right after the JTAG reset cycle completes, but before the
+// standard JTAG initialization performed by the MEP.  The second, if
+// defined, is scanned in right after the standard JTAG initialization
+// performed by the MEP.  On most boards these can both be omitted.
+//
+//    ew MEP_JTAG_INIT0 = <scan-op> [ , <scan-op> ]  ...
+//    ew MEP_JTAG_INIT1 = <scan-op> [ , <scan-op> ]  ...
+
+// The  Ice_Power_Sense  option enables the target power monitor.  When
+// target power is detected, the debug interface is enabled.
+
+eo Ice_Power_Sense = VREF
+
+// The  Ice_JTAG_TAP_Select  option controls which TAP on a multi-TAP
+// daisy chain is associated with this debug connection.  This option
+// can be omitted on targets which have one TAP.  Note that TAPs are
+// numbered from 1-N, with TAP 1 being the one whose TDO is connected
+// to the MEP probe.
+//
+//    eo Ice_JTAG_TAP_Select = <num>
+
+eo Ice_JTAG_TAP_Select = 1
+
+// Physical Memory Configuration
+// =============================
+
+mc *:P, inv     // start with all *physical* memory (*:P) marked as invalid
+
+// TO DO #1 -- Change the address range(s) below to match the  *physical*
+//             address ranges of your ROM/flash and RAM areas.  Add more
+//             MC commands as necessary for each memory mapped area.
+//
+// WARNING:  DO NOT confuse virtual (MVA) addresses with physical space.
+//           Make sure to use physical addresses in the MC table.
+//
+// EXAMPLE:
+//
+//     mc  ________:P  ________:P,  PWE, JAM, RW    // DRAM
+//     mc  ________:P  ________:P,  PWD, JAM, RO    // Flash or ROM
+//     mc  ________:P  ________:P,  PWD, JAM, RW    // Peripheral registers
+//
+// Note that if your boot code remaps physical memory, then the MC table
+// should reflect the mapping that is in effect for the code you are trying
+// to debug.  When debugging boot code in flash, MC should match the mapping
+// in effect when booting.  When debugging code in RAM, MC should match the
+// mapping in effect when running code from RAM.
+//
+// Address Range          PWE  Access
+// ---------------------- ---- -------
+mc 0x00000000:P 0x00FFFFFF:P, PWD, DMA, RO // 16M Boot ROM
+mc 0x07000000:P 0x07FFFFFF:P, PWE, DMA, RW // 16M SCC RAM
+mc 0x0FFFC000:P 0x0FFFFFFF:P, PWD, DMA, RW // 16K TZIC
+mc 0x10000000:P 0x13FFFFFF:P, PWD, JAM, RW // 64M SATA
+mc 0x18000000:P 0x1FFFFFFF:P, PWD, JAM, RW // 128M IPU
+mc 0x20000000:P 0x2FFFFFFF:P, PWD, JAM, RW // 256M GPU2D
+mc 0x30000000:P 0x3FFFFFFF:P, PWD, JAM, RW // 256M GPU3D
+mc 0x40000000:P 0x40000FFF:P, PWD, JAM, RO // 4K DROM
+mc 0x40001000:P 0x40001FFF:P, PWD, JAM, RW // 4K ETB
+mc 0x40002000:P 0x40002FFF:P, PWD, JAM, RW // 4K ETM
+mc 0x40003000:P 0x40003FFF:P, PWD, JAM, RW // 4K TPIU
+mc 0x40004000:P 0x40007FFF:P, PWD, JAM, RW // 16K CTI
+mc 0x40008000:P 0x40008FFF:P, PWD, JAM, RW // 4K ARMDU
+mc 0x50004000:P 0x50007FFF:P, PWD, JAM, RW // 16K ESDHC1
+mc 0x50008000:P 0x5000BFFF:P, PWD, JAM, RW // 16K ESDHC2
+mc 0x5000C000:P 0x5000FFFF:P, PWD, JAM, RW // 16K UART3
+mc 0x50010000:P 0x50013FFF:P, PWD, JAM, RW // 16K ECSPI1
+mc 0x50014000:P 0x50017FFF:P, PWD, JAM, RW // 16K SSI2
+mc 0x50018000:P 0x5001BFFF:P, PWD, JAM, RW // 16K EASI1
+mc 0x50020000:P 0x50023FFF:P, PWD, JAM, RW // 16K ESDHC3
+mc 0x50024000:P 0x50027FFF:P, PWD, JAM, RW // 16K ESDHC4
+mc 0x50028000:P 0x5002BFFF:P, PWD, JAM, RW // 16K SPDIF
+mc 0x5002C000:P 0x5002FFFF:P, PWD, JAM, RW // 16K ASRC
+mc 0x50030000:P 0x50033FFF:P, PWD, JAM, RW // 16K PATA
+mc 0x5003C000:P 0x5003FFFF:P, PWD, JAM, RW // 16K SPBA
+mc 0x53F80000:P 0x53F83FFF:P, PWD, JAM, RW // 16K USB
+mc 0x53F84000:P 0x53F87FFF:P, PWD, JAM, RW // 16K GPIO1
+mc 0x53F88000:P 0x53F8BFFF:P, PWD, JAM, RW // 16K GPIO2
+mc 0x53F8C000:P 0x53F8FFFF:P, PWD, JAM, RW // 16K GPIO3
+mc 0x53F90000:P 0x53F93FFF:P, PWD, JAM, RW // 16K GPIO4
+mc 0x53F94000:P 0x53F97FFF:P, PWD, JAM, RW // 16K KPP
+mc 0x53F98000:P 0x53F9BFFF:P, PWD, JAM, RW // 16K WDOG1
+mc 0x53F9C000:P 0x53F9FFFF:P, PWD, JAM, RW // 16K WDOG2
+mc 0x53F9C000:P 0x53FA3FFF:P, PWD, JAM, RW // 16K GPT
+mc 0x53FA4000:P 0x53FA7FFF:P, PWD, JAM, RW // 16K SRTC
+mc 0x53FA8000:P 0x53FABFFF:P, PWD, JAM, RW // 16K IOMUXC
+mc 0x53FAC000:P 0x53FAFFFF:P, PWD, JAM, RW // 16K EPIT1
+mc 0x53FB0000:P 0x53FB3FFF:P, PWD, JAM, RW // 16K EPIT2
+mc 0x53FB4000:P 0x53FB7FFF:P, PWD, JAM, RW // 16K PWM1
+mc 0x53FB8000:P 0x53FBBFFF:P, PWD, JAM, RW // 16K PWM2
+mc 0x53F90000:P 0x53F93FFF:P, PWD, JAM, RW // 16K GPIO4
+mc 0x53FBC000:P 0x53FBFFFF:P, PWD, JAM, RW // 16K UART1
+mc 0x53FC0000:P 0x53FC3FFF:P, PWD, JAM, RW // 16K UART2
+mc 0x53FC4000:P 0x53FC7FFF:P, PWD, JAM, RW // 16K USB
+mc 0x53FC8000:P 0x53FCBFFF:P, PWD, JAM, RW // 16K FLEXCAN1
+mc 0x53FCC000:P 0x53FCFFFF:P, PWD, JAM, RW // 16K FLEXCAN2
+mc 0x53FD0000:P 0x53FD3FFF:P, PWD, JAM, RW // 16K SRC
+mc 0x53FD4000:P 0x53FD7FFF:P, PWD, JAM, RW // 16K CCM
+mc 0x53FD8000:P 0x53FDBFFF:P, PWD, JAM, RW // 16K GPC
+mc 0x53FDC000:P 0x53FDFFFF:P, PWD, JAM, RW // 16K GPIO5
+mc 0x53FE0000:P 0x53FE3FFF:P, PWD, JAM, RW // 16K GPIO6
+mc 0x53FE4000:P 0x53FE7FFF:P, PWD, JAM, RW // 16K GPIO7
+mc 0x53FE8000:P 0x53FEBFFF:P, PWD, JAM, RW // 16K PATA
+mc 0x53FC0000:P 0x53FC3FFF:P, PWD, JAM, RW // 16K UART2
+mc 0x53FEC000:P 0x53FEFFFF:P, PWD, JAM, RW // 16K I2C3
+mc 0x53FF0000:P 0x53FF3FFF:P, PWD, JAM, RW // 16K UART4
+mc 0x63F80000:P 0x63F83FFF:P, PWD, JAM, RW // 16K DPLLC1
+mc 0x63F84000:P 0x63F87FFF:P, PWD, JAM, RW // 16K DPLLC2
+mc 0x63F88000:P 0x63F8BFFF:P, PWD, JAM, RW // 16K DPLLC3
+mc 0x63F8C000:P 0x63F8FFFF:P, PWD, JAM, RW // 16K DPLLC4
+mc 0x63F90000:P 0x63F93FFF:P, PWD, JAM, RW // 16K UART5
+mc 0x63F94000:P 0x63F97FFF:P, PWD, JAM, RW // 16K AHBMAX
+mc 0x63F98000:P 0x63F9BFFF:P, PWD, JAM, RW // 16K IIM
+mc 0x63F9C000:P 0x63F9FFFF:P, PWD, JAM, RW // 16K CSU
+mc 0x63FA0000:P 0x63FA3FFF:P, PWD, JAM, RW // 16K ARM PLATFORM
+mc 0x63FA4000:P 0x63FA7FFF:P, PWD, JAM, RW // 16K OWIRE
+mc 0x63FA8000:P 0x63FABFFF:P, PWD, JAM, RW // 16K FIRI
+mc 0x63FAC000:P 0x63FAFFFF:P, PWD, JAM, RW // 16K ECSPI2
+mc 0x63FB0000:P 0x63FB3FFF:P, PWD, JAM, RW // 16K SDMA
+mc 0x63FB4000:P 0x63FB7FFF:P, PWD, JAM, RW // 16K SCC
+mc 0x63FB8000:P 0x63FBBFFF:P, PWD, JAM, RW // 16K ROMC
+mc 0x63FBC000:P 0x63FBFFFF:P, PWD, JAM, RW // 16K RTIC
+mc 0x63FC0000:P 0x63FC3FFF:P, PWD, JAM, RW // 16K CSPI
+mc 0x63FC4000:P 0x63FC7FFF:P, PWD, JAM, RW // 16K I2C2
+mc 0x63FC8000:P 0x63FCBFFF:P, PWD, JAM, RW // 16K I2C1
+mc 0x63FCC000:P 0x63FCFFFF:P, PWD, JAM, RW // 16K SSI
+mc 0x63FD0000:P 0x63FD3FFF:P, PWD, JAM, RW // 16K AUDMUX
+mc 0x63FD4000:P 0x63FD7FFF:P, PWD, JAM, RW // 16K RTC
+mc 0x63FD8000:P 0x63FDBFFF:P, PWD, JAM, RW // 16K EXTMC
+mc 0x63FE4000:P 0x63FE7FFF:P, PWD, JAM, RW // 16K MLB
+mc 0x63FE8000:P 0x63FEBFFF:P, PWD, JAM, RW // 16K SSI3
+mc 0x63FEC000:P 0x63FEFFFF:P, PWD, JAM, RW // 16K FEC
+mc 0x63FF0000:P 0x63FF3FFF:P, PWD, JAM, RW // 16K TVE
+mc 0x63FC0000:P 0x63FC3FFF:P, PWD, JAM, RW // 16K CSPI
+mc 0x63FF4000:P 0x63FF7FFF:P, PWD, JAM, RW // 16K VPU
+mc 0x63FF8000:P 0x63FFBFFF:P, PWD, JAM, RW // 16K SAHARA
+mc 0x63FFC000:P 0x63FFFFFF:P, PWD, JAM, RW // 16K PTP
+mc 0x63FD0000:P 0x63FD3FFF:P, PWD, JAM, RW // 16K AUDMUX
+mc 0x70000000:P 0x8FFFFFFF:P, PWD, DMA, RW // 512MB RAM
+mc 0xB0000000:P 0xCFFFFFFF:P, PWD, DMA, RW // 512MB RAM
+mc 0xF7FF0000:P 0xF7FFFFFF:P, PWD, DMA, RW // 64K NAND
+
+//        ____User Supplied Setup Commands Go Here____
+
+// TO DO #2 -- If your target board requires any special MEP settings
+//             (e.g. special JTAG initialization), add the commands to
+//             make those settings here.
+
+
+// End of initial one-time only setup script.  If this is a non-intrusive
+// attach connection, or if a normal debug connection fails to connect
+// properly, then exit at this point.  Otherwise continue on with optional
+// additional initialization.
+
+if (@.4$INIT_TYPE != 0) {dv "Non-intrusive attach connection\n"; goto EXIT}
+if (@$trgt_cpu_state != $tcs.halt) {dv "Debug connection failed, "; doq TCS; goto EXIT}
+
+// TO DO #3 -- Comment out all but one of the next three commands to
+//             control IF and HOW the target is initialized when the
+//             debugger is launched.  If no reset or target initialization
+//             is needed then all these can be left commented out.
+
+TI
+//   RTI
+//   RTNI
+// The semihosting vector is +8 from the vector area base address, which
+// on Cortex-A8 is configurable via the system coprocessor.  This option
+// is required for hosted mode applications, and ignored for unhosted
+// mode.
+
+ew $semi_hosting_vector = @cp15_snvba + 8
+:EXIT
+dv "Finished reading $$#.\n"
+return
+
+//___________________________________________________________________
+::DO_RTNI  // Reset Target with No Initialization.
+
+    // Normally an  rt  command is sufficient, but it may be necessary
+    // to slow down the JTAG clock first, depending on the affect of
+    // reset on the processor.
+
+    dv "Executing RTNI script function\n"
+    rt
+    return
+
+//___________________________________________________________________
+::DO_RTI   // Reset Target and Initialize.
+
+    // Note that it may be necessary to slow down the JTAG clock first, 
+    // depending on the affect of reset on the processor.
+
+    dv "Executing RTI script function\n"
+    rt
+    TI	// call script DO_TI function
+    return
+
+//___________________________________________________________________
+::DO_TI  // Target Initialize.
+
+    if (@$trgt_cpu_state != $tcs.halt) { dv "Target Initialization commands skipped due to CPU state\n"; doq TCS; return }
+    dv "Initializing target...\n"
+
+    //  Memory Controller Setup
+    //
+    // TO DO #4 -- If your board has a different memory configuration than
+    //             the reference board, then you may need to adapt the
+    //             memory controller initialization script accordingly.
+    //             These settings should match the settings used by your
+    //             boot code during its hardware initialization phase.
+
+    // Reset settle down delay
+    W 1000
+
+    // select ARM / supervisor mode
+    ew CPSR = 0x000001D3
+
+    // Disable WDOG triggered reset
+    //ew 0x73FD0000:P = 0x000002A1
+
+    // Disable FPM, Set OSCNT (256 CKIL)
+    ew 0x53FD4000:P = 0x000016FF
+
+    // Switch to lp_apm clock before configuring PLLs
+    ew 0x53FD400C:P = 0x00000004
+
+    // Disable auto-restart of PLL's
+    ew 0x63F80004:P = 0x00000000
+    ew 0x63F84004:P = 0x00000000
+    ew 0x63F88004:P = 0x00000000
+    ew 0x63F8C004:P = 0x00000000
+
+    // Setup PLL1 @800MHz with 24MHz crystal
+    // mfi=8,pdf=1,mfd=2,mfn=1
+    ew 0x63F80000:P = 0x00001223
+    ew 0x63F80008:P = 0x00000080
+    ew 0x63F8000C:P = 0x00000002
+    ew 0x63F80010:P = 0x00000001
+
+    // Setup PLL2 @400MHz with 24MHz crystal
+    // mfi=6,pdf=2,mfd=31,mfn=30
+    ew 0x63F84000:P = 0x00001223
+    ew 0x63F84008:P = 0x00000081
+    ew 0x63F8400C:P = 0x00000002
+    ew 0x63F84010:P = 0x00000001
+
+    // Setup PLL3 @216MHz with 24MHz crystal
+    // mfi=6,pdf=2,mfd=3,mfn=3
+    ew 0x63F88000:P = 0x00001223
+    ew 0x63F88008:P = 0x00000062
+    ew 0x63F8800C:P = 0x00000003
+    ew 0x63F88010:P = 0x00000003
+
+    // Insert delay to ensure PLL's have settled-down
+    W 1000
+    
+    // Switch ARM CPU to PLL1
+    ew 0x53FD400C:P = 0x00000000
+
+    // Enable auto-restart of PLL's
+    ew 0x63F80004:P = 0x00000002
+    ew 0x63F84004:P = 0x00000002
+    ew 0x63F88004:P = 0x00000002
+
+    // Initialize SDRAM controller
+
+    ew 0x53fa8554:P = 0x00300000
+    ew 0x53fa8558:P = 0x00300040
+    ew 0x53fa8560:P = 0x00300000
+    ew 0x53fa8564:P = 0x00300040
+    ew 0x53fa8568:P = 0x00300040
+    ew 0x53fa8570:P = 0x00300000
+    ew 0x53fa8574:P = 0x00300000
+    ew 0x53fa8578:P = 0x00300000
+    ew 0x53fa857c:P = 0x00300040
+    ew 0x53fa8580:P = 0x00300040
+    ew 0x53fa8584:P = 0x00300000
+    ew 0x53fa8588:P = 0x00300000
+    ew 0x53fa8590:P = 0x00300040
+    ew 0x53fa8594:P = 0x00300000
+    ew 0x53fa86f0:P = 0x00300000
+    ew 0x53fa86f4:P = 0x00000000
+    ew 0x53fa86fc:P = 0x00000000
+    ew 0x53fa8714:P = 0x00000000
+    ew 0x53fa8718:P = 0x00300000
+    ew 0x53fa871c:P = 0x00300000
+    ew 0x53fa8720:P = 0x00300000
+    ew 0x53fa8724:P = 0x04000000
+    ew 0x53fa8728:P = 0x00300000
+    ew 0x53fa872c:P = 0x00300000
+    ew 0x63fd9088:P = 0x35343535
+    ew 0x63fd9090:P = 0x4d444c44
+    ew 0x63fd907c:P = 0x01370138
+    ew 0x63fd9080:P = 0x013b013c
+    ew 0x63fd9018:P = 0x00011740
+    ew 0x63fd9000:P = 0xc3190000
+    ew 0x63fd900c:P = 0x9f5152e3
+    ew 0x63fd9010:P = 0xb68e8a63
+    ew 0x63fd9014:P = 0x01ff00db
+    ew 0x63fd902c:P = 0x000026d2
+    ew 0x63fd9030:P = 0x009f0e21
+    ew 0x63fd9008:P = 0x12273030
+    ew 0x63fd9004:P = 0x0002002d
+    ew 0x63fd901c:P = 0x00008032
+    ew 0x63fd901c:P = 0x00008033
+    ew 0x63fd901c:P = 0x00028031
+    ew 0x63fd901c:P = 0x092080b0
+    ew 0x63fd901c:P = 0x04008040
+    ew 0x63fd901c:P = 0x0000803a
+    ew 0x63fd901c:P = 0x0000803b
+    ew 0x63fd901c:P = 0x00028039
+    ew 0x63fd901c:P = 0x09208138
+    ew 0x63fd901c:P = 0x04008048
+    ew 0x63fd9020:P = 0x00001800
+    ew 0x63fd9040:P = 0x04b80003
+    ew 0x63fd9058:P = 0x00022227
+    ew 0x63fd901c:P = 0x00000000
+
+    // Enable Clocks
+    ew 0x53FD4068:P = 0xFFFFFFFF
+    ew 0x53FD406C:P = 0xFFFFFFFF
+    ew 0x53FD4070:P = 0xFFFFFFFF
+    ew 0x53FD4074:P = 0xFFFFFFFF
+    ew 0x53FD4078:P = 0xFFFFFFFF
+    ew 0x53FD407C:P = 0xFFFFFFFF
+    ew 0x53FD4080:P = 0xFFFFFFFF
+    ew 0x53FD4084:P = 0xFFFFFFFF
+
+    // Speed up JTAG now that PLL is enabled
+    eo ice_jtag_clock_freq = 20   
+
+    dv "Initializing target done.\n"
+    return
+
+//___________________________________________________________________
+
+// <eof>

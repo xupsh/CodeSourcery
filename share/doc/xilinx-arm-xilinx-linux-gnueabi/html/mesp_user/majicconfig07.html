@@ -1,0 +1,295 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:22:23 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>Components of Initialization Files</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("Sourcery Probe Configuration ","majicconfig01","Sourcery Probe Target Initialization Scripts","majicconfig04","Components of Initialization Files","majicconfig07","14");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp26541"></a><h1 class="pHeading3 FontLevel1" id="MGC26541">
+
+<a name="CRefID59558"></a>
+Components of Initialization Files
+</h1>
+
+<a name="wp26542"></a><p class="pBody">
+
+A typical board initialization file has several separate scripts that can be run at different times for different functions.
+</p>
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp26551"></a><p class="pnoteNote">
+
+        	A block comment at the top of the file indicates what details need to be filled in, and where to do that. Each section of the initialization script also contains detailed comments on what happens there and what customization, if any, might be required.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp26555"></a><h2 class="pHeading4 FontLevel2" id="MGC26555">
+
+<a name="CRefID81919"></a>
+Initialization
+</h2>
+<a name="wp26559"></a><p class="pBody">
+
+When Sourcery CodeBench launches the MDI debug connection, it reads this section of the target initialization script file from the top. It uses <a name="EW14"></a><a href="moncommand_debug6.html#CRefID41215" onclick='oT("CRF","moncommand_debug6.html#CRefID41215");'><span class=" cLinkOverride">EA Enter Alias</span></a> commands to define new command names that will be used later to invoke the command script functions provided later in the script file.
+</p>
+<div id="TableDivQz"></div>
+<div align="center">
+
+
+<a name="wp26567"></a><p class="pTableTitle" id="MGC26567">
+
+Table 3&#8209;2. 
+Initialization File Commands
+</p>
+
+
+<table border="1" cellpadding="5" cellspacing="0" id="wp26567table26563">
+  <tr align="left" valign="top">
+    <td id='Row1Column1'  style='width:1.35996in'>
+
+
+<a name="wp26571"></a><p class="pTableCell" id="MGC26567">
+RTNI</p></td>
+
+    <td id='Row1Column2'  style='width:4.39996in'>
+
+
+<a name="wp26573"></a><p class="pTableCell">
+Reset Target with No Initialization</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row2Column1'  style='width:1.35996in'>
+
+
+<a name="wp26575"></a><p class="pTableCell">
+RTI</p></td>
+
+    <td id='Row2Column2'  style='width:4.39996in'>
+
+
+<a name="wp26577"></a><p class="pTableCell">
+Reset Target and Initialize</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row3Column1' >
+
+
+<a name="wp26579"></a><p class="pTableCell">
+TI</p></td>
+
+    <td id='Row3Column2' >
+
+
+<a name="wp26581"></a><p class="pTableCell">
+Initialize Target</p></td>
+
+
+</tr>
+
+
+</table>
+
+</div>
+<div id='EndTable'> </div>
+<p class="pBody">
+
+<br clear='left' class='Blank4Table' />
+
+
+</p>
+
+<a name="wp26586"></a><p class="pBody">
+
+After these command aliases are defined, the script proceeds to configure the debug interface. Often this requires only a couple of configuration options to be set.<span class=" cItalic"> </span>(See <a href="majicconfig08.html"  onclick='oT("CRF","majicconfig08.html");return false;'><span class=" cLinkOverride">Configuration Options</span></a>)
+</p>
+
+<a name="wp26593"></a><p class="pBody">
+
+Some targets require special probe initialization options.<span class=" cItalic"> </span>See <a href="majicconfig13.html"  onclick='oT("CRF","majicconfig13.html");return false;'>Special Probe Initialization (ARM and MIPS Only)</a> for details on the probe initialization features normally used during initialization.
+</p>
+
+<a name="wp26594"></a><p class="pBody">
+
+When the probe interface has been configured, the script enables the power sensor. (See ice_power_sense in <a href="majicconfig12.html#wp25380"  onclick='oT("CRF","majicconfig12.html#wp25380");return false;'><span class=" cLinkOverride">Table&#160;3&#8209;9</span></a>)
+</p>
+
+<a name="wp26598"></a><p class="pBody">
+
+Assuming the target is correctly connected and is powered up, the probe detects the target&#39;s voltage level and enables the debug interface at that level. At this point the interface and the processor&#39;s debug controller are initialized. Normally the processor is stopped and reset when the debug controller is initialized, but if the debugger was launched in a non-intrusive attach mode connection, the processor is stopped, but not reset to allow for inspecting the current state.<span class=" cItalic"> </span>See <a name="EW15"></a><a href="moncommand40.html#CRefID94763" onclick='oT("CRF","moncommand40.html#CRefID94763");'><span class=" cLinkOverride">R, RP, RT Reset</span></a>.
+</p>
+
+<a name="wp26599"></a><p class="pBody">
+
+This section of the<span class=" cItalic"> template.maj </span>file<span class=" cItalic"> </span>also declares the memory configuration table for the board&#39;s physical memory map. This controls how the Mentor Embedded Sourcery Probe accesses different memory regions, and helps avoid illegal accesses. See <a href="majicconfig08.html#wp26695"  onclick='oT("CRF","majicconfig08.html#wp26695");return false;'><span class=" cLinkOverride">Memory Configuration (ARM and MIPS Only)</span></a> for more information. The next lines of the file are the place to add additional customization your board might require.
+</p>
+
+<a name="wp26606"></a><p class="pBody">
+
+If the debugger was launched in non-intrusive connection mode the initialization script exits; otherwise, it calls one of the other scripts in the file via one of the command aliases defined above: RTI, RTNI, or TI. The correct script to call depends on your particular use case.
+</p>
+
+<a name="wp31164"></a><h2 class="pHeading4 FontLevel2" id="MGC31164">
+
+
+DO_RTNI Script
+</h2>
+<a name="wp31168"></a><p class="pBody">
+
+This script does a Reset Target type reset (See <a name="EW16"></a><a href="moncommand40.html#CRefID94763" onclick='oT("CRF","moncommand40.html#CRefID94763");'><span class=" cLinkOverride">R, RP, RT Reset</span></a>) with No Initialization (NI). Use this reset method to reset the board using the system reset pin on the debug connector (separate from the JTAG reset), and leave the hardware uninitialized. This is recommended when using a boot loader to initialize the board and download the application, or when debugging boot code in ROM or flash memory.
+</p>
+
+<a name="wp26611"></a><p class="pBody">
+
+The result depends on the design of your target board and CPU. For example, certain processors execute some amount of boot code when they exit the reset state despite the presence of a probe. Other boards do not provide a system reset pin on the debug connector and, therefore, cannot be reset in this way.
+</p>
+
+<a name="wp26614"></a><h2 class="pHeading4 FontLevel2" id="MGC26614">
+
+
+DO_RTI Script
+</h2>
+<a name="wp26615"></a><p class="pBody">
+
+This script does a Reset Target and Initialize. After performing a Reset Target type reset (See <a name="EW17"></a><a href="moncommand40.html#CRefID94763" onclick='oT("CRF","moncommand40.html#CRefID94763");'><span class=" cLinkOverride">R, RP, RT Reset</span></a>), to reset the board using the system reset pin on the debug connector (separate from the JTAG reset), it calls <span class=" cBold">TI</span> to run your initialization script. This is recommended when you plan to download the application into RAM using the debugger. However, some targets do not respond well to a hard reset, in which case <span class=" cBold">TI</span> is recommended instead of <span class=" cBold">RTI</span>.
+</p>
+
+<a name="wp26616"></a><p class="pBody">
+
+The result depends on the design of your target board and CPU. For example, certain processors execute some amount of boot code when they exit the reset state despite the presence of a probe. Other boards do not provide a system reset pin on the debug connector, and, therefore, cannot be reset in this way.
+</p>
+
+<a name="wp26619"></a><h2 class="pHeading4 FontLevel2" id="MGC26619">
+
+
+DO_TI
+</h2>
+<a name="wp26620"></a><p class="pBody">
+
+This is the script used for initializing your memory controller, and any additional hardware initialization that might be required. If your board boots up normally, you might not need to make any adjustments. However, if you have no boot code (or bad boot code) and want to download code into RAM, then you might need to initialize your memory controller with a command script to set up the control registers.
+</p>
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp26628"></a><p class="pnoteNote">
+
+        	The target initialization script must be compatible with the boot code. In general, it is best to do a bare minimum of initialization in the script and leave as much as possible to the boot code.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "Components of Initialization Files";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "Components.of.Initialization.Files"
+   ThisTopic = "ComponentsofInitializationFiles";
+   CurrentFile = "majicconfig07.html";
+   CurrentFileID = "14";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    
+<br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    
+<br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

@@ -1,0 +1,462 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:25:37 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>Creating a MON Connection</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("MON Command Line Debugger","moncommand_debug1","MON Invocation Line","moncommand_debug2","Creating a MON Connection","moncommand_debug4","97");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp5416"></a><h1 class="pHeading3 FontLevel1" id="MGC5416">
+
+
+Creating a MON Connection
+</h1>
+
+<a name="wp5417"></a><p class="pBody">
+
+This section provides you with the steps required to create a MON connection.
+</p>
+
+<a name="wp5418"></a><p class="pHTaskSubhead">
+
+Prerequisites
+</p>
+
+<a name="wp5421"></a>
+<ul><li class="LL1BulSolid">The probe has been configured with an IP address. See <a name="EW53"></a><a href="majic_setup1.html#CRefID77136" onclick='oT("CRF","majic_setup1.html#CRefID77136");'><span class=" cLinkOverride">Mentor Embedded Sourcery Probe Introduction</span></a>.</li></ul>
+
+<a name="wp5423"></a>
+<ul><li class="LL1BulSolid">A connection to the evaluation board is being established with an existing <span class=" cItalic">.maj</span> board initialization file.</li></ul>
+
+<a name="wp5424"></a><p class="pHTaskSubhead">
+
+Procedure
+</p>
+
+<a name="wp5425"></a>
+<ol start="1"><li class="LL1Seq">Change directories to the directory containing the mon (monice) executable as shown in the following example.</li></ol>
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp5433"></a><p class="pnoteNote">
+
+        	If you are using Windows&reg; 64-bit, you must use &quot;Program Files(x86)&quot; in the path.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp5434"></a><pre class="pCodeIndent">
+C:\&gt;cd &lt;install_directory&gt;i686-mingw32\arm-none-eabi\mep\bin
+</pre>
+
+<a name="wp5436"></a><pre class="pCodeIndent">
+
+</pre>
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack"><img src="../MGC/images/blank2x2.png" /></span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteTip"></td>
+    <td valign="top">
+            
+<a name="wp7101"></a><p class="pnoteInfo">
+
+        <span class=" cBold">	Tip</span>: See <a name="EW54"></a><a href="majic_setup2.html#CRefID12259" onclick='oT("CRF","majic_setup2.html#CRefID12259");'><span class=" cLinkOverride">Table&#160;1&#8209;1</span></a> for default installation directory locations, then look in the <span class=" cItalic">tsp/_templates</span> subdirectory.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp5437"></a>
+<ol start="2"><li class="LL1Seq">Scan for the available probes on the network and create a connection:</li></ol>
+<a name="wp5438"></a><pre class="pCodeIndent">
+&gt;mon -dm -vARM920T -l 
+..\tsp\arm\atmel_at91rm9200ek\at91rm9200ek.maj
+</pre>
+
+<a name="wp5439"></a><pre class="pCodeIndent">
+
+</pre>
+
+<a name="wp5440"></a><p class="pL1Body">
+Where in this example:</p>
+<a name="wp5441"></a><p class="pL2Body">
+-dm - discovers probes available on the network</p>
+<a name="wp5442"></a><p class="pL2Body">
+-vARM920T - specifies the processor type</p>
+<a name="wp5443"></a><p class="pL2Body">
+-l - specifies the little endian processor configuration</p>
+<a name="wp5444"></a><p class="pL2Body">
+<span class=" cItalic">..\tsp\arm\atmel_at91rm9200ek\at91rm9200ek.maj</span> - specifies the relative path to an installed board configuration file</p>
+<a name="wp5445"></a><p class="pL1Body">
+The output for the probe discovery will be similar to the following:</p>
+<a name="wp5446"></a><pre class="pCodeIndent">
+Symbolic Assembly Level Debug Monitor, version V7.0.12 - Win32
+</pre>
+
+<a name="wp5447"></a><pre class="pCodeIndent">
+Copyright (c) 1987-2011 by Mentor Graphics Corporation - All Rights 
+Reserved.
+</pre>
+
+<a name="wp5448"></a><pre class="pCodeIndent">
+Reading command history from: &#39;C:\Documents and 
+Settings\kwilliam\Application Da
+</pre>
+
+<a name="wp5449"></a><pre class="pCodeIndent">
+ta\mon_mon.hist&#39;
+</pre>
+
+<a name="wp5450"></a><pre class="pCodeIndent">
+Scanning for visible Probes...
+</pre>
+
+<a name="wp5451"></a><pre class="pCodeIndent">
+    Model:                   Serial #: IP Addr:        UnitName:
+</pre>
+
+<a name="wp5654"></a><pre class="pCodeIndent">
+0: MESP-Personal / ARM07380127                  169.254.156.159 jpsmeuj
+</pre>
+
+<a name="wp5619"></a><pre class="pCodeIndent">
+1: MESP-Pro / ARMFSL00FF73                        134.86.101.72   FSL00FF73
+</pre>
+
+<a name="wp5652"></a><pre class="pCodeIndent">
+Select a Probe 0..1, q&gt; 
+</pre>
+
+<a name="wp5458"></a><pre class="pCodeIndent">
+
+</pre>
+
+<a name="wp5459"></a>
+<ol start="3"><li class="LL1Seq">Enter the number of the probe you want to connect to at the <span class=" cBold">Select a Probe</span><span class=" cItalic"> </span>prompt, or enter <span class=" cBold">q </span>to quit without connecting to any probe.</li></ol>
+<a name="wp5460"></a><p class="pL1Body">
+<span class=" cBold">NOTE: </span>To connect to a probe without using probe discovery, use the -d&lt;ip_addr&gt; command:</p>
+<a name="wp5461"></a><pre class="pCodeIndent">
+ &gt;mon -d 134.86.101.72 -vARM920T -l 
+..\tsp\arm\atmel_at91rm9200ek\at91rm9200ek.maj
+</pre>
+
+<a name="wp5462"></a><pre class="pCodeIndent">
+
+</pre>
+
+<a name="wp5463"></a><p class="pL1Body">
+where in this example:</p>
+<a name="wp5464"></a><p class="pL1Body">
+-d 134.86.101.72 - specifies the probe&#8217;s IP address</p>
+<a name="wp5465"></a><p class="pHTaskSubhead">
+
+Results
+</p>
+
+<a name="wp5466"></a><p class="pBody">
+
+Output similar to the following is produced:
+</p>
+
+<a name="wp5467"></a><pre class="pCode">
+Symbolic Assembly Level Debug Monitor, version V7.0.12 - Win32
+</pre>
+
+<a name="wp5468"></a><pre class="pCode">
+Copyright (c) 1987-2011 by Mentor Graphics Corporation - All Rights 
+Reserved.
+</pre>
+
+<a name="wp5469"></a><pre class="pCode">
+Processing register file: C:\Program 
+Files\CodeSourcery\Sourcery_CodeBench_for_A
+</pre>
+
+<a name="wp5470"></a><pre class="pCode">
+RM_EABI\i686-mingw32\arm-none-eabi\mep\bin\arm/spaces.rd
+</pre>
+
+<a name="wp5471"></a><pre class="pCode">
+Processing register file: C:\Program 
+Files\CodeSourcery\Sourcery_CodeBench_for_A
+</pre>
+
+<a name="wp5472"></a><pre class="pCode">
+RM_EABI\i686-mingw32\arm-none-eabi\mep\bin\arm//arm920t.rd
+</pre>
+
+<a name="wp5473"></a><pre class="pCode">
+Processing register file: C:\Program 
+Files\CodeSourcery\Sourcery_CodeBench_for_A
+</pre>
+
+<a name="wp5474"></a><pre class="pCode">
+RM_EABI\i686-mingw32\arm-none-eabi\mep\bin\arm/\armbase32.rd
+</pre>
+
+<a name="wp5475"></a><pre class="pCode">
+Reading command history from: &#39;C:\Documents and 
+Settings\kwilliam\Application Da
+</pre>
+
+<a name="wp5476"></a><pre class="pCode">
+ta\mon_mon.hist&#39;
+</pre>
+
+<a name="wp5477"></a><pre class="pCode">
+Establishing communications with probe: 134.86.101.72...
+</pre>
+
+<a name="wp5478"></a><pre class="pCode">
+Select returned ready
+</pre>
+
+<a name="wp5479"></a><pre class="pCode">
+Connection verified
+</pre>
+
+<a name="wp5480"></a><pre class="pCode">
+Processing register file: C:\Program 
+Files\CodeSourcery\Sourcery_CodeBench_for_A
+</pre>
+
+<a name="wp5481"></a><pre class="pCode">
+RM_EABI\i686-mingw32\arm-none-eabi\mep\bin\arm\mds.rd
+</pre>
+
+<a name="wp5482"></a><pre class="pCode">
+Target System:  MESP-Pro / COP, S/N FSL00FF73
+</pre>
+
+<a name="wp5483"></a><pre class="pCode">
+Firmware Rev:   2.1.0 build 1
+</pre>
+
+<a name="wp5484"></a><pre class="pCode">
+Hardware Rev:   1:7:8:0
+</pre>
+
+<a name="wp5485"></a><pre class="pCode">
+Unit Name:      FSL00FF73
+</pre>
+
+<a name="wp5486"></a><pre class="pCode">
+Ethernet MAC:   00:04:9F:00:FF:73
+</pre>
+
+<a name="wp5487"></a><pre class="pCode">
+Ethernet IP:    134.86.101.72, Subnet Mask: 255.255.254.0, (Static)
+</pre>
+
+<a name="wp5488"></a><pre class="pCode">
+Target CPU:     ARM920T
+</pre>
+
+<a name="wp5489"></a><pre class="pCode">
+Connected via:  TCP/IP, Device name: 134.86.101.72
+</pre>
+
+<a name="wp5490"></a><pre class="pCode">
+Target Endian:  little
+</pre>
+
+<a name="wp5491"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp5492"></a><pre class="pCode">
+Reading commands from C:\Program 
+Files\CodeSourcery\Sourcery_CodeBench_for_ARM_E
+</pre>
+
+<a name="wp5493"></a><pre class="pCode">
+ABI\i686-mingw32\arm-none-
+eabi\mep\bin\..\tsp\arm\atmel_at91rm9200ek\at91rm9200e
+</pre>
+
+<a name="wp5494"></a><pre class="pCode">
+k.maj
+</pre>
+
+<a name="wp5495"></a><pre class="pCode">
+MON&gt; +q  // Enter quiet mode
+</pre>
+
+<a name="wp5496"></a><pre class="pCode">
+Reading at91rm9200ek.maj ...
+</pre>
+
+<a name="wp5497"></a><pre class="pCode">
+ice_jtag_clock_freq = 0.009
+</pre>
+
+<a name="wp5498"></a><pre class="pCode">
+Target power detected
+</pre>
+
+<a name="wp5499"></a><pre class="pCode">
+Auto JTAG detection process detected 1 TAP
+</pre>
+
+<a name="wp5500"></a><pre class="pCode">
+JTAG bypass test passed
+</pre>
+
+<a name="wp5501"></a><pre class="pCode">
+DCache=16k, ICache=16k
+</pre>
+
+<a name="wp5502"></a><pre class="pCode">
+Target is Halted
+</pre>
+
+<a name="wp5503"></a><pre class="pCode">
+Executing RTI script function
+</pre>
+
+<a name="wp5504"></a><pre class="pCode">
+ice_jtag_clock_freq = 0.009
+</pre>
+
+<a name="wp5505"></a><pre class="pCode">
+Auto JTAG detection process detected 1 TAP
+</pre>
+
+<a name="wp5506"></a><pre class="pCode">
+Initializing target...
+</pre>
+
+<a name="wp5507"></a><pre class="pCode">
+ice_jtag_clock_freq = 18.75
+</pre>
+
+<a name="wp5508"></a><pre class="pCode">
+Target initialization completed.
+</pre>
+
+<a name="wp5509"></a><pre class="pCode">
+Finished reading at91rm9200ek.maj.
+</pre>
+
+<a name="wp5510"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp5511"></a><p class="pBody">
+
+To confirm the connection, use the d r0 command as shown in the following example:
+</p>
+
+<a name="wp5512"></a><pre class="pCode">
+MON&gt; d r0
+</pre>
+
+<a name="wp5513"></a><pre class="pCode">
+.r0        2000138C
+</pre>
+
+<a name="wp5668"></a><pre class="pCode">
+
+</pre>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "Creating a MON Connection";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "Creating.a.MON.Connection"
+   ThisTopic = "CreatingaMONConnection";
+   CurrentFile = "moncommand_debug4.html";
+   CurrentFileID = "97";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    
+<br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    
+<br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:23:56 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>MON Operands</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("MON Command Language ","moncommand01","MON Operands","moncommand50","Operand Details","moncommand50","72");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp6425"></a><h1 class="pHeading2 FontLevel1" id="MGC6425">
+
+<a name="CRefID63793"></a>
+MON Operands
+</h1>
+<a name="wp6426"></a><p class="pBody">
+
+This section describes the operands common to many of the commands in the MON command language. For details on the MON command language see <a href="moncommand02.html"  onclick='oT("CRF","moncommand02.html");return false;'>MON Command Basics</a>.
+</p>
+
+<a name="wp6433"></a><p class="pBody">
+
+The following is a summary of all operands. For details on the operands, see <a href="moncommand50.html#wp6454"  onclick='oT("CRF","moncommand50.html#wp6454");return false;'>Operand Details</a>.
+</p>
+
+<a name="wp6434"></a>
+<ul><li class="LL1BulSolid"><span class=" cItalic">addr</span><span class=" cBold"> - Address</span></li></ul>
+
+<a name="wp6435"></a><p class="pL1Body">
+{{<span class=" cItalic">number</span>|<span class=" cBold">(</span><span class=" cItalic">expr</span><span class=" cBold">)</span>}[<span class=" cBold">:</span><span class=" cItalic">space</span>]<span class=" cBold"> <br /></span><span class=" cItalic">sym_name<br />expr<br /></span>[.]<span class=" cItalic">reg_name</span>[<span class=" cBold">.</span><span class=" cItalic">field</span>]<br /><span class=" cBold">$</span><span class=" cItalic">ident</span></p>
+<a name="wp6436"></a>
+<ul><li class="LL1BulSolid"><span class=" cItalic">cmd_list</span><span class=" cBold"> - Command List</span></li></ul>
+
+<a name="wp6437"></a><p class="pL1Body">
+<span class=" cItalic">command</span><span class=" cNoBold cNoItalic cBlack"> </span>[<span class=" cBold">;</span><span class=" cNoBold cNoItalic cBlack"> </span><span class=" cItalic">command</span>] ...</p>
+<a name="wp6438"></a>
+<ul><li class="LL1BulSolid"><span class=" cItalic">expr</span><span class=" cBold"> - Address Expression</span><span class="cDefault"> </span></li></ul>
+
+<a name="wp6439"></a><p class="pL1Body">
+{<span class=" cItalic">addr</span>|<span class=" cBold">(</span><span class=" cItalic">expr</span><span class=" cBold">)</span>|<span class=" cItalic">expr op expr</span>|<span class=" cItalic">unary-op</span><span class=" cNoBold cNoItalic cBlack"> </span><span class=" cItalic">expr</span>}</p>
+<a name="wp6441"></a>
+<ul><li class="LL1BulSolid"><span class=" cItalic"><a name="CRefID65276"></a>fmt</span><span class=" cBold"> - Format</span></li></ul>
+
+<a name="wp6442"></a><p class="pL1Body">
+{<span class=" cBold">d</span>|<span class=" cBold">u|o|x|X|f|e|E|g|G|c|s|i|I</span>}</p>
+<a name="wp6443"></a>
+<ul><li class="LL1BulSolid"><span class=" cItalic">ident</span><span class=" cBold"> - Identifier</span></li></ul>
+
+<a name="wp6444"></a><p class="pL1Body">
+{<span class=" cBold">A..Z|a..z|_ }[A..Z|a..z|0..9|$|_ |. ]</span> ...</p>
+<a name="wp6445"></a>
+<ul><li class="LL1BulSolid"><span class=" cItalic">number</span><span class=" cBold"> - Constant Number</span></li></ul>
+
+<a name="wp6446"></a><p class="pL1Body">
+[<span class=" cBold">0x|0o|0n</span>]<span class=" cBold"> </span><span class=" cItalic">digit_string</span></p>
+<a name="wp6447"></a>
+<ul><li class="LL1BulSolid"><span class=" cItalic">range</span><span class=" cBold"> - Address Range</span></li></ul>
+
+<a name="wp6448"></a><p class="pL1Body">
+{[<span class=" cItalic">addr</span>] [<span class=" cBold">L</span><span class=" cNoBold cNoItalic cBlack"> </span><span class=" cItalic">number</span>]|<span class=" cItalic">addr</span><span class=" cNoBold cNoItalic cBlack"> </span><span class=" cItalic">addr2</span>|<span class=" cBold">*</span>[<span class=" cBold">:</span><span class=" cItalic">space</span>]}</p>
+<a name="wp10023"></a>
+<ul><li class="LL1BulSolid"><span class=" cItalic">reg_name</span><span class=" cBold"> - Register Name</span></li></ul>
+
+<a name="wp10024"></a><p class="pL1Body">
+MIPS and ARM Register name tables are provided in <a href="moncommand58.html"  onclick='oT("CRF","moncommand58.html");return false;'><span class=" cLinkOverride">reg_name Register Name</span></a>.</p>
+<a name="wp10025"></a>
+<ul><li class="LL1BulSolid"><span class=" cItalic">space</span> <span class=" cBold">- Memory Space<br /></span><span class=" cNoBold cNoItalic cBlack">MIPS: </span>{<span class=" cBold">U|0|1|2|3|R|S|XU|XS|XP|XK|P|I|D|L2|DA</span>}<br />ARM: &#160;{<span class=" cBold">P|DA</span>}</li></ul>
+
+<a name="wp6452"></a><p class="pL1Body">
+<span class=" cItalic">string</span><span class=" cBold"> - ASCII String<br /></span>&quot;text&quot;</p>
+<a name="wp6454"></a><h2 class="pHeading3NoSplit FontLevel2" id="MGC6454">
+
+<a name="CRefID31215"></a>
+Operand Details
+</h2>
+<a name="wp6455"></a><p class="pBody">
+
+The following pages describe each operand.
+</p>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "MON Operands";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "MON.Operands"
+   ThisTopic = "UserDefinedAccessLists";
+   CurrentFile = "moncommand50.html";
+   CurrentFileID = "72";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    <br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    <br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

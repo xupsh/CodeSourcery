@@ -1,0 +1,64 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>5.4. Xilinx Platform Cable USB Interface</title><link rel="stylesheet" href="cs.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.74.0"><link rel="home" href="index.html" title="Sourcery CodeBench Lite"><link rel="up" href="sprite.html" title="Chapter 5. Sourcery CodeBench Debug Sprite"><link rel="prev" href="sec-sprite-options.html" title="5.3. Sourcery CodeBench Debug Sprite Options"><link rel="next" href="ch05s05.html" title="5.5. Debugging a Remote Board"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">5.4. Xilinx Platform Cable USB Interface</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sec-sprite-options.html">Prev</a> </td><th width="60%" align="center">Chapter 5. Sourcery CodeBench Debug Sprite</th><td width="20%" align="right"> <a accesskey="n" href="ch05s05.html">Next</a></td></tr></table><hr></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="debug-sprite-xilinx-url"></a>5.4. Xilinx Platform Cable USB Interface</h2></div></div></div><p>
+    The Sourcery CodeBench Debug Sprite supports Xilinx ZYNQ-7000 boards on
+    32-bit GNU/Linux hosts via the Xilinx Platform Cable USB
+    interface.
+  </p><p>
+    The <em class="replaceable"><code>device-url</code></em> for Xilinx devices takes
+    the following form:
+
+    </p><pre class="screen">xilinx:///[?<em class="replaceable"><code>device-options</code></em>]</pre><p>
+
+    The following <em class="replaceable"><code>device-options</code></em> are
+    optional:
+
+    </p><div class="variablelist"><dl><dt><span class="term"><code class="option">commandfile=<em class="replaceable"><code>filename</code></em></code></span></dt><dd><p>
+	  Specify the full path to
+	  a <code class="filename"><em class="replaceable"><code>target</code></em>.maj</code>
+	  target initialization script, which provides Sourcery Probe
+	  and target hardware configuration information.  This is
+	  typically named after the board for which it is intended.
+	  <span>
+	    Sample start-up command scripts for standard reference
+	    platforms are included in
+	    the <code class="filename">i686-pc-linux-gnu/arm-xilinx-linux-gnueabi/mep/tsp/arm/</code>
+	    directory of the Sourcery CodeBench Lite software installation. If no
+	    suitable <code class="filename"><em class="replaceable"><code>target</code></em>.maj</code>
+	    script is available, you can select the sample template
+	    (<code class="filename">template.maj</code>) and edit it by
+	    hand. For details, refer to Chapter 2 of <em class="citetitle">Mentor
+	    Embedded Sourcery Probe User's Manual</em>.
+	  </span> 
+        </p></dd><dt><span class="term"><code class="option">core=<em class="replaceable"><code>n</code></em></code></span></dt><dd><p>
+          Specify the core to connect to.  Cores are numbered starting
+          with 0.
+        </p></dd><dt><span class="term"><code class="option">log=<em class="replaceable"><code>filename</code></em></code></span></dt><dd><p>
+          Specify the log file that is used to log internal activities
+          of the Debug Sprite.  This option is only useful for
+          debugging the Debug Sprite.
+        </p></dd></dl></div><p>
+  </p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id346917"></a>5.4.1. Configuration on GNU/Linux hosts</h3></div></div></div><p>
+      You must install a 32-bit version of the Xilinx ISE Tools before
+      you can use the Debug Sprite with Xilinx Platform Cable USB
+      devices.  Then set environment variable <code class="envar">XILINX</code>
+      like so:
+
+      </p><pre class="screen">export XILINX=/path/to/ISE-<em class="replaceable"><code>version</code></em>/SDK/SDK</pre><p>
+
+      where <em class="replaceable"><code>version</code></em> should be the version
+      of the tools installed on your system.
+    </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id346946"></a>5.4.2. Caveats</h3></div></div></div><p>
+      You may occasionally see the Debug Sprite fail to make a
+      connection to the target board.  If you see error messages from
+      the Debug Sprite like "VMAJIC failed to start (timed out)",
+      you may need to set environment
+      variable <code class="envar">XILINX_USB_PORT</code>
+      to <code class="literal">USB22</code> before invoking the Debug Sprite.
+      This is because ZYNQ-7000 boards have two JTAG chains, and the
+      Debug Sprite does not always connect to the "right" JTAG chain.
+      When you power-cycle the board and invoke the Debug Sprite
+      again, you may or may not need to keep the environment variable.
+    </p><p>
+      If the Debug Sprite is killed unexpectedly,
+      use <code class="command">xmd</code>, the Xilinx debugger, to clean up
+      locks with the <code class="command">xclean_cablelocks</code> command.
+    </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sec-sprite-options.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="sprite.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch05s05.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">5.3. Sourcery CodeBench Debug Sprite Options </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 5.5. Debugging a Remote Board</td></tr></table></div></body></html>

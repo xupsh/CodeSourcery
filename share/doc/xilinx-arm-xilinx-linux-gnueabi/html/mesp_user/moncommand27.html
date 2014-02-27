@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:23:56 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>G, GI Go, Go Interactive</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("MON Command Language ","moncommand01","MON Command Details","moncommand04","G, GI Go, Go Interactive","moncommand27","49");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp6012"></a><h1 class="pzCmdFunc FontLevel1" id="MGC6012">
+
+<a name="CRefID76882"></a>
+G, GI Go, Go Interactive
+</h1>
+
+
+
+<a name="wp17321"></a><p class="pzMiscInfo">
+
+Availability: MON, or a script file under MDI
+</p>
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp26196"></a><p class="pnoteNote">
+
+        	You must use this command from a command script in MDI and the current execute state must not change. For example, the script can execute code and hit a breakpoint, but the current execute state should be the same as it was when the script started running.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp17328"></a><p class="pzHeading">
+
+Syntax
+</p>
+
+<a name="wp17329"></a><p class="pzMiscInfo">
+
+G[I] [=<span class=" cItalic">addr</span>] [<span class=" cItalic">addr</span> ...] [{[<span class=" cItalic">cmd_list</span>]}]
+</p>
+
+<a name="wp17330"></a><p class="pzHeading">
+
+Description
+</p>
+
+<a name="wp17331"></a><p class="pBody">
+
+The Go command starts or resumes execution of the program. Execution continues until a breakpoint or the end of the program is encountered. The <span class=" cItalic">I</span> option starts execution in interactive mode. This mode allows a subset of debugger commands to be used while the target is executing. The <span class=" cBold">SP</span> (Stop) command interrupts the running program and returns MON to normal debug mode. Note that MON&#8216;s interactive mode command prompt differs from the normal prompt (for example, MON(r) means the target is running).
+</p>
+
+<a name="wp17332"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cItalic">=addr</span> &#151; If specified, execution begins at the addr address. Otherwise execution begins at the current Program Counter location.</li></ul>
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp17379"></a><p class="pnoteNote">
+
+        	Some programs require initialized data sections or registers to be reloaded before the program may be restarted from its entry point. In such cases, the <span class=" cBold">Load</span> command (L Load) should be used rather than <span class=" cBold">G </span><span class=" cItalic">=addr</span>.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp17334"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cItalic">addr..</span>. &#151; Remaining addresses on the command line specify temporary (non-sticky) breakpoints, which will disappear when execution stops for any reason.</li></ul>
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp17385"></a><p class="pnoteNote">
+
+        	Each addr must be a valid code address.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp17336"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"> <span class=" cItalic">cmd_list </span>&#151; If specified, the list of commands will be executed each time execution stops for any reason. This type of automatic command list is useful for displaying interesting values every time execution stops. If execution stops due to hitting a breakpoint that also has an associated command list, the breakpoint&#8216;s command list is executed first. A <span class=" cItalic">cmd_list</span> can contain a Go or Step command, in which case program execution will resume automatically. Note that it is legal for additional commands to follow a Go or Step command in a command list. They will be stacked for execution in the proper order when execution finally stops for the last time, but this can be confusing. Ensure that a Go or Step is the last command to be executed in the list to avoid this situation.</li></ul>
+
+
+<a name="wp17429"></a>
+<div class="LLzArgDesc">Curly braces surrounding <span class=" cItalic">cmd_list</span> are required and the entire Go command must be entered without any carriage returns. The current &quot;end execution&quot; <span class=" cItalic">cmd_list</span> can be displayed with the BL command.</div>
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp20392"></a><p class="pnoteNote">
+
+        	It remains in effect until canceled by a Go or Step command with a new or empty command list (for example, <span class=" cBold">G {}</span>). Performing target access via cmd_list&#39;s is driven from the host debugger. Sourcery Probes also provide a method for the probe itself to perform a sequence of memory accesses. See <a name="EW32"></a><a href="majicconfig14.html#CRefID29909" onclick='oT("CRF","majicconfig14.html#CRefID29909");'><span class=" cLinkOverride">Automatic Access Mode</span></a>.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "G, GI Go, Go Interactive";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "G.GI.Go.Go.Interactive"
+   ThisTopic = "UserDefinedAccessLists";
+   CurrentFile = "moncommand27.html";
+   CurrentFileID = "49";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    
+<br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    
+<br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

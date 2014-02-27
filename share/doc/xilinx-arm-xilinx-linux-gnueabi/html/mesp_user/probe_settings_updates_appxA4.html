@@ -1,0 +1,391 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:26:20 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>Sourcery Probe Personal Settings (ARM and MIPS Only)</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("Probe Settings and Updates","probe_settings_updates_appxA1","Sourcery Probe Personal Settings (ARM and MIPS Only)","probe_settings_updates_appxA4","naV","naV","137");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp6036"></a><h1 class="pHeading2 FontLevel1" id="MGC6036">
+
+<a name="CRefID85050"></a>Sourcery Probe Personal Settings (ARM and MIPS Only)
+</h1>
+<a name="wp6040"></a><p class="pBody">
+
+Sourcery Probe Personal models for ARM and MIPS use TCP/IP sockets over USB for communicating with the debugger. This requires compatible IP addresses on the probe and PC. By default, the USB probe automatically uses an IP address in the Local Link range 169.254.x.x.
+</p>
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp7250"></a><p class="pnoteNote">
+
+        	Sourcery Probe Personal models for PowerPC do not require any communication settings because a dedicated USB driver is used.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp7271"></a><p class="pBody">
+
+In most cases it is best to leave the probe set to use Local Link mode so that it can pick an IP address for itself.
+</p>
+
+<a name="wp7272"></a>
+<ul><li class="LL1BulSolid">If you are using Windows 7, then local link mode is fully supported, and no special configuration is required.</li></ul>
+
+<a name="wp7273"></a>
+<ul><li class="LL1BulSolid">If you are using Windows XP or Linux, then you will need to assign a static IP address to the PC network adapter. Refer to &ldquo;Connecting to the Target and Host Computer&rdquo; in the <span class=" cItalic">Mentor Embedded Sourcery Probe Personal Hardware Manual</span> for this procedure.</li></ul>
+
+<a name="wp7293"></a><p class="pBody">
+
+Although no special probe settings are normally required, in some cases you might want to set the probe to a static IP address in a different address range. There are two ways to do this:
+</p>
+
+<a name="wp7295"></a>
+<ul><li class="LL1BulSolid">Use the Sourcery Probe Console to configure the settings. This is the best method if you cannot establish a network connection to the probe. See &ldquo;Sourcery Probe Console&rdquo; in the <span class=" cItalic">Mentor Embedded Sourcery Probe Personal Hardware Manual</span> for details on this procedure.</li></ul>
+
+<a name="wp7287"></a>
+<ul><li class="LL1BulSolid">Use the Sourcery Probe Settings feature of CodeBench (assuming you can establish a network connection). See <a href="probe_settings_updates_appxA4.html#wp7392"  onclick='oT("CRF","probe_settings_updates_appxA4.html#wp7392");return false;'>Changing the Settings Using CodeBench</a>.</li></ul>
+
+<a name="wp7392"></a><h3 class="pHeading4 FontLevel3" id="MGC7392">
+
+<a name="CRefID63205"></a>
+Changing the Settings Using CodeBench
+</h3>
+<a name="wp6053"></a><p class="pzHeading">
+
+Prerequisites
+</p>
+
+<a name="wp6057"></a>
+<ul><li class="LL1BulSolid">You must be using an ARM or MIPS model of Sourcery Probe Personal.</li></ul>
+
+<table class="notes">
+  <tr class="NotesUpperRuleRed">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesRed">Caution</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp7345"></a><p class="pnoteSWCaution">
+
+        	New static IP settings can result in the probe becoming inaccessible if the settings are incorrect or incompatible with the network adapter on your PC. If the probe is inaccessible after programming new settings, you must change your network adapter settings to match the IP range used by the probe.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleRed">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp6058"></a><p class="pzHeading">
+
+Procedure
+</p>
+
+<a name="wp6062"></a>
+<ol start="1"><li class="LL1Seq">Start Sourcery CodeBench per the instructions in the Sourcery CodeBench user manual. Close the Welcome screen if it appears.</li></ol>
+<a name="wp6068"></a>
+<ol start="2"><li class="LL1Seq">Select <span class=" cBold">Run &gt; Sourcery Probe &gt; Settings and Firmware Update</span>. <br />The <a href="probe_settings_updates_appxA6.html"  onclick='oT("CRF","probe_settings_updates_appxA6.html");return false;'>Settings and Firmware Update Dialog Box</a> appears.</li></ol>
+<a name="wp6075"></a>
+<ol start="3"><li class="LL1Seq">Enter the IP address or hostname in the <span class=" cBold">Probe IP/Hostname</span> field for the probe, and click <span class=" cBold">Retrieve Settings</span>. <br /><br /><span class=" cBold">Tip: </span>If you do not know the IP address or hostname of your probe, click <span class=" cBold">Discover</span> to view a list of all Sourcery Probe devices currently available on the local subnet.</li></ol>
+<a name="wp6082"></a><p class="pL1Body">
+This opens the <a href="probe_settings_updates_appxA7.html"  onclick='oT("CRF","probe_settings_updates_appxA7.html");return false;'>Sourcery Probe Discovery Dialog Box</a> and scans all available network adapters for Sourcery Probes. Note that not all Sourcery Probe devices can be discovered by this dialog box.</p>
+<a name="wp6092"></a>
+<ol start="4"><li class="LL1Seq">The Settings and Firmware Update dialog box displays the current settings for the selected probe device.<a name="CRefID24905"></a></li></ol>
+<a name="wp6094"></a>
+<ol start="5"><li class="LL1Seq">Choose one of the following options on the Settings tab:<br /><span class=" cBold">NOTE</span>: If you need to use multiple Sourcery Probe Personal probes on the same host, please contact Mentor Graphics for help with your setup.</li></ol>
+<a name="wp6095"></a>
+<ol start="1."><li class="LL2Seq">Select <span class=" cBold">Use DHCP/Local Link </span>for the probe to obtain the IP address configuration automatically from the DHCP server on the network. This is the default configuration.</li></ol>
+<a name="wp6096"></a>
+<ol start="2."><li class="LL2Seq">Select <span class=" cBold">Static IP</span> to use the static IP address configuration.</li></ol>
+<a name="wp6097"></a><p class="pL2Body">
+This requires you to enter the IP address and subnet mask. Since this is a private network to your PC, you can choose the IP address setup that makes sense for your environment. Be careful not to collide with existing network adapter settings on your host computer. We suggest using something in the range of 192.168.X.X with a subnet mask of 255.255.255.0.</p>
+<a name="wp6106"></a>
+<ol start="6"><li class="LL1Seq">After you make the necessary changes to the settings, click<span class=" cBold"> Program Settings</span> to set them on the device and reboot it.<a name="CRefID71494"></a></li></ol>
+<a name="wp6116"></a><p class="pHTaskSubhead">
+
+Related Topics
+</p>
+
+<a name="wp6120"></a><p class="pBody">
+
+<a href="probe_settings_updates_appxA6.html"  onclick='oT("CRF","probe_settings_updates_appxA6.html");return false;'>Settings and Firmware Update Dialog Box</a>
+</p>
+
+<a name="wp6124"></a><p class="pBody">
+
+<a href="probe_settings_updates_appxA7.html"  onclick='oT("CRF","probe_settings_updates_appxA7.html");return false;'>Sourcery Probe Discovery Dialog Box</a>
+</p>
+
+<a name="wp6128"></a><p class="pBody">
+
+<a href="probe_settings_updates_appxA2.html"  onclick='oT("CRF","probe_settings_updates_appxA2.html");return false;'>Updating the Sourcery Probe Firmware Using CodeBench</a>
+</p>
+
+<a name="wp9548"></a><h3 class="pHeading4 FontLevel3" id="MGC9548">
+
+Configuring a Sourcery Probe Network Interface for Local Link Addressing
+</h3>
+<a name="wp9558"></a><p class="pzShortDesc">
+
+The Linux service &quot;Network Manager&quot; is responsible for automatically configuring host network interfaces. The steps in this section describe how to recognize and configure a Sourcery Probe network interface for Local Link addressing.
+</p>
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp9586"></a><p class="pnoteNote">
+
+        	The screenshots and instructions provided here are from the Gnome NetworkManager version available with Ubuntu 10.04.  Network manager is evolving rapidly and the UI is known to look different in earlier and later versions, but the configuration settings are the same - configure the interface for Local Link IPv4.  A similar NetworkManager GUI is available for the KDE UI.  There is a new command line interface for Network Manager &quot;nmcli&quot;, but it does not yet have the ability to configure interfaces as needed here.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp9482"></a><p class="pHTaskSubhead">
+
+Procedure
+</p>
+
+<a name="wp9681"></a>
+<ol start="1"><li class="LL1Seq">Make sure avahi-autoipd is installed. Most modern Linux distributions have this installed by default.</li></ol>
+<a name="wp9682"></a><pre class="pCodeIndent">
+Installation on Debian/Debian derived Distros
+</pre>
+
+<a name="wp9657"></a><pre class="pCodeIndent">
+# sudo apt-get install avahi-autoipd
+</pre>
+
+<a name="wp9658"></a><pre class="pCodeIndent">
+Reading package lists... Done
+</pre>
+
+<a name="wp9659"></a><pre class="pCodeIndent">
+Building dependency tree
+</pre>
+
+<a name="wp9660"></a><pre class="pCodeIndent">
+Reading state information... Done
+</pre>
+
+<a name="wp9661"></a><pre class="pCodeIndent">
+avahi-autoipd is already the newest version
+</pre>
+
+<a name="wp9687"></a><pre class="pCodeIndent">
+
+</pre>
+
+<a name="wp9711"></a>
+<ol start="2"><li class="LL1Seq">Configure the host Ethernet interface for Link Link Only:</li></ol>
+<a name="wp9712"></a>
+<ol start="1."><li class="LL2Seq">Plug your Sourcery probe into your Linux host and ensure the TX/RX led is flashing green/off. </li></ol>
+<a name="wp9733"></a>
+<ol start="2."><li class="LL2Seq">Right-click on your desktop network icon to display the network manager GUI Application menu.</li></ol>
+<a name="wp9752"></a>
+<ol start="3."><li class="LL2Seq">Select <span class=" cBold"> Edit Connections...</span>.</li></ol>
+<a name="wp9831"></a>
+<ol start="4."><li class="LL2Seq">In the Network Connections Dialog select the <span class=" cBold">Wired</span> tab, then select the interface associated with the probe and click <span class=" cBold">Edit...</span>. The highest numbered interface is most likely the probe, but you can confirm this in the Edit dialog.</li></ol>
+<a name="wp9835"></a><p class="pFigureTitle" id="MGC9835">
+
+Figure A&#8209;1. Network Connections Dialog<a name='Graphic9833'></a><img src="images/netmgr2.png"  style='width:4.8125in;'  class="Aligncenter" id='wp9833' border='0' hspace='0' vspace='0'/>
+
+
+</p>
+
+
+<a name="wp9713"></a>
+<ol start="5."><li class="LL2Seq">In the Editing Auto ethX dialog, verify the MAC address ends in 22:33:44.  This ensures the interface you are editing is a virtual interface and is most likely the probe.  If it is not, go back to the previous dialog and select a different Wired interface. Then, select the<span class=" cBold"> IPv4 Settings</span> tab and change the method to <span class=" cBold">Link-Local Only</span>. </li></ol>
+<a name="wp9861"></a><p class="pFigureTitle" id="MGC9861">
+
+Figure A&#8209;2. Editing Network Connection Dialog<a name='Graphic9869'></a><img src="images/netmgr3.png"  style='width:4.01041in;'  class="Aligncenter" id='wp9869' border='0' hspace='0' vspace='0'/>
+
+
+</p>
+
+
+<a name="wp9917"></a>
+<ol start="6."><li class="LL2Seq">Click <span class=" cBold">Apply</span>.</li></ol>
+<a name="wp9927"></a>
+<ol start="3"><li class="LL1Seq">Verify an IP address was assigned to the host interface:</li></ol>
+<a name="wp10027"></a>
+<ul><li class="LL2BulSolid">Open a terminal window and use the ifconfig command to verify the Local Link setup.  Local link IP addresses will be 169.254.xxx.xxx with a netmask of 255.255.0.0.  You can see that the address 169.254.5.96 was automatically allocated.  The probe should now be discoverable.</li></ul>
+<a name="wp10035"></a><pre class="pCodeIndent">
+ubuntu: $ ifconfig
+</pre>
+
+<a name="wp10036"></a><pre class="pCodeIndent">
+eth1 Link encap:Ethernet HWaddr 00:0c:29:b1:18:e2
+</pre>
+
+<a name="wp10037"></a><pre class="pCodeIndent">
+inet addr:192.168.98.150 Bcast:192.168.98.255 Mask:255.255.255.0
+</pre>
+
+<a name="wp10038"></a><pre class="pCodeIndent">
+inet6 addr: fe80::20c:29ff:feb1:18e2/64 Scope:Link
+</pre>
+
+<a name="wp10039"></a><pre class="pCodeIndent">
+UP BROADCAST RUNNING MULTICAST MTU:1500 Metric:1
+</pre>
+
+<a name="wp10040"></a><pre class="pCodeIndent">
+RX packets:40767 errors:14 dropped:23 overruns:0 frame:0
+</pre>
+
+<a name="wp10041"></a><pre class="pCodeIndent">
+TX packets:17759 errors:0 dropped:0 overruns:0 carrier:0
+</pre>
+
+<a name="wp10042"></a><pre class="pCodeIndent">
+collisions:0 txqueuelen:1000
+</pre>
+
+<a name="wp10043"></a><pre class="pCodeIndent">
+RX bytes:49830008 (49.8 MB) TX bytes:1110165 (1.1 MB)
+</pre>
+
+<a name="wp10044"></a><pre class="pCodeIndent">
+Interrupt:19 Base address:0x2000
+</pre>
+
+<a name="wp10045"></a><pre class="pCodeIndent">
+
+</pre>
+
+<a name="wp10046"></a><pre class="pCodeIndent">
+eth3 Link encap:Ethernet HWaddr 00:07:e9:22:33:44
+</pre>
+
+<a name="wp10047"></a><pre class="pCodeIndent">
+inet addr:169.254.5.96 Bcast:169.254.255.255 Mask:255.255.0.0
+</pre>
+
+<a name="wp10048"></a><pre class="pCodeIndent">
+inet6 addr: fe80::207:e9ff:fe22:3344/64 Scope:Link
+</pre>
+
+<a name="wp10049"></a><pre class="pCodeIndent">
+UP BROADCAST RUNNING MULTICAST MTU:1472 Metric:1
+</pre>
+
+<a name="wp10050"></a><pre class="pCodeIndent">
+RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+</pre>
+
+<a name="wp10051"></a><pre class="pCodeIndent">
+TX packets:95 errors:0 dropped:0 overruns:0 carrier:0
+</pre>
+
+<a name="wp10052"></a><pre class="pCodeIndent">
+collisions:0 txqueuelen:1000
+</pre>
+
+<a name="wp9985"></a><pre class="pCodeIndent">
+RX bytes:0 (0.0 B) TX bytes:21553 (21.5 KB)
+</pre>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "Sourcery Probe Personal Settings (ARM and MIPS Only)";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "Sourcery.Probe.Personal.Settings.ARM.and.MIPS.Only"
+   ThisTopic = "CommandInterpreter";
+   CurrentFile = "probe_settings_updates_appxA4.html";
+   CurrentFileID = "137";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    <br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    <br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

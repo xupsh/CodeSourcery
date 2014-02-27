@@ -1,0 +1,33 @@
+//___________________________________________________________________
+//
+//               Copyright (c) 2011 Mentor Graphics Corporation
+//                           All rights reserved
+//
+//   THIS WORK CONTAINS TRADE SECRETS AND PROPRIETARY INFORMATION WHICH IS
+//    THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS LICENSORS AND IS
+//                        SUBJECT TO LICENSE TERMS.
+//
+//___________________________________________________________________
+//
+// Mentor Embedded Sourcery Probe target initialization file.
+//
+// This file works around a bug in the e500v2 core that requires an 
+// execution sequence to occur after reset.  The idea is to set a hardware
+// instruction breakpoint at the reset address and then execute from the reset
+// address immediately causing a break.  Normally go with a breakpoint at the
+// current PC would cause a step, but that doesn't work around the core bug.
+// MDI has special logic for the reset address that allows for an breakpoint.
+
+dv "Work around e500v2 core bug by running from reset and stopping at reset\n"
+
+// Configure Trap locations
+ew IVPR=0xFFFF0000
+ew IVOR15=0x0000F000
+ew IVOR6=0x0000F700
+
+bsh i 0xfffffffc  // hardware instruction breakpoint at the reset vector
+g
+// we should have hit the hardware break and stopped
+bc 0xfffffffc  // clear out the break
+return
+

@@ -1,0 +1,668 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:22:23 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>Special Probe Initialization (ARM and MIPS Only)</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("Sourcery Probe Configuration ","majicconfig01","Special Probe Initialization (ARM and MIPS Only)","majicconfig13","MEP_JTAG_SCAN and MEP_JTAG_SCAN_TAP","majicconfig13","20");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp11263"></a><h1 class="pHeading2 FontLevel1" id="MGC11263">
+
+<a name="CRefID49615"></a>
+Special Probe Initialization (ARM and MIPS Only)
+</h1>
+<a name="wp17383"></a><h2 class="pHeading3NoSplit FontLevel2" id="MGC17383">
+
+<a name="CRefID11089"></a>
+MEP_JTAG_DIMENSION 
+</h2>
+<a name="wp17386"></a><p class="pBody">
+
+In most cases the probe can automatically determine the JTAG configuration. It does this with a quick test when the JTAG interface is first initialized. In some cases, it might be necessary to declare the JTAG connection details by writing a JTAG descriptor to the MEP_JTAG_DIMENSION buffer. The format of the JTAG descriptor consists of the number of TAPs in the chain, followed by a sequence of numbers to specify how many TAPIR bits are in each TAP. When a descriptor is declared in this way, the probe disables the automatic detection process and uses the specified descriptor to manage the scan chain.
+</p>
+
+<a name="wp17388"></a><p class="pL1Body">
+CntTAPs, CntIR1, CntIR2, ..., CntIRn</p>
+<a name="wp28213"></a><p class="pBody">
+
+<span class=" cBold">Example:</span>
+</p>
+
+<a name="wp28214"></a><pre class="pCode">
+ew MEP_JTAG_DIMENSION = 2, 5, 7    // There are 2 TAPs, one has 5 IR bits,
+</pre>
+
+<a name="wp31258"></a><pre class="pCode">
+                                     one has 7
+</pre>
+
+<a name="wp17391"></a><h2 class="pHeading3NoSplit FontLevel2" id="MGC17391">
+
+
+MEP_JTAG_INIT0 and MEP_JTAG_INIT1
+</h2>
+<a name="wp17394"></a><p class="pBody">
+
+The MEP_JTAG_INITx descriptors can be used to define special JTAG initialization operations required by certain devices. The INIT0 descriptor, if defined, is scanned through right after the JTAG reset cycle completes, but before the standard JTAG initialization performed by Sourcery Probe. The second, if defined, is scanned through right after the standard JTAG initialization performed by the Sourcery Probe.
+</p>
+
+<a name="wp17396"></a><p class="pBody">
+
+On most boards these can both be omitted. The Sourcery Probe initialization script template includes comments showing where these are typically used in the initialization process for those boards that require something special.
+</p>
+
+<a name="wp17398"></a><p class="pBody">
+
+When used, the format is a list of 0-N <span class=" cItalic">Scan Operation</span> frames:
+</p>
+
+<a name="wp17400"></a><pre class="pCodeIndent">
+ew MEP_JTAG_INIT0 = &lt;scan-op&gt; [ , &lt;scan-op&gt; ]  ...
+</pre>
+
+<a name="wp17401"></a><pre class="pCodeIndent">
+ew MEP_JTAG_INIT1 = &lt;scan-op&gt; [ , &lt;scan-op&gt; ]  ...
+</pre>
+
+<a name="wp17402"></a><pre class="pCodeIndent">
+ew MEP_JTAG_INIT0 = 0    // disable INIT0 descriptor
+</pre>
+
+<a name="wp17403"></a><pre class="pCodeIndent">
+ew MEP_JTAG_INIT1 = 0    // disable INIT1 descriptor
+</pre>
+
+<a name="wp17506"></a><pre class="pCodeIndent">
+
+</pre>
+
+<a name="wp17405"></a><p class="pBody">
+
+Each <span class=" cItalic">scan-op</span> frame is a free-form data buffer in the following format:
+</p>
+
+<a name="wp17407"></a><pre class="pCodeIndent">
+FF0SNCNT [ , SCANDATA ] [ , SCANDATA ]...
+</pre>
+
+<a name="wp18199"></a><pre class="pCodeIndent">
+
+</pre>
+
+<a name="wp17409"></a><p class="pBody">
+
+FF0SNCNT is a 32-bit word in big endian format, with eight flag bits in the MS bits and 20 bit scan count in the LS bits.
+</p>
+<div id="TableDivQz"></div>
+<div align="center">
+
+
+<a name="wp17528"></a><p class="pTableTitle" id="MGC17528">
+
+Table 3&#8209;10. MEP_JTAG_INIT0 and MEP_JTAG_INIT1 Field Descriptions
+</p>
+
+
+<table border="1" cellpadding="5" cellspacing="0" id="wp17528table17526">
+  <tr bgcolor="#CCCCCC"  align="center" valign="middle">
+    <th>
+
+<a name="wp17534"></a><p class="pTableHeading" id="MGC17528">
+Field
+</p>
+</th>
+
+    <th>
+
+<a name="wp17536"></a><p class="pTableHeading">
+
+Bit(s)
+</p>
+
+</th>
+
+    <th>
+
+<a name="wp17538"></a><p class="pTableHeading">
+
+Description
+</p>
+
+</th>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row2Column1'  style='width:0.65278in'>
+
+
+<a name="wp17540"></a><p class="pTableCell">
+IR/DR</p></td>
+
+    <td id='Row2Column2'  style='width:1.0in'>
+
+
+<a name="wp17542"></a><p class="pTableCell">
+0x80000000</p></td>
+
+    <td id='Row2Column3'  style='width:3.44444in'>
+
+
+<a name="wp17544"></a><p class="pTableCell">
+IR if the MSB is a 1, DR if 0</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row3Column1' >
+
+
+<a name="wp17546"></a><p class="pTableCell">
+P/U</p></td>
+
+    <td id='Row3Column2' >
+
+
+<a name="wp17548"></a><p class="pTableCell">
+0x08000000</p></td>
+
+    <td id='Row3Column3' >
+
+
+<a name="wp17550"></a><p class="pTableCell">
+End in PAUSE if 1, end in Update/Idle if 0</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row4Column1' >
+
+
+<a name="wp17552"></a><p class="pTableCell">
+IN</p></td>
+
+    <td id='Row4Column2' >
+
+
+<a name="wp17554"></a><p class="pTableCell">
+0x01000000</p></td>
+
+    <td id='Row4Column3' >
+
+
+<a name="wp17556"></a><p class="pTableCell">
+Scan IN to TDI, ignore TDO</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row5Column1' >
+
+
+<a name="wp27192"></a><p class="pTableCell">
+sncnt</p></td>
+
+    <td id='Row5Column2' >
+
+
+<a name="wp27194"></a><p class="pTableCell">
+0x000nnnnn</p></td>
+
+    <td id='Row5Column3' >
+
+
+<a name="wp27196"></a><p class="pTableCell">
+Scan bit count</p></td>
+
+
+</tr>
+
+
+</table>
+
+</div>
+<div id='EndTable'> </div>
+<p class="pBody">
+<br clear='left' class='Blank4Table' />
+
+
+</p>
+
+<a name="wp17434"></a><p class="pBody">
+
+SCANDATA is defined as an array of 32-bit words, where the LSB of the first word is shifted into TDI and out of TDO, then higher order bits from that word, then LSB of the next word, and so on. If the final word has less than 32 bits, those final bits are in the LS bit positions of the final word. The number of words of SCANDATA depends on the bit specified in the FF0SNCNT control word.
+</p>
+
+<a name="wp30288"></a><h2 class="pHeading3NoSplit FontLevel2" id="MGC30288">
+
+
+MEP_JTAG_SCAN and MEP_JTAG_SCAN_TAP
+</h2>
+<a name="wp30289"></a><p class="pBody">
+
+The MEP_JTAG_SCAN and MEP_JTAG_SCAN_TAP descriptors can be used to define special JTAG initialization operations required by certain devices. These descriptors are similar to the MEP_JTAG_INITx descriptors except that they perform their function immediately, unlike the MEP_JTAG_INITx descriptors that are preset in advance and are then used during JTAG initialization.
+</p>
+
+<a name="wp30300"></a><p class="pBody">
+
+When used, the format is as follows:
+</p>
+
+<a name="wp30390"></a><pre class="pCode">
+ew MEP_JTAG_RESET = <span class=" cItalic">jrmode</span>         // reset JTAG in mode 0,1,2
+</pre>
+
+<a name="wp30563"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp30613"></a><pre class="pCode">
+                              0   Reset mode based on IJUT option
+</pre>
+
+<a name="wp30614"></a><pre class="pCode">
+                              1   Reset JTAG via TRST* signal
+</pre>
+
+<a name="wp30570"></a><pre class="pCode">
+                              2   Reset JTAG via 5xTMS=1 cycles
+</pre>
+
+<a name="wp30577"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp30391"></a><pre class="pCode">
+ew MEP_JTAG_UNRESET = <span class=" cItalic">jimode</span>      // unreset JTAG and initialize in mode 0,1,2,4,8
+</pre>
+
+<a name="wp30639"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp30745"></a><pre class="pCode">
+                              0   unreset, no initialization
+</pre>
+
+<a name="wp30746"></a><pre class="pCode">
+                              1   Enable multi-TAP support (see table below)
+</pre>
+
+<a name="wp30747"></a><pre class="pCode">
+                              2   Enable bypass test
+</pre>
+
+<a name="wp30748"></a><pre class="pCode">
+                              4   Enable multi-TAP auto detection
+</pre>
+
+<a name="wp30749"></a><pre class="pCode">
+                              8   Enable multi-TAP using MAJIC_JTAG_SCAN_DIM
+</pre>
+
+<a name="wp30750"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp30752"></a><pre class="pCode">
+   MT   MT_AUTO   MT_SDEF   Description
+</pre>
+
+<a name="wp30753"></a><pre class="pCode">
+    --   -------   -------   -----------------------
+</pre>
+
+<a name="wp30754"></a><pre class="pCode">
+   0      x         x      Whole chain mode (multi-TAP support is disabled)
+</pre>
+
+<a name="wp30755"></a><pre class="pCode">
+   1      0         0      Multi-TAP support using <a href="majicconfig13.html#wp17383"  onclick='oT("CRF","majicconfig13.html#wp17383");return false;'>MEP_JTAG_DIMENSION</a> if defined, 
+else auto detect
+</pre>
+
+<a name="wp30756"></a><pre class="pCode">
+   1      0         1         Multi-TAP support using <a href="majicconfig13.html#wp17383"  onclick='oT("CRF","majicconfig13.html#wp17383");return false;'>MEP_JTAG_DIMENSION</a> if defined, 
+else single TAP or whole chain mode
+</pre>
+
+<a name="wp30757"></a><pre class="pCode">
+   1      1         x         Multi-TAP support, using automatic detection.
+</pre>
+
+<a name="wp30646"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp30392"></a><pre class="pCode">
+ew MEP_JTAG_SCAN = <span class=" cItalic">scan-list</span>      // perform the specified list of scan operations on
+</pre>
+
+<a name="wp30831"></a><pre class="pCode">
+                              the default TAP; i.e., the TAP selected with the
+</pre>
+
+<a name="wp31294"></a><pre class="pCode">
+                              IJTS option.
+</pre>
+
+<a name="wp30840"></a><pre class="pCode">
+ew MEP_JTAG_SCAN_TAP | (<span class=" cItalic">TAP</span> &lt;&lt; 4)= <span class=" cItalic">scan-list</span>                                    
+// perform the specified list of scan operations on
+</pre>
+
+<a name="wp30877"></a><pre class="pCode">
+                              the specific TAP
+</pre>
+
+<a name="wp30394"></a><pre class="pCode">
+dw MEP_JTAG_SCAN = <span class=" cItalic">scan-list</span>      // displays the results from last ew MEP_JTAG_SCAN
+</pre>
+
+<a name="wp30885"></a><pre class="pCode">
+                              or MEP_JTAG_SCAN_TAP
+</pre>
+
+<a name="wp30304"></a><pre class="pCode">
+dw MEP_JTAG_SCAN_TAP= <span class=" cItalic">scan-list</span>   // displays the results from last ew MEP_JTAG_SCAN
+</pre>
+
+<a name="wp30893"></a><pre class="pCode">
+                              or MEP_JTAG_SCAN_TAP
+</pre>
+
+<a name="wp30306"></a><h3 class="pHeading4 FontLevel3" id="MGC30306">
+
+
+Scan-List Format
+</h3>
+<a name="wp30908"></a><p class="pBody">
+
+Each <span class=" cItalic">scan-list</span> frame is a free-form data buffer in the following format:
+</p>
+
+<a name="wp30307"></a><pre class="pCodeIndent">
+FF0SNCNT [ , SCANDATA ] [ , SCANDATA ]...
+</pre>
+
+<a name="wp30308"></a><pre class="pCodeIndent">
+
+</pre>
+
+<a name="wp30309"></a><p class="pBody">
+
+FF0SNCNT is a 32-bit word in big endian format, with eight flag bits in the MS bits shown in the table below and 20 bit scan count in the LS bits.
+</p>
+<div id="TableDivQz"></div>
+<div align="center">
+
+
+<a name="wp30312"></a><p class="pTableTitle" id="MGC30312">
+
+Table 3&#8209;11. Scan-List Field Descriptions
+</p>
+
+
+<table border="1" cellpadding="5" cellspacing="0" id="wp30312table30310">
+  <tr bgcolor="#CCCCCC"  align="center" valign="middle">
+    <th>
+
+<a name="wp30318"></a><p class="pTableHeading" id="MGC30312">
+Field
+</p>
+</th>
+
+    <th>
+
+<a name="wp30320"></a><p class="pTableHeading">
+
+Bit(s)
+</p>
+
+</th>
+
+    <th>
+
+<a name="wp30322"></a><p class="pTableHeading">
+
+Description
+</p>
+
+</th>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row2Column1'  style='width:0.65278in'>
+
+
+<a name="wp30324"></a><p class="pTableCell">
+<span class=" cNoBold cNoItalic cBlack">IR/DR</span></p></td>
+
+    <td id='Row2Column2'  style='width:1.0in'>
+
+
+<a name="wp30326"></a><p class="pTableCell">
+<span class=" cNoBold cNoItalic cBlack">0x80000000</span></p></td>
+
+    <td id='Row2Column3'  style='width:3.44444in'>
+
+
+<a name="wp30328"></a><p class="pTableCell">
+<span class=" cNoBold cNoItalic cBlack">IR if the MSB is a 1, DR if 0</span></p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row3Column1' >
+
+
+<a name="wp30330"></a><p class="pTableCell">
+<span class=" cNoBold cNoItalic cBlack">P/U</span></p></td>
+
+    <td id='Row3Column2' >
+
+
+<a name="wp30332"></a><p class="pTableCell">
+<span class=" cNoBold cNoItalic cBlack">0x08000000</span></p></td>
+
+    <td id='Row3Column3' >
+
+
+<a name="wp30334"></a><p class="pTableCell">
+<span class=" cNoBold cNoItalic cBlack">End in PAUSE if 1, end in Update/Idle if 0</span></p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row4Column1' >
+
+
+<a name="wp30336"></a><p class="pTableCell">
+IN</p></td>
+
+    <td id='Row4Column2' >
+
+
+<a name="wp30338"></a><p class="pTableCell">
+0x01000000</p></td>
+
+    <td id='Row4Column3' >
+
+
+<a name="wp30340"></a><p class="pTableCell">
+Scan IN to TDI, ignore TDO</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row5Column1' >
+
+
+<a name="wp31315"></a><p class="pTableCell">
+OUT</p></td>
+
+    <td id='Row5Column2' >
+
+
+<a name="wp31317"></a><p class="pTableCell">
+0x02000000</p></td>
+
+    <td id='Row5Column3' >
+
+
+<a name="wp31344"></a><p class="pTableCell">
+Scan TDO out to probe, and recycle back into TDI</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row6Column1' >
+
+
+<a name="wp31321"></a><p class="pTableCell">
+I/O</p></td>
+
+    <td id='Row6Column2' >
+
+
+<a name="wp31323"></a><p class="pTableCell">
+0x03000000</p></td>
+
+    <td id='Row6Column3' >
+
+
+<a name="wp31325"></a><p class="pTableCell">
+Scan into TDI and scan TDO out to probe</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row7Column1' >
+
+
+<a name="wp30342"></a><p class="pTableCell">
+sncnt</p></td>
+
+    <td id='Row7Column2' >
+
+
+<a name="wp30344"></a><p class="pTableCell">
+0x000nnnnn</p></td>
+
+    <td id='Row7Column3' >
+
+
+<a name="wp30346"></a><p class="pTableCell">
+Scan bit count</p></td>
+
+
+</tr>
+
+
+</table>
+
+</div>
+<div id='EndTable'> </div>
+<p class="pBody">
+<br clear='left' class='Blank4Table' />
+
+
+</p>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "Special Probe Initialization (ARM and MIPS Only)";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "Special.Probe.Initialization.ARM.and.MIPS.Only"
+   ThisTopic = "RegisterDefinitionFileFormat";
+   CurrentFile = "majicconfig13.html";
+   CurrentFileID = "20";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    <br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    <br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

@@ -1,0 +1,350 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:23:56 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>string String Literal</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("MON Command Language ","moncommand01","MON Operands","moncommand50","string String Literal","moncommand60","82");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp7108"></a><h1 class="pzCmdFunc FontLevel1" id="MGC7108">
+
+
+string <a name="CRefID28310"></a>String Literal
+</h1>
+
+
+
+<a name="wp7109"></a><p class="pBody">
+
+<span class=" cBold">&quot;</span><span class=" cItalic">text</span><span class=" cBold">&quot;</span>
+</p>
+
+<a name="wp7110"></a><p class="pzHeading">
+
+Description
+</p>
+
+<a name="wp7111"></a><p class="pzShortDesc">
+
+Quoted strings are used in string format find (<span class=" cBold">DB,s</span>) commands, string format Enter Byte commands, and in the Display Value command.
+</p>
+
+
+<a name="wp7112"></a><p class="pBody">
+
+<span class=" cItalic">text</span>	 is any sequence of printable characters. Non-printable characters can be included by using any of the following C-style &ldquo;escape sequences&rdquo;:
+</p>
+<div id="TableDivQz"></div>
+<div align="center">
+
+
+<table border="0" cellpadding="2" cellspacing="2" id="wp7115table7113">
+  <tr align="left" valign="top">
+    <td id='Row1Column1'  style='width:0.75762in'>
+
+
+<a name="wp7115"></a><p class="pBody">
+<span class=" cBold">\b</span>
+</p>
+</td>
+    <td id='Row1Column2'  style='width:3.23226in'>
+
+
+<a name="wp7117"></a><p class="pBody">
+
+ backspace (0x08)
+</p>
+</td>
+
+</tr>
+  <tr align="left" valign="top">
+    <td id='Row2Column1'  style='width:0.75762in'>
+
+
+<a name="wp7119"></a><p class="pBody">
+
+<span class=" cBold">\f</span>
+</p>
+</td>
+    <td id='Row2Column2'  style='width:3.23226in'>
+
+
+<a name="wp7121"></a><p class="pBody">
+
+ formfeed (0x0C)
+</p>
+</td>
+
+</tr>
+  <tr align="left" valign="top">
+    <td id='Row3Column1' >
+
+
+<a name="wp7123"></a><p class="pBody">
+
+<span class=" cBold">\n</span>
+</p>
+</td>
+    <td id='Row3Column2' >
+
+
+<a name="wp7125"></a><p class="pBody">
+
+ newline (0x0A)
+</p>
+</td>
+
+</tr>
+  <tr align="left" valign="top">
+    <td id='Row4Column1' >
+
+
+<a name="wp7127"></a><p class="pBody">
+
+<span class=" cBold">\r</span>
+</p>
+</td>
+    <td id='Row4Column2' >
+
+
+<a name="wp7129"></a><p class="pBody">
+
+ carriage-return (0x0D)
+</p>
+</td>
+
+</tr>
+  <tr align="left" valign="top">
+    <td id='Row5Column1' >
+
+
+<a name="wp7131"></a><p class="pBody">
+
+<span class=" cBold">\t</span>
+</p>
+</td>
+    <td id='Row5Column2' >
+
+
+<a name="wp7133"></a><p class="pBody">
+
+ tab (0x09)
+</p>
+</td>
+
+</tr>
+  <tr align="left" valign="top">
+    <td id='Row6Column1' >
+
+
+<a name="wp7135"></a><p class="pBody">
+
+<span class=" cBold">\v</span>
+</p>
+</td>
+    <td id='Row6Column2' >
+
+
+<a name="wp7137"></a><p class="pBody">
+
+ vertical tab (0x0B)
+</p>
+</td>
+
+</tr>
+  <tr align="left" valign="top">
+    <td id='Row7Column1' >
+
+
+<a name="wp7139"></a><p class="pBody">
+
+<span class=" cBold">\</span><span class=" cNoBold cNoItalic cBlack">&rdquo;</span>
+</p>
+</td>
+    <td id='Row7Column2' >
+
+
+<a name="wp7141"></a><p class="pBody">
+
+ quote
+</p>
+</td>
+
+</tr>
+  <tr align="left" valign="top">
+    <td id='Row8Column1' >
+
+
+<a name="wp7143"></a><p class="pBody">
+
+<span class=" cBold">\</span><span class=" cNoBold cNoItalic cBlack">&#8217;</span>
+</p>
+</td>
+    <td id='Row8Column2' >
+
+
+<a name="wp7145"></a><p class="pBody">
+
+ apostrophe
+</p>
+</td>
+
+</tr>
+  <tr align="left" valign="top">
+    <td id='Row9Column1' >
+
+
+<a name="wp7147"></a><p class="pBody">
+
+<span class=" cBold">\\</span>
+</p>
+</td>
+    <td id='Row9Column2' >
+
+
+<a name="wp7149"></a><p class="pBody">
+
+ backslash
+</p>
+</td>
+
+</tr>
+  <tr align="left" valign="top">
+    <td id='Row10Column1' >
+
+
+<a name="wp7151"></a><p class="pBody">
+
+<span class=" cBold">\</span><span class=" cItalic">ooo</span>
+</p>
+</td>
+    <td id='Row10Column2' >
+
+
+<a name="wp7153"></a><p class="pBody">
+
+ octal value (<span class=" cItalic">ooo</span> is 1 to 3 octal digits)
+</p>
+</td>
+
+</tr>
+  <tr align="left" valign="top">
+    <td id='Row11Column1' >
+
+
+<a name="wp7155"></a><p class="pBody">
+
+<span class=" cBold">\x</span><span class=" cItalic">hh</span>
+</p>
+</td>
+    <td id='Row11Column2' >
+
+
+<a name="wp7157"></a><p class="pBody">
+
+ hex value (<span class=" cItalic">hh</span> is 1 or 2 hex digits)
+</p>
+</td>
+
+</tr>
+
+</table>
+
+</div>
+<div id='EndTable'> </div>
+<p class="pBody">
+<br clear='left' class='Blank4Table' />
+
+</p>
+
+<a name="wp7158"></a><p class="pBody">
+
+To perform a &ldquo;<span class=" cBold">DB,s</span>&rdquo; command with no search <span class=" cItalic">value</span>, or an interactive &ldquo;<span class=" cBold">EB,s</span>&rdquo; command, MON searches for a null character as the string terminator and automatically inserts a null at the end of a replacement string. But to perform a search for a specific string (<span class=" cBold">DB,s</span>= &ldquo;<span class=" cItalic">string</span>&rdquo;) or non-interactive Enter (<span class=" cBold">EB,s</span>=&#160;&ldquo;<span class=" cItalic">string</span>&rdquo;), MON will neither require a null character for the string to match, nor insert a null automatically at the end of a replacement string. Such strings can be explicitly provided with a null terminator by including<span class=" cBold"> \0</span> immediately before the closing quote.<a name="CRefID61019"></a>
+</p>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "string String Literal";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "string.String.Literal"
+   ThisTopic = "UserDefinedAccessLists";
+   CurrentFile = "moncommand60.html";
+   CurrentFileID = "82";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    <br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    <br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

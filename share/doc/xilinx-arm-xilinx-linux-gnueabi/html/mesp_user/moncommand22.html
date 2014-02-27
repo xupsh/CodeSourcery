@@ -1,0 +1,239 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:23:56 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>EB, ED, EH, EQ, EW Enter or Fill Data</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("MON Command Language ","moncommand01","MON Command Details","moncommand04","EB, ED, EH, EQ, EW Enter or Fill Data","moncommand22","44");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp5847"></a><h1 class="pzCmdFunc FontLevel1" id="MGC5847">
+
+
+EB, ED, EH, EQ, EW <a name="CRefID41954"></a>Enter or Fill Data
+</h1>
+
+
+
+<a name="wp29068"></a><p class="pzMiscInfo">
+
+Availability: ALL
+</p>
+
+<a name="wp5848"></a><p class="pzHeading">
+
+Syntax
+</p>
+
+<a name="wp5849"></a><p class="pzUsage">
+
+E[<span class="cOptRpl">type</span>][K] [<span class="cOptRpl">range</span>][,<span class="cOptRpl">fmt</span>]
+</p>
+
+<a name="wp5850"></a><p class="pzUsage">
+
+E[<span class="cOptRpl">type</span>] [<span class="cOptRpl">range</span>][,<span class="cOptRpl">fmt</span>] = <span class="cOptRpl">value</span>[, <span class="cOptRpl">value</span>] ...
+</p>
+
+<a name="wp31997"></a><p class="pzUsage">
+
+E[<span class="cOptRpl">type</span>] [K] [<span class="cOptRpl">range</span>][,<span class="cOptRpl">fmt</span>] = <span class="cOptRpl">value</span>[, <span class="cOptRpl">value</span>] ...
+</p>
+
+<a name="wp5851"></a><p class="pzHeading">
+
+Description
+</p>
+
+<a name="wp5852"></a><p class="pzShortDesc">
+
+The Enter command allows the contents of the specified registers or memory locations to be altered. If a value list is not provided, the Enter command displays the current value of each object in turn, prompting for a new value (interactive mode). If a range is not supplied, the Enter command picks up where the last Enter command left off. EW with i or I fmt invokes the MIPS mini-assembler.
+</p>
+
+
+<a name="wp5853"></a><p class="pzShortDesc">
+
+If a value list is supplied, the Enter command stores the values immediately without reading the old values (that is, there is no interactive prompting). If the number of values supplied would overflow the specified range, the excess values are ignored. If the supplied values do not completely fill the range, the value list will be replicated as necessary to fill the range.
+</p>
+
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp5862"></a><p class="pnoteNote">
+
+        	Such replicating &ldquo;fill&rdquo; operations are implemented as an Enter followed by a &ldquo;destructive&rdquo; overlapping Move. When the entire range is read/write memory, the effect is as expected. But the results might not be intuitive if write-only or read-only resources are involved (for example, on MIPS processors, <span class=" cBold">ew r0 r31=123</span> will have the effect of filling the registers with 0 because r0 is architecturally defined as being 0 and that propagates to the other registers in the overlapping move).
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp5863"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cItalic">type</span> - Specifies the object size. Has the form: {<span class=" cBold">B</span>|<span class=" cBold">H</span>|<span class=" cBold">W</span>|<span class=" cBold">D|Q</span>}.<span class=" cBold"> </span>where <span class=" cBold">B</span> is for Byte, <span class=" cBold">H</span> is for 16-bit Half-word, <span class=" cBold">W</span> is for 32-bit Word, <span class=" cBold">D</span> is for 64-bit Double word and <span class=" cBold">Q</span> is for 128-bit Quad word. The default is the <span class=" cItalic">type</span> specified in the previous Enter command or <span class=" cBold">W</span>, if this is the first Enter command.</li></ul>
+
+<a name="wp5864"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cItalic">K</span><span class=" cBold"> - </span>Causes input to be read directly from the keyboard, even when reading commands from a command file. It is ignored if &ldquo;<span class=" cBold">=</span> <span class=" cItalic">value</span>&rdquo; is given. If <span class=" cBold">K</span> is not specified and an Enter command without a<span class=" cItalic"> value</span> list is executed from a command file, the input data items are also read from subsequent lines of the command file.</li></ul>
+
+<a name="wp5865"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cItalic">range - </span>Specifies the location(s) where the<span class=" cItalic"> </span>values will be stored. The syntax of <span class=" cItalic">range</span> is described in <a href="moncommand57.html"  onclick='oT("CRF","moncommand57.html");return false;'>range Address Range</a>.</li></ul>
+
+
+<a name="wp5869"></a>
+<div class="LLzArgDesc">If <span class=" cItalic">range</span> does not specify a start address, Enter continues where the previous Enter left off, or begins at virtual address <span class=" cBold">0</span> if it is the first Enter command. If <span class=" cItalic">range</span> includes a length or end address, an interactive Enter command will automatically terminate after the last value is entered. If <span class=" cItalic">range</span> does not specify a number of objects, the default range is determined by the number of values supplied. And if no values are supplied, the default <span class=" cItalic">range</span> is unlimited.</div>
+<a name="wp5870"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cItalic">fmt - </span>Specifies the display and data entry format. Has the form: {<span class=" cBold">d|u|o|x|X|f|e|E|g|G|c|s |i|</span>}<br />The default format is <span class=" cBold">X</span> (hex). The <span class=" cBold">i</span> and<span class=" cBold"> I</span> (instruction) format is supported only for MIPS processors, and invokes the mini-assembler. For more information and to see a list of valid formats for each <span class=" cItalic">type</span>, see <a href="moncommand54.html"  onclick='oT("CRF","moncommand54.html");return false;'>fmt Data Format</a>.</li></ul>
+
+<a name="wp5874"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cItalic">value</span> - Is the data to be written to the location(s) specified in <span class=" cItalic">range</span> and must be given in<span class=" cItalic"> fmt</span> type. For integer <span class=" cItalic">fmt</span> types,<span class=" cItalic"> value </span>can be an <span class=" cItalic">expr</span>. If <span class=" cItalic">fmt</span> is &ldquo;<span class=" cBold">s</span>&rdquo;, <span class=" cItalic">value</span> is a <span class=" cItalic">string</span> literal. If <span class=" cItalic">fmt</span> is &ldquo;<span class=" cBold">i</span>&rdquo;, <span class=" cItalic">value </span>is an instruction. For more information on <span class=" cItalic">fmt</span> and <span class=" cItalic">expr</span>, see <a href="moncommand54.html"  onclick='oT("CRF","moncommand54.html");return false;'>fmt Data Format</a> and <a href="moncommand53.html"  onclick='oT("CRF","moncommand53.html");return false;'>expr Expression</a>, respectively.</li></ul>
+
+<a name="wp5881"></a><p class="pBody">
+
+If an explicit <span class=" cItalic">value</span> list is not supplied, Enter displays the location and current value of each object in turn, prompting for a new value interactively. Entering a backslash &ldquo;\&rdquo; instead of a value will cause the Enter command to re-display the previous location and its current value for modification or verification. Hitting the &lt;enter&gt; key by itself will skip over the current object without modification. A period &ldquo;.&rdquo; instead of a value will terminate the interactive Enter command.
+</p>
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp32025"></a><p class="pnoteNote">
+
+        	Only hex input values are supported for quad word writes (EQ command). A quad word value may be separated &#8216;.&#8217; at the double word value.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp5886"></a><p class="pzHeading">
+
+Examples
+</p>
+
+<a name="wp5887"></a><pre class="pCode">
+MON&gt; eb r2=55                     // Sets R2 to 0x55.
+</pre>
+
+<a name="wp5888"></a><pre class="pCode">
+MON&gt; eb 0:1,c =a,,, ,b,,, ,c               // the string &ldquo;a, b, c&rdquo;
+</pre>
+
+<a name="wp5889"></a><pre class="pCode">
+MON&gt; eb 0:1 l 10,d = 16,17,18               // fill with value pattern
+</pre>
+
+<a name="wp5890"></a><pre class="pCode">
+MON&gt; ew $saved=@loop               // Saves the contents of the variable
+                           // loop in the MON local variable
+                           // $saved.
+</pre>
+
+<a name="wp5891"></a><pre class="pCode">
+MON&gt; ew $saved=@$saved+1         // Increments the contents of the
+                           // MON local variable $saved.
+</pre>
+
+<a name="wp5892"></a><pre class="pCode">
+MON&gt; ew 1028:0,i = mfc0 a0,$12            // use MIPS mini-assembler
+</pre>
+
+<a name="wp5893"></a><pre class="pCode">
+
+</pre>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "EB, ED, EH, EQ, EW Enter or Fill Data";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "EB.ED.EH.EQ.EW.Enter.or.Fill.Data"
+   ThisTopic = "UserDefinedAccessLists";
+   CurrentFile = "moncommand22.html";
+   CurrentFileID = "44";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    <br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    <br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

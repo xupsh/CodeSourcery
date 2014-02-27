@@ -1,0 +1,3709 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:22:23 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>Register Definition File Format</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("Sourcery Probe Configuration ","majicconfig01","Register Definition File","majicconfig10","Register Definition File Format","majicconfig11","18");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp5437"></a><h1 class="pHeading3 FontLevel1" id="MGC5437">
+
+<a name="CRefID29005"></a>
+Register Definition File Format
+</h1>
+
+<a name="wp5438"></a><p class="pBody">
+
+Define new register names using the following syntax:
+</p>
+
+<a name="wp5439"></a><pre class="pCode">
+REG = reg_name [offset space_name] byte_size [SEQ first last
+      obj_inc [inc]]
+</pre>
+
+<a name="wp18523"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp5479"></a><p class="pBody">
+
+
+</p>
+<div id="TableDivQz"></div>
+<div align="center">
+
+
+<a name="wp18361"></a><p class="pTableTitle" id="MGC18361">
+
+Table 3&#8209;4. <a name="CRefID91817"></a>
+Variable Descriptions&#160;
+</p>
+
+
+<table border="1" cellpadding="5" cellspacing="0" id="wp18361table18359">
+  <tr bgcolor="#CCCCCC"  align="center" valign="middle">
+    <th>
+
+<a name="wp18365"></a><p class="pTableHeading" id="MGC18361">
+Variable Name
+</p>
+</th>
+
+    <th>
+
+<a name="wp18367"></a><p class="pTableHeading">
+
+Description
+</p>
+
+</th>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row2Column1'  style='width:1.19444in'>
+
+
+<a name="wp18369"></a><p class="pTableCell">
+<span class=" cItalic">reg_name</span></p></td>
+
+    <td id='Row2Column2'  style='width:5.29863in'>
+
+
+<a name="wp18371"></a><p class="pTableCell">
+Identifier giving the name of the register being defined.</p>
+<a name="wp18505"></a><p class="pTableCell">
+If the name begins with &#8216;$&#8217;, it defines a &ldquo;debugger local&rdquo; register and the offset and the space_name are omitted.</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row3Column1' >
+
+
+<a name="wp18373"></a><p class="pTableCell">
+<span class=" cItalic">offset</span></p></td>
+
+    <td id='Row3Column2' >
+
+
+<a name="wp18375"></a><p class="pTableCell">
+Decimal number giving the register&#8217;s byte offset within the specified space. For real register spaces, the offset is the register number times the register size. For memory spaces, the offset is the byte address.</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row4Column1' >
+
+
+<a name="wp18377"></a><p class="pTableCell">
+<span class=" cItalic">space_name</span></p></td>
+
+    <td id='Row4Column2' >
+
+
+<a name="wp18379"></a><p class="pTableCell">
+One of the keywords from the following list giving the register file or memory space for the register. See <a href="majicconfig11.html#wp31780"  onclick='oT("CRF","majicconfig11.html#wp31780");return false;'>Table&#160;3&#8209;6</a> and <a href="majicconfig11.html#wp32083"  onclick='oT("CRF","majicconfig11.html#wp32083");return false;'>Table&#160;3&#8209;7</a>.</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row5Column1' >
+
+
+<a name="wp18381"></a><p class="pTableCell">
+<span class=" cItalic">byte_size</span></p></td>
+
+    <td id='Row5Column2' >
+
+
+<a name="wp18383"></a><p class="pTableCell">
+{1|2|4|8} is the size of the register in bytes.</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row6Column1' >
+
+
+<a name="wp18385"></a><p class="pTableCell">
+<span class=" cItalic">first</span></p></td>
+
+    <td id='Row6Column2' >
+
+
+<a name="wp18387"></a><p class="pTableCell">
+Decimal number giving the first value to append to reg_name to form a sequence of names.</p>
+<a name="wp18506"></a><p class="pTableCell">
+Sequences make it easy to represent a consecutive set of like-named registers (for example, r0..r31).</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row7Column1' >
+
+
+<a name="wp18389"></a><p class="pTableCell">
+<span class=" cItalic">last</span></p></td>
+
+    <td id='Row7Column2' >
+
+
+<a name="wp18391"></a><p class="pTableCell">
+The last number in the sequence (see <span class=" cItalic">first</span>).</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row8Column1' >
+
+
+<a name="wp18393"></a><p class="pTableCell">
+<span class=" cItalic">obj_inc</span></p></td>
+
+    <td id='Row8Column2' >
+
+
+<a name="wp18395"></a><p class="pTableCell">
+Decimal number giving the &quot;stride&quot;. </p>
+<a name="wp18508"></a><p class="pTableCell">
+It is normally <span class=" cItalic">1</span>, but can be set to a higher value when the registers in the sequence are actually addressed as every Nth register in the space.</p>
+<a name="wp18507"></a><p class="pTableCell">
+For each register in the sequence, the amount added to the offset to form the address is the register sequence number <span class=" cItalic">* byte_size</span>.</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row9Column1' >
+
+
+<a name="wp18397"></a><p class="pTableCell">
+<span class=" cItalic">inc</span></p></td>
+
+    <td id='Row9Column2' >
+
+
+<a name="wp18399"></a><p class="pTableCell">
+Decimal number giving the amount by which to increment the register number for each name in the sequence.</p>
+<a name="wp18509"></a><p class="pTableCell">
+If not specified, the default is 1.</p></td>
+
+
+</tr>
+
+
+</table>
+
+</div>
+<div id='EndTable'> </div>
+<p class="pBody">
+<br clear='left' class='Blank4Table' />
+
+<a href="majicconfig11.html#wp18361"  onclick='oT("CRF","majicconfig11.html#wp18361");return false;'>Table&#160;3&#8209;4</a> shows the definitions for the variable definition.
+</p>
+
+<a name="wp5480"></a><p class="pBody">
+
+For example: You want a sequence of four 8 bit registers mapped to physical memory at <span class=" cBold">0</span>, with each register in the low byte of successive machine words (32 bits). To name these registers <span class=" cItalic">z1</span>, <span class=" cItalic">z3</span>, <span class=" cItalic">z5</span>, etc., the definition syntax is:
+</p>
+
+<a name="wp5481"></a><pre class="pCode">
+REG=z 0x0 MEMORY_P 1 SEQ 1 7 4 2
+
+</pre>
+
+<a name="wp5482"></a><p class="pBody">
+
+Registers can also be broken down into displayable fields. Any previously defined register or register sequence can be set up as <span class=" cItalic">field encoded</span>. If a field breakdown is provided for a register sequence, the fields apply to every register in the sequence. Fields of more than one bit are displayed as <span class=" cItalic">field_name=hexadecimal_value</span>. One bit fields are displayed as an uppercase or lowercase <span class=" cItalic">field_name</span> where uppercase means a <span class=" cBold">TRUE</span> or <span class=" cBold">1</span> value.
+</p>
+
+<a name="wp5483"></a><pre class="pCode">
+<span class=" cBold">REG_FIELD</span> <span class=" cBold">=</span> <span class=" cItalic">reg_name</span> <span class=" cItalic">field_spec </span><span class=" cBold">[,</span> <span class=" cItalic">field_spec</span><span class=" cBold">]
+</span></pre>
+
+<a name="wp27615"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp18570"></a><p class="pBody">
+
+
+</p>
+<div id="TableDivQz"></div>
+<div align="center">
+
+
+<a name="wp18576"></a><p class="pTableTitle" id="MGC18576">
+
+Table 3&#8209;5. <a name="CRefID52460"></a>
+REG_FIELD Variables&#160;
+</p>
+
+
+<table border="1" cellpadding="5" cellspacing="0" id="wp18576table18574">
+  <tr bgcolor="#CCCCCC"  align="center" valign="middle">
+    <th>
+
+<a name="wp18580"></a><p class="pTableHeading" id="MGC18576">
+Variable Name
+</p>
+</th>
+
+    <th>
+
+<a name="wp18582"></a><p class="pTableHeading">
+
+Definition
+</p>
+
+</th>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row2Column1'  style='width:1.19444in'>
+
+
+<a name="wp18584"></a><p class="pTableCell">
+<span class=" cItalic">reg_name</span></p></td>
+
+    <td id='Row2Column2'  style='width:4.08334in'>
+
+
+<a name="wp18586"></a><p class="pTableCell">
+The name previously defined through a REG statement.</p>
+<a name="wp18665"></a><p class="pTableCell">
+Note that for sequence registers a full sequence register name must be given (including the number).</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row3Column1' >
+
+
+<a name="wp18588"></a><p class="pTableCell">
+<span class=" cItalic">field_spec</span></p></td>
+
+    <td id='Row3Column2' >
+
+
+<a name="wp18590"></a><p class="pTableCell">
+field_name high_bit low_bit [, field_spec]</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row4Column1' >
+
+
+<a name="wp18592"></a><p class="pTableCell">
+<span class=" cItalic">field_name</span></p></td>
+
+    <td id='Row4Column2' >
+
+
+<a name="wp18594"></a><p class="pTableCell">
+An ident providing the name of the field.</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row5Column1' >
+
+
+<a name="wp18596"></a><p class="pTableCell">
+<span class=" cItalic">high_bit</span></p></td>
+
+    <td id='Row5Column2' >
+
+
+<a name="wp18598"></a><p class="pTableCell">
+A decimal number in the bit range of the given register.</p>
+<a name="wp18666"></a><p class="pTableCell">
+Must be &gt;= low_bit.</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row6Column1' >
+
+
+<a name="wp18600"></a><p class="pTableCell">
+<span class=" cItalic">low_bit</span></p></td>
+
+    <td id='Row6Column2' >
+
+
+<a name="wp18602"></a><p class="pTableCell">
+A decimal number in the bit range of the given register.</p>
+<a name="wp18667"></a><p class="pTableCell">
+Must be &lt;= high_bit.</p></td>
+
+
+</tr>
+
+
+</table>
+
+</div>
+<div id='EndTable'> </div>
+<p class="pBody">
+<br clear='left' class='Blank4Table' />
+
+<a href="majicconfig11.html#wp18576"  onclick='oT("CRF","majicconfig11.html#wp18576");return false;'>Table&#160;3&#8209;5</a> shows the REG_FIELD variable descriptions.
+</p>
+
+<a name="wp5506"></a><p class="pBody">
+
+<span class=" cBold">Additional Notes:</span>
+</p>
+
+<a name="wp5507"></a>
+<ul><li class="LL1BulSolid">Long REG_FIELD definitions can be continued on more than one line. If a line ends with a comma, list item processing continues on the next line.</li></ul>
+
+<a name="wp5508"></a>
+<ul><li class="LL1BulSolid">Include files are supported to allow common processor elements to be placed in one file. The <span class=" cCourier cP10">INCLUDE</span> command begins reading from the referenced file and returns to the calling file when done. Nested include files are allowed.</li></ul>
+
+<a name="wp31768"></a><pre class="pCodeIndent">
+INCLUDE &ldquo;<span class=" cItalic">filename</span>&rdquo;
+</pre>
+
+<a name="wp32071"></a><h2 class="pHeading4 FontLevel2" id="MGC32071">
+
+
+
+Predefined Spaces for ARM
+
+</h2>
+
+<div id="TableDivQz"></div>
+
+<div align="center">
+
+
+
+
+
+<a name="wp31780"></a><p class="pTableTitle" id="MGC31780">
+
+
+
+Table 3&#8209;6. <a name="CRefID63548"></a>
+
+Predefined Spaces for ARM&#160;
+
+</p>
+
+
+
+
+
+<a name="wp32167"></a><p class="pBody" id="MGC31780">
+
+
+
+X - Supported, RSVD - Reserved, NS - Not Supported, NA - Not Applicable.
+
+</p>
+
+
+
+<table border="1" cellpadding="5" cellspacing="0" id="wp31780table31772">
+
+  <tr bgcolor="#CCCCCC"  align="center" valign="middle">
+
+    <th>
+
+
+
+<a name="wp31790"></a><p class="pTableHeading">
+
+Space Name
+
+</p>
+
+</th>
+
+
+
+    <th>
+
+
+
+<a name="wp31792"></a><p class="pTableHeading">
+
+
+
+Description
+
+</p>
+
+
+
+</th>
+
+
+
+    <th>
+
+
+
+<a name="wp31794"></a><p class="pTableHeading">
+
+
+
+ARM7/9/11
+
+</p>
+
+
+
+</th>
+
+
+
+    <th>
+
+
+
+<a name="wp31796"></a><p class="pTableHeading">
+
+
+
+Cortex-A
+
+</p>
+
+
+
+</th>
+
+
+
+    <th>
+
+
+
+<a name="wp31798"></a><p class="pTableHeading">
+
+
+
+Cortex-M
+
+</p>
+
+
+
+</th>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row2Column1'  style='width:1.23611in'>
+
+
+
+
+
+<a name="wp31800"></a><p class="pTableCell">
+
+<span class=" cBold">MEMORY </span></p></td>
+
+
+
+    <td id='Row2Column2'  style='width:1.8in'>
+
+
+
+
+
+<a name="wp31802"></a><p class="pTableCell">
+
+Virtual Memory</p></td>
+
+
+
+    <td id='Row2Column3'  style='width:1.2in'>
+
+
+
+
+
+<a name="wp31804"></a><p class="pTableCell">
+
+ARM9/11-X</p>
+
+<a name="wp32176"></a><p class="pTableCell">
+
+ARM7 - NS</p></td>
+
+
+
+    <td id='Row2Column4'  style='width:1.0in'>
+
+
+
+
+
+<a name="wp31806"></a><p class="pTableCell">
+
+X</p></td>
+
+
+
+    <td id='Row2Column5'  style='width:1.2in'>
+
+
+
+
+
+<a name="wp31808"></a><p class="pTableCell">
+
+X<a href='majicconfig11.html#wp33706'><span class='cFootnote'>1</span></a></p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row3Column1' >
+
+
+
+
+
+<a name="wp31810"></a><p class="pTableCell">
+
+<span class=" cBold">PHYSICAL</span></p></td>
+
+
+
+    <td id='Row3Column2' >
+
+
+
+
+
+<a name="wp31812"></a><p class="pTableCell">
+
+Physical Memory</p></td>
+
+
+
+    <td id='Row3Column3' >
+
+
+
+
+
+<a name="wp31814"></a><p class="pTableCell">
+
+X</p></td>
+
+
+
+    <td id='Row3Column4' >
+
+
+
+
+
+<a name="wp31816"></a><p class="pTableCell">
+
+X</p></td>
+
+
+
+    <td id='Row3Column5' >
+
+
+
+
+
+<a name="wp31818"></a><p class="pTableCell">
+
+X</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row4Column1' >
+
+
+
+
+
+<a name="wp31820"></a><p class="pTableCell">
+
+<span class=" cBold">CRNT </span></p></td>
+
+
+
+    <td id='Row4Column2' >
+
+
+
+
+
+<a name="wp31822"></a><p class="pTableCell">
+
+General Registers r0 - r15</p></td>
+
+
+
+    <td id='Row4Column3' >
+
+
+
+
+
+<a name="wp31824"></a><p class="pTableCell">
+
+X</p></td>
+
+
+
+    <td id='Row4Column4' >
+
+
+
+
+
+<a name="wp31826"></a><p class="pTableCell">
+
+X</p></td>
+
+
+
+    <td id='Row4Column5' >
+
+
+
+
+
+<a name="wp32185"></a><p class="pTableCell">
+
+X</p>
+
+<a name="wp32194"></a><p class="pTableCell">
+
+*See Note A</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row5Column1' >
+
+
+
+
+
+<a name="wp31830"></a><p class="pTableCell">
+
+<span class=" cBold">USER</span></p></td>
+
+
+
+    <td id='Row5Column2' >
+
+
+
+
+
+<a name="wp31832"></a><p class="pTableCell">
+
+User/System mode registers</p></td>
+
+
+
+    <td id='Row5Column3' >
+
+
+
+
+
+<a name="wp31834"></a><p class="pTableCell">
+
+X</p></td>
+
+
+
+    <td id='Row5Column4' >
+
+
+
+
+
+<a name="wp31836"></a><p class="pTableCell">
+
+X</p></td>
+
+
+
+    <td id='Row5Column5' >
+
+
+
+
+
+<a name="wp31838"></a><p class="pTableCell">
+
+NA</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row6Column1' >
+
+
+
+
+
+<a name="wp31840"></a><p class="pTableCell">
+
+<span class=" cBold">SVC</span></p></td>
+
+
+
+    <td id='Row6Column2' >
+
+
+
+
+
+<a name="wp31842"></a><p class="pTableCell">
+
+Supervisor mode registers</p></td>
+
+
+
+    <td id='Row6Column3' >
+
+
+
+
+
+<a name="wp31844"></a><p class="pTableCell">
+
+X</p></td>
+
+
+
+    <td id='Row6Column4' >
+
+
+
+
+
+<a name="wp31846"></a><p class="pTableCell">
+
+X</p></td>
+
+
+
+    <td id='Row6Column5' >
+
+
+
+
+
+<a name="wp31848"></a><p class="pTableCell">
+
+NA</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row7Column1' >
+
+
+
+
+
+<a name="wp31850"></a><p class="pTableCell">
+
+<span class=" cBold">IRQ </span></p></td>
+
+
+
+    <td id='Row7Column2' >
+
+
+
+
+
+<a name="wp31852"></a><p class="pTableCell">
+
+Interrupt mode registers</p></td>
+
+
+
+    <td id='Row7Column3' >
+
+
+
+
+
+<a name="wp31854"></a><p class="pTableCell">
+
+X</p></td>
+
+
+
+    <td id='Row7Column4' >
+
+
+
+
+
+<a name="wp31856"></a><p class="pTableCell">
+
+X</p></td>
+
+
+
+    <td id='Row7Column5' >
+
+
+
+
+
+<a name="wp31858"></a><p class="pTableCell">
+
+NA</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row8Column1' >
+
+
+
+
+
+<a name="wp31860"></a><p class="pTableCell">
+
+<span class=" cBold">FIQ</span></p></td>
+
+
+
+    <td id='Row8Column2' >
+
+
+
+
+
+<a name="wp31862"></a><p class="pTableCell">
+
+Fast Interrupt mode registers</p></td>
+
+
+
+    <td id='Row8Column3' >
+
+
+
+
+
+<a name="wp31864"></a><p class="pTableCell">
+
+X</p></td>
+
+
+
+    <td id='Row8Column4' >
+
+
+
+
+
+<a name="wp31866"></a><p class="pTableCell">
+
+X</p></td>
+
+
+
+    <td id='Row8Column5' >
+
+
+
+
+
+<a name="wp31868"></a><p class="pTableCell">
+
+NA</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row9Column1' >
+
+
+
+
+
+<a name="wp31870"></a><p class="pTableCell">
+
+<span class=" cBold">ABORT</span></p></td>
+
+
+
+    <td id='Row9Column2' >
+
+
+
+
+
+<a name="wp31872"></a><p class="pTableCell">
+
+Abort mode registers</p></td>
+
+
+
+    <td id='Row9Column3' >
+
+
+
+
+
+<a name="wp31874"></a><p class="pTableCell">
+
+X</p></td>
+
+
+
+    <td id='Row9Column4' >
+
+
+
+
+
+<a name="wp31876"></a><p class="pTableCell">
+
+X</p></td>
+
+
+
+    <td id='Row9Column5' >
+
+
+
+
+
+<a name="wp31878"></a><p class="pTableCell">
+
+NA</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row10Column1' >
+
+
+
+
+
+<a name="wp31880"></a><p class="pTableCell">
+
+<span class=" cBold">UNDEF</span></p></td>
+
+
+
+    <td id='Row10Column2' >
+
+
+
+
+
+<a name="wp31882"></a><p class="pTableCell">
+
+Undefined exception mode registers</p></td>
+
+
+
+    <td id='Row10Column3' >
+
+
+
+
+
+<a name="wp31884"></a><p class="pTableCell">
+
+X</p></td>
+
+
+
+    <td id='Row10Column4' >
+
+
+
+
+
+<a name="wp31886"></a><p class="pTableCell">
+
+X</p></td>
+
+
+
+    <td id='Row10Column5' >
+
+
+
+
+
+<a name="wp31888"></a><p class="pTableCell">
+
+NA</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row11Column1' >
+
+
+
+
+
+<a name="wp31890"></a><p class="pTableCell">
+
+<span class=" cBold">STATUS</span></p>
+
+<a name="wp31891"></a><p class="pTableCell">
+
+(non-Cortex-M)</p></td>
+
+
+
+    <td id='Row11Column2' >
+
+
+
+
+
+<a name="wp31893"></a><p class="pTableCell">
+
+cpsr, spsr {svc, abort, undef, irq, fiq}</p></td>
+
+
+
+    <td id='Row11Column3' >
+
+
+
+
+
+<a name="wp31895"></a><p class="pTableCell">
+
+X</p></td>
+
+
+
+    <td id='Row11Column4' >
+
+
+
+
+
+<a name="wp31897"></a><p class="pTableCell">
+
+X</p></td>
+
+
+
+    <td id='Row11Column5' >
+
+
+
+
+
+<a name="wp31899"></a><p class="pTableCell">
+
+NA</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row12Column1' >
+
+
+
+
+
+<a name="wp31901"></a><p class="pTableCell">
+
+<span class=" cBold">STATUS</span></p>
+
+<a name="wp31902"></a><p class="pTableCell">
+
+(Cortex-M only)</p></td>
+
+
+
+    <td id='Row12Column2' >
+
+
+
+
+
+<a name="wp32208"></a><p class="pTableCell">
+
+xpsr, apsr, ipsr, epsr, PRIMASK, FAULTMASK, BASEPRI, CONTROL</p>
+
+<a name="wp32209"></a><p class="pTableCell">
+
+*See Note B</p></td>
+
+
+
+    <td id='Row12Column3' >
+
+
+
+
+
+<a name="wp31906"></a><p class="pTableCell">
+
+NA</p></td>
+
+
+
+    <td id='Row12Column4' >
+
+
+
+
+
+<a name="wp31908"></a><p class="pTableCell">
+
+NA</p></td>
+
+
+
+    <td id='Row12Column5' >
+
+
+
+
+
+<a name="wp31910"></a><p class="pTableCell">
+
+X</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row13Column1' >
+
+
+
+
+
+<a name="wp31912"></a><p class="pTableCell">
+
+<span class=" cBold">COPROC0 </span></p></td>
+
+
+
+    <td id='Row13Column2' >
+
+
+
+
+
+<a name="wp31914"></a><p class="pTableCell">
+
+CoProcessor 0 registers</p></td>
+
+
+
+    <td id='Row13Column3' >
+
+
+
+
+
+<a name="wp31916"></a><p class="pTableCell">
+
+ARM7-Implementation Defined<a href='majicconfig11.html#wp33658'><span class='cFootnote'>2</span></a></p>
+
+<a name="wp32518"></a><p class="pTableCell">
+
+ARM9-Implementation Defined<a href='majicconfig11.html#wp33637'><span class='cFootnote'>3</span></a></p>
+
+<a name="wp32810"></a><p class="pTableCell">
+
+ARM11-Vendor specific<a href='majicconfig11.html#wp33630'><span class='cFootnote'>4</span></a></p></td>
+
+
+
+    <td id='Row13Column4' >
+
+
+
+
+
+<a name="wp31918"></a><p class="pTableCell">
+
+Vendor specific</p></td>
+
+
+
+    <td id='Row13Column5' >
+
+
+
+
+
+<a name="wp31920"></a><p class="pTableCell">
+
+Implementation defined</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row14Column1' >
+
+
+
+
+
+<a name="wp31922"></a><p class="pTableCell">
+
+<span class=" cBold">COPROC1 </span></p></td>
+
+
+
+    <td id='Row14Column2' >
+
+
+
+
+
+<a name="wp31924"></a><p class="pTableCell">
+
+CoProcessor 1 registers</p></td>
+
+
+
+    <td id='Row14Column3' >
+
+
+
+
+
+<a name="wp31926"></a><p class="pTableCell">
+
+ARM7-Implementation Defined</p>
+
+<a name="wp32525"></a><p class="pTableCell">
+
+ARM9-Implementation Defined</p>
+
+<a name="wp32817"></a><p class="pTableCell">
+
+ARM11-Vendor specific</p></td>
+
+
+
+    <td id='Row14Column4' >
+
+
+
+
+
+<a name="wp32231"></a><p class="pTableCell">
+
+Vendor specific</p></td>
+
+
+
+    <td id='Row14Column5' >
+
+
+
+
+
+<a name="wp32233"></a><p class="pTableCell">
+
+Implementation defined</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row15Column1' >
+
+
+
+
+
+<a name="wp31932"></a><p class="pTableCell">
+
+<span class=" cBold">COPROC2 </span></p></td>
+
+
+
+    <td id='Row15Column2' >
+
+
+
+
+
+<a name="wp31934"></a><p class="pTableCell">
+
+CoProcessor 2 registers</p></td>
+
+
+
+    <td id='Row15Column3' >
+
+
+
+
+
+<a name="wp31936"></a><p class="pTableCell">
+
+ARM7-Implementation Defined</p>
+
+<a name="wp32544"></a><p class="pTableCell">
+
+ARM9-Implementation Defined</p>
+
+<a name="wp32836"></a><p class="pTableCell">
+
+ARM11-Vendor specific</p></td>
+
+
+
+    <td id='Row15Column4' >
+
+
+
+
+
+<a name="wp32235"></a><p class="pTableCell">
+
+Vendor specific</p></td>
+
+
+
+    <td id='Row15Column5' >
+
+
+
+
+
+<a name="wp32237"></a><p class="pTableCell">
+
+Implementation defined</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row16Column1' >
+
+
+
+
+
+<a name="wp31942"></a><p class="pTableCell">
+
+<span class=" cBold">COPROC3 </span></p></td>
+
+
+
+    <td id='Row16Column2' >
+
+
+
+
+
+<a name="wp31944"></a><p class="pTableCell">
+
+CoProcessor 3 registers</p></td>
+
+
+
+    <td id='Row16Column3' >
+
+
+
+
+
+<a name="wp31946"></a><p class="pTableCell">
+
+ARM7-Implementation Defined</p>
+
+<a name="wp32563"></a><p class="pTableCell">
+
+ARM9-Implementation Defined</p>
+
+<a name="wp32855"></a><p class="pTableCell">
+
+ARM11-Vendor specific</p></td>
+
+
+
+    <td id='Row16Column4' >
+
+
+
+
+
+<a name="wp32239"></a><p class="pTableCell">
+
+Vendor specific</p></td>
+
+
+
+    <td id='Row16Column5' >
+
+
+
+
+
+<a name="wp32241"></a><p class="pTableCell">
+
+Implementation defined</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row17Column1' >
+
+
+
+
+
+<a name="wp31952"></a><p class="pTableCell">
+
+<span class=" cBold">COPROC4 </span></p></td>
+
+
+
+    <td id='Row17Column2' >
+
+
+
+
+
+<a name="wp31954"></a><p class="pTableCell">
+
+CoProcessor 4 registers</p></td>
+
+
+
+    <td id='Row17Column3' >
+
+
+
+
+
+<a name="wp31956"></a><p class="pTableCell">
+
+ARM7-Implementation Defined</p>
+
+<a name="wp32582"></a><p class="pTableCell">
+
+ARM9-Implementation Defined</p>
+
+<a name="wp32874"></a><p class="pTableCell">
+
+ARM11-Vendor specific</p></td>
+
+
+
+    <td id='Row17Column4' >
+
+
+
+
+
+<a name="wp32243"></a><p class="pTableCell">
+
+Vendor specific</p></td>
+
+
+
+    <td id='Row17Column5' >
+
+
+
+
+
+<a name="wp32245"></a><p class="pTableCell">
+
+Implementation defined</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row18Column1' >
+
+
+
+
+
+<a name="wp31962"></a><p class="pTableCell">
+
+<span class=" cBold">COPROC5</span></p></td>
+
+
+
+    <td id='Row18Column2' >
+
+
+
+
+
+<a name="wp31964"></a><p class="pTableCell">
+
+CoProcessor 5 registers</p></td>
+
+
+
+    <td id='Row18Column3' >
+
+
+
+
+
+<a name="wp31966"></a><p class="pTableCell">
+
+ARM7-Implementation Defined</p>
+
+<a name="wp32601"></a><p class="pTableCell">
+
+ARM9-Implementation Defined</p>
+
+<a name="wp32900"></a><p class="pTableCell">
+
+ARM11-Vendor specific</p></td>
+
+
+
+    <td id='Row18Column4' >
+
+
+
+
+
+<a name="wp32247"></a><p class="pTableCell">
+
+Vendor specific</p></td>
+
+
+
+    <td id='Row18Column5' >
+
+
+
+
+
+<a name="wp32249"></a><p class="pTableCell">
+
+Implementation defined</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row19Column1' >
+
+
+
+
+
+<a name="wp31972"></a><p class="pTableCell">
+
+<span class=" cBold">COPROC6 </span></p></td>
+
+
+
+    <td id='Row19Column2' >
+
+
+
+
+
+<a name="wp31974"></a><p class="pTableCell">
+
+CoProcessor 6 registers</p></td>
+
+
+
+    <td id='Row19Column3' >
+
+
+
+
+
+<a name="wp31976"></a><p class="pTableCell">
+
+ARM7-Implementation Defined</p>
+
+<a name="wp32620"></a><p class="pTableCell">
+
+ARM9-Implementation Defined</p>
+
+<a name="wp32919"></a><p class="pTableCell">
+
+ARM11-Vendor specific</p></td>
+
+
+
+    <td id='Row19Column4' >
+
+
+
+
+
+<a name="wp32251"></a><p class="pTableCell">
+
+Vendor specific</p></td>
+
+
+
+    <td id='Row19Column5' >
+
+
+
+
+
+<a name="wp32253"></a><p class="pTableCell">
+
+Implementation defined</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row20Column1' >
+
+
+
+
+
+<a name="wp31982"></a><p class="pTableCell">
+
+<span class=" cBold">COPROC7 </span></p></td>
+
+
+
+    <td id='Row20Column2' >
+
+
+
+
+
+<a name="wp31984"></a><p class="pTableCell">
+
+CoProcessor 7 registers</p></td>
+
+
+
+    <td id='Row20Column3' >
+
+
+
+
+
+<a name="wp31986"></a><p class="pTableCell">
+
+ARM7-Implementation Defined</p>
+
+<a name="wp32639"></a><p class="pTableCell">
+
+ARM9-Implementation Defined</p>
+
+<a name="wp32938"></a><p class="pTableCell">
+
+ARM11-Vendor specific</p></td>
+
+
+
+    <td id='Row20Column4' >
+
+
+
+
+
+<a name="wp32255"></a><p class="pTableCell">
+
+Vendor specific</p></td>
+
+
+
+    <td id='Row20Column5' >
+
+
+
+
+
+<a name="wp32257"></a><p class="pTableCell">
+
+Implementation defined</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row21Column1' >
+
+
+
+
+
+<a name="wp31992"></a><p class="pTableCell">
+
+<span class=" cBold">COPROC8 </span></p></td>
+
+
+
+    <td id='Row21Column2' >
+
+
+
+
+
+<a name="wp31994"></a><p class="pTableCell">
+
+CoProcessor 8 registers</p></td>
+
+
+
+    <td id='Row21Column3' >
+
+
+
+
+
+<a name="wp31996"></a><p class="pTableCell">
+
+ARM7-Implementation Defined</p>
+
+<a name="wp32658"></a><p class="pTableCell">
+
+ARM9-Implementation Defined</p>
+
+<a name="wp32957"></a><p class="pTableCell">
+
+ARM11-Vendor specific</p></td>
+
+
+
+    <td id='Row21Column4' >
+
+
+
+
+
+<a name="wp31998"></a><p class="pTableCell">
+
+RSVD</p></td>
+
+
+
+    <td id='Row21Column5' >
+
+
+
+
+
+<a name="wp32000"></a><p class="pTableCell">
+
+RSVD</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row22Column1' >
+
+
+
+
+
+<a name="wp32002"></a><p class="pTableCell">
+
+<span class=" cBold">COPROC9</span></p></td>
+
+
+
+    <td id='Row22Column2' >
+
+
+
+
+
+<a name="wp32004"></a><p class="pTableCell">
+
+CoProcessor 9 registers</p></td>
+
+
+
+    <td id='Row22Column3' >
+
+
+
+
+
+<a name="wp32006"></a><p class="pTableCell">
+
+ARM7-Implementation Defined</p>
+
+<a name="wp32677"></a><p class="pTableCell">
+
+ARM9-Implementation Defined</p>
+
+<a name="wp32976"></a><p class="pTableCell">
+
+ARM11-Vendor specific</p></td>
+
+
+
+    <td id='Row22Column4' >
+
+
+
+
+
+<a name="wp32259"></a><p class="pTableCell">
+
+RSVD</p></td>
+
+
+
+    <td id='Row22Column5' >
+
+
+
+
+
+<a name="wp32261"></a><p class="pTableCell">
+
+RSVD</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row23Column1' >
+
+
+
+
+
+<a name="wp32012"></a><p class="pTableCell">
+
+<span class=" cBold">COPROC10</span></p></td>
+
+
+
+    <td id='Row23Column2' >
+
+
+
+
+
+<a name="wp32014"></a><p class="pTableCell">
+
+CoProcessor 10 registers</p></td>
+
+
+
+    <td id='Row23Column3' >
+
+
+
+
+
+<a name="wp32016"></a><p class="pTableCell">
+
+ARM7-Implementation Defined</p>
+
+<a name="wp32696"></a><p class="pTableCell">
+
+ARM9-Implementation Defined</p>
+
+<a name="wp32995"></a><p class="pTableCell">
+
+ARM11-NS</p></td>
+
+
+
+    <td id='Row23Column4' >
+
+
+
+
+
+<a name="wp32018"></a><p class="pTableCell">
+
+X</p></td>
+
+
+
+    <td id='Row23Column5' >
+
+
+
+
+
+<a name="wp32020"></a><p class="pTableCell">
+
+RSVD</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row24Column1' >
+
+
+
+
+
+<a name="wp32022"></a><p class="pTableCell">
+
+<span class=" cBold">COPROC11</span></p></td>
+
+
+
+    <td id='Row24Column2' >
+
+
+
+
+
+<a name="wp32024"></a><p class="pTableCell">
+
+CoProcessor 11 registers</p></td>
+
+
+
+    <td id='Row24Column3' >
+
+
+
+
+
+<a name="wp32026"></a><p class="pTableCell">
+
+ARM7-Implementation Defined</p>
+
+<a name="wp32715"></a><p class="pTableCell">
+
+ARM9-Implementation Defined</p>
+
+<a name="wp33016"></a><p class="pTableCell">
+
+ARM11-NS</p></td>
+
+
+
+    <td id='Row24Column4' >
+
+
+
+
+
+<a name="wp32028"></a><p class="pTableCell">
+
+X</p></td>
+
+
+
+    <td id='Row24Column5' >
+
+
+
+
+
+<a name="wp32030"></a><p class="pTableCell">
+
+RSVD</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row25Column1' >
+
+
+
+
+
+<a name="wp32032"></a><p class="pTableCell">
+
+<span class=" cBold">COPROC12 </span></p></td>
+
+
+
+    <td id='Row25Column2' >
+
+
+
+
+
+<a name="wp32034"></a><p class="pTableCell">
+
+CoProcessor 12 registers</p></td>
+
+
+
+    <td id='Row25Column3' >
+
+
+
+
+
+<a name="wp32036"></a><p class="pTableCell">
+
+ARM7-Implementation Defined</p>
+
+<a name="wp32734"></a><p class="pTableCell">
+
+ARM9-Implementation Defined</p>
+
+<a name="wp33037"></a><p class="pTableCell">
+
+ARM11-Vendor specific</p></td>
+
+
+
+    <td id='Row25Column4' >
+
+
+
+
+
+<a name="wp32038"></a><p class="pTableCell">
+
+RSVD</p></td>
+
+
+
+    <td id='Row25Column5' >
+
+
+
+
+
+<a name="wp32040"></a><p class="pTableCell">
+
+RSVD</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row26Column1' >
+
+
+
+
+
+<a name="wp32042"></a><p class="pTableCell">
+
+<span class=" cBold">COPROC13</span></p></td>
+
+
+
+    <td id='Row26Column2' >
+
+
+
+
+
+<a name="wp32044"></a><p class="pTableCell">
+
+CoProcessor 13 registers</p></td>
+
+
+
+    <td id='Row26Column3' >
+
+
+
+
+
+<a name="wp32046"></a><p class="pTableCell">
+
+ARM7-Implementation Defined</p>
+
+<a name="wp32753"></a><p class="pTableCell">
+
+ARM9-Implementation Defined</p>
+
+<a name="wp33056"></a><p class="pTableCell">
+
+ARM11-Vendor specific</p></td>
+
+
+
+    <td id='Row26Column4' >
+
+
+
+
+
+<a name="wp32048"></a><p class="pTableCell">
+
+RSVD</p></td>
+
+
+
+    <td id='Row26Column5' >
+
+
+
+
+
+<a name="wp32050"></a><p class="pTableCell">
+
+RSVD</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row27Column1' >
+
+
+
+
+
+<a name="wp32052"></a><p class="pTableCell">
+
+<span class=" cBold">COPROC14 </span></p></td>
+
+
+
+    <td id='Row27Column2' >
+
+
+
+
+
+<a name="wp32054"></a><p class="pTableCell">
+
+CoProcessor 14 registers</p></td>
+
+
+
+    <td id='Row27Column3' >
+
+
+
+
+
+<a name="wp32056"></a><p class="pTableCell">
+
+ARM7-Implementation Defined</p>
+
+<a name="wp32772"></a><p class="pTableCell">
+
+ARM9-Implementation Defined</p>
+
+<a name="wp33075"></a><p class="pTableCell">
+
+ARM11-Not user accessible<a href='majicconfig11.html#wp33594'><span class='cFootnote'>5</span></a></p></td>
+
+
+
+    <td id='Row27Column4' >
+
+
+
+
+
+<a name="wp32058"></a><p class="pTableCell">
+
+X</p></td>
+
+
+
+    <td id='Row27Column5' >
+
+
+
+
+
+<a name="wp32060"></a><p class="pTableCell">
+
+RSVD</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row28Column1' >
+
+
+
+
+
+<a name="wp32062"></a><p class="pTableCell">
+
+<span class=" cBold">COPROC15 </span></p></td>
+
+
+
+    <td id='Row28Column2' >
+
+
+
+
+
+<a name="wp32064"></a><p class="pTableCell">
+
+CoProcessor 15 registers</p></td>
+
+
+
+    <td id='Row28Column3' >
+
+
+
+
+
+<a name="wp32066"></a><p class="pTableCell">
+
+ARM7-Implementation Defined</p>
+
+<a name="wp32791"></a><p class="pTableCell">
+
+ARM9-X</p>
+
+<a name="wp33096"></a><p class="pTableCell">
+
+ARM11-X</p></td>
+
+
+
+    <td id='Row28Column4' >
+
+
+
+
+
+<a name="wp32068"></a><p class="pTableCell">
+
+X</p></td>
+
+
+
+    <td id='Row28Column5' >
+
+
+
+
+
+<a name="wp32070"></a><p class="pTableCell">
+
+RSVD</p></td>
+
+
+
+
+
+</tr>
+
+
+
+
+
+</table>
+
+
+
+</div>
+
+<div id='EndTable'> </div>
+
+
+
+<a name="wp33706"></a><p class="pTableFootnote">
+
+
+
+<a href='majicconfig11.html#wp31808'>1</a>A virtual address (VA) is always equal to a physical address (PA).
+
+</p>
+
+
+
+<a name="wp33658"></a><p class="pTableFootnote">
+
+
+
+<a href='majicconfig11.html#wp31916'>2</a>For COPROC0-COPROC15 - RD files need to be updated with descriptions of implementation specific registers
+
+</p>
+
+
+
+<a name="wp33637"></a><p class="pTableFootnote">
+
+
+
+<a href='majicconfig11.html#wp32518'>3</a>For COPROC0-COPROC14 - RD files need to be updated with descriptions of implementation specific registers
+
+</p>
+
+
+
+<a name="wp33630"></a><p class="pTableFootnote">
+
+
+
+<a href='majicconfig11.html#wp32810'>4</a>For COPROC0-COPROC13 - RD files need to be updated with descriptions of vendor specific registers
+
+</p>
+
+
+
+<a name="wp33594"></a><p class="pFootnote">
+
+
+
+<a href='majicconfig11.html#wp33075'>5</a>Reserved for the probe to access the debug controller
+
+</p>
+
+
+
+<h2 class="pHeading4 FontLevel2" id="MGC32071">
+
+<br clear='left' class='Blank4Table' />
+
+
+
+
+
+</h2>
+<a name="wp32279"></a><p class="pL1Body">
+<span class=" cBold">Note A -</span> R13 Stack pointer register - there are two stacks supported in ARMv7-M, each with its own (banked) stack pointer register.</p>
+<a name="wp32294"></a><p class="pL2Body">
+Main stack - SP_main</p>
+<a name="wp32271"></a><p class="pL2Body">
+Process stack - SP_process.</p>
+<a name="wp32311"></a><p class="pL1Body">
+<span class=" cBold">Note B -</span> xPSR = APSR | IPSR | EPSR</p>
+<a name="wp32150"></a><h2 class="pHeading4 FontLevel2" id="MGC32150">
+
+
+
+Predefined Spaces for MIPS
+
+</h2>
+
+<div id="TableDivQz"></div>
+
+<div align="center">
+
+
+
+
+
+<a name="wp32083"></a><p class="pTableTitle" id="MGC32083">
+
+
+
+Table 3&#8209;7. <a name="CRefID97574"></a>
+
+Predefined Spaces for MIPS&#160;
+
+</p>
+
+
+
+
+
+<table border="1" cellpadding="5" cellspacing="0" id="wp32083table32075">
+
+  <tr bgcolor="#CCCCCC"  align="center" valign="middle">
+
+    <th>
+
+
+
+<a name="wp32087"></a><p class="pTableHeading" id="MGC32083">
+
+Space Name
+
+</p>
+
+</th>
+
+
+
+    <th>
+
+
+
+<a name="wp32089"></a><p class="pTableHeading">
+
+
+
+Description
+
+</p>
+
+
+
+</th>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row2Column1'  style='width:1.01389in'>
+
+
+
+
+
+<a name="wp32091"></a><p class="pTableCell">
+
+<span class=" cBold">MEMORY </span></p></td>
+
+
+
+    <td id='Row2Column2'  style='width:3.01389in'>
+
+
+
+
+
+<a name="wp32093"></a><p class="pTableCell">
+
+Virtual Memory</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row3Column1' >
+
+
+
+
+
+<a name="wp32095"></a><p class="pTableCell">
+
+<span class=" cBold">PHYSICAL </span></p></td>
+
+
+
+    <td id='Row3Column2' >
+
+
+
+
+
+<a name="wp32097"></a><p class="pTableCell">
+
+Physical Memory</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row4Column1' >
+
+
+
+
+
+<a name="wp32099"></a><p class="pTableCell">
+
+<span class=" cBold">GR </span></p></td>
+
+
+
+    <td id='Row4Column2' >
+
+
+
+
+
+<a name="wp32101"></a><p class="pTableCell">
+
+General Registers r0 - r31</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row5Column1' >
+
+
+
+
+
+<a name="wp32103"></a><p class="pTableCell">
+
+<span class=" cBold">MR </span></p></td>
+
+
+
+    <td id='Row5Column2' >
+
+
+
+
+
+<a name="wp32105"></a><p class="pTableCell">
+
+mdhi, mdlo</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row6Column1' >
+
+
+
+
+
+<a name="wp32107"></a><p class="pTableCell">
+
+<span class=" cBold">CP0_CTL </span></p></td>
+
+
+
+    <td id='Row6Column2' >
+
+
+
+
+
+<a name="wp32109"></a><p class="pTableCell">
+
+Some newer MIPS32 chips use this space</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row7Column1' >
+
+
+
+
+
+<a name="wp32111"></a><p class="pTableCell">
+
+<span class=" cBold">CP0_GEN </span></p></td>
+
+
+
+    <td id='Row7Column2' >
+
+
+
+
+
+<a name="wp32113"></a><p class="pTableCell">
+
+Coprocessor control register (cause, sr, etc)</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row8Column1' >
+
+
+
+
+
+<a name="wp32115"></a><p class="pTableCell">
+
+<span class=" cBold">CP1_CTL</span></p></td>
+
+
+
+    <td id='Row8Column2' >
+
+
+
+
+
+<a name="wp32117"></a><p class="pTableCell">
+
+floating point control</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row9Column1' >
+
+
+
+
+
+<a name="wp32119"></a><p class="pTableCell">
+
+<span class=" cBold">CP1_GEN</span></p></td>
+
+
+
+    <td id='Row9Column2' >
+
+
+
+
+
+<a name="wp32121"></a><p class="pTableCell">
+
+floating point</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row10Column1' >
+
+
+
+
+
+<a name="wp32123"></a><p class="pTableCell">
+
+<span class=" cBold">CP2_CTL</span></p></td>
+
+
+
+    <td id='Row10Column2' >
+
+
+
+
+
+<a name="wp32125"></a><p class="pTableCell">
+
+CP2 Typically not used</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row11Column1' >
+
+
+
+
+
+<a name="wp32127"></a><p class="pTableCell">
+
+<span class=" cBold">CP2_GEN </span></p></td>
+
+
+
+    <td id='Row11Column2' >
+
+
+
+
+
+<a name="wp32129"></a><p class="pTableCell">
+
+CP2 Typically not used</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row12Column1' >
+
+
+
+
+
+<a name="wp32131"></a><p class="pTableCell">
+
+<span class=" cBold">CP3_CTL</span></p></td>
+
+
+
+    <td id='Row12Column2' >
+
+
+
+
+
+<a name="wp32133"></a><p class="pTableCell">
+
+Mips I/II architecture chips only</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row13Column1' >
+
+
+
+
+
+<a name="wp32135"></a><p class="pTableCell">
+
+<span class=" cBold">CP3_GEN</span></p></td>
+
+
+
+    <td id='Row13Column2' >
+
+
+
+
+
+<a name="wp32137"></a><p class="pTableCell">
+
+Mips I/II architecture chips only</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row14Column1' >
+
+
+
+
+
+<a name="wp32139"></a><p class="pTableCell">
+
+<span class=" cBold">ICT </span></p></td>
+
+
+
+    <td id='Row14Column2' >
+
+
+
+
+
+<a name="wp32141"></a><p class="pTableCell">
+
+Instruction Cache tags</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row15Column1' >
+
+
+
+
+
+<a name="wp32143"></a><p class="pTableCell">
+
+<span class=" cBold">DCT </span></p></td>
+
+
+
+    <td id='Row15Column2' >
+
+
+
+
+
+<a name="wp32145"></a><p class="pTableCell">
+
+Data Cache tags</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row16Column1' >
+
+
+
+
+
+<a name="wp32147"></a><p class="pTableCell">
+
+<span class=" cBold">TLB</span></p></td>
+
+
+
+    <td id='Row16Column2' >
+
+
+
+
+
+<a name="wp32149"></a><p class="pTableCell">
+
+TLB registers 0..?</p></td>
+
+
+
+
+
+</tr>
+
+
+
+
+
+</table>
+
+
+
+</div>
+
+<div id='EndTable'> </div>
+
+<h2 class="pHeading4 FontLevel2" id="MGC32150">
+
+<br clear='left' class='Blank4Table' />
+
+
+
+
+
+</h2>
+<a name="wp34094"></a><h2 class="pHeading4 FontLevel2" id="MGC34094">
+
+Predefined Spaces for PowerPC
+
+</h2>
+
+<div id="TableDivQz"></div>
+
+<div align="center">
+
+
+
+
+
+<a name="wp34027"></a><p class="pTableTitle" id="MGC34027">
+
+
+
+Table 3&#8209;8. 
+
+Predefined Spaces for PowerPC
+
+</p>
+
+
+
+
+
+<table border="1" cellpadding="5" cellspacing="0" id="wp34027table34019">
+
+  <tr bgcolor="#CCCCCC"  align="center" valign="middle">
+
+    <th>
+
+
+
+<a name="wp34031"></a><p class="pTableHeading" id="MGC34027">
+
+Space Name
+
+</p>
+
+</th>
+
+
+
+    <th>
+
+
+
+<a name="wp34033"></a><p class="pTableHeading">
+
+
+
+Description
+
+</p>
+
+
+
+</th>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row2Column1'  style='width:1.18056in'>
+
+
+
+
+
+<a name="wp34035"></a><p class="pTableCell">
+
+<span class=" cBold">MEMORY </span></p></td>
+
+
+
+    <td id='Row2Column2'  style='width:3.01389in'>
+
+
+
+
+
+<a name="wp34037"></a><p class="pTableCell">
+
+Virtual Memory</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row3Column1' >
+
+
+
+
+
+<a name="wp34039"></a><p class="pTableCell">
+
+<span class=" cBold">PHYSICAL </span></p></td>
+
+
+
+    <td id='Row3Column2' >
+
+
+
+
+
+<a name="wp34041"></a><p class="pTableCell">
+
+Physical Memory</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row4Column1' >
+
+
+
+
+
+<a name="wp34043"></a><p class="pTableCell">
+
+<span class=" cBold">INSTR_MEM </span></p></td>
+
+
+
+    <td id='Row4Column2' >
+
+
+
+
+
+<a name="wp34045"></a><p class="pTableCell">
+
+Virtual Memory Accessed as Instruction</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row5Column1' >
+
+
+
+
+
+<a name="wp34047"></a><p class="pTableCell">
+
+<span class=" cBold">GR </span></p></td>
+
+
+
+    <td id='Row5Column2' >
+
+
+
+
+
+<a name="wp34049"></a><p class="pTableCell">
+
+General Registers r0 - r31</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row6Column1' >
+
+
+
+
+
+<a name="wp34051"></a><p class="pTableCell">
+
+<span class=" cBold">SPR </span></p></td>
+
+
+
+    <td id='Row6Column2' >
+
+
+
+
+
+<a name="wp34053"></a><p class="pTableCell">
+
+Special Purpose Registers spr0 - spr1023</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row7Column1' >
+
+
+
+
+
+<a name="wp34055"></a><p class="pTableCell">
+
+<span class=" cBold">CR </span></p></td>
+
+
+
+    <td id='Row7Column2' >
+
+
+
+
+
+<a name="wp34057"></a><p class="pTableCell">
+
+Condition Register cr</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row8Column1' >
+
+
+
+
+
+<a name="wp34059"></a><p class="pTableCell">
+
+<span class=" cBold">MSR</span></p></td>
+
+
+
+    <td id='Row8Column2' >
+
+
+
+
+
+<a name="wp34061"></a><p class="pTableCell">
+
+MSR Register msr</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row9Column1' >
+
+
+
+
+
+<a name="wp34063"></a><p class="pTableCell">
+
+<span class=" cBold">FPSCR</span></p></td>
+
+
+
+    <td id='Row9Column2' >
+
+
+
+
+
+<a name="wp34065"></a><p class="pTableCell">
+
+Floating Point Control Registers fpscr</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row10Column1' >
+
+
+
+
+
+<a name="wp34091"></a><p class="pTableCell">
+
+<span class=" cBold">TLB0</span></p></td>
+
+
+
+    <td id='Row10Column2' >
+
+
+
+
+
+<a name="wp34093"></a><p class="pTableCell">
+
+Registers l2mmu_tlb0 - l2mmu_tlb511</p></td>
+
+
+
+
+
+</tr>
+
+
+
+  <tr align="left" valign="top">
+
+    <td id='Row11Column1' >
+
+
+
+
+
+<a name="wp34133"></a><p class="pTableCell">
+
+TLB1</p></td>
+
+
+
+    <td id='Row11Column2' >
+
+
+
+
+
+<a name="wp34135"></a><p class="pTableCell">
+
+Registers l2mmu_cam0 - l2mmu_cam15 (end various with core type)</p></td>
+
+
+
+
+
+</tr>
+
+
+
+
+
+</table>
+
+
+
+</div>
+
+<div id='EndTable'> </div>
+
+<h2 class="pHeading4 FontLevel2" id="MGC34094">
+
+<br clear='left' class='Blank4Table' />
+
+
+
+
+
+</h2>
+<a name="wp5714"></a><h2 class="pHeading4 FontLevel2" id="MGC5714">
+
+
+Sample Register Definition file
+</h2>
+<a name="wp5715"></a><p class="pBody">
+
+The following example demonstrates a definition for some memory-mapped registers (common in hardware designs).
+</p>
+
+<a name="wp5716"></a><pre class="pCode">
+// Define a register named &#39;dev_a_ctrl&#39; and associate its address, space, 
+and size
+</pre>
+
+<a name="wp5717"></a><pre class="pCode">
+REG       = dev_a_ctrl  0xFF00A000 PHYSICAL 4
+</pre>
+
+<a name="wp5718"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp5719"></a><pre class="pCode">
+// Define the names and bit positions of fields within the &#39;dev_a_ctrl&#39; 
+register
+</pre>
+
+<a name="wp5720"></a><pre class="pCode">
+REG_FIELD = dev_a_ctrl  status 2 0, lock 3 3
+</pre>
+
+<a name="wp5721"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp5722"></a><pre class="pCode">
+// Define additional registers
+</pre>
+
+<a name="wp5723"></a><pre class="pCode">
+REG = dev_a_data1 0xFF00A004 MEMORY 4
+</pre>
+
+<a name="wp5724"></a><pre class="pCode">
+REG = dev_a_data2 0xFF00A008 MEMORY 4
+</pre>
+
+<a name="wp5725"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp5726"></a><pre class="pCode">
+// &lt;eof&gt;
+</pre>
+
+<a name="wp5727"></a><pre class="pCode">
+
+</pre>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "Register Definition File Format";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "Register.Definition.File.Format"
+   ThisTopic = "RegisterDefinitionFileFormat";
+   CurrentFile = "majicconfig11.html";
+   CurrentFileID = "18";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    <br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    <br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

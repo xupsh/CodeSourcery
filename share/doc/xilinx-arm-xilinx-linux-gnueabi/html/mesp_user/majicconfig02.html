@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:22:23 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>Configuration Process</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("Sourcery Probe Configuration ","majicconfig01","Configuration Process","majicconfig02","Configuration Files","majicconfig02","9");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp5360"></a><h1 class="pHeading2 FontLevel1" id="MGC5360">
+
+<a name="CRefID10616"></a>
+Configuration Process
+</h1>
+<a name="wp5364"></a><p class="pBody">
+
+<a href="majicconfig02.html#wp21052"  onclick='oT("CRF","majicconfig02.html#wp21052");return false;'>Figure&#160;3&#8209;1</a> shows the configuration process when using the debugger to connect to a Sourcery Probe.
+</p>
+
+<a name="wp21052"></a><p class="pFigureTitle" id="MGC21052">
+
+Figure 3&#8209;1. <a name="CRefID56978"></a>
+Configuration Process<a name='Graphic27410'></a><img src="images/configwithedge.jpg"  style='width:4.95833in;'  class="Aligncenter" id='wp27410' border='0' hspace='0' vspace='0'/>
+
+
+</p>
+
+
+<a name="wp5381"></a><h2 class="pHeading3NoSplit FontLevel2" id="MGC5381">
+
+<a name="CRefID29829"></a><a name="CRefID75154"></a><a name="CRefID80348"></a>
+Configuration Files
+</h2>
+<a name="wp5382"></a><p class="pBody">
+
+<a href="majicconfig02.html#wp18253"  onclick='oT("CRF","majicconfig02.html#wp18253");return false;'>Table&#160;3&#8209;1</a> describes the configuration files used in the initialization process.<a name="CRefID59993"></a>
+</p>
+<div id="TableDivQz"></div>
+<div align="center">
+
+
+<a name="wp18253"></a><p class="pTableTitle" id="MGC18253">
+
+Table 3&#8209;1. <a name="CRefID66517"></a>
+Debugger Configuration Files
+</p>
+
+
+<table border="1" cellpadding="5" cellspacing="0" id="wp18253table18251">
+  <tr align="left" valign="top">
+    <td id='Row1Column1'  style='width:0.95833in'>
+
+
+<a name="wp18257"></a><p class="pTableCell" id="MGC18253">
+<span class=" cItalic">processor.rd</span></p></td>
+
+    <td id='Row1Column2'  style='width:5.27259in'>
+
+
+<a name="wp18259"></a><p class="pTableCell">
+The register definition file for the selected processor is automatically read on startup. You may also specify other <span class=" cItalic">.rd</span> files for custom hardware on your system.</p>
+<a name="wp18295"></a><p class="pTableCell">
+(See <a href="majicconfig10.html"  onclick='oT("CRF","majicconfig10.html");return false;'>Register Definition File</a>.)</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row2Column1'  style='width:0.95833in'>
+
+
+<a name="wp18261"></a><p class="pTableCell">
+<span class=" cItalic">target.maj</span></p></td>
+
+    <td id='Row2Column2'  style='width:5.27259in'>
+
+
+<a name="wp18263"></a><p class="pTableCell">
+This is a custom target initialization file for managing the details particular to your target board. In some cases, additional script files may be called for more sophisticated initialization scenarios.</p>
+<a name="wp18296"></a><p class="pTableCell">
+(See <a href="majicconfig04.html"  onclick='oT("CRF","majicconfig04.html");return false;'>Sourcery Probe Target Initialization Scripts</a>.)</p></td>
+
+
+</tr>
+
+
+</table>
+
+</div>
+<div id='EndTable'> </div>
+<p class="pBody">
+<br clear='left' class='Blank4Table' />
+
+
+</p>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "Configuration Process";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "Configuration.Process"
+   ThisTopic = "SourceryProbeDiscoveryDialogBox";
+   CurrentFile = "majicconfig02.html";
+   CurrentFileID = "9";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    <br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    <br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

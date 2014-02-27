@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:23:56 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title> MON Command Language </title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("MON Command Language ","moncommand01","naV","naV","naV","naV","23");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp28914"></a><h1 class="pHeading1 FontLevel1" id="MGC28914">
+
+<a name="CRefID21126"></a>
+MON Command Language 
+</h1>
+
+
+<a name="wp28920"></a><p class="pxChTOCH2">
+<a href="moncommand02.html"  onclick='oT("CRF","moncommand02.html");return false;'>MON Command Basics</a></p>
+<a name="wp27509"></a><p class="pxChTOCH2">
+<a href="moncommand03.html"  onclick='oT("CRF","moncommand03.html");return false;'>MON Command Quick Reference</a></p>
+<a name="wp8782"></a><p class="pxChTOCH2">
+<a href="moncommand04.html"  onclick='oT("CRF","moncommand04.html");return false;'>MON Command Details</a></p>
+<a name="wp8786"></a><p class="pxChTOCH2">
+<a href="moncommand50.html"  onclick='oT("CRF","moncommand50.html");return false;'>MON Operands</a></p>
+<a name="wp8791"></a><p class="pxChTOCH2">
+<a href="moncommand61.html"  onclick='oT("CRF","moncommand61.html");return false;'>Assigning Names</a></p>
+<a name="wp8796"></a><p class="pxChTOCH2">
+<a href="moncommand62.html"  onclick='oT("CRF","moncommand62.html");return false;'>Command Aliases</a></p>
+<a name="wp27544"></a><p class="pxChTOCH2">
+<a href="moncommand63.html"  onclick='oT("CRF","moncommand63.html");return false;'>MON Local Variables and Option References</a></p>
+<a name="wp27548"></a><p class="pxChTOCH2">
+<a href="moncommand64.html"  onclick='oT("CRF","moncommand64.html");return false;'>Formatted Display</a></p>
+<a name="wp27552"></a><p class="pxChTOCH2">
+<a href="moncommand65.html"  onclick='oT("CRF","moncommand65.html");return false;'>Session Log</a></p>
+<a name="wp26010"></a><p class="pxChTOCH2">
+<a href="moncommand66.html"  onclick='oT("CRF","moncommand66.html");return false;'>Command Script Files</a></p>
+<a name="wp27516"></a><p class="pBody">
+
+This section provides you with details about the MON command language as it applies to the Sourcery Probes for ARM and MIPS.
+</p>
+
+<a name="wp27523"></a><p class="pBody">
+
+The primary use of the MON command language within the GDB and Sourcery CodeBench<span class=" cBold"> </span>environment is in Sourcery Probe target initialization (<span class=" cItalic">.maj</span>) files. These initialization files configure the Sourcery Probe for a given target board and provide scripts for performing different reset and initialization functions.
+</p>
+
+<a name="wp27533"></a><p class="pBody">
+
+You can also enter MON commands in the Probe Console view of the Sourcery CodeBench Debug perspective, or use them within gdb scripts to access Sourcery Probe features not directly available in GDB or Sourcery CodeBench.
+</p>
+
+<a name="wp28461"></a><p class="pBody">
+
+The MON Command Line Debugger program accepts MON commands at the input prompt. (See Chapter 4 - <a name="EW21"></a><a href="moncommand_debug1.html#CRefID32656" onclick='oT("CRF","moncommand_debug1.html#CRefID32656");'><span class=" cLinkOverride">MON Command Line Debugger</span></a> for information on running and using the MON debugger.)
+</p>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "MON Command Language ";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "MON.Command.Language."
+   ThisTopic = "UserDefinedAccessLists";
+   CurrentFile = "moncommand01.html";
+   CurrentFileID = "23";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    
+<br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    
+<br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

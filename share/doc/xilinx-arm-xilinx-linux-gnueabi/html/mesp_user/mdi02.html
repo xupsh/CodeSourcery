@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:25:46 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>What is MDI?</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("Meta Debug Interface (MDI)","mdi01","What is MDI?","mdi02","naV","naV","101");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="EW58"></a>
+<a name="wp15477"></a><h1 class="pHeading2 WarninG FontLevel1" id="MGC15477">
+
+<a name="CRefID26363"></a>
+What is MDI?
+</h1>
+<a name="wp8559"></a><p class="pBody">
+
+The Meta Debug Interface (MDI) is an Application Programming Interface (API) that defines a standard set of data structures and functions that abstract hardware for debugging purposes. Having a standard meta interface allows debuggers and debug agent tools (ROM resident debug monitors, ICEs, JTAG probes, and so on) from different vendors to work together.
+</p>
+
+<a name="wp8560"></a><p class="pBody">
+
+The initial MDI specification, <span class=" cItalic">/mep/mdi/mdispec.pdf</span>, (See <a name="EW59"></a><a href="majic_setup2.html#CRefID12259" onclick='oT("CRF","majic_setup2.html#CRefID12259");'><span class=" cLinkOverride">Table&#160;1&#8209;1</span></a> for default installation directory locations) was jointly developed by Embedded Performance, Inc. (subsequently acquired by Mentor Graphics Corporation) and LSI Logic Corporation. Mentor Graphics makes the MDI specification freely available, and welcomes its adoption by any interested vendor. While the initial implementations targeted MIPS processors, the specification is architecture-neutral, so you can adapt it to other architectures.
+</p>
+
+<a name="wp8561"></a><p class="pBody">
+
+The MDI API is implemented as a shared library (Windows DLL file or Linux <span class=" cItalic">.so</span> file), called an MDILib. The MDILib implements the standard MDI API on top of the vendor-specific mechanism for communicating with the actual debug agent which controls the target system. As such, the MDILib is normally provided by the vendor of the debug agent tool that provides target access and control services (typically an ICE, debug monitor, or simulator).
+</p>
+
+<a name="wp8562"></a><p class="pBody">
+
+Similarly, the debugger typically supports MDI via a layer of code that implements the debugger&#39;s proprietary API or communications protocol by making calls on the functions exported by the MDILib. This translation layer may be included within the debugger executable or it may be in a separate module.
+</p>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "What is MDI?";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "What.is.MDI"
+   ThisTopic = "CreatingaMONConnection";
+   CurrentFile = "mdi02.html";
+   CurrentFileID = "101";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    
+<br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    
+<br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

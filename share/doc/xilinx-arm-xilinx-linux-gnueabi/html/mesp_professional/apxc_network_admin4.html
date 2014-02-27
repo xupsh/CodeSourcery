@@ -1,0 +1,394 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:22:37 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe Professional Hardware Manual" />
+    <title>Step-by-Step Guide to Configuring a Static IP</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("Network Administration","apxc_network_admin1","Using netparam to Configure the Sourcery Probe Professional","apxc_network_admin3","Step-by-Step Guide to Configuring a Static IP","apxc_network_admin4","32");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp7021"></a><h1 class="pHeading3 FontLevel1" id="MGC7021">
+
+<a name="CRefID33853"></a>
+Step-by-Step Guide to Configuring a Static IP
+</h1>
+
+<a name="wp7022"></a><p class="pBody">
+
+This section provides the steps required to assign a static IP address and host name to the probe.
+</p>
+
+<a name="wp7023"></a><p class="pHTaskSubhead">
+
+Prerequisites
+</p>
+
+<a name="wp7024"></a>
+<ul><li class="LL1BulSolid">You must have write permissions to the network database or the assistance of your network system administrator.</li></ul>
+
+<a name="wp7025"></a><p class="pHTaskSubhead">
+
+Procedure
+</p>
+
+<a name="wp7026"></a>
+<ol start="1"><li class="LL1Seq">Use a terminal emulator to log into the USB serial port of your probe. After login, you&#39;ll be presented with a core&gt; prompt.</li></ol>
+<a name="wp8407"></a><p class="pL1Body">
+From this prompt, use the netparam command to review the current network settings. The following example shows a DHCP (default) output:</p>
+<a name="wp7027"></a><pre class="pCodeIndent">
+core&gt; netparam
+</pre>
+
+<a name="wp7028"></a><pre class="pCodeIndent">
+ ethernet_address        = 00:04:9F:00:FF:65
+</pre>
+
+<a name="wp7029"></a><pre class="pCodeIndent">
+ bootconfig              = dhcp:FSL00FF65 (134.86.178.206)
+</pre>
+
+<a name="wp7030"></a><pre class="pCodeIndent">
+ static_ip_address       = &lt;none&gt;
+</pre>
+
+<a name="wp7031"></a><pre class="pCodeIndent">
+ static_dns_server       = &lt;none&gt;
+</pre>
+
+<a name="wp7032"></a><pre class="pCodeIndent">
+ static_hosts            = &lt;none&gt;
+</pre>
+
+<a name="wp7033"></a><pre class="pCodeIndent">
+ static_routes           = &lt;none&gt;
+</pre>
+
+<a name="wp7034"></a><pre class="pCodeIndent">
+
+</pre>
+
+<a name="wp7035"></a>
+<ol start="2"><li class="LL1Seq">Use the ping command to verify that the static IP address assigned to you by your network administrator is not currently in use by someone else as shown in the following example:</li></ol>
+<a name="wp7036"></a><pre class="pCodeIndent">
+H:\&gt;ping 134.86.178.63
+</pre>
+
+<a name="wp7037"></a><pre class="pCodeIndent">
+Pinging 134.86.178.63 with 32 bytes of data:
+</pre>
+
+<a name="wp7038"></a><pre class="pCodeIndent">
+Reply from 134.86.178.187: Destination host unreachable.
+</pre>
+
+<a name="wp7039"></a><pre class="pCodeIndent">
+
+</pre>
+
+<a name="wp7040"></a>
+<ol start="3"><li class="LL1Seq">Gather the other network settings you require.</li></ol>
+<a name="wp8415"></a><p class="pL1Body">
+Use the ipconfig command to display the information on a Windows machine that is on the same physical subnet as the probe you are configuring. The ipconfig command enumerates the network adapters on your system. You must determine which adapter information is for the physical network to which your probe is connected.</p>
+<a name="wp7402"></a><pre class="pCode">
+H:\&gt;ipconfig /all
+</pre>
+
+<a name="wp7403"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp7404"></a><pre class="pCode">
+Ethernet adapter Local Area Connection:
+</pre>
+
+<a name="wp7405"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp7406"></a><pre class="pCode">
+Connection-specific DNS Suffix .: sje.mentorg.com
+</pre>
+
+<a name="wp7407"></a><pre class="pCode">
+Description . . . . . . . . . ..: Intel(R) 82567LM Gigabit Network 
+Connection
+</pre>
+
+<a name="wp7408"></a><pre class="pCode">
+Physical Address. . . . . . . . . : 00-24-E8-91-37-2E
+</pre>
+
+<a name="wp7409"></a><pre class="pCode">
+DHCP Enabled. . . . . . . . . . . : Yes
+</pre>
+
+<a name="wp7410"></a><pre class="pCode">
+Autoconfiguration Enabled . . . . : Yes
+</pre>
+
+<a name="wp7411"></a><pre class="pCode">
+Link-local IPv6 Address . . . . . : 
+fe80::e589:cc9d:86f9:1835%12(Preferred)
+</pre>
+
+<a name="wp7412"></a><pre class="pCode">
+IPv4 Address. . . . . . . . . . . : 134.86.178.186(Preferred)
+</pre>
+
+<a name="wp7413"></a><pre class="pCode">
+<span class=" cBold">Subnet Mask . . . . . . . . . . . : 255.255.254.0
+</span></pre>
+
+<a name="wp7414"></a><pre class="pCode">
+Lease Obtained. . . . . . . . . . : Thursday, September 30, 2010 11:33:29 
+AM
+</pre>
+
+<a name="wp7415"></a><pre class="pCode">
+Lease Expires . . . . . . . . . . : Tuesday, October 05, 2010 5:27:44 PM
+</pre>
+
+<a name="wp7416"></a><pre class="pCode">
+<span class=" cBold">Default Gateway . . . . . . . . . : 134.86.179.254
+</span></pre>
+
+<a name="wp7417"></a><pre class="pCode">
+DHCP Server . . . . . . . . . . . : 134.86.188.34
+</pre>
+
+<a name="wp7418"></a><pre class="pCode">
+DHCPv6 IAID . . . . . . . . . . . : 251667688
+</pre>
+
+<a name="wp7419"></a><pre class="pCode">
+DHCPv6 Client DUID. . . . . . . . : 00-01-00-01-13-CE-A5-3A-00-24-E8-91-
+37-2E
+</pre>
+
+<a name="wp7420"></a><pre class="pCode">
+<span class=" cBold">DNS Servers . . . . . . . . . . . : 134.86.188.38
+</span></pre>
+
+<a name="wp7421"></a><pre class="pCode">
+                                    134.86.188.11
+</pre>
+
+<a name="wp7422"></a><pre class="pCode">
+                                    134.86.188.57
+</pre>
+
+<a name="wp7423"></a><pre class="pCode">
+Primary WINS Server . . . . . . . : 147.34.97.74
+</pre>
+
+<a name="wp7424"></a><pre class="pCode">
+Secondary WINS Server . . . . . . : 134.86.188.34
+</pre>
+
+<a name="wp7425"></a><pre class="pCode">
+NetBIOS over Tcpip. . . . . . . . : Enabled
+</pre>
+
+<a name="wp7342"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp7400"></a><pre class="pCode">
+
+</pre>
+
+<a name="wp7064"></a>
+<ol start="4"><li class="LL1Seq">Use the netparam command to make the settings in the probe as shown here:</li></ol>
+<a name="wp7065"></a><pre class="pCodeIndent">
+core&gt; netparam static_ip_address &lt;static ip&gt;:&lt;subnet  mask&gt;
+</pre>
+
+<a name="wp7066"></a><pre class="pCodeIndent">
+core&gt; netparam add_route default &lt;gateway&gt; 1
+</pre>
+
+<a name="wp7067"></a><pre class="pCodeIndent">
+core&gt; netparam static_dns_server &lt;dns server ip&gt;
+</pre>
+
+<a name="wp7068"></a><pre class="pCodeIndent">
+core&gt; netparam  bootconfig static
+</pre>
+
+<a name="wp7070"></a><pre class="pCodeIndent">
+
+</pre>
+
+<table class="notes">
+  <tr class="NotesUpperRuleRed">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesRed">Caution</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp7071"></a><p class="pnoteSWCaution">
+
+        	The netparam utility copies its settings into non-volatile memory on the probe. Follow these rules while using netparam utility:
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleRed">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp9659"></a>
+<ul><li class="LL3BulSolid">Each time you enter a netparam command, wait for the core&gt; prompt to reappear before entering the next command. The prompt indicates that the parameter change has been logged.</li></ul>
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp9680"></a><p class="pnoteNote">
+
+        	The add_route entry is required if you want to access your probe from outside the subnet the probe is connected to. The static_dns_server entry is required if you wish to access the probe via a symbolic hostname. The hostname is constructed from the bottom three fields of the MAC address (no colons) preceded by FSL. Your network name server must support DDNS protocols for this to work. If you find that the auto discovery feature in CodeBench or the command line tool does not list your probe, please make sure these two settings are set correctly for your network.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp9642"></a>
+<ul><li class="LL3BulSolid">When you have finished entering all settings, type <span class=" cBold">reset</span> at the core&gt; prompt. When the probe restarts, it uses the new netparam parameters.</li></ul>
+<a name="wp9516"></a><pre class="pCodeIndent">
+core&gt; reset
+</pre>
+
+<a name="wp7074"></a><p class="pHTaskSubhead">
+
+Results
+</p>
+
+<a name="wp7075"></a>
+<ul><li class="LL1BulSolid">The reset command reboots the probe and once it returns you to the core&gt; prompt, you can review the settings:</li></ul>
+
+<a name="wp7076"></a><pre class="pCodeIndent">
+core&gt; netparam
+</pre>
+
+<a name="wp7077"></a><pre class="pCodeIndent">
+ethernet_address        = 00:04:9F:00:FF:65
+</pre>
+
+<a name="wp7078"></a><pre class="pCodeIndent">
+bootconfig              = static:FSL00FF65
+</pre>
+
+<a name="wp7079"></a><pre class="pCodeIndent">
+static_ip_address       = 134.86.178.63:255.255.254.0
+</pre>
+
+<a name="wp7080"></a><pre class="pCodeIndent">
+static_dns_server       = 134.86.188.11
+</pre>
+
+<a name="wp7081"></a><pre class="pCodeIndent">
+static_hosts            = &lt;none&gt;
+</pre>
+
+<a name="wp7082"></a><pre class="pCodeIndent">
+static_routes           = destination     gateway         metric
+</pre>
+
+<a name="wp7083"></a><pre class="pCodeIndent">
+                          --------------- --------------- ------
+</pre>
+
+<a name="wp7084"></a><pre class="pCodeIndent">
+                          default         134.86.179.254  1
+</pre>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_professional";
+   DocTitle = "Mentor Embedded Sourcery Probe Professional Hardware Manual";
+   PageTitle = "Step\-by\-Step Guide to Configuring a Static IP";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "StepbyStep.Guide.to.Configuring.a.Static.IP"
+   ThisTopic = "StepbyStepGuidetoConfiguringaStaticIP";
+   CurrentFile = "apxc_network_admin4.html";
+   CurrentFileID = "32";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe Professional Hardware Manual&nbsp;2.3.4
+    <br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    <br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

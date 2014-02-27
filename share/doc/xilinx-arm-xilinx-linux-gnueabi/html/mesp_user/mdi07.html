@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:25:46 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>MDI Files</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("Meta Debug Interface (MDI)","mdi01","Getting Started with MDI","mdi04","MDI Files","mdi07","106");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp8580"></a><h1 class="pHeading3 FontLevel1" id="MGC8580">
+
+<a name="CRefID58872"></a>
+MDI Files
+</h1>
+
+<a name="wp8581"></a><p class="pBody">
+
+An MDI Configuration consists of the following files:
+</p>
+
+<a name="wp8582"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cItalic">mdi.dll </span>(Windows) or <span class=" cItalic">mdi.so</span> (Linux) </li></ul>
+
+
+<a name="wp9144"></a>
+<div class="LLzArgDesc">The MDI interface library that will be loaded by your third party debugger to provide the connection to your Sourcery Probe. This file will be copied to the MDI configuration/project directory. Alternatively, your debugger may allow you to specify the full path name of the MDI library file, in which case it can be run from the Sourcery CodeBench installation directory (recommended). See your debugger&#39;s documentation for more details.</div>
+<a name="wp8584"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cItalic">mdi.cfg</span> </li></ul>
+
+
+<a name="wp9150"></a>
+<div class="LLzArgDesc">MON creates an <span class=" cItalic">mdi.cfg</span> file specific to your configuration (Sourcery Probe and startup file), and saves it in the MDI configuration directory. This file contains configuration information required by the MDI library.</div>
+
+<a name="wp9166"></a>
+<div class="LLzArgDesc">A sample <span class=" cItalic">mdi.cfg</span> file showing how you can combine multiple MDI configurations into a single configuration file is provided in the <span class=" cCourier cP10 cItalic">/mdi </span>folder of your Sourcery CodeBench installation. See <a name="EW61"></a><a href="majic_setup2.html#CRefID33022" onclick='oT("CRF","majic_setup2.html#CRefID33022");'><span class=" cLinkOverride">Sourcery Probe Default Installation Directories</span></a> for the installation directory for your specific architecture and OS.</div>
+<a name="wp13886"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cCourier cP10 cItalic">./mep/mdi/mdispec.pdf</span></li></ul>
+
+
+<a name="wp13887"></a>
+<div class="LLzArgDesc">The MDI specification which describes the API in great detail. It is provided for informational purposes. You do not need to read this document in order to use an MDI compliant debugger and library.</div>
+<a name="wp13888"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cCourier cP10 cItalic">./mep/mdi/mdi.h</span><span class=" cItalic">, </span><span class=" cCourier cP10 cItalic">./mep/mdi/mdimips.h</span><span class=" cItalic">, </span><span class=" cCourier cP10 cItalic">./mep/mdi/mdiarm.h</span><span class=" cItalic">, </span><span class=" cCourier cP10 cItalic">./mep/mdi/mdiload.c</span> </li></ul>
+
+
+<a name="wp13884"></a>
+<div class="LLzArgDesc">C source code, headers for the MDI API and sample debugger code to load an MDI library. These files are of interest only to those actually implementing an MDI library or an MDI compliant debugger.</div>
+<a name="wp9167"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cItalic">&lt;target&gt;.maj </span></li></ul>
+
+
+<a name="wp11799"></a>
+<div class="LLzArgDesc">The Sourcery Probe and target hardware configuration information is provided by the &lt;<span class=" cItalic">target&gt;.maj </span>target initialization script. This is typically named after the board for which it is intended. Sample startup command scripts for standard reference platforms are included in the <span class=" cCourier cP10 cItalic">/tsp/&lt;arch&gt;/</span> directory of the Sourcery CodeBench software installation. See <a name="EW62"></a><a href="majic_setup2.html#CRefID33022" onclick='oT("CRF","majic_setup2.html#CRefID33022");'><span class=" cLinkOverride">Sourcery Probe Default Installation Directories</span></a> for the installation directory for your specific architecture and OS. If no suitable &lt;<span class=" cItalic">target&gt;.maj </span>script is available, you can select the sample template (<span class=" cItalic">template.maj</span>) and edit it by hand. See <a name="EW63"></a><a href="majicconfig04.html#CRefID20487" onclick='oT("CRF","majicconfig04.html#CRefID20487");'><span class=" cLinkOverride">Sourcery Probe Target Initialization Scripts</span></a>.</div>
+<a name="wp11815"></a>
+<ul class="ulSmSpace"><li class="LLzptArg">In addition, many of the files found in the tree containing the MDI shared library are referenced and used by MDI.</li></ul>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "MDI Files";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "MDI.Files"
+   ThisTopic = "MDIFiles";
+   CurrentFile = "mdi07.html";
+   CurrentFileID = "106";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    
+<br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    
+<br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

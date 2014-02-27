@@ -1,0 +1,289 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:23:56 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>addr Address</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("MON Command Language ","moncommand01","MON Operands","moncommand50","addr Address","moncommand51","73");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp6464"></a><h1 class="pzCmdFunc FontLevel1" id="MGC6464">
+
+<a name="CRefID18563"></a>
+addr <a name="CRefID21429"></a>Address
+</h1>
+
+
+
+<a name="wp6465"></a><p class="pzHeading">
+
+Syntax
+</p>
+
+<a name="wp6466"></a><p class="pzUsage">
+
+memory addresses: 
+</p>
+
+<a name="wp6467"></a><pre class="pCode">
+{number |(expr)}[:space] 
+</pre>
+
+<a name="wp6468"></a><pre class="pCode">
+sym_name
+</pre>
+
+<a name="wp6469"></a><pre class="pCode">
+expr
+
+</pre>
+
+<a name="wp6470"></a><p class="pzUsage">
+
+register addresses: 
+</p>
+
+<a name="wp6471"></a><pre class="pCode">
+[.]reg_name[.field]
+
+</pre>
+
+<a name="wp6472"></a><p class="pzUsage">
+
+MON local addresses: 
+</p>
+
+<a name="wp6473"></a><pre class="pCode">
+$ident
+</pre>
+
+<a name="wp6474"></a><p class="pzHeading">
+
+Description
+</p>
+
+<a name="wp6478"></a><p class="pzShortDesc">
+
+This operand specifies the location of an object. An address consists of an offset and a space. An offset is a 32 or 64 bit value giving the byte address of an object relative to the start of an address space (virtual memory, physical memory, general register, and so on)<span class=" cItalic">.</span>
+</p>
+
+
+<a name="wp6483"></a><p class="pzShortDesc">
+
+<a name="CRefID31411"></a>There are three classifications of addresses: memory addresses, register addresses and &ldquo;MON local&rdquo; addresses. For a description of &ldquo;MON local&rdquo; address space, see <a href="moncommand63.html"  onclick='oT("CRF","moncommand63.html");return false;'>MON Local Variables and Option References</a>. The register addresses reference the processor&#8217;s general and special registers, user-defined registers, and optionally specific bit fields within registers.
+</p>
+
+
+<a name="wp6487"></a><p class="pzShortDesc">
+
+The memory addresses reference data and instruction memory or memory-mapped devices. These addresses include virtual address segments, and physical (main) memory. The MIPS architecture defines memory in terms of virtual address segments (for example, kseg0, kuseg) mapped into a common physical address space. MON accesses data or instructions either by their physical address <span class=" cBold">(:P)</span> or by their virtual address, that can be expressed as an offset from the start of an address segment<span class=" cItalic">.</span> (For more information, see the <span class=" cItalic">space</span> operand in <a href="moncommand59.html"  onclick='oT("CRF","moncommand59.html");return false;'>space Address Space Designator</a>.)
+</p>
+
+
+<a name="wp10907"></a>
+<ul><li class="LL1BulSolid"><span class=" cItalic">number</span> - Specifies an offset in bytes from the start of a space. The default base for number is hexadecimal. If an ambiguity arises between a hex digit string, and a sym_name or reg_name, the symbol always takes precedence. In such cases, the hex digit string must be preceded by 0x.</li></ul>
+
+<a name="wp10908"></a>
+<ul><li class="LL1BulSolid"><span class=" cItalic">expr</span> - Specifies both offset and a space. An expr must be enclosed in parentheses to allow addition of an explicit space designator. The offset will be aligned to a word boundary for word objects, and to a half word boundary for half word objects. The offset for double words is rounded to either 32 or 64 bits depending on the processor bus width.</li></ul>
+
+<a name="wp10909"></a>
+<ul><li class="LL1BulSolid"><span class=" cItalic">space</span> - Specifies the memory address spaces. If a space is not explicitly indicated, a virtual address is assumed. See <a href="moncommand59.html"  onclick='oT("CRF","moncommand59.html");return false;'>space Address Space Designator</a>.</li></ul>
+
+<a name="wp10910"></a><p class="pL1Body">
+This operand must be appropriate for the command being invoked. For example, the MC command requires physical addresses, so :P is required in that case.</p>
+<a name="wp10911"></a>
+<ul><li class="LL1BulSolid"><span class=" cItalic">sym_name</span> - An ident specifying the name of a global or static variable, or function in the program being debugged, or a name previously defined via EA (refer to <a href="moncommand23.html"  onclick='oT("CRF","moncommand23.html");return false;'>EN Enter Names</a>).</li></ul>
+
+<a name="wp10912"></a>
+<ul><li class="LL1BulSolid"><span class=" cItalic">reg_name</span> - An ident specifying the name of a processor register. In general, MON recognizes the register names documented in the processor&#8217;s data sheet, as well as any names read from a Register Definition File. See <a href="moncommand58.html"  onclick='oT("CRF","moncommand58.html");return false;'>reg_name Register Name</a> for a list of the register names for your processor.</li></ul>
+
+<a name="wp10913"></a>
+<ul><li class="LL1BulSolid"><span class=" cItalic">field</span> - An ident specifying the name of a specific bit field within a register that contains multiple fields. The complete field breakdown is shown when such a register is displayed without the .field qualifier, but the reg_name.field syntax allows a single field to be easily displayed or modified.</li></ul>
+
+<a name="wp10914"></a>
+<ul><li class="LL1BulSolid"><span class=" cItalic">ident</span> - An ident naming a MON local variable. The name will be defined and assigned an address the first time it is referenced.</li></ul>
+
+<a name="wp10915"></a><p class="pzBody">
+
+Sometimes an ident might match a valid symbol name and a register name, and might even be a valid hexadecimal number as well. In such cases, it will be interpreted as the symbol name by default, and will need to be prefixed with &ldquo;.&rdquo; to be interpreted as the register name, or 0x to be interpreted as the hex number. For example, a0 is a sym_name if it exists, while .a0 is always the MIPS reg_name, and 0xa0 is always the number.
+</p>
+
+
+<a name="wp10905"></a><p class="pzBody">
+
+An addr that consists of a special register field name (such as SR.IEC) is a special case. It can be used in Display and Enter commands, but it cannot appear in any other context, and ranges of fields are not supported.
+</p>
+
+
+<a name="wp6514"></a><p class="pzHeading">
+
+Examples
+</p>
+
+<a name="wp6515"></a><pre class="pCode">
+1000               // Virtual address 0x1000.
+</pre>
+
+<a name="wp6516"></a><pre class="pCode">
+1000:u               // MIPS. Same as above: virtual kuseg address 0x1000.
+</pre>
+
+<a name="wp6517"></a><pre class="pCode">
+0n1000               // Virtual address 1000 (decimal).
+</pre>
+
+<a name="wp6518"></a><pre class="pCode">
+1000:0               // MIPS. Offset 0x1000 in kseg0 (virtual address 
+               // 0x80001000 or FFFFFFFF80001000 depending on
+               // CPU type).
+</pre>
+
+<a name="wp6519"></a><pre class="pCode">
+1000:p               // Physical location 0x1000.
+</pre>
+
+<a name="wp6520"></a><pre class="pCode">
+@a0000000              // Location whose virtual address is fetched from a0000000
+</pre>
+
+<a name="wp6521"></a><pre class="pCode">
+@0x1234:1            // Location whose virtual address is fetched from
+               // offset 1234 in kseg1.
+</pre>
+
+<a name="wp6522"></a><pre class="pCode">
+R13               // General Register $13. This register can also be
+               // referred to by its software name S0.
+</pre>
+
+<a name="wp6523"></a><pre class="pCode">
+lr_irq                // ARM. The IRQ mode link register
+</pre>
+
+<a name="wp6524"></a><pre class="pCode">
+CPSR                   // ARM.  The current processor status register
+</pre>
+
+<a name="wp6525"></a><pre class="pCode">
+SR               // MIPS. The current processor Status Register.
+</pre>
+
+<a name="wp6526"></a><pre class="pCode">
+sr.kuc               // The current value of the Kernel/User mode bit.
+</pre>
+
+<a name="wp6527"></a><pre class="pCode">
+pc               // The current Program Counter (unless there is a
+               // symbol named &ldquo;pc&rdquo;). This is not an actual
+               // register, but the address of the next instruction to
+               // be executed.
+</pre>
+
+<a name="wp6528"></a><pre class="pCode">
+.pc               // Always refers to the Program Counter.
+</pre>
+
+<a name="wp6529"></a><pre class="pCode">
+a2               // Register A2 (also can be referred to as .A2, R6,
+               // or .R6).
+</pre>
+
+<a name="wp6530"></a><pre class="pCode">
+0xa2               // Virtual address 0xa2.
+</pre>
+
+<a name="wp6531"></a><pre class="pCode">
+foo_bar               // Location and space defined by symbol foo_bar.
+</pre>
+
+<a name="wp6532"></a><pre class="pCode">
+(@.1ptr+5*4)         // ptr is a symbol giving an offset and a space.
+               // This expr fetches the byte at that location and
+               // adds 20 (decimal) to it.
+</pre>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "addr Address";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "addr.Address"
+   ThisTopic = "UserDefinedAccessLists";
+   CurrentFile = "moncommand51.html";
+   CurrentFileID = "73";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    <br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    <br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

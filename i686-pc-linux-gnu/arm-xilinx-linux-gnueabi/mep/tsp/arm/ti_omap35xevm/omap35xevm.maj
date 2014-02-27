@@ -1,0 +1,1057 @@
++q  // Enter quiet mode
+//___________________________________________________________________
+//
+//               Copyright (c) 2011 Mentor Graphics Corporation
+//                           All rights reserved
+//
+//   THIS WORK CONTAINS TRADE SECRETS AND PROPRIETARY INFORMATION WHICH IS
+//    THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS LICENSORS AND IS
+//                        SUBJECT TO LICENSE TERMS.
+//
+//___________________________________________________________________
+//
+// Mentor Embedded Sourcery Probe target initialization file for the
+// TI OMAP35x EVM platform.  It supports this platform as-is,
+// and can be adapted to a new target based on this reference board,
+// as detailed below.  For a brand new custom board not related to
+// this reference board, it may be better to start from the template
+// rather than trying to adapt this file.
+//
+// Target Description:
+//
+//     Board:   TI OMAP35x EVM
+//     Device:  TI OMAP3530
+//     CPU ID:  Cortex-A8
+//     Endian:  Little
+//     Cores:   1
+//
+// Porting Guide:
+//
+// The user should make the following adaptations to port this file
+// to a new target board based on the associated reference platform:
+//
+//        0. Review the MEP Probe Initialization section at
+//           "TO DO #0" below to make sure the settings are
+//           right for your board.
+//        1. Update the memory configuration table for changes
+//           in the new board's  *Physical*  memory map.  See
+//           'TO DO #1' below.
+//        2. If your target board requires any special MEP
+//           settings, they should be added to the end of the
+//           ONE_TIME_SETUP section.  See 'TO DO #2' below.
+//        3. Decide whether the target should be automatically
+//           reset and/or initialized upon start-up by choosing
+//           the desired command at 'TO DO #3' below.  This
+//           really depends on your use case.
+//        4. If the board has no boot code (or bad boot code),
+//           and you want to download into RAM, then you may
+//           have to adapt the memory controller initialization
+//           script at 'TO DO #4' below to account for changes
+//           relative to the reference platform.
+//
+// NOTE:  Additional information on MON commands and the configuration
+//        options used here is available in the online help system.
+//___________________________________________________________________
+dv "Reading $$# ...\n"
+
+
+// Initialization script preparation
+// =================================
+
+// The RTI, RTNI, and TI command aliases call script functions in this file.
+// These command aliases should never be changed.
+
+ea RTI   $$#.DO_RTI  // RTI  call DO_RTI script function  (Reset Target and Initialize)
+ea RTNI  $$#.DO_RTNI // RTNI call DO_RTNI script function (Reset Target with No Initialization)
+ea TI    $$#.DO_TI   // TI   call DO_TI script function   (Target Initialize without resetting)
+
+fr rd omap35xevm.rd
+
+// MEP Probe Initialization
+// ==========================
+
+// TO DO #0 -- Review the following MEP configuration options to make
+//             sure they are right for your target board hardware and
+//             processor device design.
+
+// The  Trgt_Resets_JTAG  option informs the MEP probe whether the target
+// board will forward a system reset (nSRST) to the JTAG interface (nTRST),
+// or reset the system only without resetting the JTAG interface.  When in
+// doubt, a YES setting is safer.  When the two reset circuits are known
+// to be independent, which is strongly recommended, then a NO setting is
+// recommended.
+
+eo Trgt_Resets_JTAG  = yes
+
+// The  Ice_JTAG_Use_RTCLK  and  Ice_JTAG_Clock_Freq  options are related
+// and must be considered together.  An  Ice_JTAG_Use_RTCLK  setting of
+// ON  selects adaptive clocking mode, where the JTAG clock is dynamically
+// controlled by the target processor.  When  Ice_JTAG_Use_RTCLK  is set
+// OFF  then normal (unthrottled) clocking is selected.
+//
+// When adaptive clocking is disabled, the  Ice_JTAG_Clock_Freq  option
+// specifies the the JTAG clock (TCK) frequency in Megahertz, from
+// 0.002 to 100 (depending on probe hardware capability).  A lower setting
+// is safer, a higher setting yields higher performance.  Note that the
+// requested frequency will be adjusted down to the closest frequency
+// supported by the probe hardware (displaying this option will show the
+// actual TCK frequency).
+//
+//     IJUR  Clock mode
+//     ====  ========================
+//     OFF   Free running TCK at specified frequency (RTCK is ignored)
+//     ON    Adaptive clocking with frequency controlled by RTCK
+//           (Ice_JTAG_Clock_Freq is ignored)
+//
+// Note that enabling  Ice_JTAG_Use_RTCLK  on target boards that do not
+// drive the RTCK signal will lock up the JTAG interface.
+
+eo Ice_JTAG_Use_RTCLK  = off
+eo Ice_JTAG_Clock_Freq = 12.5
+if (@$Ice_JTAG_Use_RTCLK) {doq Ice_JTAG_Use_RTCLK} {doq Ice_JTAG_Clock_Freq}
+
+// The following command can be used to define the details of the JTAG
+// daisy chain.  It is only required for targets on which the MEP
+// auto-detection algorithm cannot correctly determine the JTAG connection
+// details.  On most boards this command can be omitted.
+//
+//    ew MEP_JTAG_DIMENSION = TAP_CNT, IR1_CNT [ , IR2_CNT ]  ...
+
+ew MEP_JTAG_DIMENSION = 2,4,6
+
+// The following commands can be used to define special JTAG initialization
+// operations required by certain processors.  The first one, if defined,
+// is scanned in right after the JTAG reset cycle completes, but before the
+// standard JTAG initialization performed by the MEP.  The second, if
+// defined, is scanned in right after the standard JTAG initialization
+// performed by the MEP.  On most boards these can both be omitted.
+//
+//    ew MEP_JTAG_INIT0 = <scan-op> [ , <scan-op> ]  ...
+//    ew MEP_JTAG_INIT1 = <scan-op> [ , <scan-op> ]  ...
+
+ew MEP_JTAG_INIT0 =   89000006, 00000007, 09000008, 00000089, 89000006, 00000002, 09000020, 81000080, 09000020, a3002048, 09000020, 81000081, 09000020, a3002148, 81000006, 0000003f, 81000010, ffff
+
+// The  Ice_Power_Sense  option enables the target power monitor.  When
+// target power is detected, the debug interface is enabled.
+
+eo Ice_Power_Sense = VREF
+
+// The  Ice_JTAG_TAP_Select  option controls which TAP on a multi-TAP
+// daisy chain is associated with this debug connection.  This option
+// can be omitted on targets which have one TAP.  Note that TAPs are
+// numbered from 1-N, with TAP 1 being the one whose TDO is connected
+// to the MEP probe.
+//
+//    eo Ice_JTAG_TAP_Select = <num>
+
+eo Ice_JTAG_TAP_Select = 1
+
+// Physical Memory Configuration
+// =============================
+
+mc *:P, inv     // start with all *physical* memory (*:P) marked as invalid
+
+// TO DO #1 -- Change the address range(s) below to match the  *physical*
+//             address ranges of your ROM/flash and RAM areas.  Add more
+//             MC commands as necessary for each memory mapped area.
+//
+// WARNING:  DO NOT confuse virtual (MVA) addresses with physical space.
+//           Make sure to use physical addresses in the MC table.
+//
+// EXAMPLE:
+//
+//     mc  ________:P  ________:P,  PWE, JAM, RW    // DRAM
+//     mc  ________:P  ________:P,  PWD, JAM, RO    // Flash or ROM
+//     mc  ________:P  ________:P,  PWD, JAM, RW    // Peripheral registers
+//
+// Note that if your boot code remaps physical memory, then the MC table
+// should reflect the mapping that is in effect for the code you are trying
+// to debug.  When debugging boot code in flash, MC should match the mapping
+// in effect when booting.  When debugging code in RAM, MC should match the
+// mapping in effect when running code from RAM.
+//
+// Address Range          PWE  Access
+// ---------------------- ---- -------
+// Q0
+mc 0x00000000:P 0x0001bfff:P, PWD, JAM, RO, DW=16   // GPMC CS0 ROM
+mc 0x04000000:P 0x0401bfff:P, PWD, JAM, RO, DW=16   // GPMC CS0 remapped
+mc 0x20000000:P 0x2bffffff:P, PWD, JAM, RO, DW=16   // PoP NAND Flash
+mc 0x2c000000:P 0x2c0003ff:P, PWD, JAM, RO, DW=16   // Ethernet MAC/PHY
+
+// Q1 (1GB) 0x40000000 - 0x7fffffff
+// On-chip memory
+mc 0x40000000:P 0x40013fff:P, PWE, JAM, RO          // Reserved
+mc 0x40014000:P 0x4001bfff:P, PWE, JAM, RO          // Boot ROM internal
+mc 0x40200000:P 0x4020ffff:P, PWE, JAM, RW          // SRAM internal
+mc 0x40210000:P 0x47afffff:P, PWE, JAM, RW          // Reserved
+// L4 interconnects
+// L4-Core (0x48000000 - 0x48ffffff)
+mc 0x48002000:P 0x48002fff:P, PWE, JAM, RW          // SCM - Module
+mc 0x48003000:P 0x48003fff:P, PWE, JAM, RW          // SCM - L4 interconnect
+mc 0x48004000:P 0x48005fff:P, PWE, JAM, RW          // CM - Module region A
+mc 0x48006000:P 0x480067ff:P, PWE, JAM, RW          // CM - Module region B
+mc 0x48006800:P 0x48006fff:P, PWE, JAM, RW          // Reserved
+mc 0x48007000:P 0x48007fff:P, PWE, JAM, RW          // CM - L4 interconnect
+mc 0x48008000:P 0x4803ffff:P, PWE, JAM, RW          // Reserved
+mc 0x48040000:P 0x480407ff:P, PWE, JAM, RW          // L4-Core conf - Address/protection (A/P)
+mc 0x48040800:P 0x48040fff:P, PWE, JAM, RW          // L4-Core conf - Initiator port (IP)
+mc 0x48041000:P 0x48041fff:P, PWE, JAM, RW          // L4-Core conf - Link agent (LA)
+mc 0x48042000:P 0x4804fbfe:P, PWE, JAM, RW          // Reserved
+mc 0x4804fbff:P 0x4804ffff:P, PWE, JAM, RW          // DSI
+mc 0x48050000:P 0x480503ff:P, PWE, JAM, RW          // Display subsystem top
+mc 0x48050400:P 0x480507ff:P, PWE, JAM, RW          // Display controller
+mc 0x48050800:P 0x48050bff:P, PWE, JAM, RW          // Display subsystem - RFBI
+mc 0x48050C00:P 0x48050fff:P, PWE, JAM, RW          // Display subsystem - Video encorder
+mc 0x48051000:P 0x48051fff:P, PWE, JAM, RW          // Display subsystem - L4 interconnect
+mc 0x48052000:P 0x4805ffff:P, PWE, JAM, RW          // Reserved
+mc 0x48056000:P 0x48056fff:P, PWE, JAM, RW          // sDMA - Module
+mc 0x48057000:P 0x48057fff:P, PWE, JAM, RW          // sDMA - L4 interconnect
+mc 0x48058000:P 0x4805ffff:P, PWE, JAM, RW          // Reserved
+mc 0x48060000:P 0x48060fff:P, PWE, JAM, RW          // I2C3 - Module
+mc 0x48061000:P 0x48061fff:P, PWE, JAM, RW          // I2C3 - L4 interconnect
+mc 0x48062000:P 0x48062fff:P, PWE, JAM, RW          // USBTLL - Module
+mc 0x48063000:P 0x48063fff:P, PWE, JAM, RW          // USBTLL - L4 interconnect
+mc 0x48064000:P 0x48064fff:P, PWE, JAM, RW          // HS USB Host - Module
+mc 0x48065000:P 0x48065fff:P, PWE, JAM, RW          // HS USB Host - L4 interconnect
+mc 0x48066000:P 0x48069fff:P, PWE, JAM, RW          // Reserved
+mc 0x4806a000:P 0x4806afff:P, PWE, JAM, RW          // UART1 - Module
+mc 0x4806b000:P 0x4806bfff:P, PWE, JAM, RW          // UART1 - L4 interconnect
+mc 0x4806c000:P 0x4806cfff:P, PWE, JAM, RW          // UART2 - Module
+mc 0x4806d000:P 0x4806dfff:P, PWE, JAM, RW          // UART2 - L4 interconnect
+mc 0x4806e000:P 0x4806ffff:P, PWE, JAM, RW          // Reserved
+mc 0x48070000:P 0x48070fff:P, PWE, JAM, RW          // I2C1 - Module
+mc 0x48071000:P 0x48071fff:P, PWE, JAM, RW          // I2C1 - L4 interconnect
+mc 0x48072000:P 0x48072fff:P, PWE, JAM, RW          // I2C2 - Module
+mc 0x48073000:P 0x48073fff:P, PWE, JAM, RW          // I2C2 - L4 interconnect
+mc 0x48074000:P 0x48074fff:P, PWE, JAM, RW          // McBSP1 - Module
+mc 0x48075000:P 0x48075fff:P, PWE, JAM, RW          // McBSP1 - L4 interconnect
+mc 0x48076000:P 0x48085fff:P, PWE, JAM, RW          // Reserved
+mc 0x48086000:P 0x48086fff:P, PWE, JAM, RW          // GPTIMER10 - Module
+mc 0x48087000:P 0x48087fff:P, PWE, JAM, RW          // GPTIMER10 - L4 interconnect
+mc 0x48088000:P 0x48088fff:P, PWE, JAM, RW          // GPTIMER11 - Module
+mc 0x48089000:P 0x48089fff:P, PWE, JAM, RW          // GPTIMER11 - L4 interconnect
+mc 0x4808a000:P 0x48093fff:P, PWE, JAM, RW          // Reserved
+mc 0x48094000:P 0x48094fff:P, PWE, JAM, RW          // Mailbox - Module
+mc 0x48095000:P 0x48095fff:P, PWE, JAM, RW          // Mailbox - L4 interconnect
+mc 0x48096000:P 0x48096fff:P, PWE, JAM, RW          // McBSP5 - Module
+mc 0x48097000:P 0x48097fff:P, PWE, JAM, RW          // McBSO5 - L4 interconnect
+mc 0x48098000:P 0x48098fff:P, PWE, JAM, RW          // McSPI1 - Module
+mc 0x48099000:P 0x48099fff:P, PWE, JAM, RW          // McSPI1 - L4 interconnect
+mc 0x4809a000:P 0x4809afff:P, PWE, JAM, RW          // McSPI2 - Module
+mc 0x4809b000:P 0x4809bfff:P, PWE, JAM, RW          // McSPI2 - L4 interconnect
+mc 0x4809c000:P 0x4809cfff:P, PWE, JAM, RW          // MMC/SD/SDIO1 - Module
+mc 0x4809d000:P 0x4809dfff:P, PWE, JAM, RW          // MMC/SD.SDIO1 - L4 interconnect
+mc 0x4809e000:P 0x480aafff:P, PWE, JAM, RW          // Reserved
+mc 0x480ab000:P 0x480abfff:P, PWE, JAM, RW          // HS USB OTG - Module
+mc 0x480ac000:P 0x480acfff:P, PWE, JAM, RW          // HS USB OTG - L4 interconnect
+mc 0x480ad000:P 0x480adfff:P, PWE, JAM, RW          // MMC/SD/SDIO3 - Module
+mc 0x480ae000:P 0x480aefff:P, PWE, JAM, RW          // MMC/SD.SDIO3 - L4 interconnect
+mc 0x480af000:P 0x480b1fff:P, PWE, JAM, RW          // Reserved
+mc 0x480b2000:P 0x480b2fff:P, PWE, JAM, RW          // HDQ/1-Wire - Module
+mc 0x480b3000:P 0x480b3fff:P, PWE, JAM, RW          // HDQ/1-Wire - L4 interconnect
+mc 0x480b4000:P 0x480b4fff:P, PWE, JAM, RW          // MMC/SD/SDIO2 - Module
+mc 0x480b5000:P 0x480b5fff:P, PWE, JAM, RW          // MMC/SD.SDIO2 - L4 interconnect
+mc 0x480b6000:P 0x480b6fff:P, PWE, JAM, RW          // ICR MPU port - Module
+mc 0x480b7000:P 0x480b7fff:P, PWE, JAM, RW          // ICR MPU port - L4 interconnect
+mc 0x480b8000:P 0x480b8fff:P, PWE, JAM, RW          // McSPI3 - Module
+mc 0x480b9000:P 0x480b9fff:P, PWE, JAM, RW          // McSPI3 - L4 interconnect
+mc 0x480ba000:P 0x480bafff:P, PWE, JAM, RW          // McSPI4 - Module
+mc 0x480bb000:P 0x480bbfff:P, PWE, JAM, RW          // McSPI4 - L4 interconnect
+mc 0x480bc000:P 0x480bffff:P, PWE, JAM, RW          // Camera ISP - Module
+mc 0x480c0000:P 0x480c0fff:P, PWE, JAM, RW          // Camera ISP - L4 interconnect
+mc 0x480c1000:P 0x480c8fff:P, PWE, JAM, RW          // Reserved
+mc 0x480c9000:P 0x480c9fff:P, PWE, JAM, RW          // SR1 - Module
+mc 0x480ca000:P 0x480cafff:P, PWE, JAM, RW          // SR1 - L4 interconnect
+mc 0x480cb000:P 0x480cbfff:P, PWE, JAM, RW          // SR2 - Module
+mc 0x480cc000:P 0x480ccfff:P, PWE, JAM, RW          // SR2 - L4 interconnect
+mc 0x480cd000:P 0x480cdfff:P, PWE, JAM, RW          // ICR modem port - Module
+mc 0x480ce000:P 0x480cefff:P, PWE, JAM, RW          // ICR modem port - L4 interconnect
+mc 0x480cf000:P 0x482fffff:P, PWE, JAM, RW          // Reserved
+// L4-Wakeup (0x48300000 - 0x4833ffff)
+mc 0x48300000:P 0x48305fff:P, PWE, JAM, RW          // Reserved
+mc 0x48306000:P 0x48307fff:P, PWE, JAM, RW          // PRM - Module region A
+mc 0x48308000:P 0x483087ff:P, PWE, JAM, RW          // PRM - Module region B
+mc 0x48308800:P 0x48308fff:P, PWE, JAM, RW          // Reserved
+mc 0x48309000:P 0x48309fff:P, PWE, JAM, RW          // PRM - L4 interconnect
+mc 0x4830a000:P 0x4830ffff:P, PWE, JAM, RW          // Reserved
+mc 0x48310000:P 0x48310fff:P, PWE, JAM, RW          // GPIO1 - Module
+mc 0x48311000:P 0x48311fff:P, PWE, JAM, RW          // GPIO1 - L4 interconnect
+mc 0x48312000:P 0x48313fff:P, PWE, JAM, RW          // Reserved
+mc 0x48314000:P 0x48314fff:P, PWE, JAM, RW          // WDT2 - Module
+mc 0x48315000:P 0x48315fff:P, PWE, JAM, RW          // WDT2 - L4 interconnect
+mc 0x48316000:P 0x48317fff:P, PWE, JAM, RW          // Reserved
+mc 0x48318000:P 0x48318fff:P, PWE, JAM, RW          // GPTIMER1 - Module
+mc 0x48319000:P 0x48319fff:P, PWE, JAM, RW          // GPTIMER1 - L4 interconnect
+mc 0x4831a000:P 0x4831ffff:P, PWE, JAM, RW          // Reserved
+mc 0x48320000:P 0x48320fff:P, PWE, JAM, RW          // 32KTIMER - Module
+mc 0x48321000:P 0x48321fff:P, PWE, JAM, RW          // 32KTIMER - L4 interconnect
+mc 0x48322000:P 0x48327fff:P, PWE, JAM, RW          // Reserved
+mc 0x48328000:P 0x483287ff:P, PWE, JAM, RW          // L4-Wakeup config - AP
+mc 0x48328800:P 0x48328fff:P, PWE, JAM, RW          // L4-Wakeup config - IP L4-Core
+mc 0x48329000:P 0x48329fff:P, PWE, JAM, RW          // L4-Wakeup config - LA
+mc 0x4832a000:P 0x4832a7ff:P, PWE, JAM, RW          // L4-Wakeup config - IP L4-Emu
+mc 0x4832a800:P 0x4833ffff:P, PWE, JAM, RW          // Reserved
+// L4-Per (0x49000000 - 0x490fffff)
+mc 0x49000000:P 0x490007ff:P, PWE, JAM, RW          // L4-Per config - AP
+mc 0x49000800:P 0x49000fff:P, PWE, JAM, RW          // L4-Per config - IP
+mc 0x49001000:P 0x49001fff:P, PWE, JAM, RW          // L4-Per config - LA
+mc 0x49002000:P 0x4901ffff:P, PWE, JAM, RW          // Reserved
+mc 0x49020000:P 0x49020fff:P, PWE, JAM, RW          // UART3 - Module
+mc 0x49021000:P 0x49021fff:P, PWE, JAM, RW          // UART3 - L4 interconnect
+mc 0x49022000:P 0x49022fff:P, PWE, JAM, RW          // McBSP2 - Module
+mc 0x49023000:P 0x49023fff:P, PWE, JAM, RW          // McBSP2 - L4 interconnect
+mc 0x49024000:P 0x49024fff:P, PWE, JAM, RW          // McBSP3 - Module
+mc 0x49025000:P 0x49025fff:P, PWE, JAM, RW          // McBSP3 - L4 interconnect
+mc 0x49026000:P 0x49026fff:P, PWE, JAM, RW          // McBSP4 - Module
+mc 0x49027000:P 0x49027fff:P, PWE, JAM, RW          // McBSP4 - L4 interconnect
+mc 0x49028000:P 0x49028fff:P, PWE, JAM, RW          // McBSP2(sidetone) - Module
+mc 0x49029000:P 0x49029fff:P, PWE, JAM, RW          // McBSP2(sidetone) - L4 interconnect
+mc 0x4902a000:P 0x4902afff:P, PWE, JAM, RW          // McBSP3(sidetone) - Module
+mc 0x4902b000:P 0x4902bfff:P, PWE, JAM, RW          // McBSP3(sidetone) - L4 interconnect
+mc 0x4902c000:P 0x4902ffff:P, PWE, JAM, RW          // Reserved
+mc 0x49030000:P 0x49030fff:P, PWE, JAM, RW          // WDT3 - Module
+mc 0x49031000:P 0x49031fff:P, PWE, JAM, RW          // WDT3 - L4 interconnect
+mc 0x49032000:P 0x49032fff:P, PWE, JAM, RW          // GPTIMER2 - Module
+mc 0x49033000:P 0x49033fff:P, PWE, JAM, RW          // GPTIMER2 - L4 interconnect
+mc 0x49034000:P 0x49034fff:P, PWE, JAM, RW          // GPTIMER3 - Module
+mc 0x49035000:P 0x49035fff:P, PWE, JAM, RW          // GPTIMER3 - L4 interconnect
+mc 0x49036000:P 0x49036fff:P, PWE, JAM, RW          // GPTIMER4 - Module
+mc 0x49037000:P 0x49037fff:P, PWE, JAM, RW          // GPTIMER4 - L4 interconnect
+mc 0x49038000:P 0x49038fff:P, PWE, JAM, RW          // GPTIMER5 - Module
+mc 0x49039000:P 0x49039fff:P, PWE, JAM, RW          // GPTIMER5 - L4 interconnect
+mc 0x4903a000:P 0x4903afff:P, PWE, JAM, RW          // GPTIMER6 - Module
+mc 0x4903b000:P 0x4903bfff:P, PWE, JAM, RW          // GPTIMER6 - L4 interconnect
+mc 0x4903c000:P 0x4903cfff:P, PWE, JAM, RW          // GPTIMER7 - Module
+mc 0x4903d000:P 0x4903dfff:P, PWE, JAM, RW          // GPTIMER7 - L4 interconnect
+mc 0x4903e000:P 0x4903efff:P, PWE, JAM, RW          // GPTIMER8 - Module
+mc 0x4903f000:P 0x4903ffff:P, PWE, JAM, RW          // GPTIMER8 - L4 interconnect
+mc 0x49040000:P 0x49040fff:P, PWE, JAM, RW          // GPTIMER9 - Module
+mc 0x49041000:P 0x49041fff:P, PWE, JAM, RW          // GPTIMER9 - L4 interconnect
+mc 0x49042000:P 0x49042fff:P, PWE, JAM, RW          // UART4 - Module
+mc 0x49043000:P 0x49043fff:P, PWE, JAM, RW          // UART4 - L4 interconnect
+mc 0x49044000:P 0x4904ffff:P, PWE, JAM, RW          // Reserved
+mc 0x49050000:P 0x49050fff:P, PWE, JAM, RW          // GPIO2 - Module
+mc 0x49051000:P 0x49051fff:P, PWE, JAM, RW          // GPIO2 - L4 interconnect
+mc 0x49052000:P 0x49052fff:P, PWE, JAM, RW          // GPIO3 - Module
+mc 0x49053000:P 0x49053fff:P, PWE, JAM, RW          // GPIO3 - L4 interconnect
+mc 0x49054000:P 0x49054fff:P, PWE, JAM, RW          // GPIO4 - Module
+mc 0x49055000:P 0x49055fff:P, PWE, JAM, RW          // GPIO4 - L4 interconnect
+mc 0x49056000:P 0x49056fff:P, PWE, JAM, RW          // GPIO5 - Module
+mc 0x49057000:P 0x49057fff:P, PWE, JAM, RW          // GPIO5 - L4 interconnect
+mc 0x49058000:P 0x49058fff:P, PWE, JAM, RW          // GPIO6 - Module
+mc 0x49059000:P 0x49059fff:P, PWE, JAM, RW          // GPIO6 - L4 interconnect
+mc 0x4905a000:P 0x490fffff:P, PWE, JAM, RW          // Reserved
+// SGX
+mc 0x50000000:P 0x5000ffff:P, PWE, JAM, RW          // SGX
+mc 0x50010000:P 0x53ffffff:P, PWE, JAM, RW          // Reserved
+// L4-Emu (0x54000000 - 0x547fffff)
+mc 0x54000000:P 0x54005fff:P, PWE, JAM, RW          // Reserved
+mc 0x54006000:P 0x540067ff:P, PWE, JAM, RW          // L4-Emu config - AP
+mc 0x54006800:P 0x54006fff:P, PWE, JAM, RW          // L4-Emu config - IP L4-Core
+mc 0x54007000:P 0x54007fff:P, PWE, JAM, RW          // L4-Emu config - LA
+mc 0x54008000:P 0x540087ff:P, PWE, JAM, RW          // L4-Emu config - IP DAP
+mc 0x54008800:P 0x5400ffff:P, PWE, JAM, RW          // Reserved
+mc 0x54010000:P 0x54017fff:P, PWE, JAM, RW          // MPU emulation - Module
+mc 0x54018000:P 0x54018fff:P, PWE, JAM, RW          // MPU emulation - L4 interconnect
+mc 0x54019000:P 0x54019fff:P, PWE, JAM, RW          // TPIU - Module
+mc 0x5401a000:P 0x5401afff:P, PWE, JAM, RW          // TPIU - L4 interconnect
+mc 0x5401b000:P 0x5401bfff:P, PWE, JAM, RW          // ETB - Module
+mc 0x5401c000:P 0x5401cfff:P, PWE, JAM, RW          // ETB - L4 interconnect
+mc 0x5401d000:P 0x5401dfff:P, PWE, JAM, RW          // DAPCTL - Module
+mc 0x5401e000:P 0x5401efff:P, PWE, JAM, RW          // DAPCTL - L4 interconnect
+mc 0x5401f000:P 0x5401ffff:P, PWE, JAM, RW          // SDTI - L4 interconnect
+mc 0x54020000:P 0x544fffff:P, PWE, JAM, RW          // Reserved
+mc 0x54500000:P 0x5450ffff:P, PWE, JAM, RW          // SDTI - SDTI module (config)
+mc 0x54510000:P 0x545fffff:P, PWE, JAM, RW          // Reserved
+mc 0x54600000:P 0x546fffff:P, PWE, JAM, RW          // SDTI - SDTI module (window)
+mc 0x54700000:P 0x54705fff:P, PWE, JAM, RW          // Reserved
+mc 0x54706000:P 0x54707fff:P, PWE, JAM, RW          // PRM - Module region A
+mc 0x54708000:P 0x547087ff:P, PWE, JAM, RW          // PRM - Module region B
+mc 0x54708800:P 0x54708fff:P, PWE, JAM, RW          // Reserved
+mc 0x54709000:P 0x54709fff:P, PWE, JAM, RW          // PRM - L4 interconnect
+mc 0x5470a000:P 0x5470ffff:P, PWE, JAM, RW          // Reserved
+mc 0x54710000:P 0x54710fff:P, PWE, JAM, RW          // GPIO1 - Module
+mc 0x54711000:P 0x54711fff:P, PWE, JAM, RW          // GPIO1 - L4 interconnect
+mc 0x54712000:P 0x54713fff:P, PWE, JAM, RW          // Reserved
+mc 0x54714000:P 0x54714fff:P, PWE, JAM, RW          // WDT2 - Module
+mc 0x54715000:P 0x54715fff:P, PWE, JAM, RW          // WDT2 - L4 interconnect
+mc 0x54716000:P 0x54717fff:P, PWE, JAM, RW          // Reserved
+mc 0x54718000:P 0x54718fff:P, PWE, JAM, RW          // GPTIMER1 - Module
+mc 0x54719000:P 0x54719fff:P, PWE, JAM, RW          // GPTIMER1 - L4 interconnect
+mc 0x5471a000:P 0x5471ffff:P, PWE, JAM, RW          // Reserved
+mc 0x54720000:P 0x54720fff:P, PWE, JAM, RW          // 32KTIMER - Module
+mc 0x54721000:P 0x54721fff:P, PWE, JAM, RW          // 32KTIMER - L4 interconnect
+mc 0x54722000:P 0x54727fff:P, PWE, JAM, RW          // Reserved
+mc 0x54728000:P 0x547287ff:P, PWE, JAM, RW          // L4-Wakeup config - AP
+mc 0x54728800:P 0x54728fff:P, PWE, JAM, RW          // L4-Wakeup config - IP L4-Core
+mc 0x54729000:P 0x54729fff:P, PWE, JAM, RW          // L4-Wakeup config - LA
+mc 0x5472a000:P 0x5472a7ff:P, PWE, JAM, RW          // L4-Wakeup config - IP L4-Emu
+mc 0x5472a800:P 0x547fffff:P, PWE, JAM, RW          // Reserved
+// IVA2.2 subsystem
+mc 0x5c000000:P 0x5effffff:P, PWE, JAM, RW          // IVA2.2 subsystem
+mc 0x5f000000:P 0x5fffffff:P, PWE, JAM, RW          // Reserved
+// L3 interconnect
+mc 0x68000000:P 0x680143ff:P, PWE, JAM, RW          // L3
+mc 0x68014400:P 0x68ffffff:P, PWE, JAM, RW          // Reserved
+mc 0x6c000000:P 0x6cffffff:P, PWE, JAM, RW          // SMS registers
+mc 0x6d000000:P 0x6dffffff:P, PWE, JAM, RW          // SDRC registers
+mc 0x6e000000:P 0x6effffff:P, PWE, JAM, RW          // GPMC registers
+mc 0x6f000000:P 0x6fffffff:P, PWE, JAM, RW          // Reserved
+// SDRC/SMS
+mc 0x70000000:P 0x7fffffff:P, PWE, JAM, RW          // SDRC/SMS virtual address space0
+
+// Q2
+mc 0x80000000:P 0x9fffffff:P, PWD, JAM, RW, DW=16   // CS0 - SDRAM
+mc 0xa0000000:P 0xbfffffff:P, PWD, JAM, RW, DW=16   // CS1 - SDRAM
+
+// Q3
+mc 0xc0000000:P 0xdfffffff:P, PWE, JAM, RW          // Reserved
+mc 0xe0000000:P 0xefffffff:P, PWE, JAM, RW          // SDRC/SMS virtual address space1
+
+//        ____User Supplied Setup Commands Go Here____
+
+// TO DO #2 -- If your target board requires any special MEP settings
+//             (e.g. special JTAG initialization), add the commands to
+//             make those settings here.
+
+
+// End of initial one-time only setup script.  If this is a non-intrusive
+// attach connection, or if a normal debug connection fails to connect
+// properly, then exit at this point.  Otherwise continue on with optional
+// additional initialization.
+
+if (@.4$INIT_TYPE != 0) {dv "Non-intrusive attach connection\n"; goto EXIT}
+if (@$trgt_cpu_state != $tcs.halt) {dv "Debug connection failed, "; doq TCS; goto EXIT}
+
+// TO DO #3 -- Comment out all but one of the next three commands to
+//             control IF and HOW the target is initialized when the
+//             debugger is launched.  If no reset or target initialization
+//             is needed then all these can be left commented out.
+
+TI
+//   RTI
+//   RTNI
+
+// The semihosting vector is +8 from the vector area base address, which
+// on Cortex-A8 is configurable via the system coprocessor.  This option
+// is required for hosted mode applications, and ignored for unhosted
+// mode.
+//
+ew $semi_hosting_vector = @cp15_snvba + 8
+
+:EXIT
+dv "Finished reading $$#.\n"
+return
+
+//___________________________________________________________________
+::DO_RTNI  // Reset Target with No Initialization.
+
+    // Normally an  rt  command is sufficient, but it may be necessary
+    // to slow down the JTAG clock first, depending on the affect of
+    // reset on the processor.
+
+    dv "Executing RTNI script function\n"
+    rt
+    return
+
+//___________________________________________________________________
+::DO_RTI   // Reset Target and Initialize.
+
+    // Note that it may be necessary to slow down the JTAG clock first, 
+    // depending on the affect of reset on the processor.
+
+    dv "Executing RTI script function\n"
+    rt
+    TI	// call script DO_TI function
+    return
+
+//___________________________________________________________________
+::DO_TI  // Target Initialize.
+
+    if (@$trgt_cpu_state != $tcs.halt) { dv "Target Initialization commands skipped due to CPU state\n"; doq TCS; return }
+    dv "Initializing target...\n"
+
+    //  Memory Controller Setup
+    //
+    // TO DO #4 -- If your board has a different memory configuration than
+    //             the reference board, then you may need to adapt the
+    //             memory controller initialization script accordingly.
+    //             These settings should match the settings used by your
+    //             boot code during its hardware initialization phase.
+
+    // Watchdog disable
+
+    // Enable Interface clock
+    ew 0x48004C10:p = 0x20
+
+    // Enable functional clock
+    ew 0x48004C00:p = 0x20
+
+    // Check that module is Idle
+    :label10
+    if ((@0x48004C20:p & 0x20) != 0n0) { goto label10 }
+
+    // Wait until reset complete
+    :label20
+    if ((@0x48314014:p & 0x01) == 0n0) { goto label20 }
+
+    // Disable 32Khz watchdog timer
+    ew 0x48314048:p = 0x0000AAAA
+
+    //  while (IN_REGL(0x48314034) & 0x10) {}
+    :label30
+    if ((@0x48314034:p & 0x10) != 0n0) { goto label30 }
+
+    // Disable 32Khz watchdog timer
+    ew 0x48314048:p = 0x00005555
+
+    //  while (IN_REGL(0x48314034) & 0x10) {}
+    :label40
+    if ((@0x48314034:p & 0x10) != 0n0) { goto label40 }
+
+
+    // Initialize Power and Sleep Controller
+
+    // Turn on CORE power domain (CPU *should* default to on)
+    ew CORE_PRM = (@(CORE_PRM+0xE0) | 0x00000003)
+
+    // Turn on MPU power domain (CPU *should* default to on)
+    ew MPU_PRM = (@(MPU_PRM+0xE0) | 0x00000003)
+
+    ew IVA2_PRM = (@(IVA2_PRM+0xE0) | 0x00000003)
+    ew OCP_SYSTEM_REGISTERS_PRM = (@(OCP_SYSTEM_REGISTERS_PRM+0xE0) | 0x00000003)
+    ew GFX_PRM = (@(GFX_PRM+0xE0) | 0x00000003)
+    ew WKUP_PRM = (@(WKUP_PRM+0xE0) | 0x00000003)
+    ew CLOCK_CONTROL_REGISTERS_PRM = (@(CLOCK_CONTROL_REGISTERS_PRM+0xE0) | 0x00000003)
+    ew DSS_PRM = (@(DSS_PRM+0xE0) | 0x00000003)
+    ew CAM_PRM = (@(CAM_PRM+0xE0) | 0x00000003)
+    ew PER_PRM = (@(PER_PRM+0xE0) | 0x00000003)
+    ew EMU_PRM = (@(EMU_PRM+0xE0) | 0x00000003)
+    ew GLOBAL_REGISTERS_PRM = (@(GLOBAL_REGISTERS_PRM+0xE0) | 0x00000003)
+    ew NEON_PRM = (@(NEON_PRM+0xE0) | 0x00000003)
+    ew USBHOST_PRM = (@(USBHOST_PRM+0xE0) | 0x00000003)
+
+
+    // Initialize I/O configuration registers
+
+    eh $mode = 0x0
+    eh $pull_en = 0x0
+    eh $pull_type = 0x2
+    eh $temp = ((@$mode & 0x7) | ((@$pull_en & 0x1)<<0n3) | ((@$pull_type & 0x1)<<0n4) | ((@$pull_type & 0x2)<<0n7))
+
+    eh PADCONF_SYS_NIRQ_HI     = @$temp // sys_clkout2 (gpio 186)
+    eh PADCONF_SYS_OFF_MODE_HI = @$temp // sys_clkout1 (gpio 10 ) 
+
+    // Turn on clock out1 - 26M CLK
+    ew PRM_CLKOUT_CTRL = 0x80
+
+    // Turn on clock out2 - 54M CLK
+    ew CM_CLKOUT_CTRL = 0x83
+
+    // Enable the function clock for GPIO 2-6
+    //   temp = IN_REGL(CM_FCLKEN_PER);
+    //   temp &= ~(0x1f << 13);
+    //   temp |= 0x1f << 13;
+    //   OUT_REGL(CM_FCLKEN_PER, temp);
+    ew CM_FCLKEN_PER = ((@CM_FCLKEN_PER & ~(0x1F<<0n13)) | (0x1F<<0n13))
+
+    // Enable the function clock for GPIO 1
+    //   temp = IN_REGL(CM_FCLKEN_WKUP);
+    //   temp &= ~(1 << 3);
+    //   temp |= 1 << 3;
+    //   OUT_REGL(CM_FCLKEN_WKUP, temp);
+    ew CM_FCLKEN_WKUP = ((@CM_FCLKEN_WKUP & ~(0x1<<0n3)) | (0x1<<0n3))
+
+    // Enable the interface clock for GPIO 2-6
+    //   temp = IN_REGL(CM_ICLKEN_PER);
+    //   temp &= ~(0x1f << 13);
+    //   temp |= 0x1f << 13;
+    //   OUT_REGL(CM_ICLKEN_PER, temp);
+    ew CM_ICLKEN_PER = ((@CM_ICLKEN_PER & ~(0x1F<<0n13)) | (0x1F<<0n13))
+
+    // Enable the interface clock for GPIO 1
+    //   temp = IN_REGL(CM_ICLKEN_WKUP);
+    //   temp &= ~(1 << 3);
+    //   temp |= 1 << 3;
+    //   OUT_REGL(CM_ICLKEN_WKUP, temp);
+    ew CM_ICLKEN_WKUP = ((@CM_ICLKEN_WKUP & ~(0x1<<0n3)) | (0x1<<0n3))
+
+
+    // Initialize cpu, system and peripheral clocks
+
+    // Put CORE in low power bypass  (DPLL3)
+    //   temp = IN_REGL(CLOCK_CONTROL_REGISTERS_CM);
+    //   temp &= ~(0x7 << 0);
+    //   temp |= 0x5 << 0;
+    //   OUT_REGL(CLOCK_CONTROL_REGISTERS_CM, temp);
+    ew CLOCK_CONTROL_REGISTERS_CM = ((@CLOCK_CONTROL_REGISTERS_CM & ~(0x7<<0n0)) | (0x5<<0n0))
+
+    // Wait for bypass mode
+    //   while ((IN_REGL(CLOCK_CONTROL_REGISTERS_CM + 0x20) & 0x00000001) == 1) {}
+    :label100
+    if ((@(CLOCK_CONTROL_REGISTERS_CM+0x20) & 0x00000001) == 0n1) { goto label100 }
+
+    // Put MPU in low power bypass  (DPLL1)
+    //   temp = IN_REGL(CM_CLKEN_PLL_MPU);
+    //   temp &= ~(0x7 << 0);
+    //   temp |= 0x5 << 0;
+    //   OUT_REGL(CM_CLKEN_PLL_MPU, temp);
+    ew CM_CLKEN_PLL_MPU = ((@CM_CLKEN_PLL_MPU & ~(0x7<<0n0)) | (0x5<<0n0))
+
+    // Wait for bypass mode
+    //   while ((IN_REGL(CM_IDLEST_PLL_MPU) & 0x00000001) == 1) {}
+    :label102
+    if ((@CM_IDLEST_PLL_MPU & 0x00000001) == 0n1) { goto label102 }
+
+    // Put peripheral bus in low power stop mode  (DPLL4)
+    //   temp = IN_REGL(CLOCK_CONTROL_REGISTERS_CM);
+    //   temp &= ~(0x7 << 16);
+    //   temp |= 0x1 << 16;
+    //   OUT_REGL(CLOCK_CONTROL_REGISTERS_CM, temp);
+    ew CLOCK_CONTROL_REGISTERS_CM = ((@CLOCK_CONTROL_REGISTERS_CM & ~(0x7<<0n16)) | (0x1<<0n16))
+
+    // Wait for stop mode
+    //   while ((IN_REGL(CLOCK_CONTROL_REGISTERS_CM + 0x20) & 0x00000002) == 1) {}
+    :label103
+    if ((@(CLOCK_CONTROL_REGISTERS_CM+0x20) & 0x00000002) == 0n1) { goto label103 }
+
+    // Put per2 in low power stop mode  (DPLL5)
+    //   temp = IN_REGL(CLOCK_CONTROL_REGISTERS_CM + 0x04);
+    //   temp &= ~(0x7 << 0);
+    //   temp |= 0x1 << 0;
+    //   OUT_REGL(CLOCK_CONTROL_REGISTERS_CM + 0x04, temp);
+    ew (CLOCK_CONTROL_REGISTERS_CM+0x04) = ((@(CLOCK_CONTROL_REGISTERS_CM+0x04) & ~(0x7<<0n0)) | (0x1<<0n0))
+
+    // Wait for stop mode
+    //   while ((IN_REGL(CLOCK_CONTROL_REGISTERS_CM + 0x24) & 0x00000001) == 1) {}
+    :label104
+    if ((@(CLOCK_CONTROL_REGISTERS_CM+0x24) & 0x00000001) == 0n1) { goto label104 }
+
+    // Set input clock frequency - 26.0MHz
+    ew PRM_CLKSEL = 0x3
+
+    // Set the sys clock divider to 1  
+    //   temp = IN_REGL(PRM_CLCKSRC_CTRL);
+    //   temp &= ~(PRM_CLCKSRC_CTRL_SYSCLKDIV);
+    //   temp |= PRM_CLCKSRC_CTRL_SYSCLKDIV_1;
+    //   OUT_REGL(PRM_CLCKSRC_CTRL, temp);
+    ew PRM_CLCKSRC_CTRL = ((@PRM_CLCKSRC_CTRL & ~(0x3<<0n6)) | (0x1<<0n6))
+
+    // Configure clock ratios for all L3, L4 targets
+    //   OUT_REGL(CM_CLKSEL_CORE,   (2 << 0) |  // L3
+    //                            (2 << 2) |    // L4
+    //                            (2 << 4) |    // FSHOSTUSB
+    //                            (0 << 6) |    // GPT10
+    //                            (0 << 7) |    // GPT11
+    //                            (3 << 8));    // SSI
+    ew CM_CLKSEL_CORE = 0x32A
+
+    // Configure MPU (DPLL 1) 500MHz
+    // (26 Mhz * 250)/(12 + 1) = 500 Mhz
+    //   mult = 250;
+    ew $mult = 0n250
+
+    //   if (sys_clock_divide_value() == PRM_CLCKSRC_CTRL_SYSCLKDIV_2)
+    if ((@PRM_CLCKSRC_CTRL & (0x3<<0n6)) != (0x2<<0n6)) { goto label1 }
+    //   {
+    //      // (13 Mhz * 2 * 250)/(12 + 1) = 500 Mhz
+    //      mult *= 2;
+    ew $mult = @$mult * 0n2
+    //   }
+    :label1
+
+    //   div = 12;
+    //   freq = 7;
+    //   m2 = 1;  // MPU_DPLL_CLKOUT (DPLL1 CLKOUTX2): 1000 Mhz
+    ew $div = 0n12
+    ew $freq = 0n7
+    ew $m2 = 0n1
+
+    //   temp = IN_REGL(CM_CLKSEL1_PLL_MPU);
+    //   temp &= ~(0x7FF << 8);
+    //   temp |= mult << 8;
+    //   temp &= ~(0x7F << 0);
+    //   temp |= div << 0;
+    //   OUT_REGL(CM_CLKSEL1_PLL_MPU, temp);
+    ew CM_CLKSEL1_PLL_MPU = ((((@CM_CLKSEL1_PLL_MPU & ~(0x7FF<<0n8)) | (@$mult<<0n8)) & ~(0x7F<<0n0)) | (@$div<<0n0))
+
+    //   temp = IN_REGL(CM_CLKSEL2_PLL_MPU);
+    //   temp &= ~(0x1F << 0);
+    //   temp |= m2 << 0;
+    //   OUT_REGL(CM_CLKSEL2_PLL_MPU, temp);
+    ew CM_CLKSEL2_PLL_MPU = ((@CM_CLKSEL2_PLL_MPU & ~(0x1F<<0n0)) | (@$m2<<0n0))
+
+    //   temp = IN_REGL(CM_CLKEN_PLL_MPU);
+    //   temp &= ~(0xF << 4);
+    //   temp |= freq << 4;
+    //   OUT_REGL(CM_CLKEN_PLL_MPU, temp);
+    ew CM_CLKEN_PLL_MPU = ((@CM_CLKEN_PLL_MPU & ~(0xF<<0n4)) | (@$freq<<0n4))
+
+    // Configure CORE (DPLL 3) 166MHz
+    // Reference clock is sys clock (26 Mhz) / 2
+    // (13 Mhz * 166)/(12 + 1) = 166 Mhz
+    //   mult = 166;
+    ew $mult = 0n166
+
+    //   if (sys_clock_divide_value() == PRM_CLCKSRC_CTRL_SYSCLKDIV_2)
+    if ((@PRM_CLCKSRC_CTRL & (0x3<<0n6)) != (0x2<<0n6)) { goto label2 }
+    //   {
+    //      // (6.5 Mhz * 2 * 166)/(12 + 1) = 166 Mhz
+    //      mult *= 2;
+    ew $mult = @$mult * 0n2
+    //   }
+    :label2
+
+    //   div = 12;
+    //   freq = 7;
+    //   m2 = 1;  // CORE_DPLL_CLKOUT (166 Mhz)
+    //   m3 = 2;  // EMU_CORE_ALWON_CLK (83 Mhz)
+    ew $div = 0n12
+    ew $freq = 0n7
+    ew $m2 = 0n1
+    ew $m3 = 0n2
+
+    //   temp = IN_REGL(CM_CLKSEL1_PLL);
+    //   temp &= ~(0x1F << 27);
+    //   temp |= m2 << 27;
+    //   temp &= ~(0x7FF << 16);
+    //   temp |= mult << 16;
+    //   temp &= ~(0x7F << 8);
+    //   temp |= div << 8;
+    //   OUT_REGL(CM_CLKSEL1_PLL, temp);
+    ew CM_CLKSEL1_PLL = ((((((@CM_CLKSEL1_PLL & ~(0x1F<<0n27)) | (@$m2<<0n27)) & ~(0x7FF<<0n16)) | (@$mult<<0n16)) & ~(0x7F<<0n8)) | (@$div<<0n8))
+
+    //   temp = IN_REGL(CM_CLKEN_PLL);
+    //   temp &= ~(0xF << 4);
+    //   temp |= freq << 4;
+    //   OUT_REGL(CM_CLKEN_PLL, temp);
+    ew CM_CLKEN_PLL = ((@CM_CLKEN_PLL & ~(0xF<<0n4)) | (@$freq<<0n4))
+
+    //   temp = IN_REGL(CM_CLKSEL1_EMU);
+    //   temp &= ~(0x1F << 16);
+    //   temp |= m3 << 16;
+    //   OUT_REGL(CM_CLKSEL1_EMU, temp);
+    ew CM_CLKSEL1_EMU = ((@CM_CLKSEL1_EMU & ~(0x1F<<0n16)) | (@$m3<<0n16))
+
+    // Configure peripheral bus (DPLL 4) 864MHz
+    //   (52 Mhz * 216)/(12 + 1) = 864 Mhz
+    //   mult = 216;   // Note: DPLL4 is derived from DPLL3
+    ew $mult = 0n216
+
+    //   if (sys_clock_divide_value() == PRM_CLCKSRC_CTRL_SYSCLKDIV_2)
+    if ((@PRM_CLCKSRC_CTRL & (0x3<<0n6)) != (0x2<<0n6)) { goto label3 }
+    //   {
+    //      // (26 Mhz * 2 * 216)/(12 + 1) = 864 Mhz
+    //      mult *= 2;
+    ew $mult = @$mult * 0n2
+    //   }
+    :label3
+
+    //   div = 12;
+    //   freq = 7;
+    //   m2 = 9;  // 96 Mhz clock
+    //   m3 = 16; // TV functional clock (54 Mhz)
+    //   m4 = 9;  // DSS1_ALWON_FCLK (96 Mhz)
+    //   m5 = 4;  // CAM_MCLK (216 Mhz)
+    //   m6 = 3;  // EMU_PER_ALWON_CLK (288 Mhz)
+    ew $div = 0n12
+    ew $freq = 0n7
+    ew $m2 = 0n9
+    ew $m3 = 0n16
+    ew $m4 = 0n9
+    ew $m5 = 0n4
+    ew $m6 = 0n3
+
+    //   temp = IN_REGL(CM_CLKSEL2_PLL);
+    //   temp &= ~(0x7F << 0);
+    //   temp |= div << 0;
+    //   temp &= ~(0x7FF << 8);
+    //   temp |= mult << 8;
+    //   OUT_REGL(CM_CLKSEL2_PLL, temp);
+    ew CM_CLKSEL2_PLL = ((((@CM_CLKSEL2_PLL & ~(0x7F<<0n0)) | (@$div<<0n0)) & ~(0x7FF<<0n8)) | (@$mult<<0n8))
+
+    //   temp = IN_REGL(CM_CLKEN_PLL);
+    //   temp &= ~(0xF << 20);
+    //   temp |= freq << 20;
+    //   OUT_REGL(CM_CLKEN_PLL, temp);
+    ew CM_CLKEN_PLL = ((@CM_CLKEN_PLL & ~(0xF<<0n20)) | (@$freq<<0n20))
+
+    //   temp = IN_REGL(CM_CLKSEL3_PLL);
+    //   temp &= ~(0x1F << 0);
+    //   temp |= m2 << 0;
+    //   OUT_REGL(CM_CLKSEL3_PLL, temp);
+    ew CM_CLKSEL3_PLL = ((@CM_CLKSEL3_PLL & ~(0x1F<<0n0)) | (@$m2<<0n0))
+
+    //   temp = IN_REGL(CM_CLKSEL_DSS);
+    //   temp &= ~(0x1F << 8);
+    //   temp |= m3 << 8;
+    //   OUT_REGL(CM_CLKSEL_DSS, temp);
+    ew CM_CLKSEL_DSS = ((@CM_CLKSEL_DSS & ~(0x1F<<0n8)) | (@$m3<<0n8))
+
+    //   temp = IN_REGL(CM_CLKSEL_DSS);
+    //   temp &= ~(0x1F << 0);
+    //   temp |= m4 << 0;
+    //   OUT_REGL(CM_CLKSEL_DSS, temp);
+    ew CM_CLKSEL_DSS = ((@CM_CLKSEL_DSS & ~(0x1F<<0n0)) | (@$m4<<0n0))
+
+    //   temp = IN_REGL(CM_CLKSEL_CAM);
+    //   temp &= ~(0x1F << 0);
+    //   temp |= m5 << 0;
+    //   OUT_REGL(CM_CLKSEL_CAM, temp);
+    ew CM_CLKSEL_CAM = ((@CM_CLKSEL_CAM & ~(0x1F<<0n0)) | (@$m5<<0n0))
+
+    //   temp = IN_REGL(CM_CLKSEL1_EMU);
+    //   temp &= ~(0x1F << 24);
+    //   temp |= m6 << 24;
+    //   OUT_REGL(CM_CLKSEL1_EMU, temp);
+    ew CM_CLKSEL1_EMU = ((@CM_CLKSEL1_EMU & ~(0x1F<<0n24)) | (@$m6<<0n24))
+
+    // Lock CORE
+    //   temp = IN_REGL(CM_CLKEN_PLL);
+    //   temp &= ~(0x7 << 0);
+    //   temp |= 0x7 << 0;
+    //   OUT_REGL(CM_CLKEN_PLL, temp);
+    ew CM_CLKEN_PLL = ((@CM_CLKEN_PLL & ~(0x7<<0n0)) | (0x7<<0n0))
+
+    // Wait for locked
+    //   while ((IN_REGL(CLOCK_CONTROL_REGISTERS_CM + 0x20) & 0x00000001) == 0) {}
+    :label105
+    if ((@(CLOCK_CONTROL_REGISTERS_CM+0x20) & 0x00000001) == 0n0) { goto label105 }
+
+    // Lock MPU
+    //   temp = IN_REGL(CM_CLKEN_PLL_MPU);
+    //   temp &= ~(0x7 << 0);
+    //   temp |= 0x7 << 0;
+    //   OUT_REGL(CM_CLKEN_PLL_MPU, temp);
+    ew CM_CLKEN_PLL_MPU = ((@CM_CLKEN_PLL_MPU & ~(0x7<<0n0)) | (0x7<<0n0))
+
+    // Wait for locked
+    //   while ((IN_REGL(CM_IDLEST_PLL_MPU) & 0x00000001) == 0) {}
+    :label106
+    if ((@CM_IDLEST_PLL_MPU & 0x00000001) == 0n0) { goto label106 }
+
+    // Lock peripheral bus
+    //   temp = IN_REGL(CM_CLKEN_PLL);
+    //   temp &= ~(0x7 << 16);
+    //   temp |= 0x7 << 16;
+    //   OUT_REGL(CM_CLKEN_PLL, temp);
+    ew CM_CLKEN_PLL = ((@CM_CLKEN_PLL & ~(0x7<<0n16)) | (0x7<<0n16))
+
+    // Wait for lock mode
+    //   while ((IN_REGL(CLOCK_CONTROL_REGISTERS_CM + 0x20) & 0x00000002) == 0) {}
+    :label107
+    if ((@(CLOCK_CONTROL_REGISTERS_CM+0x20) & 0x00000002) == 0n0) { goto label107 }
+      
+    ew CM_FCLKEN1_CORE = 0xFFFFFFFF
+    ew CM_ICLKEN1_CORE = 0xFFFFFFFF
+    ew CM_ICLKEN2_CORE = 0xFFFFFFFF
+    ew CM_FCLKEN_WKUP = 0xFFFFFFFF
+    ew CM_ICLKEN_WKUP = 0xFFFFFFFF
+    ew CM_FCLKEN_PER = 0xFFFFFFFF
+    ew CM_ICLKEN_PER = 0xFFFFFFFF
+    ew CM_FCLKEN_DSS = 0x00000007
+    ew CM_ICLKEN_DSS = 0x00000001
+
+
+    // Initialize General Purpose Memory controller
+
+    eh $mode = 0x0
+    eh $pull_en = 0x0
+    eh $pull_type = 0x2
+    eh $temp = ((@$mode & 0x7) | ((@$pull_en & 0x1)<<0n3) | ((@$pull_type & 0x1)<<0n4) | ((@$pull_type & 0x2)<<0n7))
+
+    eh PADCONF_sdrc_dqs3_HI     = @$temp // gpmc_a1
+    eh PADCONF_gpmc_a2          = @$temp // gpmc_a2
+    eh PADCONF_gpmc_a2_HI       = @$temp // gpmc_a3 
+    eh PADCONF_gpmc_a4          = @$temp // gpmc_a4 
+    eh PADCONF_gpmc_a4_HI       = @$temp // gpmc_a5 
+    eh PADCONF_gpmc_a6          = @$temp // gpmc_a6 
+    eh PADCONF_gpmc_a6_HI       = @$temp // gpmc_a7 
+    eh PADCONF_gpmc_a8          = @$temp // gpmc_a8 
+    eh PADCONF_gpmc_a8_HI       = @$temp // gpmc_a9 
+    eh PADCONF_gpmc_a10         = @$temp // gpmc_a10 
+
+    eh PADCONF_gpmc_a10_HI      = @$temp // gpmc_d0 
+    eh PADCONF_gpmc_d1          = @$temp // gpmc_d1 
+    eh PADCONF_gpmc_d1_HI       = @$temp // gpmc_d2 
+    eh PADCONF_gpmc_d3          = @$temp // gpmc_d3 
+    eh PADCONF_gpmc_d3_HI       = @$temp // gpmc_d4 
+    eh PADCONF_gpmc_d5          = @$temp // gpmc_d5 
+    eh PADCONF_gpmc_d5_HI       = @$temp // gpmc_d6 
+    eh PADCONF_gpmc_d7          = @$temp // gpmc_d7 
+    eh PADCONF_gpmc_d7_HI       = @$temp // gpmc_d8 
+    eh PADCONF_gpmc_d9          = @$temp // gpmc_d9 
+    eh PADCONF_gpmc_d9_HI       = @$temp // gpmc_d10 
+    eh PADCONF_gpmc_d11         = @$temp // gpmc_d11 
+    eh PADCONF_gpmc_d11_HI      = @$temp // gpmc_d12 
+    eh PADCONF_gpmc_d13         = @$temp // gpmc_d13 
+    eh PADCONF_gpmc_d13_HI      = @$temp // gpmc_d14 
+    eh PADCONF_gpmc_d15         = @$temp // gpmc_d15 
+
+    eh $mode = 0x0
+    eh $pull_en = 0x1
+    eh $pull_type = 0x3
+    eh $temp = ((@$mode & 0x7) | ((@$pull_en & 0x1)<<0n3) | ((@$pull_type & 0x1)<<0n4) | ((@$pull_type & 0x2)<<0n7))
+
+    eh PADCONF_gpmc_d15_HI      = @$temp // gpmc_ncs0 
+    eh PADCONF_gpmc_ncs1        = @$temp // gpmc_ncs1 
+    eh PADCONF_gpmc_ncs1_HI     = @$temp // gpmc_ncs2 
+    eh PADCONF_gpmc_ncs3        = @$temp // gpmc_ncs3 
+
+    eh PADCONF_gpmc_ncs3_HI     = @$temp // gpmc_ncs4 
+    eh PADCONF_gpmc_ncs5        = @$temp // gpmc_ncs5 
+    eh PADCONF_gpmc_ncs5_HI     = @$temp // gpmc_ncs6 
+
+    eh $mode = 0x1
+    eh $pull_en = 0x1
+    eh $pull_type = 0x2
+    eh $temp = ((@$mode & 0x7) | ((@$pull_en & 0x1)<<0n3) | ((@$pull_type & 0x1)<<0n4) | ((@$pull_type & 0x2)<<0n7))
+
+    eh PADCONF_gpmc_ncs7        = @$temp // gpmc_ncs7 -> gpmc_io_dir 
+
+    eh $mode = 0x0
+    eh $pull_en = 0x0
+    eh $pull_type = 0x2
+    eh $temp = ((@$mode & 0x7) | ((@$pull_en & 0x1)<<0n3) | ((@$pull_type & 0x1)<<0n4) | ((@$pull_type & 0x2)<<0n7))
+
+    eh PADCONF_gpmc_ncs7_HI     = @$temp // gpmc_clk 
+    eh PADCONF_gpmc_nadv_ale    = @$temp // gpmc_adv_ale 
+    eh PADCONF_gpmc_nadv_ale_HI = @$temp // gpmc_noe 
+    eh PADCONF_gpmc_nwe         = @$temp // gpmc_nwe 
+
+    eh $mode = 0x0
+    eh $pull_en = 0x1
+    eh $pull_type = 0x3
+    eh $temp = ((@$mode & 0x7) | ((@$pull_en & 0x1)<<0n3) | ((@$pull_type & 0x1)<<0n4) | ((@$pull_type & 0x2)<<0n7))
+
+    eh PADCONF_gpmc_nwe_HI      = @$temp // gpmc_nbe0_cle LAB/LVSOM ?
+
+    eh PADCONF_gpmc_nbe1        = @$temp // gpmc_nbe1 
+    eh PADCONF_gpmc_nbe1_HI     = @$temp // gpmc_nwp 
+    eh PADCONF_gpmc_wait0_HI    = @$temp // gpmc_wait1 
+
+    // Reset the GPMC
+    ew GPMC_SYSCONFIG = 0x2
+
+    //   while (!IN_REGL(GPMC_SYSSTATUS)) {}
+    :label108
+    if (@GPMC_SYSSTATUS == 0n0) { goto label108 }
+
+    // GPMC Configuration - No idle, L3 clock free running
+    ew GPMC_SYSCONFIG = 0x00000010
+
+    // Time out disabled
+    ew GPMC_TIMEOUT_CONTROL = 0x0
+
+    // GPMC_IRQENABLE(0x0C): All interrupts disabled
+    ew GPMC_IRQENABLE = 0x00000000
+
+    // Write protect output pin high and Wait active Low
+    ew GPMC_CONFIG = 0x0010
+
+    // CS0 -> PoP NAND 0x00000000
+    ew GPMC_CONFIG1_0 = 0x00001800
+    ew GPMC_CONFIG2_0 = 0x00080800
+    ew GPMC_CONFIG3_0 = 0x00080800
+    ew GPMC_CONFIG4_0 = 0x06000600
+    ew GPMC_CONFIG5_0 = 0x00080808
+    ew GPMC_CONFIG6_0 = 0x000003CF
+    ew GPMC_CONFIG7_0 = 0x00000F5F
+
+    // CS1
+
+    // CS2 -> ON/OFF BOARD NOR BOOT 0x10000000
+    ew GPMC_CONFIG1_2 = 0x00001210
+    ew GPMC_CONFIG2_2 = 0x00101001
+    ew GPMC_CONFIG3_2 = 0x00020201
+    ew GPMC_CONFIG4_2 = 0x0F031003
+    ew GPMC_CONFIG5_2 = 0x000F1111
+    ew GPMC_CONFIG6_2 = 0x0F030080
+    ew GPMC_CONFIG7_2 = 0x00000C50
+
+    // Don't use wait
+    ew GPMC_CONFIG = 0x00000010
+
+    
+    // Initialize SDRAM Controller
+
+    // Reset SDRAM Controller
+    ew 0x6D000010:P = 0x00000020
+
+    // Wait on the reset done bit in SDRC SysStatus register 
+    :label_wait4
+    if ((@0x6D000014 & 0x00000001) == 0) {goto label_wait4}
+
+    //Remove reset
+    ew 0x6D000010:P = 0x00000000
+
+    // Set SDRC interface pins to normal mode
+    ew 0x6D000044:P = 0x00000100
+
+    // configure to a 128 MB bank
+    ew 0x6D000040:P = 0x1
+
+    // Set MCFG0 register
+    ew 0x6D000080:P = 0x02584099
+
+    // Set MCFG1 register
+    ew 0x6D0000B0:P = 0x02584099
+
+    // Set ACTIM_CTRLA0 register
+    ew 0x6D00009C:P = 0x7AE1B4C6
+
+    // Set ACTIM_CTRLB0 register
+    ew 0x6D0000A0:P = 0x00011517
+
+    // Set ACTIM_CTRLA1 register
+    ew 0x6D0000C4:P = 0x7AE1B4C6
+
+    // Set ACTIM_CTRLB1 register
+    ew 0x6D0000C8:P = 0x00011517
+
+    // Set RFR_CTRL0 register
+    ew 0x6D0000A4:P = 0x0004E201
+
+    // Set RFR_CTRL1 register
+    ew 0x6D0000D4:P = 0x0004E201
+
+    // Set SDRC Power register
+    ew 0x6D000070:P = 0x00000081
+
+    // Manual NOP command
+    ew 0x6D0000A8:P = 0x0
+    ew 0x6D0000D8:P = 0x0
+
+    // Manual precharge command
+    ew 0x6D0000A8:P = 0x1
+    ew 0x6D0000D8:P = 0x1
+
+    // Manual auto refresh command
+    ew 0x6D0000A8:P = 0x2
+    ew 0x6D0000D8:P = 0x2
+
+    // Set SDRC MR0 register
+    ew 0x6D000084:P = 0x32
+
+    // Set SDRC MR1 register
+    ew 0x6D0000B4:P = 0x32
+
+    // Set SDRC DLLA Control register
+    ew 0x6D000060:P = 0xA
+
+    
+    // Invalidate L1 Cache
+    ci
+    
+    
+    // Disable L2 cache by clearing bit 2 in cp15 auxiliary control register
+    ew $tempvar = @cp15_auxctl
+    ew $tempvar2 = (@$tempvar & 0xFFFFFFFD)
+    ew cp15_auxctl = @$tempvar2 
+
+    dv "Initializing target done.\n"
+    return
+
+//___________________________________________________________________
+
+// <eof>

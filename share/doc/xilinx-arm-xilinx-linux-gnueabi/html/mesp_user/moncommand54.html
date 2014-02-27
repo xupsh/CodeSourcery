@@ -1,0 +1,326 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:23:56 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>fmt Data Format</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("MON Command Language ","moncommand01","MON Operands","moncommand50","fmt Data Format","moncommand54","76");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp6677"></a><h1 class="pzCmdFunc FontLevel1" id="MGC6677">
+
+
+fmt <a name="CRefID42154"></a>Data Format
+</h1>
+
+
+
+<a name="wp6678"></a><p class="pzHeading">
+
+Syntax
+</p>
+
+<a name="wp6679"></a><p class="pzUsage">
+
+{d|u|o|x|X|f|e|E|g|G|c|s|i|I}
+</p>
+
+<a name="wp6680"></a><p class="pzHeading">
+
+Description
+</p>
+
+<a name="wp6682"></a><p class="pzShortDesc">
+
+The <span class=" cItalic">fmt</span> operand specifies the format used by the Display and Enter commands, as follows:
+</p>
+
+
+<a name="wp6683"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cBold">d</span> - Signed decimal integer.</li></ul>
+
+<a name="wp6684"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cBold">u</span> - Unsigned decimal integer.</li></ul>
+
+<a name="wp6685"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cBold">o</span> - Unsigned octal integer.</li></ul>
+
+<a name="wp6686"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cBold">x|X</span> - Unsigned hexadecimal integer. Default is <span class=" cBold">&ldquo;X&rdquo;</span>.</li></ul>
+
+<a name="wp6687"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cBold">f</span> - Signed floating point value in decimal notation, with six decimal places.</li></ul>
+
+<a name="wp6688"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cBold">e|E</span> - Signed floating point value in scientific notation, with six decimal places.</li></ul>
+
+<a name="wp6689"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cBold">g|G</span> - Signed floating point value in either decimal or scientific notation, whichever is more compact.</li></ul>
+
+<a name="wp6690"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cBold">c</span> - Single ASCII character.</li></ul>
+
+<a name="wp6691"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cBold">s</span> - Character string<span class=" cItalic">.</span></li></ul>
+
+<a name="wp6695"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cBold">i</span>|<span class=" cBold">I</span> - Assembled/disassembled instruction (see <a href="moncommand12.html"  onclick='oT("CRF","moncommand12.html");return false;'>DB, DD, DH, DQ, DW, Display/Find Data</a> and <a href="moncommand22.html"  onclick='oT("CRF","moncommand22.html");return false;'>EB, ED, EH, EQ, EW Enter or Fill Data</a>).</li></ul>
+
+<a name="wp6699"></a><p class="pBody">
+
+The case of the x, e, and g formats determines whether alphabetic characters in the formatted data will be in upper or lower case. The fmt operand is the sole exception to the rule that keywords are not case-sensitive in monitor commands.
+</p>
+
+<a name="wp6700"></a><p class="pBody">
+
+Some formats are not valid for some object sizes. Refer to <a href="moncommand54.html#wp6705"  onclick='oT("CRF","moncommand54.html#wp6705");return false;'>Table&#160;4&#8209;2</a> for valid combinations.
+</p>
+<div id="TableDivQz"></div>
+<div align="center">
+
+
+<a name="wp6705"></a><p class="pTableTitle" id="MGC6705">
+
+Table 4&#8209;2. <a name="CRefID91378"></a>
+Valid Combinations&#160;
+</p>
+
+
+<table border="1" cellpadding="5" cellspacing="0" id="wp6705table6701">
+  <tr bgcolor="#CCCCCC"  align="center" valign="middle">
+    <th>
+
+<a name="wp6711"></a><p class="pTableHeading" id="MGC6705">
+Type
+</p>
+</th>
+
+    <th>
+
+<a name="wp6713"></a><p class="pTableHeading">
+
+Valid Formats
+</p>
+
+</th>
+
+    <th>
+&#160;</th>
+
+
+</tr>
+
+  <tr bgcolor="#CCCCCC"  align="center" valign="middle">
+    <th>
+&#160;</th>
+
+    <th>
+
+<a name="wp6719"></a><p class="pTableHeading">
+
+for Enter
+</p>
+
+</th>
+
+    <th>
+
+<a name="wp6721"></a><p class="pTableHeading">
+
+for Display
+</p>
+
+</th>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row3Column1' >
+
+
+<a name="wp6723"></a><p class="pTableCell">
+B</p></td>
+
+    <td id='Row3Column2' >
+
+
+<a name="wp6725"></a><p class="pTableCell">
+<span class=" cBold">d</span>, <span class=" cBold">u</span>, <span class=" cBold">o</span>, <span class=" cBold">x</span>, <span class=" cBold">X</span>, <span class=" cBold">c</span>, <span class=" cBold">s</span></p></td>
+
+    <td id='Row3Column3' >
+
+
+<a name="wp6727"></a><p class="pTableCell">
+<span class=" cBold">d</span>, <span class=" cBold">u</span>, <span class=" cBold">o</span>, <span class=" cBold">x</span>, <span class=" cBold">X</span>, <span class=" cBold">c</span>, <span class=" cBold">s</span></p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row4Column1' >
+
+
+<a name="wp6729"></a><p class="pTableCell">
+H</p></td>
+
+    <td id='Row4Column2' >
+
+
+<a name="wp6731"></a><p class="pTableCell">
+<span class=" cBold">d</span>, <span class=" cBold">u</span>,<span class=" cBold"> o</span>, <span class=" cBold">x</span>, <span class=" cBold">X</span></p></td>
+
+    <td id='Row4Column3' >
+
+
+<a name="wp6733"></a><p class="pTableCell">
+<span class=" cBold">i</span>, <span class=" cBold">I</span>, <span class=" cBold">d</span>, <span class=" cBold">u</span>, <span class=" cBold">o</span>, <span class=" cBold">x</span>, <span class=" cBold">X</span></p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row5Column1' >
+
+
+<a name="wp6735"></a><p class="pTableCell">
+W</p></td>
+
+    <td id='Row5Column2' >
+
+
+<a name="wp6737"></a><p class="pTableCell">
+any except <span class=" cBold">c</span> or <span class=" cBold">s</span></p></td>
+
+    <td id='Row5Column3' >
+
+
+<a name="wp6739"></a><p class="pTableCell">
+any except <span class=" cBold">c</span> or <span class=" cBold">s</span></p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row6Column1' >
+
+
+<a name="wp6741"></a><p class="pTableCell">
+D</p></td>
+
+    <td id='Row6Column2' >
+
+
+<a name="wp6743"></a><p class="pTableCell">
+<span class=" cBold">f</span>, <span class=" cBold">e</span>, <span class=" cBold">E</span>, <span class=" cBold">g</span>, <span class=" cBold">G</span>, <span class=" cBold">x</span>, <span class=" cBold">X</span></p></td>
+
+    <td id='Row6Column3' >
+
+
+<a name="wp6745"></a><p class="pTableCell">
+<span class=" cBold">f</span>, <span class=" cBold">e</span>, <span class=" cBold">E</span>, <span class=" cBold">g</span>, <span class=" cBold">G</span>, <span class=" cBold">x</span>, <span class=" cBold">X</span></p></td>
+
+
+</tr>
+
+
+</table>
+
+</div>
+<div id='EndTable'> </div>
+<p class="pBody">
+<br clear='left' class='Blank4Table' />
+
+
+</p>
+
+<a name="wp6752"></a><p class="pzShortDesc">
+
+See<span class="cDefault"> </span><a href="moncommand12.html"  onclick='oT("CRF","moncommand12.html");return false;'>DB, DD, DH, DQ, DW, Display/Find Data</a><span class="cDefault"> </span>and<span class="cDefault"> </span><a href="moncommand22.html"  onclick='oT("CRF","moncommand22.html");return false;'>EB, ED, EH, EQ, EW Enter or Fill Data</a><span class="cDefault"> </span>for examples.
+</p>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "fmt Data Format";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "fmt.Data.Format"
+   ThisTopic = "UserDefinedAccessLists";
+   CurrentFile = "moncommand54.html";
+   CurrentFileID = "76";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    <br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    <br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

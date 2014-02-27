@@ -1,0 +1,410 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:22:21 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>Debugging an Application with CodeBench</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("Debugging an Application","debug_with_cb1","Debugging an Application with CodeBench","debug_with_cb2","Sourcery Probe Debugger Tab Options","debug_with_cb2","7");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp14910"></a><h1 class="pHeading2 FontLevel1" id="MGC14910">
+
+
+<a name="CRefID51095"></a>Debugging an Application with CodeBench
+</h1>
+<a name="wp14911"></a><p class="pBody">
+
+Follow the steps in this section to set up a launch configuration for debugging an application using CodeBench and a Sourcery Probe.
+</p>
+
+<a name="wp14912"></a><p class="pHTaskSubhead">
+
+Prerequisites
+</p>
+
+<a name="wp14913"></a>
+<ul><li class="LL1BulSolid">Must have communication with the Sourcery Probe device. For details see the following documents:</li></ul>
+
+<a name="wp16463"></a>
+<ul><li class="LL2BulHollow"><span class=" cItalic">Mentor Embedded Sourcery Probe Professional Hardware Manual</span></li></ul>
+<a name="wp16470"></a>
+<ul><li class="LL2BulHollow"><span class=" cItalic">Mentor Embedded Sourcery Probe Personal Hardware Manual</span>.</li></ul>
+<a name="wp16739"></a>
+<ul><li class="LL2BulHollow"><a name="EW8"></a><a href="virtualprobe1.html#CRefID21126" onclick='oT("CRF","virtualprobe1.html#CRefID21126");'><span class=" cLinkOverride">Using the Virtual Sourcery Probe</span></a></li></ul>
+<a name="wp16740"></a>
+<ul><li class="LL1BulSolid">An executable build must exist.</li></ul>
+
+<a name="wp16741"></a><p class="pHTaskSubhead">
+
+Procedure
+</p>
+
+<a name="wp14915"></a>
+<ol start="1"><li class="LL1Seq">In the Sourcery CodeBench IDE, select <span class=" cBold">Run &gt; Debug Configurations...</span>.</li></ol>
+<a name="wp15243"></a>
+<ol start="2"><li class="LL1Seq">Select <span class=" cBold">Soucery CodeBench Debug</span>, then click the <span class=" cBold">New</span> <a name='Graphic15253'></a><img src="images/new_lc_button.png"  style='width:0.23958in;'  id='wp15253' border='0' hspace='0' vspace='0'/>
+
+
+ icon.</li></ol>
+<a name="wp14916"></a>
+<ol start="3"><li class="LL1Seq">Under the Main tab, select your project and your application.</li></ol>
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp16709"></a><p class="pnoteNote">
+
+        	If you want to debug an external executable without creating or selecting a project, leave the Project field empty.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp15263"></a>
+<ol start="4"><li class="LL1Seq">Under the Debugger tab, select <span class=" cBold">Sourcery Probe</span> or <span class=" cBold">Virtual Sourcery Probe</span> as the Debug interface.</li></ol>
+<a name="wp15272"></a>
+<ol start="5"><li class="LL1Seq">Select the specific probe device you are using.</li></ol>
+<a name="wp15288"></a>
+<ul><li class="LL2BulSolid">If the probe is discovered, it can be selected from the device list.</li></ul>
+<a name="wp15301"></a>
+<ul><li class="LL2BulSolid">If some probes are discovered, but not the one you want, select <span class=" cBold">Manually Configured Probe</span> and enter its host name or IP address.</li></ul>
+<a name="wp15308"></a>
+<ul><li class="LL2BulSolid">If no probes are discovered, then enter the probe&#8217;s host name or IP address.</li></ul>
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp16258"></a><p class="pnoteNote">
+
+        	If the probe you want to use is not shown in the list, click the <span class=" cBold">Rescan</span> button (). If it still is not found, then you must manually enter the IP address or hostname of your probe. Some common reasons why a probe may not be discoverable include:
+<br />
+<br />- If your probe is not on your current host machine&#8217;s subnet, or your network adapter is not configured for multi-cast, it might not be discoverable.
+<br />
+<br />- Your probe also might not be discoverable if the routers servicing your network are blocking multi-cast packets, a very common practice among companies.
+<br />
+<br />- Many VPN environments also block multi-cast packets.
+<br />
+<br />- If multi-casting is blocked, you must manually enter the IP address or hostname of your probe.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp16262"></a>
+<ol start="6"><li class="LL1Seq">Select the target board.</li></ol>
+<a name="wp15342"></a>
+<ol start="7"><li class="LL1Seq">Under Debugger Options select the <span class=" cBold">Sourcery Probe</span> tab and enter the appropriate device settings. See <a href="debug_with_cb2.html#wp15355"  onclick='oT("CRF","debug_with_cb2.html#wp15355");return false;'>Sourcery Probe Debugger Tab Options</a> for a description of these options.</li></ol>
+<a name="wp15631"></a>
+<ol start="8"><li class="LL1Seq">Select the <span class=" cBold">Startup</span> tab. Use this tab to customize the startup process. </li></ol>
+<a name="wp15632"></a>
+<ol start="9"><li class="LL1Seq">By default, CodeBench will automatically run the code up to main() when you launch the debugger. If you instead wish to begin debugging from the program&#39;s entry point, then check that option in the Startup tab.</li></ol>
+<a name="wp15657"></a>
+<ol start="10"><li class="LL1Seq">Click <span class=" cBold">Apply</span>. </li></ol>
+<a name="wp15667"></a>
+<ol start="11"><li class="LL1Seq">Click <span class=" cBold">Debug</span>.</li></ol>
+<a name="wp14924"></a><p class="pHTaskSubhead">
+
+	Related Topics
+</p>
+<div id="TableDivQz"></div>
+<div align="left">
+
+
+<table border="0" cellpadding="2" cellspacing="0" width="96%" id="wp14921table14919">
+  <tr align="left" valign="top">
+    <td id='Row1Column1'  style='width:3.25in'>
+
+
+<a name="wp14921"></a><p class="pTableCell">
+<a name="EW2"></a><a href="majicconfig05.html#CRefID47175" onclick='oT("CRF","majicconfig05.html#CRefID47175");'><span class=" cLinkOverride">Creating a Custom Initialization Script Using a Template</span></a></p></td>
+    <td id='Row1Column2'  style='width:3.25in'>
+
+
+<a name="wp14923"></a><p class="pTableCell">
+<a name="EW3"></a><a href="majicconfig04.html#CRefID20487" onclick='oT("CRF","majicconfig04.html#CRefID20487");'><span class=" cLinkOverride">Sourcery Probe Target Initialization Scripts</span></a></p></td>
+
+</tr>
+  <tr align="left" valign="top">
+    <td id='Row2Column1'  style='width:3.25in'>
+
+
+<a name="wp15681"></a><p class="pTableCell">
+<a name="EW4"></a><a href="probe_settings_updates_appxA7.html#CRefID34690" onclick='oT("CRF","probe_settings_updates_appxA7.html#CRefID34690");'><span class=" cLinkOverride">Sourcery Probe Discovery Dialog Box</span></a></p></td>
+    <td id='Row2Column2'  style='width:3.25in'>
+
+
+<a name="wp15683"></a><p class="pTableCell">
+  &#160;</p></td>
+
+</tr>
+
+</table>
+
+</div>
+<div id='EndTable'> </div>
+<p class="pHTaskSubhead">
+
+<br clear='left' class='Blank4Table' />
+
+</p>
+
+<a name="wp15355"></a><h2 class="pHeading3NoSplit FontLevel2" id="MGC15355">
+
+<a name="CRefID48313"></a>
+Sourcery Probe Debugger Tab Options
+</h2>
+<a name="wp15356"></a><p class="pBody">
+
+The Sourcery Probe requires you to set some device options to complete the launch configuration setup.
+</p>
+
+<a name="wp15357"></a><p class="pBody">
+
+These options are described in <a href="debug_with_cb2.html#wp15432"  onclick='oT("CRF","debug_with_cb2.html#wp15432");return false;'>Table&#160;2&#8209;1</a>:
+</p>
+
+<a name="wp15393"></a><p class="pBody">
+
+
+</p>
+<div id="TableDivQz"></div>
+<div align="center">
+
+
+<a name="wp15432"></a><p class="pTableTitle" id="MGC15432">
+
+Table 2&#8209;1. <a name="CRefID55447"></a>
+Sourcery Probe Device Options&#160;
+</p>
+
+
+<table border="1" cellpadding="5" cellspacing="0" id="wp15432table15398">
+  <tr bgcolor="#CCCCCC"  align="center" valign="middle">
+    <th>
+
+<a name="wp15436"></a><p class="pTableHeading" id="MGC15432">
+Option
+</p>
+</th>
+
+    <th>
+
+<a name="wp15438"></a><p class="pTableHeading">
+
+Description
+</p>
+
+</th>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row2Column1'  style='width:2.2in'>
+
+
+<a name="wp15440"></a><p class="pTableCell">
+Target init script</p></td>
+
+    <td id='Row2Column2'  style='width:4.0in'>
+
+
+<a name="wp15442"></a><p class="pTableCell">
+Specifies the full path to a target initialization script. To find the list of supplied reference platform initialization scripts, look for files with the <span class=" cItalic">.maj</span> extension under<span class=" cItalic"> i686-mingw32/xxxx/mep/tsp</span> (Windows host) or <span class=" cItalic">i686-pc-linux/xxxx/mep/tsp</span> (Linux host), where <span class=" cItalic">xxxx</span> is the CodeBench package type. Refer to <a name="EW5"></a><a href="majicconfig04.html#CRefID20487" onclick='oT("CRF","majicconfig04.html#CRefID20487");'><span class=" cLinkOverride">Sourcery Probe Target Initialization Scripts</span></a>.</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row3Column1' >
+
+
+<a name="wp15444"></a><p class="pTableCell">
+CPU ID</p></td>
+
+    <td id='Row3Column2' >
+
+
+<a name="wp15446"></a><p class="pTableCell">
+Specifies the CPU type on the target board.</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row4Column1' >
+
+
+<a name="wp15517"></a><p class="pTableCell">
+Core</p></td>
+
+    <td id='Row4Column2' >
+
+
+<a name="wp15519"></a><p class="pTableCell">
+Specifies the processor core to which the debugger should attach. NOTE: This option is only applicable to multi-core processors. The integer value must be between 1 and the number of processor cores. See <a name="EW6"></a><a href="majicconfig12.html#CRefID20670" onclick='oT("CRF","majicconfig12.html#CRefID20670");'><span class=" cLinkOverride">Core_Access_Select</span></a>.</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row5Column1' >
+
+
+<a name="wp15448"></a><p class="pTableCell">
+Endianness</p></td>
+
+    <td id='Row5Column2' >
+
+
+<a name="wp15450"></a><p class="pTableCell">
+Specifies big or little endian, depending on the byte ordering of the target board. See <a name="EW7"></a><a href="majicconfig12.html#CRefID39093" onclick='oT("CRF","majicconfig12.html#CRefID39093");'><span class=" cLinkOverride">Trgt_Little_Endian</span></a>.</p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row6Column1' >
+
+
+<a name="wp15452"></a><p class="pTableCell">
+Semihosting</p></td>
+
+    <td id='Row6Column2' >
+
+
+<a name="wp15454"></a><p class="pTableCell">
+Specifies semihosting on or off. The default is on. If semihosting is not in use by the program/application disabling this feature can improve performance. </p></td>
+
+
+</tr>
+
+  <tr align="left" valign="top">
+    <td id='Row7Column1' >
+
+
+<a name="wp15456"></a><p class="pTableCell">
+Log File</p></td>
+
+    <td id='Row7Column2' >
+
+
+<a name="wp15458"></a><p class="pTableCell">
+This is for the logging operation of MDI and its interface to the probe. It is only required for troubleshooting debug connection problems. </p>
+<a name="wp15929"></a><p class="pTableCell">
+NOTE: Be sure to use a fully qualified path for the log file (e.g., <span class=" cItalic">c:\mdi.log</span>) to make finding it easier. Otherwise, a simple file name or relative path will place the file relative to the current working directory of the Sprite, the location of which is not always obvious.</p></td>
+
+
+</tr>
+
+
+</table>
+
+</div>
+<div id='EndTable'> </div>
+<p class="pBody">
+
+<br clear='left' class='Blank4Table' />
+
+
+</p>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "Debugging an Application with CodeBench";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "Debugging.an.Application.with.CodeBench"
+   ThisTopic = "SourceryProbeDiscoveryDialogBox";
+   CurrentFile = "debug_with_cb2.html";
+   CurrentFileID = "7";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    
+<br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    
+<br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

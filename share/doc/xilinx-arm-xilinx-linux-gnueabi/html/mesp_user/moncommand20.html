@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:23:56 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe User's Manual" />
+    <title>DV Display Values</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("MON Command Language ","moncommand01","MON Command Details","moncommand04","DV Display Values","moncommand20","42");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp27137"></a><h1 class="pzCmdFunc FontLevel1" id="MGC27137">
+
+
+DV <a name="CRefID14820"></a>Display <a name="CRefIDdisplay value;DV"></a>Values
+</h1>
+
+
+
+<a name="wp29054"></a><p class="pzMiscInfo">
+
+Availability: ALL
+</p>
+
+<a name="wp32119"></a><p class="pzHeading">
+
+Syntax
+</p>
+
+<a name="wp32120"></a><p class="pzUsage">
+
+DV <span class="cOptRpl">string</span>[, <span class="cOptRpl">expr</span>] ...
+</p>
+
+<a name="wp32121"></a><p class="pzHeading">
+
+Description
+</p>
+
+<a name="wp5803"></a><p class="pzShortDesc">
+
+The <a name="CRefIDdisplay value command"></a>Display Value command allows you to generate formatted output. The format string controls the operation of <span class=" cBold">DV</span> much like the format string in a C printf() statement.
+</p>
+
+
+<a name="wp5804"></a>
+<ul class="ulSmSpace"><li class="LLzptArg"><span class=" cItalic">string - </span>a string literal containing characters to be displayed and conversion specifiers. For each conversion format specification, a corresponding <a href="moncommand53.html"  onclick='oT("CRF","moncommand53.html");return false;'><span class=" cNoBold cNoItalic cBlack">expr Expression</span></a><span class=" cNoBold cNoItalic cBlack"> </span>argument is required to provide the value to be displayed. (The <span class=" cItalic">string</span> syntax is shown in <a href="moncommand60.html"  onclick='oT("CRF","moncommand60.html");return false;'>string String Literal</a>.)</li></ul>
+
+
+<a name="wp5808"></a>
+<div class="LLzArgDesc">All the conversion specifiers defined for the &ldquo;C&rdquo; printf() function are supported, except the use of <span class=" cBold">*</span> to specify dynamic field width or precision. Also, as an extension, the conversion letter can be preceded by an object size specifier: <span class=" cBold">B</span>, <span class=" cBold">H</span>, or <span class=" cBold">W</span> (or <span class=" cBold">L</span>) indicating the value to be displayed is a Byte, Half-word, or Word sized object located at address <span class=" cItalic">expr</span>.</div>
+
+<a name="wp5809"></a>
+<div class="LLzArgDesc">The size and conversion letters combine to determine whether to display the value of<span class=" cItalic"> expr</span> or the data stored at the address <span class=" cItalic">expr</span>. For formats <span class=" cBold">s</span>, <span class=" cBold">e</span>, <span class=" cBold">f</span>, and <span class=" cBold">g</span>, the data at the address <span class=" cItalic">expr</span> is always displayed. For all other formats, the value of<span class=" cItalic"> expr</span> is displayed, unless a size specifier is used (in which case the data at <span class=" cItalic">expr</span> is displayed, as demonstrated in the second example below).</div>
+<a name="wp5810"></a><p class="pzHeading">
+
+Examples
+</p>
+
+<a name="wp5812"></a><pre class="pCode">
+<a name="CRefIDdisplay value command"></a>DV &quot;Hello, world!\n&quot;            
+</pre>
+
+<a name="wp5813"></a><pre class="pCode">
+DV &quot;Byte at %x is %02bx\n&quot;, global_char_var, global_char_var
+</pre>
+
+<a name="wp5814"></a><pre class="pCode">
+
+</pre>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_user";
+   DocTitle = "Mentor Embedded Sourcery Probe User's Manual";
+   PageTitle = "DV Display Values";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "DV.Display.Values"
+   ThisTopic = "UserDefinedAccessLists";
+   CurrentFile = "moncommand20.html";
+   CurrentFileID = "42";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe User's Manual&nbsp;2.3.4
+    <br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    <br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

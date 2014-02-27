@@ -1,0 +1,39 @@
++q  // Enter quiet mode
+//___________________________________________________________________
+//
+//               Copyright (c) 2010 Mentor Graphics Corporation
+//                           All rights reserved
+//
+//   THIS WORK CONTAINS TRADE SECRETS AND PROPRIETARY INFORMATION WHICH IS
+//    THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS LICENSORS AND IS
+//                        SUBJECT TO LICENSE TERMS.
+//
+//___________________________________________________________________
+//
+// MEP Target Initialization File for ARM Platform Baseboard (PB11MPCore)
+// reference platform
+//
+// This file is called from core 0's board init file, but may also be called
+// via an alias (BI) command that is set up in each core's init file
+
+// Initialize Interrupt Mode on PB11MPCore
+//
+//	Legacy mode              0x00000000 
+//	New mode without DDC     0x00800000 
+//	New mode with DCC        0x00400000 
+//___________________________________________________________________
+dv "Initializing board via $$# script\n"
+
+if (@$trgt_cpu_state != $tcs.halt) { dv "Error: Unable to initialize board due to CPU state\n"; doq TCS; return }
+
+// Proceed with initialization steps
+
+ew 10000020 = 0xA05F				// unlock register
+ew 10000074 = @.4(0x10000074) | 0x00800000	// write mode value
+ew 10000020 = 0x00000000			// lock register
+
+ew scu_cntrl = 0x00001fff
+
+//___________________________________________________________________
+//
+// <eof>

@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <noscript>
+       <link rel="StyleSheet" href="../MGC/styles/body.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/catalog.css" type="text/css" />
+       <link rel="StyleSheet" href="../MGC/styles/document.css" type="text/css" />
+    </noscript>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 for FrameMaker 8.0.2.1385" />
+    <meta name="TEMPLATEBASE" content="mgc_ww_v3.1.107" />
+    <meta name="LASTUPDATED" content="Mon Oct 22 13:21:47 2012" />
+    <meta name="mgc_html_doctitle" content="Mentor Embedded Sourcery Probe Personal Hardware Manual" />
+    <title>Connecting the Probe to the Target</title>
+<!-- Search Engine keywords -->
+    <meta name="attributes" content=" product.version.2.3.4,doc.type.documentation.user,product.id.P11526 "/>
+<!-- JavaScript Files -->
+<script type="text/javascript" language="JavaScript1.2" src="../MGC/js/page.js"></script>
+<script type="text/javascript" language="JavaScript1.2">
+        if(DetectChromeForBasic()){
+           writeNoScriptStyles();
+        }
+
+     </script>
+   <script type="text/javascript" language="JavaScript1.2">
+     // Set reference to top level help frame
+      //
+      if(!DetectChromeForBasic()){
+        javascriptTopicRedirect();
+      }
+     </script>
+  </head>
+
+<body class="body" id="DocBody">
+<div id="BodyPopup" class="BodyPopup"></div>
+<div class="HideBody" id="HideBody">&nbsp;</div>
+<div id="bodycontent" class="BodyContent">
+
+
+
+
+
+  <script type="text/javascript" language="JavaScript1.2">
+  <!--
+      var BC = new Array("Connecting to the Target and Host Computer","connecting01","Probe Configuration Settings","connecting11","naV","naV","21");
+  // -->
+  </script>
+
+   <noscript><iframe framespacing="0" marginheight="2px" frameborder="no" scrolling="no" src="../MGC/html/noscript_header.htm" width="100%" height="100px;"></iframe>
+   </noscript>
+
+<script type="text/javascript" language="JavaScript1.2">
+if(DetectChromeForBasic()){
+       if(!(top.inEclipse)){  
+          writeBasicHeader();
+      }
+}
+</script>
+<div id="BodyContent">
+
+<a name="wp15823"></a><h1 class="pHeading2 FontLevel1" id="MGC15823">
+
+<a name="CRefID13204"></a>
+Connecting the Probe to the Target
+</h1>
+<a name="wp15824"></a><p class="pBody">
+
+To connect the probe connector to the target debug port header, perform the steps provided in this section.
+</p>
+
+<a name="wp15825"></a><p class="pHTaskSubhead">
+
+Prerequisites
+</p>
+
+<a name="wp15826"></a>
+<ul><li class="LL1BulSolid">The debugger software must be installed before you attempt to connect the probe to the PC for the first time. This ensures the required USB drivers are available when the first connection is established. See <a href="connecting01.html"  onclick='oT("CRF","connecting01.html");return false;'>Connecting to the Target and Host Computer</a>.</li></ul>
+
+<a name="wp15827"></a><p class="pHTaskSubhead">
+
+Procedure
+</p>
+
+<a name="wp15960"></a>
+<ol start="1"><li class="LL1Seq">Remove power from your target.</li></ol>
+<a name="wp15961"></a>
+<ol start="2"><li class="LL1Seq">Unplug the USB cable from the probe.</li></ol>
+<a name="wp15962"></a>
+<ol start="3"><li class="LL1Seq">Ensure that pin 1 of the probe&#8217;s gray ribbon cable connector lines up with pin 1 on the target&#8217;s debug port header.</li></ol>
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp17204"></a><p class="pnoteNote">
+
+        	Pin 1 is clearly marked on the probe&#8217;s gray ribbon cable by a red line down one side of the cable and a small triangle in the plastic socket.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp15970"></a><p class="pFigureTitle" id="MGC15970">
+
+Figure 2&#8209;5. Sourcery Probe Personal <a name='Graphic15968'></a><img src="images/usb_jtag_top_new.jpg"  style='width:4.07999in;'  class="Aligncenter" id='wp15968' border='0' hspace='0' vspace='0'/>
+
+
+</p>
+
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp15978"></a><p class="pnoteNote" id="MGC15970">
+
+        	There are many different standard debug connectors. Target Adapter Modules are available with certain probe models to support alternate debug connector types. (See <a href="connecting10.html#wp16131"  onclick='oT("CRF","connecting10.html#wp16131");return false;'>Table&#160;2&#8209;1</a>.) It is very important to check the debug connector details of your target board when selecting the right adapter module. See the <span class=" cItalic">Mentor Embedded Sourcery Probe Personal Target Connections</span> application note.
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+<a name="wp15985"></a>
+<ol start="4"><li class="LL1Seq">Gently (but firmly) press the probe connector onto the target debug port header.</li></ol>
+<a name="wp15986"></a>
+<ol start="5"><li class="LL1Seq">Reconnect the USB cable to the probe.</li></ol>
+<a name="wp15828"></a>
+<ol start="6"><li class="LL1Seq">Apply power to your target.</li></ol>
+<a name="wp15924"></a><h1 class="pHeading2NoSplit FontLevel1" id="MGC15924">
+
+
+Probe Configuration Settings
+</h1>
+<a name="wp14785"></a><p class="pBody">
+
+Probe configuration settings like JTAG clock frequency must be adapted to meet the requirements of the target hardware. Refer to the <span class=" cItalic">Mentor Embedded Sourcery Probe User&#8217;s Manual </span>for information on how to configure the probe settings.
+</p>
+
+<table class="notes">
+  <tr class="NotesUpperRuleBlack">
+    <td class="NotesUpperRule" colspan='2'><span class="cNotesBlack">Note</span></td>
+  </tr>
+  <tr class="NotesNote">
+    <td class="NoteNote"></td>
+    <td valign="top">
+            
+<a name="wp14793"></a><p class="pnoteNote">
+
+        	Due to variations in the design of target systems, it is not possible to guarantee that all systems can be operated at the maximum debug port clock rates. These variations include circuit impedances, trace lengths, and signal terminations. You might need to select a lower clock rate to get reliable operation. 
+        </p>
+          </td>
+  </tr>
+  <tr class="NotesBottomRuleBlack">
+    <td class="NotesBottomRule" colspan='2'>&nbsp;</td>
+    </tr>
+ </table>
+
+
+
+
+
+</div>
+<!--BeginFooterContent-->
+<div class="BlankFooter" id="BlankFooter">&nbsp;</div>
+<div class="Footer" id="Footer">&nbsp;</div>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+   DocHandle = "mesp_personal";
+   DocTitle = "Mentor Embedded Sourcery Probe Personal Hardware Manual";
+   PageTitle = "Connecting the Probe to the Target";
+   Copyright = "2011-2012";
+   PDFLinkTitle = "Connecting.the.Probe.to.the.Target"
+   ThisTopic = "ConnectingtotheSourceryProbeConsolefromSourceryCodeBench";
+   CurrentFile = "connecting11.html";
+   CurrentFileID = "21";
+      topicFooter();
+
+ // -->
+ </script>
+ 
+ <noscript>
+    <p class="MGCFooter">Mentor Embedded Sourcery Probe Personal Hardware Manual&nbsp;2.3.4
+    <br />2011-2012&#169;&nbsp;Mentor Graphics Corporation. All rights reserved.
+    <br /><a href='../mgc_html_help/nsmgchelp.htm' target="_blank">Browser Requirements</a></p>
+ </noscript>
+
+    </div>
+  </body>
+</html>
+
+ 

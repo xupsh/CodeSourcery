@@ -1,0 +1,154 @@
+__________________________________________________________________________
+
+Mon Jan 06 14:37:28 CST 2014
+
+Free Memory: 9325 kB
+Total Memory: 20280 kB
+
+4 Command Line Args:
+0:  -f
+1:  /tmp/714358.tmp/mergeModuleLax11.properties
+2:  -l
+3:  en
+
+java.class.path:
+    /tmp/714358.tmp/SubInstaller1.zip
+    /tmp/install.dir.2239/InstallerData
+    /tmp/install.dir.2239/InstallerData/installer.zip
+
+ZGUtil.CLASS_PATH:
+    /tmp/714358.tmp/SubInstaller1.zip
+    /tmp/install.dir.2239/InstallerData
+    /tmp/install.dir.2239/InstallerData/installer.zip
+
+sun.boot.class.path:
+    /tmp/install.dir.2239/Linux/resource/jre/lib/resources.jar
+    /tmp/install.dir.2239/Linux/resource/jre/lib/rt.jar
+    /tmp/install.dir.2239/Linux/resource/jre/lib/sunrsasign.jar
+    /tmp/install.dir.2239/Linux/resource/jre/lib/jsse.jar
+    /tmp/install.dir.2239/Linux/resource/jre/lib/jce.jar
+    /tmp/install.dir.2239/Linux/resource/jre/lib/charsets.jar
+    /tmp/install.dir.2239/Linux/resource/jre/lib/jfr.jar
+    /tmp/install.dir.2239/Linux/resource/jre/classes
+
+java.ext.dirs:
+    /tmp/install.dir.2239/Linux/resource/jre/lib/ext
+    /usr/java/packages/lib/ext
+
+java.version                  == 1.7.0_07 (Java 1)
+java.vm.name                  == Java HotSpot(TM) Client VM
+java.vm.vendor                == Oracle Corporation
+java.vm.version               == 23.3-b01
+java.vm.specification.name    == Java Virtual Machine Specification
+java.vm.specification.vendor  == Oracle Corporation
+java.vm.specification.version == 1.7
+java.specification.name       == Java Platform API Specification
+java.specification.vendor     == Oracle Corporation
+java.specification.version    == 1.7
+java.vendor                   == Oracle Corporation
+java.vendor.url               == http://java.oracle.com/
+java.class.version            == 51.0
+java.compiler                 == null
+java.home                     == /tmp/install.dir.2239/Linux/resource/jre
+java.io.tmpdir                == /tmp
+os.name                       == Linux
+os.arch                       == i386
+os.version                    == 3.8.0-29-generic
+path.separator                == :
+file.separator                == /
+file.encoding                 == UTF-8
+user.name                     == root
+user.home                     == /root
+user.dir                      == /tmp/714358.tmp
+user.language                 == en
+user.region                   == null
+__________________________________________________________________________
+
+Install Begin: Mon Jan 06 14:37:22 CST 2014
+Install End: Mon Jan 06 14:37:28 CST 2014
+
+Installed by InstallAnywhere 11.0 Enterprise Build 3890
+
+
+User Interactions
+-----------------
+
+
+#Install
+#-------
+-fileOverwrite_/root/CodeSourcery/uninstall/Uninstall_Sourcery_Gxx_Common/Uninstall_Sourcery_Gxx_Common.lax=Yes
+-fileOverwrite_/root/CodeSourcery/uninstall/features/Common.key=Yes
+-fileOverwrite_/root/CodeSourcery/uninstall/create-links-iamm-common_files-xilinx-2012.09-104-arm-xilinx-linux-gnueabi=Yes
+-fileOverwrite_/root/CodeSourcery/uninstall/remove-links-iamm-common_files-xilinx-2012.09-104-arm-xilinx-linux-gnueabi=Yes
+
+Summary
+-------
+
+Installation: Successful.
+
+18 Successes
+0 Warnings
+0 NonFatalErrors
+0 FatalErrors
+
+Action Notes:
+
+None
+
+Install Log Detail:
+
+Install Action:           InstallAnywhere Variable
+                          Status: SUCCESSFUL
+
+Install Action:           InstallAnywhere Variable
+                          Status: SUCCESSFUL
+
+Install Action:           InstallAnywhere Variable
+                          Status: SUCCESSFUL
+
+Check Disk Space:         /root/CodeSourcery
+                          Status: SUCCESSFUL
+                          Additional Notes: NOTE - Required Disk Space: 938,445; Free Disk Space: 45,583,187,968
+
+Install Directory:        /root/CodeSourcery/
+                          Status: SUCCESSFUL
+                          Additional Notes: NOTE - Directory already existed
+
+Install Directory:        /root/CodeSourcery/uninstall/
+                          Status: SUCCESSFUL
+                          Additional Notes: NOTE - Directory already existed
+
+Install Directory:        /root/CodeSourcery/uninstall/Uninstall_Sourcery_Gxx_Common/
+                          Status: SUCCESSFUL
+
+Install Uninstaller:      Sourcery G++ Common (Install All Uninstaller Components)
+                          Status: SUCCESSFUL
+
+
+Install File:             /root/CodeSourcery/uninstall/Uninstall_Sourcery_Gxx_Common/Uninstall_Sourcery_Gxx_Common.lax
+                          Status: SUCCESSFUL
+
+Install Uninstaller:      Sourcery G++ Common (Install All Uninstaller Components)
+                          Status: SUCCESSFUL
+
+Install Directory:        /root/CodeSourcery/uninstall/
+                          Status: SUCCESSFUL
+                          Additional Notes: NOTE - Directory already existed
+
+Install Directory:        /root/CodeSourcery/uninstall/features/
+                          Status: SUCCESSFUL
+                          Additional Notes: NOTE - Directory already existed
+
+Install File:             /root/CodeSourcery/uninstall/features/Common.key
+                          Status: SUCCESSFUL
+
+Install File:             /root/CodeSourcery/uninstall/create-links-iamm-common_files-xilinx-2012.09-104-arm-xilinx-linux-gnueabi
+                          Status: SUCCESSFUL
+
+Install File:             /root/CodeSourcery/uninstall/remove-links-iamm-common_files-xilinx-2012.09-104-arm-xilinx-linux-gnueabi
+                          Status: SUCCESSFUL
+
+
+Execute Target File:      Creating links...
+                          Status: SUCCESSFUL
+

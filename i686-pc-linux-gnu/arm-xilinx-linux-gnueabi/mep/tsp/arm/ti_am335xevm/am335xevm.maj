@@ -1,0 +1,605 @@
++q  // Enter quiet mode
+//___________________________________________________________________
+//
+//               Copyright (c) 2012 Mentor Graphics Corporation
+//                           All rights reserved
+//
+//   THIS WORK CONTAINS TRADE SECRETS AND PROPRIETARY INFORMATION WHICH IS
+//    THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS LICENSORS AND IS
+//                        SUBJECT TO LICENSE TERMS.
+//
+//___________________________________________________________________
+//
+// Mentor Embedded Sourcery Probe target initialization file for the
+// TI AM335X-EVM reference platform.  It supports this platform as-is,
+// and can be adapted to a new target based on this reference board,
+// as detailed below.  For a brand new custom board not related to
+// this reference board, it may be better to start from the template
+// rather than trying to adapt this file.
+//
+// Target Description:
+//
+//     Board:   TI AM335X-EVM Reference Platform
+//     Device:  TI AM3358
+//     CPU ID:  Cortex-A8
+//     Endian:  Little
+//     Cores:   1
+//
+// Porting Guide:
+//
+// The user should make the following adaptations to port this file
+// to a new target board based on the associated reference platform:
+//
+//        0. Review the MEP Probe Initialization section at
+//           "TO DO #0" below to make sure the settings are
+//           right for your board.
+//        1. Update the memory configuration table for changes
+//           in the new board's  *Physical*  memory map.  See
+//           'TO DO #1' below.
+//        2. If your target board requires any special MEP
+//           settings, they should be added to the end of the
+//           ONE_TIME_SETUP section.  See 'TO DO #2' below.
+//        3. Decide whether the target should be automatically
+//           reset and/or initialized upon start-up by choosing
+//           the desired command at 'TO DO #3' below.  This
+//           really depends on your use case.
+//        4. If the board has no boot code (or bad boot code),
+//           and you want to download into RAM, then you may
+//           have to adapt the memory controller initialization
+//           script at 'TO DO #4' below to account for changes
+//           relative to the reference platform.
+//
+// NOTE:  Additional information on MON commands and the configuration
+//        options used here is available in the online help system.
+//___________________________________________________________________
+dv "Reading $$# ...\n"
+
+
+// Initialization script preparation
+// =================================
+
+// The RTI, RTNI, and TI command aliases call script functions in this file.
+// These command aliases should never be changed.
+
+ea RTI   $$#.DO_RTI  // RTI  call DO_RTI script function  (Reset Target and Initialize)
+ea RTNI  $$#.DO_RTNI // RTNI call DO_RTNI script function (Reset Target with No Initialization)
+ea TI    $$#.DO_TI   // TI   call DO_TI script function   (Target Initialize without resetting)
+
+// Some SoC specific registers are defined in the register definition file below.
+fr rd am335xevm.rd
+
+// MEP Probe Initialization
+// ==========================
+
+// TO DO #0 -- Review the following MEP configuration options to make
+//             sure they are right for your target board hardware and
+//             processor device design.
+
+// The  Trgt_Resets_JTAG  option informs the MEP probe whether the target
+// board will forward a system reset (nSRST) to the JTAG interface (nTRST),
+// or reset the system only without resetting the JTAG interface.  When in
+// doubt, a YES setting is safer.  When the two reset circuits are known
+// to be independent, which is strongly recommended, then a NO setting is
+// recommended.
+
+eo Trgt_Resets_JTAG  = yes
+
+// The  Ice_JTAG_Use_RTCLK  and  Ice_JTAG_Clock_Freq  options are related
+// and must be considered together.  An  Ice_JTAG_Use_RTCLK  setting of
+// ON  selects adaptive clocking mode, where the JTAG clock is dynamically
+// controlled by the target processor.  When  Ice_JTAG_Use_RTCLK  is set
+// OFF  then normal (unthrottled) clocking is selected.
+//
+// When adaptive clocking is disabled, the  Ice_JTAG_Clock_Freq  option
+// specifies the the JTAG clock (TCK) frequency in Megahertz, from
+// 0.002 to 100 (depending on probe hardware capability).  A lower setting
+// is safer, a higher setting yields higher performance.  Note that the
+// requested frequency will be adjusted down to the closest frequency
+// supported by the probe hardware (displaying this option will show the
+// actual TCK frequency).
+//
+//     IJUR  Clock mode
+//     ====  ========================
+//     OFF   Free running TCK at specified frequency (RTCK is ignored)
+//     ON    Adaptive clocking with frequency controlled by RTCK
+//           (Ice_JTAG_Clock_Freq is ignored)
+//
+// Note that enabling  Ice_JTAG_Use_RTCLK  on target boards that do not
+// drive the RTCK signal will lock up the JTAG interface.
+
+eo Ice_JTAG_Use_RTCLK  = off
+eo Ice_JTAG_Clock_Freq = 20                  
+if (@$Ice_JTAG_Use_RTCLK) {doq Ice_JTAG_Use_RTCLK} {doq Ice_JTAG_Clock_Freq}
+
+// The following command can be used to define the details of the JTAG
+// daisy chain.  It is only required for targets on which the MEP
+// auto-detection algorithm cannot correctly determine the JTAG connection
+// details.  On most boards this command can be omitted.
+//
+//    ew MEP_JTAG_DIMENSION = TAP_CNT, IR1_CNT [ , IR2_CNT ]  ...
+
+ew MEP_JTAG_DIMENSION = 2,4,6
+
+// The following commands can be used to define special JTAG initialization
+// operations required by certain processors.  The first one, if defined,
+// is scanned in right after the JTAG reset cycle completes, but before the
+// standard JTAG initialization performed by the MEP.  The second, if
+// defined, is scanned in right after the standard JTAG initialization
+// performed by the MEP.  On most boards these can both be omitted.
+//
+//    ew MEP_JTAG_INIT0 = <scan-op> [ , <scan-op> ]  ...
+//    ew MEP_JTAG_INIT1 = <scan-op> [ , <scan-op> ]  ...
+//
+
+//                  IR P 6,   IR=7,     DR P 8,   DR = 8.   IR P 6,   IR = 2,   DR P 32,  aP002108  IR P 6,   IR = 2,   DR P 32,  eQ002008, IR 6,     IR = 3f,  extra TCK files
+ew MEP_JTAG_INIT0 = 89000006, 00000007, 09000008, 00000089, 89000006, 00000002, 09000020, aC002108, 89000006, 00000002, 09000020, e0002008, 81000006, 0000003f, 81000020, ffffffff
+
+// Override the core debug base address, which is incorrectly reported
+// in the Core Sight ROM table.
+ew CORE_DBG_BASE_ADR = 0xCB141000
+
+// The  Ice_Power_Sense  option enables the target power monitor.  When
+// target power is detected, the debug interface is enabled.
+
+eo Ice_Power_Sense = VREF
+
+// The  Ice_JTAG_TAP_Select  option controls which TAP on a multi-TAP
+// daisy chain is associated with this debug connection.  This option
+// can be omitted on targets which have one TAP.  Note that TAPs are
+// numbered from 1-N, with TAP 1 being the one whose TDO is connected
+// to the MEP probe.
+//
+//    eo Ice_JTAG_TAP_Select = <num>
+
+eo Ice_JTAG_TAP_Select = 1
+
+// Physical Memory Configuration
+// =============================
+
+mc *:P, inv     // start with all *physical* memory (*:P) marked as invalid
+
+// TO DO #1 -- Change the address range(s) below to match the  *physical*
+//             address ranges of your ROM/flash and RAM areas.  Add more
+//             MC commands as necessary for each memory mapped area.
+//
+// WARNING:  DO NOT confuse virtual (MVA) addresses with physical space.
+//           Make sure to use physical addresses in the MC table.
+//
+// EXAMPLE:
+//
+//     mc  ________:P  ________:P,  PWE, JAM, RW    // DRAM
+//     mc  ________:P  ________:P,  PWD, JAM, RO    // Flash or ROM
+//     mc  ________:P  ________:P,  PWD, JAM, RW    // Peripheral registers
+//
+// Note that if your boot code remaps physical memory, then the MC table
+// should reflect the mapping that is in effect for the code you are trying
+// to debug.  When debugging boot code in flash, MC should match the mapping
+// in effect when booting.  When debugging code in RAM, MC should match the
+// mapping in effect when running code from RAM.
+//
+// Address Range          PWE  Access
+// ---------------------- ---- -------
+mc 0x40000000:P 0x4001FFFF:P, PWD, JAM, RO    // Boot ROM internal - Secure 
+mc 0x40020000:P 0x4002BFFF:P, PWD, JAM, RO    // Boot ROM internal - Public
+mc 0x402F0400:P 0x402FFFFF:P, PWE, JAM, RW    // SRAM internal
+mc 0x40300000:P 0x4030FFFF:P, PWE, JAM, RW    // OCMC SRAM
+mc 0x44000000:P 0x443FFFFF:P, PWD, JAM, RW    // L3 Fast Config
+mc 0x44800000:P 0x44BFFFFF:P, PWD, JAM, RW    // L3S Low Config
+mc 0x44C00000:P 0x4FFFFFFF:P, PWD, JAM, RW    // L4-Wkup
+mc 0x46000000:P 0x463FFFFF:P, PWD, JAM, RW    // McASP0 
+mc 0x46400000:P 0x467FFFFF:P, PWD, JAM, RW    // McASP1 
+mc 0x47400000:P 0x47400FFF:P, PWD, JAM, RW    // USBSS
+mc 0x47401000:P 0x474012FF:P, PWD, JAM, RW    // USB0  
+mc 0x47401300:P 0x474013FF:P, PWD, JAM, RW    // USB0 PHY 
+mc 0x47401400:P 0x474017FF:P, PWD, JAM, RW    // USB0 Core 
+mc 0x47401800:P 0x47401AFF:P, PWD, JAM, RW    // USB1
+mc 0x47401B00:P 0x47401BFF:P, PWD, JAM, RW    // USB1 PHY
+mc 0x47401C00:P 0x47401FFF:P, PWD, JAM, RW    // USB1 Core
+mc 0x47402000:P 0x47402FFF:P, PWD, JAM, RW    // USB CPPI DMA Controller
+mc 0x47403000:P 0x47403FFF:P, PWD, JAM, RW    // USB CPPI DMA Sched
+mc 0x47404000:P 0x47404FFF:P, PWD, JAM, RW    // USB queue
+mc 0x47810000:P 0x4781FFFF:P, PWD, JAM, RW    // MMCHS2
+mc 0x48000000:P 0x48FFFFFF:P, PWD, JAM, RW    // L4PER
+mc 0x49000000:P 0x490FFFFF:P, PWD, JAM, RW    // TPCC
+mc 0x49800000:P 0x498FFFFF:P, PWD, JAM, RW    // TPTC0
+mc 0x49900000:P 0x499FFFFF:P, PWD, JAM, RW    // TPTC1
+mc 0x49A00000:P 0x49AFFFFF:P, PWD, JAM, RW    // TPTC2
+mc 0x4A000000:P 0x4AFFFFFF:P, PWD, JAM, RW    // L4Fast
+mc 0x4B000000:P 0x4BFFFFFF:P, PWD, JAM, RW    // DebugSS
+mc 0x4C000000:P 0x4CFFFFFF:P, PWD, JAM, RW    // EMIF0 Config
+mc 0x50000000:P 0x50FFFFFF:P, PWD, JAM, RW    // GPMC Config
+mc 0x56000000:P 0x56FFFFFF:P, PWD, JAM, RW    // SGX
+mc 0x80000000:P 0xBFFFFFFF:P, PWE, JAM, RW    // EMIF4 SDRAM 
+
+
+//        ____User Supplied Setup Commands Go Here____
+
+// TO DO #2 -- If your target board requires any special MEP settings
+//             (e.g. special JTAG initialization), add the commands to
+//             make those settings here.
+
+
+// End of initial one-time only setup script.  If this is a non-intrusive
+// attach connection, or if a normal debug connection fails to connect
+// properly, then exit at this point.  Otherwise continue on with optional
+// additional initialization.
+
+if (@.4$INIT_TYPE != 0) {dv "Non-intrusive attach connection\n"; goto EXIT}
+if (@$trgt_cpu_state != $tcs.halt) {dv "Debug connection failed, "; doq TCS; goto EXIT}
+
+// TO DO #3 -- Comment out all but one of the next three commands to
+//             control IF and HOW the target is initialized when the
+//             debugger is launched.  If no reset or target initialization
+//             is needed then all these can be left commented out.
+
+TI
+//   RTI
+//   RTNI
+// The semihosting vector is +8 from the vector area base address, which
+// on Cortex-A8 is configurable via the system coprocessor.  This option
+// is required for hosted mode applications, and ignored for unhosted
+// mode.
+
+ew $semi_hosting_vector = @cp15_snvba + 8
+:EXIT
+dv "Finished reading $$#.\n"
+return
+
+//___________________________________________________________________
+::DO_RTNI  // Reset Target with No Initialization.
+
+    // Normally an  rt  command is sufficient, but it may be necessary
+    // to slow down the JTAG clock first, depending on the affect of
+    // reset on the processor.
+
+    dv "Executing RTNI script function\n"
+    rt
+    return
+
+//___________________________________________________________________
+::DO_RTI   // Reset Target and Initialize.
+
+    // Note that it may be necessary to slow down the JTAG clock first, 
+    // depending on the affect of reset on the processor.
+
+    dv "Executing RTI script function\n"
+    rt
+    TI	// call script DO_TI function
+    return
+
+//___________________________________________________________________
+::DO_TI  // Target Initialize.
+
+    if (@$trgt_cpu_state != $tcs.halt) { dv "Target Initialization commands skipped due to CPU state\n"; doq TCS; return }
+    dv "Initializing target...\n"
+
+    // Initializing DLL MPU
+    ew $clkmode = @CM_CLKMODE_DPLL_MPU
+    ew $clksel = @CM_CLKSEL_DPLL_MPU 
+    ew $div_m2 = @CM_DIV_M2_DPLL_MPU
+
+    //put the DPLL in bypass mode
+    ew CM_CLKMODE_DPLL_MPU = 0x4
+
+    //wait for bypass status
+    :label10
+    if ((@(CM_IDLEST_DPLL_MPU) & 0x100) == 0n0) { goto label10 }
+
+    //set multiply and divide values
+    ew $clksel = @$clksel & (~0x7FFFF)
+
+    ew $clksel = @$clksel | ((0n720 <<0n8) | 0n23 )
+
+    ew CM_CLKSEL_DPLL_MPU = @$clksel
+
+    ew $div_m2 = @$div_m2 & (~0x1F)
+
+    ew $div_m2 = @$div_m2 | 0n1
+
+    ew CM_DIV_M2_DPLL_MPU = @$div_m2
+
+    //now lock the DPLL
+    ew $clkmode = @$clkmode | 0x7;  
+
+    ew CM_CLKMODE_DPLL_MPU = @$clkmode
+
+    :label20
+    if ((@(CM_IDLEST_DPLL_MPU) & 0x1) == 0n0) { goto label20 }
+
+    //Initializing DDR MPU
+    ew $clkmode = @CM_CLKMODE_DPLL_DDR
+    ew $clksel = @CM_CLKSEL_DPLL_DDR 
+    ew $div_m2 = @CM_DIV_M2_DPLL_DDR
+
+    //put the DPLL in bypass mode
+    ew CM_CLKMODE_DPLL_DDR = 0x4
+
+    //wait for bypass status
+    :label30
+    if ((@(CM_IDLEST_DPLL_DDR) & 0x100) == 0n0) { goto label30 }
+
+    //set multiply and divide values
+    ew $clksel = @$clksel & (~0x7FFFF)
+
+    ew $clksel = @$clksel | ((0n266 <<0n8) | 0n23 )
+
+    ew CM_CLKSEL_DPLL_DDR = @$clksel
+
+    ew $div_m2 = @$div_m2 & (~0x1F)
+
+    ew $div_m2 = @$div_m2 | 0n1
+
+    ew CM_DIV_M2_DPLL_DDR = @$div_m2
+
+    //now lock the DPLL
+    ew $clkmode = @$clkmode | 0x7;  
+
+    ew CM_CLKMODE_DPLL_DDR = @$clkmode
+
+    :label40
+    if ((@(CM_IDLEST_DPLL_DDR) & 0x1) == 0n0) { goto label40 }
+
+    //Initializing PER MPU
+    ew $clkmode = @CM_CLKMODE_DPLL_PER
+    ew $clksel = @CM_CLKSEL_DPLL_PER 
+    ew $div_m2 = @CM_DIV_M2_DPLL_PER
+
+    //put the DPLL in bypass mode
+    ew CM_CLKMODE_DPLL_PER = 0x4
+
+    //wait for bypass status
+    :label50
+    if ((@(CM_IDLEST_DPLL_PER) & 0x100) == 0n0) { goto label50 }
+
+    //set multiply and divide values
+    ew $clksel = @$clksel & (~0x7FFFF)
+
+    ew $clksel = @$clksel | ((0n960 <<0n8) | 0n23 )
+
+    ew CM_CLKSEL_DPLL_PER = @$clksel
+    
+    ew $div_m2 = @$div_m2 & (~0x7F)
+
+    ew $div_m2 = @$div_m2 | 0n5
+
+    ew CM_DIV_M2_DPLL_PER = @$div_m2
+
+    //now lock the DPLL
+    ew $clkmode = @$clkmode | 0x7;  
+
+    ew CM_CLKMODE_DPLL_PER = @$clkmode
+
+    :label60
+    if ((@(CM_IDLEST_DPLL_PER) & 0x1) == 0n0) { goto label60 }
+
+
+    //Initializing DISP MPU
+    ew $clkmode = @CM_CLKMODE_DPLL_DISP
+    ew $clksel = @CM_CLKSEL_DPLL_DISP
+    ew $div_m2 = @CM_DIV_M2_DPLL_DISP
+
+    //put the DPLL in bypass mode
+    ew CM_CLKMODE_DPLL_DISP = 0x4
+
+    //wait for bypass status
+    :label70
+    if ((@(CM_IDLEST_DPLL_DISP) & 0x100) == 0n0) { goto label70 }
+
+    //set multiply and divide values
+    ew $clksel = @$clksel & (~0x7FFFF)
+
+    ew $clksel = @$clksel | ((0n48 <<0n8) | 0n23 )
+
+    ew CM_CLKSEL_DPLL_DISP = @$clksel
+
+    ew $div_m2 = @$div_m2 & (~0x1F)
+
+    ew $div_m2 = @$div_m2 | 0n1
+
+    ew CM_DIV_M2_DPLL_DISP = @$div_m2
+
+    //now lock the DPLL
+    ew $clkmode = @$clkmode | 0x7;  
+
+    ew CM_CLKMODE_DPLL_DISP = @$clkmode
+
+    :label80
+    if ((@(CM_IDLEST_DPLL_DISP) & 0x1) == 0n0) { goto label80 }
+
+
+    //Initializing CORE MPU
+    ew $clkmode = @CM_CLKMODE_DPLL_CORE
+    ew $clksel = @CM_CLKSEL_DPLL_CORE
+    ew $div_m4 = @CM_DIV_M4_DPLL_CORE
+    ew $div_m5 = @CM_DIV_M5_DPLL_CORE
+    ew $div_m6 = @CM_DIV_M6_DPLL_CORE
+
+    //put the DPLL in bypass mode
+    ew CM_CLKMODE_DPLL_CORE = 0x4
+
+    //wait for bypass status
+    :label90
+    if ((@(CM_IDLEST_DPLL_CORE) & 0x100) == 0n0) { goto label90 }
+
+    //set multiply and divide values
+    ew $clksel = @$clksel & (~0x7FFFF)
+
+    ew $clksel = @$clksel | ((0n1000 <<0n8) | 0n23 )
+
+    ew CM_CLKSEL_DPLL_CORE = @$clksel
+
+    ew $div_m4 = 0n10
+
+    ew CM_DIV_M4_DPLL_CORE = @$div_m4
+
+    ew $div_m5 = 0n8
+
+    ew CM_DIV_M5_DPLL_CORE = @$div_m5
+
+    ew $div_m6 = 0n4
+
+    ew CM_DIV_M6_DPLL_CORE = @$div_m6
+
+    //now lock the DPLL
+    ew $clkmode = @$clkmode | 0x7;  
+
+    ew CM_CLKMODE_DPLL_CORE = @$clkmode
+
+    :label100
+    if ((@(CM_IDLEST_DPLL_CORE) & 0x1) == 0n0) { goto label100 }
+
+    //Initializing DDR
+
+    // Enable EMIF4DC Firewall clocks
+    ew CM_PER_EMIF_FW_CLKCTRL = 0x02
+
+    // Enable EMIF4DC clocks*/
+    ew CM_PER_EMIF_CLKCTRL = 0x02
+
+    // Poll for module is functional
+    :label110
+    if (@CM_PER_EMIF_CLKCTRL != 0x02) { goto label100 }
+
+    //Write 1 to enable VTP
+    ew VTP_CTRL_REG = @VTP_CTRL_REG  | 0x00000040
+
+    //Write 0 to CLRZ bit
+    ew VTP_CTRL_REG = @VTP_CTRL_REG  & 0xFFFFFFFE
+
+    //Write 1 to CLRZ bit
+    ew VTP_CTRL_REG = @VTP_CTRL_REG  | 0x00000001
+
+    //Check for VTP ready bit
+    :label120
+    if ((@(VTP_CTRL_REG) & 0x00000020) != 0x00000020) { goto label120 }
+
+    // Command Macro initialization
+    ew CMD0_PHY_CTRL_SLAVE_RATIO0 = 0x80             
+    ew CMD0_PHY_CTRL_SLAVE_FORCE0 = 0x00                      
+    ew CMD0_PHY_CTRL_SLAVE_DELAY0 = 0x00                       
+    ew CMD0_PHY_DLL_LOCK_DIFF0   = 0x00                       
+    ew CMD0_PHY_INVERT_CLKOUT0 = 0x00
+
+    ew CMD1_PHY_CTRL_SLAVE_RATIO0 = 0x80                 
+    ew CMD1_PHY_CTRL_SLAVE_FORCE0 = 0x00                      
+    ew CMD1_PHY_CTRL_SLAVE_DELAY0 = 0x00                      
+    ew CMD1_PHY_DLL_LOCK_DIFF0 = 0x00                        
+    ew CMD1_PHY_INVERT_CLKOUT0 = 0x00
+
+    ew CMD2_PHY_CTRL_SLAVE_RATIO0 = 0x80             
+    ew CMD2_PHY_CTRL_SLAVE_FORCE0 = 0x00                      
+    ew CMD2_PHY_CTRL_SLAVE_DELAY0 = 0x00                      
+    ew CMD2_PHY_DLL_LOCK_DIFF0 = 0x00                       
+    ew CMD2_PHY_INVERT_CLKOUT0 = 0x00    
+ 
+    // Data Macro 0 initialization
+    ew DATA0_PHY_RD_DQS_SLAVE_RATIO0 = (0x12<<0n30)|(0x12<<0n20)|(0x12<<0n10)|(0x12<<0n0)
+    ew DATA0_PHY_RD_DQS_SLAVE_RATIO1 = 0x12>>2
+
+    ew DATA0_PHY_WR_DQS_SLAVE_RATIO0  = (0<<0n30)|(0<<0n20)|(0<<0n10)|(0<<0n0)
+    ew DATA0_PHY_WR_DQS_SLAVE_RATIO1 = 0>>0n2
+
+    ew DATA0_PHY_WRLVL_INIT_RATIO0 = (0<<0n30)|(0<<0n20)|(0<<0n10)|(0<<0n0)
+    ew DATA0_PHY_WRLVL_INIT_RATIO1 = 0>>0n2
+
+    ew DATA0_PHY_GATELVL_INIT_RATIO0 = (0<<0n30)|(0<<0n20)|(0<<0n10)|(0<<0n0)
+    ew DATA0_PHY_GATELVL_INIT_RATIO1 = 0>>0n2
+
+    ew DATA0_FIFO_WE_SLAVE_RATIO0 = (0x80<<0n30)|(0x80<<0n20)|(0x80<<0n10)|(0x80<<0n0)
+    ew DATA0_FIFO_WE_SLAVE_RATIO1 = 0x80>>0n2
+
+    ew DATA0_WR_DATA_SLAVE_RATIO0 = (0x40<<0n30)|(0x40<<0n20)|(0x40<<0n10)|(0x40<<0n0)
+    ew DATA0_WR_DATA_SLAVE_RATIO1 = 0x40>>0n2      
+
+    ew DATA0_PHY_DLL_LOCK_DIFF0 = 0x0
+
+    // Data Macro 1 initialization
+    ew DATA0_PHY_RD_DQS_SLAVE_RATIO0 + 0xA4 = (0x12<<0n30)|(0x12<<0n20)|(0x12<<0n10)|(0x12<<0n0)
+    ew DATA0_PHY_RD_DQS_SLAVE_RATIO1 + 0xA4 = 0x12>>0n2
+
+    ew DATA0_PHY_WR_DQS_SLAVE_RATIO0 + 0xA4 = (0<<0n30)|(0<<0n20)|(0<<0n10)|(0<<0n0)
+    ew DATA0_PHY_WR_DQS_SLAVE_RATIO1 + 0xA4 = 0>>0n2
+
+    ew DATA0_PHY_WRLVL_INIT_RATIO0 + 0xA4 = (0<<0n30)|(0<<0n20)|(0<<0n10)|(0<<0n0)
+    ew DATA0_PHY_WRLVL_INIT_RATIO1 + 0xA4 = 0>>0n2
+
+    ew DATA0_PHY_GATELVL_INIT_RATIO0 + 0xA4 = (0<<0n30)|(0<<0n20)|(0<<0n10)|(0<<0n0)
+    ew DATA0_PHY_GATELVL_INIT_RATIO1 + 0xA4 = 0>>0n2
+
+    ew DATA0_FIFO_WE_SLAVE_RATIO0 + 0xA4 = (0x80<<0n30)|(0x80<<0n20)|(0x80<<0n10)|(0x80<<0n0)
+    ew DATA0_FIFO_WE_SLAVE_RATIO1 + 0xA4 = 0x80>>0n2
+
+    ew DATA0_WR_DATA_SLAVE_RATIO0 + 0xA4 = (0x40<<0n30)|(0x40<<0n20)|(0x40<<0n10)|(0x40<<0n0)
+    ew DATA0_WR_DATA_SLAVE_RATIO1 + 0xA4 = 0x40>>0n2      
+
+    ew DATA0_PHY_DLL_LOCK_DIFF0 + 0xA4 = 0x0    
+
+    ew DATA0_PHY_USE_RANK0_DELAYS0 = 0x01
+    ew DATA1_PHY_USE_RANK0_DELAYS0 = 0x01
+
+    //set IO control registers
+    ew DDR_CMD0_IOCTRL = 0x18B
+    ew DDR_CMD1_IOCTRL = 0x18B
+    ew DDR_CMD2_IOCTRL = 0x18B
+    ew DDR_DATA0_IOCTRL = 0x18B
+    ew DDR_DATA1_IOCTRL = 0x18B
+
+    //IO to work for DDR2
+    ew DDR_IO_CTRL =  @DDR_IO_CTRL & (~0x10000000) 
+
+    //CKE controlled by EMIF/DDR_PHY
+    ew DDR_CKE_CTRL =  @DDR_CKE_CTRL | 0x00000001
+
+    // EMIF_MMR configuration
+    ew EMIF_DDR_PHY_CTRL_1_REG = 0x05
+    ew EMIF_DDR_PHY_CTRL_1_SHDW_REG = 0x05
+    ew EMIF_DDR_PHY_CTRL_2_REG = 0x04
+
+    ew EMIF_SDRAM_TIM_1_REG = 0x0666B3D6
+    ew EMIF_SDRAM_TIM_1_SHDW_REG = 0x0666B3D6
+
+    ew EMIF_SDRAM_TIM_2_REG = 0x143731DA
+    ew EMIF_SDRAM_TIM_2_SHDW_REG = 0x143731DA
+
+    ew EMIF_SDRAM_TIM_3_REG = 0x00000347
+    ew EMIF_SDRAM_TIM_3_SHDW_REG = 0x00000347
+
+    ew EMIF_SDRAM_CONFIG_REG =  0x40805032
+    ew EMIF_SDRAM_CONFIG_2_REG =  0x40805032
+
+    ew EMIF_SDRAM_REF_CTRL_REG = 0x00004650
+    ew EMIF_SDRAM_REF_CTRL_SHDW_REG = 0x00004650
+
+    ew $delay = 5000
+
+    :label130
+    ew $delay = @$delay - 1
+    if ( @$delay != 0) { goto label130 }
+
+    ew EMIF_SDRAM_REF_CTRL_REG = 0x0000081a
+    ew EMIF_SDRAM_REF_CTRL_SHDW_REG = 0x0000081a 
+    ew EMIF_SDRAM_CONFIG_REG =  0x40805032
+    ew EMIF_SDRAM_CONFIG_2_REG =  0x40805032
+
+    //Invalidate L1 Caches
+    ci
+
+    //Invalidate and Disable L2 Cache
+
+    // Invalidate L2 Cache by calling SMI monitor
+    ew 100:da = 0xE3A0C001 //  mov   r12,#0x00000001
+    ew 100:da = 0xE1600070 // SMC   #0
+
+        // Disable L2 cache by clearing bit 2 in cp15 auxiliary control register
+    ew $tempvar = @cp15_auxctl
+    ew $tempvar2 = (@$tempvar & 0xFFFFFFFD)
+    ew cp15_auxctl = @$tempvar2 
+
+    //        ____User Supplied Target Init Commands Go Here____
+
+    dv "Initializing target done.\n"
+    return
+
+//___________________________________________________________________
+
+// <eof>
